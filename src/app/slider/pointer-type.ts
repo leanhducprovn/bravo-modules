@@ -1,6 +1,6 @@
 export enum PointerType {
-  // Con trỏ nhỏ
+  // Con trỏ thấp
   Min,
-  // Con trỏ lớn
+  // Con trỏ cao
   Max,
 }

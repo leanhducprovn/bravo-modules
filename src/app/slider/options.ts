@@ -56,264 +56,184 @@ export class Options {
   // Giá trị tối đa cho một thanh trượt. Không áp dụng khi sử dụng stepArray.
   ceil?: number | undefined;
 
-  /** Step between each value.
-    Not applicable when using stepsArray. */
+  // Bước nhảy giữa mỗi giá trị. Không áp dụng khi sử dụng stepArray.
   step?: number = 1;
 
-  /** The minimum range authorized on the slider.
-    Applies to range slider only.
-    When using stepsArray, expressed as index into stepsArray. */
+  // Phạm vi tối thiểu được phép trên thanh trượt. Chỉ áp dụng cho thanh trượt phạm vi. Khi sử dụng stepArray, được biểu thị dưới dạng chỉ mục vào stepArray.
   minRange?: number | undefined;
 
-  /** The maximum range authorized on the slider.
-    Applies to range slider only.
-    When using stepsArray, expressed as index into stepsArray. */
+  // Phạm vi tối đa được phép trên thanh trượt. Chỉ áp dụng cho thanh trượt phạm vi. Khi sử dụng stepArray, được biểu thị dưới dạng chỉ mục vào stepArray.
   maxRange?: number | undefined;
 
-  /** Set to true to have a push behavior. When the min handle goes above the max,
-    the max is moved as well (and vice-versa). The range between min and max is
-    defined by the step option (defaults to 1) and can also be overriden by
-    the minRange option. Applies to range slider only. */
+  // Đặt thành true để có hành vi đẩy. Khi xử lý tối thiểu vượt quá mức tối đa, giá trị tối đa cũng được di chuyển (và ngược lại). Phạm vi giữa tối thiểu và tối đa là được xác định bởi tùy chọn bước (mặc định là 1) và cũng có thể được ghi đè bởi tùy chọn minRange. Chỉ áp dụng cho thanh trượt phạm vi.
   pushRange?: boolean = false;
 
-  /** The minimum value authorized on the slider.
-    When using stepsArray, expressed as index into stepsArray. */
+  // Giá trị tối thiểu được ủy quyền trên thanh trượt. Khi sử dụng stepsArray, được thể hiện dưới dạng chỉ mục thành bước.
   minLimit?: number | undefined;
 
-  /** The maximum value authorized on the slider.
-    When using stepsArray, expressed as index into stepsArray. */
+  // Giá trị tối đa được ủy quyền trên thanh trượt. Khi sử dụng stepsArray, được thể hiện dưới dạng chỉ mục thành bước.
   maxLimit?: number | undefined;
 
-  /** Custom translate function. Use this if you want to translate values displayed
-      on the slider. */
+  // Hàm dịch tùy chỉnh.Sử dụng điều này nếu bạn muốn dịch các giá trị được hiển thị Trên thanh trượt.
   translate?: TranslateFunction | undefined;
 
-  /** Custom function for combining overlapping labels in range slider.
-      It takes the min and max values (already translated with translate fuction)
-      and should return how these two values should be combined.
-      If not provided, the default function will join the two values with
-      ' - ' as separator. */
+  // Chức năng tùy chỉnh để kết hợp các nhãn chồng chéo trong Slider phạm vi. Nó lấy các giá trị tối đa và tối đa (đã được dịch bằng lệnh dịch) và nên trả lại cách hai giá trị này nên được kết hợp. Nếu không được cung cấp, hàm mặc định sẽ tham gia hai giá trị với ' -' Là người phân tách.
   combineLabels?: CombineLabelsFunction | undefined;
 
-  /** Use to display legend under ticks (thus, it needs to be used along with
-     showTicks or showTicksValues). The function will be called with each tick
-     value and returned content will be displayed under the tick as a legend.
-     If the returned value is null, then no legend is displayed under
-     the corresponding tick.You can also directly provide the legend values
-     in the stepsArray option. */
+  // Sử dụng để hiển thị huyền thoại dưới ve (do đó, nó cần được sử dụng cùng với showticks hoặc showticksvalues).Chức năng sẽ được gọi với mỗi đánh dấu Giá trị và nội dung được trả về sẽ được hiển thị theo Tick dưới dạng huyền thoại. Nếu giá trị trả về là null, thì không có truyền thuyết nào được hiển thị dưới Ticks tương ứng. Bạn cũng có thể trực tiếp cung cấp các giá trị huyền thoại Trong tùy chọn StepArray.
   getLegend?: GetLegendFunction | undefined;
 
-  /** Use to display a custom legend of a stepItem from stepsArray.
-    It will be the same as getLegend but for stepsArray. */
+  // Sử dụng để hiển thị một huyền thoại tùy chỉnh của một kế hoạch từ BƯỚC. Nó sẽ giống như getlegend nhưng đối với các bước.
   getStepLegend?: GetStepLegendFunction | undefined;
 
-  /** If you want to display a slider with non linear/number steps.
-     Just pass an array with each slider value and that's it; the floor, ceil and step settings
-     of the slider will be computed automatically.
-     By default, the value model and valueHigh model values will be the value of the selected item
-     in the stepsArray.
-     They can also be bound to the index of the selected item by setting the bindIndexForStepsArray
-     option to true. */
+  // Nếu bạn muốn hiển thị một thanh trượt với các bước phi tuyến tính/số. Chỉ cần vượt qua một mảng với mỗi giá trị thanh trượt và đó là nó;Cài đặt sàn, trần và bước của thanh trượt sẽ được tính toán tự động. Theo mặc định, mô hình giá trị và giá trị mô hình giá trị sẽ là giá trị của mục đã chọn Trong các bước. Chúng cũng có thể bị ràng buộc với chỉ mục của mục đã chọn bằng cách đặt BindIndExforStepsArray tùy chọn để đúng.
   stepsArray?: CustomStepDefinition[] | undefined;
 
-  /** Set to true to bind the index of the selected item to value model and valueHigh model. */
+  // Được đặt thành true để liên kết chỉ số của mục đã chọn với mô hình giá trị và mô hình giá trị.
   bindIndexForStepsArray?: boolean = false;
 
-  /** When set to true and using a range slider, the range can be dragged by the selection bar.
-    Applies to range slider only. */
+  // Khi được đặt thành TRUE và sử dụng một thanh trượt phạm vi, phạm vi có thể được kéo bởi thanh lựa chọn. Chỉ áp dụng cho các slider phạm vi.
   draggableRange?: boolean = false;
 
-  /** Same as draggableRange but the slider range can't be changed.
-    Applies to range slider only. */
+  // Giống như DragGableRange nhưng phạm vi trượt không thể thay đổi. Chỉ áp dụng cho các slider phạm vi.
   draggableRangeOnly?: boolean = false;
 
-  /** Set to true to always show the selection bar before the slider handle. */
+  // Đặt thành True để luôn hiển thị thanh lựa chọn trước tay cầm thanh trượt.
   showSelectionBar?: boolean = false;
 
-  /** Set to true to always show the selection bar after the slider handle. */
+  // Đặt thành True để luôn hiển thị thanh lựa chọn sau tay cầm thanh trượt.
   showSelectionBarEnd?: boolean = false;
 
-  /**  Set a number to draw the selection bar between this value and the slider handle.
-    When using stepsArray, expressed as index into stepsArray. */
+  //  Đặt một số để vẽ thanh lựa chọn giữa giá trị này và tay cầm thanh trượt. Khi sử dụng stepsArray, được thể hiện dưới dạng chỉ mục thành bước.
   showSelectionBarFromValue?: number | undefined;
 
-  /**  Only for range slider. Set to true to visualize in different colour the areas
-    on the left/right (top/bottom for vertical range slider) of selection bar between the handles. */
+  //  Chỉ cho slider phạm vi.Đặt thành True để hình dung trong các khu vực khác nhau các khu vực Ở bên trái/phải (trên/dưới cho thanh trượt phạm vi thẳng đứng) của thanh lựa chọn giữa các tay cầm.
   showOuterSelectionBars?: boolean = false;
 
-  /** Set to true to hide pointer labels */
+  // Đặt thành True để ẩn các nhãn con trỏ
   hidePointerLabels?: boolean = false;
 
-  /** Set to true to hide min / max labels  */
+  // Đặt thành True để ẩn nhãn Min / Max
   hideLimitLabels?: boolean = false;
 
-  /** Set to false to disable the auto-hiding behavior of the limit labels. */
+  // Đặt thành Sai để vô hiệu hóa hành vi ẩn tự động của các nhãn giới hạn.
   autoHideLimitLabels?: boolean = true;
 
-  /** Set to true to make the slider read-only. */
+  // Đặt thành true để thực hiện thanh trượt chỉ đọc.
   readOnly?: boolean = false;
 
-  /** Set to true to disable the slider. */
+  // Đặt thành true để vô hiệu hóa thanh trượt.
   disabled?: boolean = false;
 
-  /** Set to true to display a tick for each step of the slider. */
+  // Đặt thành True để hiển thị một dấu ấn cho mỗi bước của thanh trượt.
   showTicks?: boolean = false;
 
-  /** Set to true to display a tick and the step value for each step of the slider.. */
+  // Đặt thành true để hiển thị một dấu ve và giá trị bước cho từng bước của thanh trượt..
   showTicksValues?: boolean = false;
 
-  /* The step between each tick to display. If not set, the step value is used.
-    Not used when ticksArray is specified. */
+  // Bước giữa mỗi đánh dấu để hiển thị.Nếu không được đặt, giá trị bước được sử dụng.Không được sử dụng khi ticksarray được chỉ định.
   tickStep?: number | undefined;
 
-  /* The step between displaying each tick step value.
-    If not set, then tickStep or step is used, depending on which one is set. */
+  // Bước giữa việc hiển thị mỗi giá trị bước đánh dấu.Nếu không được đặt, thì Tickstep hoặc bước được sử dụng, tùy thuộc vào cái nào được đặt.
   tickValueStep?: number | undefined;
 
-  /** Use to display ticks at specific positions.
-    The array contains the index of the ticks that should be displayed.
-    For example, [0, 1, 5] will display a tick for the first, second and sixth values. */
+  // Sử dụng để hiển thị ve ở các vị trí cụ thể.Mảng chứa chỉ số của các ve nên được hiển thị.Ví dụ: [0, 1, 5] sẽ hiển thị một đánh dấu cho các giá trị thứ nhất, thứ hai và thứ sáu.
   ticksArray?: number[] | undefined;
 
-  /** Used to display a tooltip when a tick is hovered.
-    Set to a function that returns the tooltip content for a given value. */
+  // Được sử dụng để hiển thị một chú giải công cụ khi đánh dấu.Đặt thành một hàm trả về nội dung chú giải công cụ cho một giá trị nhất định.
   ticksTooltip?: (value: number) => string | undefined;
 
-  /** Same as ticksTooltip but for ticks values. */
+  // Tương tự như Tickstooltip nhưng đối với các giá trị đánh dấu.
   ticksValuesTooltip?: (value: number) => string | undefined;
 
-  /** Set to true to display the slider vertically.
-    The slider will take the full height of its parent.
-    Changing this value at runtime is not currently supported. */
+  // Đặt thành true để hiển thị thanh trượt theo chiều dọc.Thanh trượt sẽ mất toàn bộ chiều cao của cha mẹ.Thay đổi giá trị này trong thời gian chạy hiện không được hỗ trợ.
   vertical?: boolean = false;
 
-  /** Function that returns the current color of the selection bar.
-    If your color won't change, don't use this option but set it through CSS.
-    If the returned color depends on a model value (either value or valueHigh),
-    you should use the argument passed to the function.
-    Indeed, when the function is called, there is no certainty that the model
-    has already been updated.*/
+  // Chức năng trả về màu hiện tại của thanh lựa chọn. Nếu màu của bạn không thay đổi, đừng sử dụng tùy chọn này nhưng đặt nó thông qua CSS. Nếu màu được trả về phụ thuộc vào giá trị mô hình (giá trị hoặc giá trị), Bạn nên sử dụng đối số được truyền cho chức năng. Thật vậy, khi hàm được gọi, không có gì chắc chắn rằng mô hình đã được cập nhật.
   getSelectionBarColor?: (
     minValue: number,
     maxValue?: number
   ) => string | undefined;
 
-  /** Function that returns the color of a tick. showTicks must be enabled. */
+  // Chức năng trả về màu của đánh dấu.ShowTicks phải được bật.
   getTickColor?: (value: number) => string | undefined;
 
-  /** Function that returns the current color of a pointer.
-    If your color won't change, don't use this option but set it through CSS.
-    If the returned color depends on a model value (either value or valueHigh),
-    you should use the argument passed to the function.
-    Indeed, when the function is called, there is no certainty that the model has already been updated.
-    To handle range slider pointers independently, you should evaluate pointerType within the given
-    function where "min" stands for value model and "max" for valueHigh model values. */
+  // Chức năng trả về màu hiện tại của một con trỏ. Nếu màu của bạn không thay đổi, đừng sử dụng tùy chọn này nhưng đặt nó thông qua CSS. Nếu màu được trả về phụ thuộc vào giá trị mô hình (giá trị hoặc giá trị), Bạn nên sử dụng đối số được truyền cho chức năng. Thật vậy, khi chức năng được gọi, không có gì chắc chắn rằng mô hình đã được cập nhật. Để xử lý các con trỏ trượt phạm vi một cách độc lập, bạn nên đánh giá con trỏ trong phạm vi đã cho Chức năng trong đó "tối thiểu" là viết tắt của mô hình giá trị và "tối đa" cho các giá trị mô hình giá trị.
   getPointerColor?: (
     value: number,
     pointerType: PointerType
   ) => string | undefined;
 
-  /** Handles are focusable (on click or with tab) and can be modified using the following keyboard controls:
-    Left/bottom arrows: -1
-    Right/top arrows: +1
-    Page-down: -10%
-    Page-up: +10%
-    Home: minimum value
-    End: maximum value
-   */
+  // Tay cầm có thể tập trung (khi nhấp hoặc với tab) và có thể được sửa đổi bằng cách sử dụng các điều khiển bàn phím sau: Mũi tên trái/dưới: -1 Mũi tên phải/trên: +1 Trang xuống: -10% Trang lên: +10% Trang chủ: Giá trị tối thiểu Kết thúc: Giá trị tối đa
   keyboardSupport?: boolean = true;
 
-  /** If you display the slider in an element that uses transform: scale(0.5), set the scale value to 2
-    so that the slider is rendered properly and the events are handled correctly. */
+  // Nếu bạn hiển thị thanh trượt trong một phần tử sử dụng Transform: Scale (0,5), hãy đặt giá trị tỷ lệ thành 2 để thanh trượt được hiển thị đúng và các sự kiện được xử lý chính xác.
   scale?: number = 1;
 
-  /** If you display the slider in an element that uses transform: rotate(90deg), set the rotate value to 90
-   so that the slider is rendered properly and the events are handled correctly. Value is in degrees. */
+  // Nếu bạn hiển thị thanh trượt trong một phần tử sử dụng biến đổi: xoay (90deg), hãy đặt giá trị xoay thành 90 để thanh trượt được hiển thị đúng và các sự kiện được xử lý chính xác.Giá trị là bằng độ.
   rotate?: number = 0;
 
-  /** Set to true to force the value(s) to be rounded to the step, even when modified from the outside.
-    When set to false, if the model values are modified from outside the slider, they are not rounded
-    and can be between two steps. */
+  // Đặt thành đúng để buộc (các) giá trị được làm tròn vào bước, ngay cả khi được sửa đổi từ bên ngoài. Khi được đặt thành sai, nếu các giá trị mô hình được sửa đổi từ bên ngoài thanh trượt, chúng không được làm tròn và có thể ở giữa hai bước.
   enforceStep?: boolean = true;
 
-  /** Set to true to force the value(s) to be normalised to allowed range (floor to ceil), even when modified from the outside.
-    When set to false, if the model values are modified from outside the slider, and they are outside allowed range,
-    the slider may be rendered incorrectly. However, setting this to false may be useful if you want to perform custom normalisation. */
+  // Đặt thành đúng để buộc (các) giá trị được chuẩn hóa thành phạm vi cho phép (từ sàn đến trần), ngay cả khi được sửa đổi từ bên ngoài. Khi được đặt thành sai, nếu các giá trị mô hình được sửa đổi từ bên ngoài thanh trượt và chúng ở bên ngoài phạm vi được phép, Thanh trượt có thể được hiển thị không chính xác.Tuy nhiên, việc đặt điều này thành sai có thể hữu ích nếu bạn muốn thực hiện chuẩn hóa tùy chỉnh.
   enforceRange?: boolean = true;
 
-  /** Set to true to force the value(s) to be rounded to the nearest step value, even when modified from the outside.
-    When set to false, if the model values are modified from outside the slider, and they are outside allowed range,
-    the slider may be rendered incorrectly. However, setting this to false may be useful if you want to perform custom normalisation. */
+  // Đặt thành true để buộc (các) giá trị được làm tròn đến giá trị bước gần nhất, ngay cả khi được sửa đổi từ bên ngoài. Khi được đặt thành sai, nếu các giá trị mô hình được sửa đổi từ bên ngoài thanh trượt và chúng ở bên ngoài phạm vi được phép, Thanh trượt có thể được hiển thị không chính xác.Tuy nhiên, việc đặt điều này thành sai có thể hữu ích nếu bạn muốn thực hiện chuẩn hóa tùy chỉnh.
   enforceStepsArray?: boolean = true;
 
-  /** Set to true to prevent to user from switching the min and max handles. Applies to range slider only. */
+  // Đặt thành True để ngăn người dùng chuyển đổi tay cầm tối đa và tối đa.Chỉ áp dụng cho các slider phạm vi.
   noSwitching?: boolean = false;
 
-  /** Set to true to only bind events on slider handles. */
+  // Đặt thành true để chỉ liên kết các sự kiện trên tay cầm trượt.
   onlyBindHandles?: boolean = false;
 
-  /** Set to true to show graphs right to left.
-    If vertical is true it will be from top to bottom and left / right arrow functions reversed. */
+  // Đặt thành True để hiển thị đồ thị phải sang trái. Nếu dọc là đúng, nó sẽ từ trên xuống dưới và các hàm mũi tên trái / phải đảo ngược.
   rightToLeft?: boolean = false;
 
-  /** Set to true to reverse keyboard navigation:
-    Right/top arrows: -1
-    Left/bottom arrows: +1
-    Page-up: -10%
-    Page-down: +10%
-    End: minimum value
-    Home: maximum value
-   */
+  // Đặt thành True thành Điều hướng bàn phím đảo ngược: Mũi tên phải/trên: -1 Mũi tên trái/dưới: +1 Trang lên: -10% Trang xuống: +10% Kết thúc: Giá trị tối thiểu Trang chủ: Giá trị tối đa
+
   reversedControls?: boolean = false;
 
-  /** Set to true to keep the slider labels inside the slider bounds. */
+  // Đặt thành True để giữ các nhãn trượt bên trong giới hạn thanh trượt.
   boundPointerLabels?: boolean = true;
 
-  /** Set to true to use a logarithmic scale to display the slider.  */
+  // Set to true to use a logarithmic scale to display the slider.
   logScale?: boolean = false;
 
-  /** Function that returns the position on the slider for a given value.
-    The position must be a percentage between 0 and 1.
-    The function should be monotonically increasing or decreasing; otherwise the slider may behave incorrectly. */
+  // Hàm trả về vị trí trên thanh trượt cho một giá trị nhất định. Vị trí phải là một tỷ lệ phần trăm từ 0 đến 1. Chức năng nên tăng hoặc giảm đơn điệu;Nếu không, thanh trượt có thể cư xử không chính xác.
   customValueToPosition?: ValueToPositionFunction | undefined;
 
-  /** Function that returns the value for a given position on the slider.
-    The position is a percentage between 0 and 1.
-    The function should be monotonically increasing or decreasing; otherwise the slider may behave incorrectly. */
+  // Hàm trả về giá trị cho một vị trí nhất định trên thanh trượt. Vị trí là một tỷ lệ phần trăm từ 0 đến 1. Chức năng nên tăng hoặc giảm đơn điệu;Nếu không, thanh trượt có thể cư xử không chính xác.
   customPositionToValue?: PositionToValueFunction | undefined;
 
-  /** Precision limit for calculated values.
-    Values used in calculations will be rounded to this number of significant digits
-    to prevent accumulating small floating-point errors. */
+  // Giới hạn chính xác cho các giá trị được tính toán. Các giá trị được sử dụng trong các tính toán sẽ được làm tròn vào số chữ số quan trọng này Để ngăn chặn tích lũy các lỗi điểm nổi nhỏ.
   precisionLimit?: number = 12;
 
-  /** Use to display the selection bar as a gradient.
-    The given object must contain from and to properties which are colors. */
+  // Sử dụng để hiển thị thanh lựa chọn như một gradient. Đối tượng đã cho phải chứa từ và đến các thuộc tính là màu sắc.
   selectionBarGradient?: { from: string; to: string } | undefined;
 
-  /** Use to add a label directly to the slider for accessibility. Adds the aria-label attribute. */
+  // Sử dụng để thêm nhãn trực tiếp vào thanh trượt để tiếp cận.Thêm thuộc tính nhãn ARIA.
   ariaLabel?: string = 'ngx-slider';
 
-  /** Use instead of ariaLabel to reference the id of an element which will be used to label the slider.
-    Adds the aria-labelledby attribute. */
+  // Sử dụng thay vì Arialabel để tham chiếu ID của một phần tử sẽ được sử dụng để dán nhãn thanh trượt. Thêm thuộc tính Aria-Labelledby.
   ariaLabelledBy?: string | undefined;
 
-  /** Use to add a label directly to the slider range for accessibility. Adds the aria-label attribute. */
+  // Sử dụng để thêm một nhãn trực tiếp vào phạm vi thanh trượt để tiếp cận.Thêm thuộc tính nhãn ARIA.
   ariaLabelHigh?: string = 'ngx-slider-max';
 
-  /** Use instead of ariaLabelHigh to reference the id of an element which will be used to label the slider range.
-    Adds the aria-labelledby attribute. */
+  // Sử dụng thay vì Arialabelhigh để tham chiếu ID của một phần tử sẽ được sử dụng để dán nhãn phạm vi trượt. Thêm thuộc tính Aria-Labelledby.
   ariaLabelledByHigh?: string | undefined;
 
-  /** Use to increase rendering performance. If the value is not provided, the slider calculates the with/height of the handle */
+  // Sử dụng để tăng hiệu suất kết xuất.Nếu giá trị không được cung cấp, thanh trượt sẽ tính toán với/chiều cao của tay cầm
   handleDimension?: number | undefined;
 
-  /** Use to increase rendering performance. If the value is not provided, the slider calculates the with/height of the bar */
+  // Sử dụng để tăng hiệu suất kết xuất.Nếu giá trị không được cung cấp, thanh trượt sẽ tính toán với/chiều cao của thanh
   barDimension?: number | undefined;
 
-  /** Enable/disable CSS animations */
+  // Bật/tắt hình ảnh động CSS
   animate?: boolean = true;
 
-  /** Enable/disable CSS animations while moving the slider */
+  // Bật/tắt hoạt hình CSS trong khi di chuyển thanh trượt
   animateOnMove?: boolean = false;
 }
