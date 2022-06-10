@@ -155,7 +155,7 @@ export class Options {
     maxValue?: number
   ) => string | undefined;
 
-  // Chức năng trả về màu của đánh dấu.ShowTicks phải được bật.
+  // Chức năng trả về màu của đánh dấu. ShowTicks phải được bật.
   getTickColor?: (value: number) => string | undefined;
 
   // Chức năng trả về màu hiện tại của một con trỏ. Nếu màu của bạn không thay đổi, đừng sử dụng tùy chọn này nhưng đặt nó thông qua CSS. Nếu màu được trả về phụ thuộc vào giá trị mô hình (giá trị hoặc giá trị), Bạn nên sử dụng đối số được truyền cho chức năng. Thật vậy, khi chức năng được gọi, không có gì chắc chắn rằng mô hình đã được cập nhật. Để xử lý các con trỏ trượt phạm vi một cách độc lập, bạn nên đánh giá con trỏ trong phạm vi đã cho Chức năng trong đó "tối thiểu" là viết tắt của mô hình giá trị và "tối đa" cho các giá trị mô hình giá trị.
@@ -182,7 +182,7 @@ export class Options {
   // Đặt thành true để buộc (các) giá trị được làm tròn đến giá trị bước gần nhất, ngay cả khi được sửa đổi từ bên ngoài. Khi được đặt thành sai, nếu các giá trị mô hình được sửa đổi từ bên ngoài thanh trượt và chúng ở bên ngoài phạm vi được phép, Thanh trượt có thể được hiển thị không chính xác.Tuy nhiên, việc đặt điều này thành sai có thể hữu ích nếu bạn muốn thực hiện chuẩn hóa tùy chỉnh.
   enforceStepsArray?: boolean = true;
 
-  // Đặt thành True để ngăn người dùng chuyển đổi tay cầm tối đa và tối đa.Chỉ áp dụng cho các slider phạm vi.
+  // Đặt thành True để ngăn người dùng chuyển đổi tay cầm tối đa và tối đa. Chỉ áp dụng cho các slider phạm vi.
   noSwitching?: boolean = false;
 
   // Đặt thành true để chỉ liên kết các sự kiện trên tay cầm trượt.
