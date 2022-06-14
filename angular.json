@@ -27,10 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/wijmo/styles/wijmo-core.css",
-              "node_modules/wijmo/styles/wijmo.css",
-              "node_modules/wijmo/styles/themes/wijmo.theme.cerulean.css"
+              "src/styles.css"
             ],
             "scripts": []
           },
