@@ -1,6 +1,5 @@
-<wj-flex-pie [header]="'Pie Chart'" [bindingName]="'day'" [binding]="'value'" [itemsSource]="data"
-    [palette]="['#e63946', '#00bbf9', '#fee440', '#38b000', '#9c89b8']">
-    <wj-flex-pie-data-label [content]="getLabelContent"></wj-flex-pie-data-label>
+<wj-flex-pie #pieChart [selectionMode]="'Point'">
+    <wj-flex-pie-data-label [content]="content"></wj-flex-pie-data-label>
     <wj-flex-chart-animation [animationMode]="'Point'" [duration]="1000">
     </wj-flex-chart-animation>
 </wj-flex-pie>
