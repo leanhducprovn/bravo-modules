@@ -22,8 +22,6 @@ export class PieChartComponent implements OnInit {
   }
 
   pie() {
-    console.log(this.pieChart);
-
     this.pieChart.palette = [
       '#e63946',
       '#00bbf9',
@@ -55,4 +53,10 @@ export class PieChartComponent implements OnInit {
       value: ht.value / this.sum,
     });
   };
+
+  click(event: any) {
+    event.hostElement.addEventListener('click', (element: any) => {
+      console.log(event.hitTest(element).name);
+    });
+  }
 }

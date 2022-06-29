@@ -1,4 +1,4 @@
-<wj-flex-pie #pieChart [selectionMode]="'Point'">
+<wj-flex-pie #pieChart [selectionMode]="'Point'" (selectionChanged)="click(pieChart)">
     <wj-flex-pie-data-label [content]="content"></wj-flex-pie-data-label>
     <wj-flex-chart-animation [animationMode]="'Point'" [duration]="1000">
     </wj-flex-chart-animation>

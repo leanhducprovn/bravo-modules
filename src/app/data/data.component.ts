@@ -9,6 +9,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./data.component.css'],
 })
 export class DataComponent implements OnInit {
+  // slider
   optionsSlider!: Options;
 
   formSlider = this.fb.group({
@@ -18,6 +19,7 @@ export class DataComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    // slider
     this.optionsSlider = {
       floor: 0,
       ceil: 250,
