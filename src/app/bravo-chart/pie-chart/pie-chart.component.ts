@@ -54,9 +54,14 @@ export class PieChartComponent implements OnInit {
     });
   };
 
-  click(event: any) {
-    event.hostElement.addEventListener('click', (element: any) => {
-      console.log(event.hitTest(element).name);
+  day!: string;
+  value!: number;
+
+  click(chart: any) {
+    chart.hostElement.addEventListener('click', (element: any) => {
+      this.day = chart.hitTest(element).item.day;
+      this.value = chart.hitTest(element).item.value;
     });
+    console.log(this.day, this.value);
   }
 }
