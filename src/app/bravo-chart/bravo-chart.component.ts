@@ -9,4 +9,8 @@ export class BravoChartComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  clickPie(day: string, value: number) {
+    console.log(day, value);
+  }
 }
