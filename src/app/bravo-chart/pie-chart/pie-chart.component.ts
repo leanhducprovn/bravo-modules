@@ -58,7 +58,6 @@ export class PieChartComponent implements OnInit {
     chart.hostElement.addEventListener('click', (element: any) => {
       let htInfo = chart.hitTest(element);
       console.log(htInfo.name, htInfo.value);
-      // test
     });
   }
 }
