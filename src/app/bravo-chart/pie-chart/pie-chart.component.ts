@@ -5,8 +5,6 @@ import { FlexPie } from '@grapecity/wijmo.chart';
 import * as wijmo from '@grapecity/wijmo';
 import * as chart from '@grapecity/wijmo.chart';
 
-import { Output, EventEmitter } from '@angular/core';
-
 @Component({
   selector: 'pie-chart',
   templateUrl: './pie-chart.component.html',
@@ -56,14 +54,10 @@ export class PieChartComponent implements OnInit {
     });
   };
 
-  @Output() dataEvent = new EventEmitter<any>();
-
   click(chart: any) {
     chart.hostElement.addEventListener('click', (element: any) => {
-      this.dataEvent.emit({
-        day: chart.hitTest(element).item.day,
-        value: chart.hitTest(element).item.value,
-      });
+      let htInfo = chart.hitTest(element);
+      console.log(htInfo.name, htInfo.value);
     });
   }
 }
