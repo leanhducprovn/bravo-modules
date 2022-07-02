@@ -59,5 +59,6 @@ export class PieChartComponent implements OnInit {
       let htInfo = chart.hitTest(element);
       console.log(htInfo.name, htInfo.value);
     });
+    console.log();
   }
 }
