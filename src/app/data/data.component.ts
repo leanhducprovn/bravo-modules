@@ -13,7 +13,7 @@ export class DataComponent implements OnInit {
   optionsSlider!: Options;
 
   formSlider = this.fb.group({
-    dataSlider: [[50, 200]],
+    dataSlider: [[50, 150]],
   });
 
   constructor(private fb: FormBuilder) {}
@@ -22,7 +22,7 @@ export class DataComponent implements OnInit {
     // slider
     this.optionsSlider = {
       floor: 0,
-      ceil: 250,
+      ceil: 200,
     };
 
     this.formSlider.valueChanges.subscribe((value) => {
