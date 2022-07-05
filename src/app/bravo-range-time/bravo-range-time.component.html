@@ -1,1 +1,22 @@
-<p>bravo-range-time works!</p>
+<div class="content">
+    <div class="select">
+        <wj-menu #select [(value)]="defaultValue" (itemClicked)="onSelect(select)">
+            <wj-menu-item [value]="0">
+                Tháng
+            </wj-menu-item>
+            <wj-menu-item [value]="1">
+                Quý
+            </wj-menu-item>
+            <wj-menu-item [value]="2">
+                Năm
+            </wj-menu-item>
+            <wj-menu-separator></wj-menu-separator>
+            <wj-menu-item [value]="3">
+                Tùy chỉnh
+            </wj-menu-item>
+        </wj-menu>
+    </div>
+    <div class="selected">
+
+    </div>
+</div>

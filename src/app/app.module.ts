@@ -10,6 +10,7 @@ import { BravoChartComponent } from './bravo-chart/bravo-chart.component';
 import { PieChartComponent } from './bravo-chart/pie-chart/pie-chart.component';
 import { WjChartModule } from '@grapecity/wijmo.angular2.chart';
 import { WjChartAnimationModule } from '@grapecity/wijmo.angular2.chart.animation';
+import { WjInputModule } from '@grapecity/wijmo.angular2.input';
 import { BravoRangeTimeComponent } from './bravo-range-time/bravo-range-time.component';
 
 @NgModule({
@@ -28,6 +29,7 @@ import { BravoRangeTimeComponent } from './bravo-range-time/bravo-range-time.com
     ReactiveFormsModule,
     WjChartModule,
     WjChartAnimationModule,
+    WjInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
