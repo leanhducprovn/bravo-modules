@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
+import * as wjc from '@grapecity/wijmo';
 import * as input from '@grapecity/wijmo.input';
 import { WjMenu } from '@grapecity/wijmo.angular2.input';
 
@@ -14,6 +15,7 @@ export class BravoRangeTimeComponent implements OnInit {
   constructor() {}
 
   defaultValue = 0;
+  textSelect!: string;
 
   ngOnInit(): void {
     let _enums = [];
@@ -26,10 +28,20 @@ export class BravoRangeTimeComponent implements OnInit {
     _enums = _enums.filter((n) => typeof n === 'number');
     for (const _e of _enums) {
     }
+
+    this.select.refreshed.addHandler(() => {
+      this.select.header = this.select.header.replace(/:|<|>|\/|b/g, '');
+    });
   }
 
   onSelect(menu: input.Menu) {
-    console.log(menu.header);
+    menu.formatItem.addHandler(() => {
+      menu.header = menu.header.replace(/:|<|>|\/|b/g, '');
+      wjc.addClass(
+        menu.dropDown.childNodes[menu.selectedIndex] as HTMLElement,
+        'selected'
+      );
+    });
   }
 }
 

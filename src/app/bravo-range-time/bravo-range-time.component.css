@@ -3,3 +3,8 @@
     flex-direction: row;
     align-items: flex-end;
 }
+
+:host ::ng-deep .wj-listbox-item.selected div::before {
+    content: "\2713";
+    margin-right: 6px;
+}
