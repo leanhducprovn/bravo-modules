@@ -1,5 +1,38 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
+
 .content {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.content .wj-content {
+    border: unset !important;
+    background: unset !important;
+}
+
+.content .wj-input-group-btn {
+    border-left: unset !important;
+}
+
+
+:host >>> .wj-input-group-btn:last-child:not(:first-child)>.wj-btn {
+    border-left: unset !important;
+}
+
+:host >>> .wj-control .wj-input-group-btn>.wj-btn.wj-btn-default:hover {
+    background: unset !important;
+}
+
+:host >>> .wj-glyph-down {
+    border-top: unset !important;
+    border-right: unset !important;
+    border-left: unset !important;
+}
+
+:host >>> .wj-glyph-down::before {
+    content: "\f107";
+    font-family: FontAwesome;
+    font-size: 20px;
 }

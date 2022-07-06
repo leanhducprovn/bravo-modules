@@ -59,6 +59,7 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
         'selected'
       );
     });
+    console.log(menu.header);
   }
 }
 
