@@ -19,12 +19,11 @@ import { WjMenu } from '@grapecity/wijmo.angular2.input';
 export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   @ViewChild('select', { static: true }) select!: WjMenu;
 
-  month = true;
-  quarter = false;
-  year = false;
   time = new Date();
   min!: Date;
   max!: Date;
+
+  periodType = PeriodType;
 
   @Output() timeEvent = new EventEmitter<any>();
 
