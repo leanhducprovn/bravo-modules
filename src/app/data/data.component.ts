@@ -9,7 +9,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./data.component.css'],
 })
 export class DataComponent implements OnInit {
-  // slider
+  // bravo slider
   optionsSlider!: Options;
 
   formSlider = this.fb.group({
@@ -19,7 +19,7 @@ export class DataComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    // slider
+    // bravo slider
     this.optionsSlider = {
       floor: 0,
       ceil: 200,
@@ -28,5 +28,10 @@ export class DataComponent implements OnInit {
     this.formSlider.valueChanges.subscribe((value) => {
       console.log(value);
     });
+  }
+
+  // bravo range time
+  timeEvent(min: Date, max: Date) {
+    console.log(min, '=>', max);
   }
 }

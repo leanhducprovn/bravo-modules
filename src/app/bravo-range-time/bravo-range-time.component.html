@@ -1,6 +1,6 @@
 <div class="content">
     <div class="select">
-        <wj-menu #select [(value)]="defaultValue" (itemClicked)="onSelect(select)">
+        <wj-menu #select [value]="0" (itemClicked)="onSelect(select)">
             <wj-menu-item [value]="0">
                 Tháng
             </wj-menu-item>
@@ -17,6 +17,24 @@
         </wj-menu>
     </div>
     <div class="selected">
-
+        <div class="month" *ngIf="month">
+            <ul (click)="onClickMonth($event)">
+                <li *ngFor="let month of listMonth()" [value]="month">{{ month }}
+                </li>
+            </ul>
+        </div>
+        <div class="quarter" *ngIf="quarter">
+            <ul (click)="onClickQuarter($event)">
+                <li>I</li>
+                <li>II</li>
+                <li>III</li>
+                <li>IV</li>
+            </ul>
+        </div>
+        <div class="year" *ngIf="year">
+            <ul (click)="onClickYear($event)">
+                <li *ngFor="let year of listYear()" [value]="year">{{ year }}</li>
+            </ul>
+        </div>
     </div>
 </div>
