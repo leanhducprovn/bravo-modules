@@ -11,3 +11,9 @@ body {
 a {
     text-decoration: none;
 }
+
+.selected div::before {
+    content: "\2713";
+    margin-left: -20px;
+    margin-right: 3px;
+}
