@@ -17,7 +17,7 @@ import { WjMenu } from '@grapecity/wijmo.angular2.input';
   styleUrls: ['./bravo-range-time.component.css'],
 })
 export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
-  @ViewChild('select', { static: true }) select!: WjMenu;
+  @ViewChild('menu', { static: true }) menu!: WjMenu;
 
   time = new Date();
   min!: Date;
@@ -30,31 +30,25 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   constructor() {}
 
   ngAfterViewInit(): void {
-    this.select.refreshed.addHandler(() => {
-      this.select.header = this.select.header.replace(/:|<|>|\/|b/g, '');
+    this.menu.refreshed.addHandler(() => {
+      this.menu.header = this.menu.header.replace(/:|<|>|\/|b/g, '');
       wjc.addClass(
-        this.select.dropDown.childNodes[
-          this.select.selectedIndex
-        ] as HTMLElement,
+        this.menu.dropDown.childNodes[this.menu.selectedIndex] as HTMLElement,
         'selected'
       );
-      this.select.dropDown.childNodes.forEach((element) => {
+      this.menu.dropDown.childNodes.forEach((element) => {
         wjc.setCss(element, {
           'margin-left': '20px',
         });
       });
     });
-  }
-
-  ngOnInit(): void {}
-
-  onSelect(menu: input.Menu) {
-    menu.formatItem.addHandler(() => {
-      menu.header = menu.header.replace(/:|<|>|\/|b/g, '');
+    this.menu.itemClicked.addHandler((menu) => {
+      menu.header = this.menu.header.replace(/:|<|>|\/|b/g, '');
       menu.dropDown.childNodes.forEach((element) => {
         wjc.setCss(element, {
           'margin-left': '20px',
         });
+        wjc.removeClass(element as HTMLElement, 'selected');
       });
       wjc.addClass(
         menu.dropDown.childNodes[menu.selectedIndex] as HTMLElement,
@@ -62,6 +56,8 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
       );
     });
   }
+
+  ngOnInit(): void {}
 
   listMonth() {
     let listMonth: any = [];
