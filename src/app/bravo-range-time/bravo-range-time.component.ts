@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 
 import * as wjc from '@grapecity/wijmo';
-import * as input from '@grapecity/wijmo.input';
 import { WjMenu } from '@grapecity/wijmo.angular2.input';
 
 @Component({
