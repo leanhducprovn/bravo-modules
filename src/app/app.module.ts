@@ -12,6 +12,7 @@ import { WjChartModule } from '@grapecity/wijmo.angular2.chart';
 import { WjChartAnimationModule } from '@grapecity/wijmo.angular2.chart.animation';
 import { WjInputModule } from '@grapecity/wijmo.angular2.input';
 import { BravoRangeTimeComponent } from './bravo-range-time/bravo-range-time.component';
+import { BravoChecklistComponent } from './bravo-checklist/bravo-checklist.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { BravoRangeTimeComponent } from './bravo-range-time/bravo-range-time.com
     BravoChartComponent,
     PieChartComponent,
     BravoRangeTimeComponent,
+    BravoChecklistComponent,
   ],
   imports: [
     BrowserModule,
