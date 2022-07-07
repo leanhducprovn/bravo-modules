@@ -6,14 +6,22 @@
 
 body {
     font-family: sans-serif;
+    color: #000;
 }
 
 a {
     text-decoration: none;
 }
 
+/* selected listbox */
 .selected div::before {
     content: "\2713";
     margin-left: -20px;
     margin-right: 3px;
+}
+
+/* popup listbox */
+.wj-dropdown-panel {
+    background: rgb(255, 255, 255) !important;
+    color: inherit !important;
 }

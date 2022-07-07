@@ -33,6 +33,7 @@
 .content .wj-content {
     border: unset !important;
     background: unset !important;
+    color: inherit !important
 }
 
 .content .wj-input-group-btn {
@@ -54,8 +55,13 @@
     border-left: unset !important;
 }
 
+:host >>> .wj-btn-default {
+    color: inherit !important;
+}
+
 :host >>> .wj-glyph-down::before {
     content: "\f107";
     font-family: FontAwesome;
     font-size: 20px;
+    color: inherit;
 }
