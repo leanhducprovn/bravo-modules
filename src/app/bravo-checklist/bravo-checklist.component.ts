@@ -3,6 +3,7 @@ import {
   ElementRef,
   Inject,
   Injector,
+  Input,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -30,6 +31,26 @@ export class BravoChecklistComponent
   extends Control
   implements OnInit, ControlValueAccessor
 {
+  private _zParentText!: string;
+  @Input()
+  public set zParentText(pzValue: string) {
+    this._zParentText = pzValue;
+    this.invalidate();
+  }
+  public get zParentText(): string {
+    return this._zParentText;
+  }
+
+  private _dataList!: DataList[];
+  @Input()
+  public set dataList(pValue: DataList[]) {
+    this._dataList = pValue;
+    this.invalidate();
+  }
+  public get dataList(): DataList[] {
+    return this._dataList;
+  }
+
   private _valueList!: string[];
   public set valueList(pzValueList: string[]) {
     this._valueList = pzValueList;
@@ -46,27 +67,21 @@ export class BravoChecklistComponent
     return this._zSeparator;
   }
 
-  private _zText!: string;
-  public set zText(pzValue: string) {
-    this._zText = pzValue;
+  private _bSelectOnlyOne!: boolean;
+  @Input()
+  public set bSelectOnlyOne(pbValue: boolean) {
+    this._bSelectOnlyOne = pbValue;
+    this.invalidate();
   }
-  public get zText(): string {
-    return this._zText;
-  }
-
-  private _bAllowSelectMultiValue!: boolean;
-  public set bAllowSelectMultiValue(pbValue: boolean) {
-    this._bAllowSelectMultiValue = pbValue;
-  }
-  public get bAllowSelectMultiValue(): boolean {
-    return this._bAllowSelectMultiValue;
+  public get bSelectOnlyOne(): boolean {
+    return this._bSelectOnlyOne;
   }
 
-  private _listType!: ListType;
-  public set listType(pnValue: ListType) {
+  private _listType!: TypeList;
+  public set listType(pnValue: TypeList) {
     this._listType = pnValue;
   }
-  public get listType(): ListType {
+  public get listType(): TypeList {
     return this._listType;
   }
 
@@ -93,10 +108,22 @@ export class BravoChecklistComponent
     super.refresh(fullUpdate);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.dataList);
+  }
+
+  onSelectOption(e: any) {
+    console.log(e);
+  }
 }
 
-enum ListType {
+export interface DataList {
+  name: string;
+  text: string;
+  value: string;
+}
+
+enum TypeList {
   Checkbox,
   Button,
 }

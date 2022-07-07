@@ -21,6 +21,15 @@
 
 <!-- check list -->
 <div class="check-list">
-    <bravo-checklist></bravo-checklist>
+
+    <bravo-checklist [zParentText]="'Loại giao dịch'" [dataList]="tradingData" [bSelectOnlyOne]="true">
+    </bravo-checklist>
+
+    <bravo-checklist [zParentText]="'Loại đánh giá'" [dataList]="ratingData">
+    </bravo-checklist>
+
+    <bravo-checklist [zParentText]="'Thời gian'" [dataList]="timingData">
+    </bravo-checklist>
+
 </div>
 <br>
