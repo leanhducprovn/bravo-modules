@@ -22,13 +22,13 @@
 <!-- check list -->
 <div class="check-list">
 
-    <bravo-checklist #trading [zParentText]="'Loại giao dịch'" [dataList]="tradingData">
+    <bravo-checklist #trading [zParentText]="'Loại giao dịch'" [dataList]="tradingData" [bSelectOnlyOne]="false">
     </bravo-checklist>
 
-    <bravo-checklist #rating [zParentText]="'Loại đánh giá'" [dataList]="ratingData" [bSelectOnlyOne]="true">
+    <bravo-checklist #rating [zParentText]="'Loại đánh giá'" [dataList]="ratingData" [bSelectOnlyOne]="false">
     </bravo-checklist>
 
-    <bravo-checklist #timing [zParentText]="'Thời gian'" [dataList]="timingData">
+    <bravo-checklist #timing [zParentText]="'Thời gian'" [dataList]="timingData" [bSelectOnlyOne]="false">
     </bravo-checklist>
 
 </div>

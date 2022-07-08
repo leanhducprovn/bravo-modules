@@ -54,6 +54,18 @@ export class BravoChecklistComponent
     return this._dataList;
   }
 
+  private _dataSelected!: DataList[];
+  public set dataSelected(pValue: DataList[]) {
+    this._dataSelected = pValue;
+    this.invalidate();
+  }
+  public get dataSelected(): DataList[] {
+    if (!this._dataSelected) {
+      this._dataSelected = [];
+    }
+    return this._dataSelected;
+  }
+
   private _valueList!: string[];
   public set valueList(pzValue: string[]) {
     this._valueList = pzValue;
@@ -119,9 +131,6 @@ export class BravoChecklistComponent
 
   public override refresh(fullUpdate?: boolean) {
     super.refresh(fullUpdate);
-  }
-
-  public ngOnInit(): void {
     for (let i = 0; i < this.dataList.length; i++) {
       this.addOption(
         this.dataList[i].name,
@@ -129,7 +138,9 @@ export class BravoChecklistComponent
         this.dataList[i].value
       );
     }
+  }
 
+  public ngOnInit(): void {
     // console.log(this.controls);
   }
 
@@ -141,16 +152,26 @@ export class BravoChecklistComponent
     for (let i = 0; i < this.controls.length; i++) {
       this.controls[i].checked = e.target.checked;
       if (this.controls[i].checked) {
-        if (this.valueList.indexOf(this.controls[i].value) == -1) {
-          this.valueList.push(this.controls[i].value);
+        if (this.dataSelected.indexOf(this.controls[i].value) == -1) {
+          this.dataSelected.push({
+            name: this.controls[i].name,
+            text: this.controls[i].text,
+            value: this.controls[i].value,
+          });
         }
+      } else {
+        this.dataSelected = [];
       }
     }
-    console.log(this.valueList);
+    console.log(this.dataSelected);
   }
 
-  public addOption(pzName: string, pzText: string, pzValue: any) {
-    this.controls.push(new BravoOptionBox(pzName, pzText, pzValue));
+  public addOption(pzName: string, pzText: string, pValue: any) {
+    let _option = this.controls.find((item) => item.name == pzName);
+    if (_option == null) {
+      _option = new BravoOptionBox(pzName, pzText, pValue);
+      this.controls.push(_option);
+    }
   }
 
   public updateCheckBox() {
