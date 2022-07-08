@@ -1,14 +1,20 @@
 import { Options } from '@angular-slider/ngx-slider';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 
 import { FormBuilder } from '@angular/forms';
+import { BravoChecklistComponent } from '../bravo-checklist/bravo-checklist.component';
 
 @Component({
   selector: 'data',
   templateUrl: './data.component.html',
   styleUrls: ['./data.component.css'],
 })
-export class DataComponent implements OnInit {
+export class DataComponent implements OnInit, AfterViewInit {
+  // checklist viewchild
+  @ViewChild('trading', { static: true }) viewTrading!: BravoChecklistComponent;
+  @ViewChild('rating', { static: true }) viewRating!: BravoChecklistComponent;
+  @ViewChild('timing', { static: true }) viewTiming!: BravoChecklistComponent;
+
   // bravo slider
   optionsSlider!: Options;
 
@@ -67,6 +73,8 @@ export class DataComponent implements OnInit {
   ];
 
   constructor(private fb: FormBuilder) {}
+
+  ngAfterViewInit(): void {}
 
   ngOnInit(): void {
     // bravo slider

@@ -31,6 +31,9 @@ export class BravoChecklistComponent
   extends Control
   implements OnInit, ControlValueAccessor
 {
+  @ViewChild('parent', { static: true }) viewParent!: any;
+  @ViewChild('children', { static: true }) viewChildren!: ElementRef;
+
   private _zParentText!: string;
   @Input()
   public set zParentText(pzValue: string) {
@@ -52,10 +55,13 @@ export class BravoChecklistComponent
   }
 
   private _valueList!: string[];
-  public set valueList(pzValueList: string[]) {
-    this._valueList = pzValueList;
+  public set valueList(pzValue: string[]) {
+    this._valueList = pzValue;
   }
   public get valueList(): string[] {
+    if (!this._valueList) {
+      this._valueList = [];
+    }
     return this._valueList;
   }
 
@@ -90,6 +96,9 @@ export class BravoChecklistComponent
     this._controls = pValue;
   }
   public get controls(): wjc.ObservableArray {
+    if (!this._controls) {
+      this._controls = new wjc.ObservableArray();
+    }
     return this._controls;
   }
 
@@ -100,20 +109,49 @@ export class BravoChecklistComponent
     super(WjDirectiveBehavior.getHostElement(elRef, injector));
   }
 
-  writeValue(obj: any): void {}
-  registerOnChange(fn: any): void {}
-  registerOnTouched(fn: any): void {}
+  public writeValue(obj: any): void {}
+  public registerOnChange(fn: any): void {}
+  public registerOnTouched(fn: any): void {}
 
   public override refresh(fullUpdate?: boolean) {
     super.refresh(fullUpdate);
   }
 
-  ngOnInit(): void {
-    console.log(this.dataList);
+  public ngOnInit(): void {
+    for (let i = 0; i < this.dataList.length; i++) {
+      this.addOption(
+        this.dataList[i].name,
+        this.dataList[i].text,
+        this.dataList[i].value
+      );
+    }
+
+    console.log(this.controls);
   }
 
-  onSelectOption(e: any) {
+  public onSelectOption(e: any) {
     console.log(e);
+  }
+
+  public onSelectAll(e: any) {
+    console.log(e);
+  }
+
+  public addOption(pzName: string, pzText: string, pzValue: any) {
+    this.controls.push(new BravoOptionBox(pzName, pzText, pzValue));
+  }
+
+  public updateCheckBox() {
+    for (let i = 0; i < this.controls.length; i++) {
+      for (let j = 0; j < this.valueList.length; j++) {
+        if (this.controls[i].value == this.valueList[j]) {
+          this.controls[i].checked = true;
+        }
+      }
+    }
+    this.viewParent.checked = this.controls.every(
+      (option) => option.checked == true
+    );
   }
 }
 
@@ -126,4 +164,36 @@ export interface DataList {
 enum TypeList {
   Checkbox,
   Button,
+}
+
+export class BravoOptionBox {
+  private _name!: string;
+  public set name(pzValue: string) {
+    this._name = pzValue;
+  }
+  public get name(): string {
+    return this._name;
+  }
+
+  private _text!: string;
+  public set text(pzValue: string) {
+    this._text = pzValue;
+  }
+  public get text(): string {
+    return this._text;
+  }
+
+  private _value!: string;
+  public set value(pzValue: string) {
+    this._value = pzValue;
+  }
+  public get value(): string {
+    return this._value;
+  }
+
+  constructor(zName: string, zText: string, zValue: string) {
+    this.name = zName;
+    this.text = zText;
+    this.value = zValue;
+  }
 }
