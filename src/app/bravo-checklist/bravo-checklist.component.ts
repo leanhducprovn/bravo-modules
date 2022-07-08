@@ -57,6 +57,7 @@ export class BravoChecklistComponent
   private _valueList!: string[];
   public set valueList(pzValue: string[]) {
     this._valueList = pzValue;
+    this.invalidate();
   }
   public get valueList(): string[] {
     if (!this._valueList) {
@@ -68,6 +69,7 @@ export class BravoChecklistComponent
   private _zSeparator!: string;
   public set zSeparator(pzValue: string) {
     this._zSeparator = pzValue;
+    this.invalidate();
   }
   public get zSeparator(): string {
     return this._zSeparator;
@@ -86,6 +88,7 @@ export class BravoChecklistComponent
   private _listType!: TypeList;
   public set listType(pnValue: TypeList) {
     this._listType = pnValue;
+    this.invalidate();
   }
   public get listType(): TypeList {
     return this._listType;
@@ -94,6 +97,7 @@ export class BravoChecklistComponent
   private _controls!: wjc.ObservableArray;
   public set controls(pValue: wjc.ObservableArray) {
     this._controls = pValue;
+    this.invalidate();
   }
   public get controls(): wjc.ObservableArray {
     if (!this._controls) {
