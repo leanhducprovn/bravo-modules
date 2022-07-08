@@ -130,7 +130,7 @@ export class BravoChecklistComponent
       );
     }
 
-    console.log(this.controls);
+    // console.log(this.controls);
   }
 
   public onSelectOption(e: any) {
@@ -138,7 +138,15 @@ export class BravoChecklistComponent
   }
 
   public onSelectAll(e: any) {
-    console.log(e);
+    for (let i = 0; i < this.controls.length; i++) {
+      this.controls[i].checked = e.target.checked;
+      if (this.controls[i].checked) {
+        if (this.valueList.indexOf(this.controls[i].value) == -1) {
+          this.valueList.push(this.controls[i].value);
+        }
+      }
+    }
+    console.log(this.valueList);
   }
 
   public addOption(pzName: string, pzText: string, pzValue: any) {
