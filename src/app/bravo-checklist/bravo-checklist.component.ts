@@ -140,19 +140,48 @@ export class BravoChecklistComponent
     }
   }
 
-  public ngOnInit(): void {
-    // console.log(this.controls);
-  }
+  public ngOnInit(): void {}
 
-  public onSelectOption(e: any) {
-    console.log(e);
+  onSelectOption(e: any) {
+    if (e.target.checked) {
+      if (this.bSelectOnlyOne) {
+        this.dataSelected = [];
+        this.dataSelected.push({
+          name: e.target.name,
+          text: e.target.parentElement.innerText,
+          value: e.target.value,
+        });
+
+        for (let i = 0; i < this.controls.length; i++) {
+          if (this.controls[i].value !== e.target.value) {
+            this.controls[i].checked = false;
+          }
+        }
+      } else {
+        if (this.valueList.indexOf(e.target.value) == -1) {
+          this.valueList.push(e.target.value);
+        }
+      }
+    } else {
+      if (this.valueList.indexOf(e.target.value) !== -1) {
+        this.valueList.splice(this.valueList.indexOf(e.target.value), 1);
+      }
+    }
+
+    ['rtrt', 'ghg'].join(this.zSeparator);
+
+    console.log(this.dataSelected);
+    // this.viewCheckList.checked = this.controls.every(
+    //   (option) => option.checked == true
+    // );
+    // this.onChange(this.valueList.join(this.zValueListSeparator));
   }
 
   public onSelectAll(e: any) {
     for (let i = 0; i < this.controls.length; i++) {
       this.controls[i].checked = e.target.checked;
       if (this.controls[i].checked) {
-        if (this.dataSelected.indexOf(this.controls[i].value) == -1) {
+        if (this.dataSelected.indexOf(this.controls[i].name) == -1) {
           this.dataSelected.push({
             name: this.controls[i].name,
             text: this.controls[i].text,
@@ -168,7 +197,7 @@ export class BravoChecklistComponent
 
   public addOption(pzName: string, pzText: string, pValue: any) {
     let _option = this.controls.find((item) => item.name == pzName);
-    if (_option == null) {
+    if (!_option) {
       _option = new BravoOptionBox(pzName, pzText, pValue);
       this.controls.push(_option);
     }

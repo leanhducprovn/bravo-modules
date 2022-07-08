@@ -10,9 +10,7 @@
 <div class="children">
     <div class="form-check" *ngFor="let item of controls">
         <input class="form-check-input" type="checkbox" value="{{ item.value }}" name="{{ item.name }}"
-            (change)="onSelectOption($event)" [checked]="item.checked">
-        <label class="form-check-label">
-            {{ item.text }}
-        </label>
+            (change)="onSelectOption($event)" [checked]="item.checked" [(ngModel)]="item.checked">
+        <label class="form-check-label">{{ item.text }}</label>
     </div>
 </div>
