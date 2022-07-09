@@ -66,6 +66,17 @@ export class BravoRangeTimeComponent
   ngOnInit(): void {}
 
   onClickMonth(event: any) {
+    const month = Array.from(
+      wjc
+        .getElement('ul')
+        .getElementsByClassName(
+          'range-time-selected'
+        ) as HTMLCollectionOf<HTMLElement>
+    );
+    month.forEach((e) => {
+      wjc.removeClass(e, 'range-time-selected');
+    });
+    wjc.addClass(event.target, 'range-time-selected');
     this.min = new Date();
     this.max = new Date();
     this.min.setFullYear(this.time.getFullYear(), event.target.value - 1, 1);
@@ -78,6 +89,17 @@ export class BravoRangeTimeComponent
   }
 
   onClickQuarter(event: any) {
+    const month = Array.from(
+      wjc
+        .getElement('ul')
+        .getElementsByClassName(
+          'range-time-selected'
+        ) as HTMLCollectionOf<HTMLElement>
+    );
+    month.forEach((e) => {
+      wjc.removeClass(e, 'range-time-selected');
+    });
+    wjc.addClass(event.target, 'range-time-selected');
     this.min = new Date();
     this.max = new Date();
     let quarter = event.target.textContent;
@@ -117,6 +139,17 @@ export class BravoRangeTimeComponent
   }
 
   onClickYear(event: any) {
+    const month = Array.from(
+      wjc
+        .getElement('ul')
+        .getElementsByClassName(
+          'range-time-selected'
+        ) as HTMLCollectionOf<HTMLElement>
+    );
+    month.forEach((e) => {
+      wjc.removeClass(e, 'range-time-selected');
+    });
+    wjc.addClass(event.target, 'range-time-selected');
     this.min = new Date();
     this.max = new Date();
     this.min.setFullYear(event.target.value, 0, 1);
