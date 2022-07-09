@@ -19,7 +19,7 @@
     <div class="selected">
         <div class="month" *ngIf="menu.value == periodType.Month">
             <ul (click)="onClickMonth($event)">
-                <li *ngFor="let month of listMonth()" [value]="month">{{ month }}
+                <li *ngFor="let month of listMonth" [value]="month">{{ month }}
                 </li>
             </ul>
         </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="year" *ngIf="menu.value == periodType.Year">
             <ul (click)="onClickYear($event)">
-                <li *ngFor="let year of listYear()" [value]="year">{{ year }}</li>
+                <li *ngFor="let year of listYear" [value]="year">{{ year }}</li>
             </ul>
         </div>
     </div>

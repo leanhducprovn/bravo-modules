@@ -1,13 +1,16 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   EventEmitter,
+  Input,
   OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
 
 import * as wjc from '@grapecity/wijmo';
+import { Control } from '@grapecity/wijmo';
 import { WjMenu } from '@grapecity/wijmo.angular2.input';
 
 @Component({
@@ -15,8 +18,31 @@ import { WjMenu } from '@grapecity/wijmo.angular2.input';
   templateUrl: './bravo-range-time.component.html',
   styleUrls: ['./bravo-range-time.component.css'],
 })
-export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
+export class BravoRangeTimeComponent
+  extends Control
+  implements OnInit, AfterViewInit
+{
   @ViewChild('menu', { static: true }) menu!: WjMenu;
+
+  private _listMonth!: number[];
+  @Input()
+  public set listMonth(pnValue: number[]) {
+    this._listMonth = pnValue;
+    this.invalidate();
+  }
+  public get listMonth(): number[] {
+    return this._listMonth;
+  }
+
+  private _listYear!: number[];
+  @Input()
+  public set listYear(pnValue: number[]) {
+    this._listYear = pnValue;
+    this.invalidate();
+  }
+  public get listYear(): number[] {
+    return this._listYear;
+  }
 
   time = new Date();
   min!: Date;
@@ -26,7 +52,13 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
 
   @Output() timeEvent = new EventEmitter<any>();
 
-  constructor() {}
+  constructor(elementRef: ElementRef) {
+    super(elementRef.nativeElement);
+  }
+
+  public override refresh(fullUpdate?: boolean) {
+    super.refresh(fullUpdate);
+  }
 
   ngAfterViewInit(): void {
     this.menu.refreshed.addHandler(() => {
@@ -57,24 +89,6 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {}
-
-  listMonth() {
-    let listMonth: any = [];
-    for (let i = 1; i <= 12; i++) {
-      listMonth.push(i);
-    }
-    return listMonth;
-  }
-
-  listYear() {
-    let listYear: any = [new Date().getFullYear()];
-    let currentYear = new Date().getFullYear();
-    for (let i = 0; i < 9; i++) {
-      currentYear++;
-      listYear.push(currentYear);
-    }
-    return listYear;
-  }
 
   onClickMonth(event: any) {
     this.min = new Date();
