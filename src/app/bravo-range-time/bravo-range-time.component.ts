@@ -11,7 +11,7 @@ import {
 
 import * as wjc from '@grapecity/wijmo';
 import { Control } from '@grapecity/wijmo';
-import { WjMenu } from '@grapecity/wijmo.angular2.input';
+import { WjComboBox } from '@grapecity/wijmo.angular2.input';
 
 @Component({
   selector: 'bravo-range-time',
@@ -22,7 +22,7 @@ export class BravoRangeTimeComponent
   extends Control
   implements OnInit, AfterViewInit
 {
-  @ViewChild('menu', { static: true }) menu!: WjMenu;
+  @ViewChild('box', { static: true }) box!: WjComboBox;
 
   private _listMonth!: number[];
   @Input()
@@ -58,35 +58,10 @@ export class BravoRangeTimeComponent
 
   public override refresh(fullUpdate?: boolean) {
     super.refresh(fullUpdate);
+    this.dropDown();
   }
 
-  ngAfterViewInit(): void {
-    this.menu.refreshed.addHandler(() => {
-      this.menu.header = this.menu.header.replace(/:|<|>|\/|b/g, '');
-      wjc.addClass(
-        this.menu.dropDown.childNodes[this.menu.selectedIndex] as HTMLElement,
-        'selected'
-      );
-      this.menu.dropDown.childNodes.forEach((element) => {
-        wjc.setCss(element, {
-          'margin-left': '20px',
-        });
-      });
-    });
-    this.menu.itemClicked.addHandler((menu) => {
-      menu.header = this.menu.header.replace(/:|<|>|\/|b/g, '');
-      menu.dropDown.childNodes.forEach((element) => {
-        wjc.setCss(element, {
-          'margin-left': '20px',
-        });
-        wjc.removeClass(element as HTMLElement, 'selected');
-      });
-      wjc.addClass(
-        menu.dropDown.childNodes[menu.selectedIndex] as HTMLElement,
-        'selected'
-      );
-    });
-  }
+  ngAfterViewInit(): void {}
 
   ngOnInit(): void {}
 
@@ -152,6 +127,19 @@ export class BravoRangeTimeComponent
   getDayOfMonth = (year: number, month: number) => {
     return new Date(year, month, 0).getDate();
   };
+
+  dropDown() {
+    this.box.dropDownCssClass = 'range-time-drop-down';
+    this.box.isDroppedDownChanging.addHandler((e) => {
+      e.dropDown.childNodes.forEach((element) => {
+        wjc.removeClass(element as HTMLElement, 'range-time-checked');
+      });
+      wjc.addClass(
+        e.dropDown.childNodes[this.box.selectedIndex] as HTMLElement,
+        'range-time-checked'
+      );
+    });
+  }
 }
 
 enum PeriodType {

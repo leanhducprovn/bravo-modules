@@ -13,15 +13,21 @@ a {
     text-decoration: none;
 }
 
-/* selected listbox */
-.selected div::before {
-    content: "\2713";
-    margin-left: -20px;
-    margin-right: 3px;
+/* range time combo box  */
+.wj-state-selected {
+    background: unset !important;
+    color: unset !important;
 }
 
-/* popup listbox */
-.wj-dropdown-panel {
-    background: rgb(255, 255, 255) !important;
+.range-time-drop-down {
+    padding-left: 25px;
     color: inherit !important;
+    background: #eee !important;
+    min-width: auto !important
+}
+
+.range-time-checked::before {
+    content: "\2713";
+    margin-left: -20px;
+    margin-right: 9px;
 }

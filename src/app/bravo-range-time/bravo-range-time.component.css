@@ -22,7 +22,8 @@
 }
 
 .content .selected ul li {
-    padding: 4px 10px 4px 10px;
+    padding: 6.5px 10px;
+    font-size: inherit;
 }
 
 .content .selected ul li:hover {
@@ -30,22 +31,26 @@
     border-radius: 4px;
 }
 
-.content .wj-content {
+:host >>> .wj-content {
     border: unset !important;
     background: unset !important;
-    color: inherit !important
+    color: inherit !important;
 }
 
-.content .wj-input-group-btn {
+:host >>> .wj-btn {
     border-left: unset !important;
 }
 
-
-:host >>> .wj-input-group-btn:last-child:not(:first-child)>.wj-btn {
-    border-left: unset !important;
+:host >>> .wj-btn-default {
+    color: inherit !important;
 }
 
-:host >>> .wj-control .wj-input-group-btn>.wj-btn.wj-btn-default:hover {
+:host >>> .wj-form-control {
+    font-size: inherit !important;
+    width: 100px !important;
+}
+
+:host >>> .wj-btn-default:hover {
     background: unset !important;
 }
 
@@ -55,13 +60,16 @@
     border-left: unset !important;
 }
 
-:host >>> .wj-btn-default {
-    color: inherit !important;
-}
-
 :host >>> .wj-glyph-down::before {
     content: "\f107";
     font-family: FontAwesome;
     font-size: 20px;
     color: inherit;
+}
+
+
+.wj-state-selected::before {
+    content: "\2713";
+    margin-left: -20px;
+    margin-right: 3px;
 }

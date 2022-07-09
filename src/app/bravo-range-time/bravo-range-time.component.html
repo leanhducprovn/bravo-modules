@@ -1,29 +1,16 @@
 <div class="content">
     <div class="select">
-        <wj-menu #menu [value]="0">
-            <wj-menu-item [value]="0">
-                Tháng
-            </wj-menu-item>
-            <wj-menu-item [value]="1">
-                Quý
-            </wj-menu-item>
-            <wj-menu-item [value]="2">
-                Năm
-            </wj-menu-item>
-            <wj-menu-separator></wj-menu-separator>
-            <wj-menu-item [value]="3">
-                Tùy chỉnh
-            </wj-menu-item>
-        </wj-menu>
+        <wj-combo-box #box [itemsSource]="['Tháng', 'Quý', 'Năm', 'Tùy chỉnh']">
+        </wj-combo-box>
     </div>
     <div class="selected">
-        <div class="month" *ngIf="menu.value == periodType.Month">
+        <div class="month" *ngIf="box.selectedIndex == periodType.Month">
             <ul (click)="onClickMonth($event)">
                 <li *ngFor="let month of listMonth" [value]="month">{{ month }}
                 </li>
             </ul>
         </div>
-        <div class="quarter" *ngIf="menu.value == periodType.Quarter">
+        <div class="quarter" *ngIf="box.selectedIndex == periodType.Quarter">
             <ul (click)="onClickQuarter($event)">
                 <li>I</li>
                 <li>II</li>
@@ -31,7 +18,7 @@
                 <li>IV</li>
             </ul>
         </div>
-        <div class="year" *ngIf="menu.value == periodType.Year">
+        <div class="year" *ngIf="box.selectedIndex == periodType.Year">
             <ul (click)="onClickYear($event)">
                 <li *ngFor="let year of listYear" [value]="year">{{ year }}</li>
             </ul>
