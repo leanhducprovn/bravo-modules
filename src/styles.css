@@ -14,7 +14,7 @@ a {
 }
 
 /* selected listbox */
-.wj-listbox-item .selected div::before {
+.selected div::before {
     content: "\2713";
     margin-left: -20px;
     margin-right: 3px;
