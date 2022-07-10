@@ -47,7 +47,7 @@
 
 :host >>> .wj-form-control {
     font-size: inherit !important;
-    width: 100px !important;
+    width: 100px !important
 }
 
 :host >>> .wj-btn-default:hover {

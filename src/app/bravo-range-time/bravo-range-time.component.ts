@@ -34,6 +34,16 @@ export class BravoRangeTimeComponent
     return this._listMonth;
   }
 
+  private _listQuarter!: string[];
+  @Input()
+  public set listQuarter(pnValue: string[]) {
+    this._listQuarter = pnValue;
+    this.invalidate();
+  }
+  public get listQuarter(): string[] {
+    return this._listQuarter;
+  }
+
   private _listYear!: number[];
   @Input()
   public set listYear(pnValue: number[]) {
@@ -47,6 +57,7 @@ export class BravoRangeTimeComponent
   time = new Date();
   min!: Date;
   max!: Date;
+  selectedIndex!: number;
 
   periodType = PeriodType;
 
@@ -66,17 +77,6 @@ export class BravoRangeTimeComponent
   ngOnInit(): void {}
 
   onClickMonth(event: any) {
-    const month = Array.from(
-      wjc
-        .getElement('ul')
-        .getElementsByClassName(
-          'range-time-selected'
-        ) as HTMLCollectionOf<HTMLElement>
-    );
-    month.forEach((e) => {
-      wjc.removeClass(e, 'range-time-selected');
-    });
-    wjc.addClass(event.target, 'range-time-selected');
     this.min = new Date();
     this.max = new Date();
     this.min.setFullYear(this.time.getFullYear(), event.target.value - 1, 1);
@@ -89,17 +89,6 @@ export class BravoRangeTimeComponent
   }
 
   onClickQuarter(event: any) {
-    const month = Array.from(
-      wjc
-        .getElement('ul')
-        .getElementsByClassName(
-          'range-time-selected'
-        ) as HTMLCollectionOf<HTMLElement>
-    );
-    month.forEach((e) => {
-      wjc.removeClass(e, 'range-time-selected');
-    });
-    wjc.addClass(event.target, 'range-time-selected');
     this.min = new Date();
     this.max = new Date();
     let quarter = event.target.textContent;
@@ -139,17 +128,6 @@ export class BravoRangeTimeComponent
   }
 
   onClickYear(event: any) {
-    const month = Array.from(
-      wjc
-        .getElement('ul')
-        .getElementsByClassName(
-          'range-time-selected'
-        ) as HTMLCollectionOf<HTMLElement>
-    );
-    month.forEach((e) => {
-      wjc.removeClass(e, 'range-time-selected');
-    });
-    wjc.addClass(event.target, 'range-time-selected');
     this.min = new Date();
     this.max = new Date();
     this.min.setFullYear(event.target.value, 0, 1);
@@ -172,6 +150,13 @@ export class BravoRangeTimeComponent
         'range-time-checked'
       );
     });
+    this.box.selectedIndexChanged.addHandler(() => {
+      this.selectedIndex = NaN;
+    });
+  }
+
+  setIndex(index: number) {
+    this.selectedIndex = index;
   }
 }
 
