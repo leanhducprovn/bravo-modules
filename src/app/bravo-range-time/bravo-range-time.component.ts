@@ -54,6 +54,19 @@ export class BravoRangeTimeComponent
     return this._listYear;
   }
 
+  private _dataBox!: string[];
+  @Input()
+  public set dataBox(pzValue: string[]) {
+    this._dataBox = pzValue;
+    this.invalidate();
+  }
+  public get dataBox(): string[] {
+    if (!this._dataBox) {
+      this._dataBox = [];
+    }
+    return this._dataBox;
+  }
+
   time = new Date();
   min!: Date;
   max!: Date;
@@ -161,8 +174,8 @@ export class BravoRangeTimeComponent
 }
 
 enum PeriodType {
-  Month,
-  Quarter,
-  Year,
-  Custom,
+  Month = 'Tháng',
+  Quarter = 'Quý',
+  Year = 'Năm',
+  Custom = 'Tùy chỉnh',
 }

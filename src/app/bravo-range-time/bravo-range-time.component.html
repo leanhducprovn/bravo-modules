@@ -1,10 +1,10 @@
 <div class="content">
     <div class="select">
-        <wj-combo-box #box [itemsSource]="['Tháng', 'Quý', 'Năm', 'Tùy chỉnh']">
+        <wj-combo-box #box [itemsSource]="dataBox">
         </wj-combo-box>
     </div>
     <div class="selected">
-        <div class="month" *ngIf="box.selectedIndex == periodType.Month">
+        <div class="month" *ngIf="box.selectedValue == periodType.Month">
             <ul (click)="onClickMonth($event)">
                 <li [ngClass]="selectedIndex == i ? 'range-time-selected' : ''"
                     *ngFor="let month of listMonth; let i = index" (click)="setIndex(i)" [value]="month">{{
@@ -12,17 +12,23 @@
                 </li>
             </ul>
         </div>
-        <div class="quarter" *ngIf="box.selectedIndex == periodType.Quarter">
+        <div class="quarter" *ngIf="box.selectedValue == periodType.Quarter">
             <ul (click)="onClickQuarter($event)">
                 <li [ngClass]="selectedIndex == i ? 'range-time-selected' : ''"
                     *ngFor="let quarter of listQuarter; let i = index" (click)="setIndex(i)" [value]="quarter">{{
                     quarter }}</li>
             </ul>
         </div>
-        <div class="year" *ngIf="box.selectedIndex == periodType.Year">
+        <div class="year" *ngIf="box.selectedValue == periodType.Year">
             <ul (click)="onClickYear($event)">
                 <li [ngClass]="selectedIndex == i ? 'range-time-selected' : ''"
                     *ngFor="let year of listYear; let i = index" (click)="setIndex(i)" [value]="year">{{ year }}</li>
+            </ul>
+        </div>
+        <div class="custom" *ngIf="box.selectedValue == periodType.Custom">
+            <ul>
+                <wj-input-date #startCustom></wj-input-date>
+                <wj-input-date #endCustom></wj-input-date>
             </ul>
         </div>
     </div>

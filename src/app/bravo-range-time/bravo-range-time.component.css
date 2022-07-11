@@ -67,13 +67,6 @@
     color: inherit;
 }
 
-
-.wj-state-selected::before {
-    content: "\2713";
-    margin-left: -20px;
-    margin-right: 3px;
-}
-
 .range-time-selected {
     background-color: #fff;
     border-radius: 4px;
