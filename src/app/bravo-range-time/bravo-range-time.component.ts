@@ -84,6 +84,11 @@ export class BravoRangeTimeComponent
     super.refresh(fullUpdate);
     this.setWidth(this.dataBox[this.box.selectedIndex].text);
     this.dropDown();
+    this.box.isDroppedDownChanged.addHandler(() => {
+      if (this.box._tbx) {
+        this.box._tbx.blur();
+      }
+    });
   }
 
   ngAfterViewInit(): void {}
