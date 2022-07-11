@@ -13,6 +13,9 @@ import * as wjc from '@grapecity/wijmo';
 import { Control } from '@grapecity/wijmo';
 import { WjComboBox } from '@grapecity/wijmo.angular2.input';
 
+import { BravoGraphicsRenderer } from '../bravo-graphics/bravo.graphics.renderer';
+import { Font } from '../bravo-graphics/font';
+
 @Component({
   selector: 'bravo-range-time',
   templateUrl: './bravo-range-time.component.html',
@@ -82,6 +85,7 @@ export class BravoRangeTimeComponent
 
   public override refresh(fullUpdate?: boolean) {
     super.refresh(fullUpdate);
+    this.setWidth(this.box.selectedValue);
     this.dropDown();
   }
 
@@ -165,11 +169,33 @@ export class BravoRangeTimeComponent
     });
     this.box.selectedIndexChanged.addHandler(() => {
       this.selectedIndex = NaN;
+      this.setWidth(this.box.selectedValue);
     });
   }
 
   setIndex(index: number) {
     this.selectedIndex = index;
+  }
+
+  setWidth(selectedValue: string) {
+    const input = document.getElementsByClassName(
+      'wj-form-control'
+    ) as HTMLCollection;
+    wjc.setCss(input[0], {
+      maxWidth: this.getPreferredSize(selectedValue).width + 'px',
+    });
+  }
+
+  getPreferredSize(selectedValue: string) {
+    let size = new wjc.Size(
+      Number(
+        BravoGraphicsRenderer.measureString(
+          selectedValue,
+          new Font('Segoe UI', 9.75)
+        )?.width
+      ) + 16
+    );
+    return size;
   }
 }
 

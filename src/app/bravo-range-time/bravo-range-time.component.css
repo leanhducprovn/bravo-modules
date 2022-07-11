@@ -22,7 +22,7 @@
 }
 
 .content .selected ul li {
-    padding: 6.5px 10px;
+    padding: 4px 8px;
     font-size: inherit;
 }
 
@@ -47,7 +47,6 @@
 
 :host >>> .wj-form-control {
     font-size: inherit !important;
-    width: 100px !important
 }
 
 :host >>> .wj-btn-default:hover {
@@ -63,7 +62,7 @@
 :host >>> .wj-glyph-down::before {
     content: "\f107";
     font-family: FontAwesome;
-    font-size: 20px;
+    font-size: inherit;
     color: inherit;
 }
 
