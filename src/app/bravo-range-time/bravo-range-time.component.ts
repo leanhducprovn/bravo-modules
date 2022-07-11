@@ -57,16 +57,13 @@ export class BravoRangeTimeComponent
     return this._listYear;
   }
 
-  private _dataBox!: string[];
+  private _dataBox!: DataType[];
   @Input()
-  public set dataBox(pzValue: string[]) {
+  public set dataBox(pzValue: DataType[]) {
     this._dataBox = pzValue;
     this.invalidate();
   }
-  public get dataBox(): string[] {
-    if (!this._dataBox) {
-      this._dataBox = [];
-    }
+  public get dataBox(): DataType[] {
     return this._dataBox;
   }
 
@@ -85,13 +82,20 @@ export class BravoRangeTimeComponent
 
   public override refresh(fullUpdate?: boolean) {
     super.refresh(fullUpdate);
-    this.setWidth(this.box.selectedValue);
+    this.setWidth(this.dataBox[this.box.selectedIndex].text);
     this.dropDown();
   }
 
   ngAfterViewInit(): void {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.dataBox = [
+      { value: 0, text: 'Tháng' },
+      { value: 1, text: 'Quý' },
+      { value: 2, text: 'Năm' },
+      { value: 3, text: 'Tùy chỉnh' },
+    ];
+  }
 
   onClickMonth(event: any) {
     this.min = new Date();
@@ -169,7 +173,7 @@ export class BravoRangeTimeComponent
     });
     this.box.selectedIndexChanged.addHandler(() => {
       this.selectedIndex = NaN;
-      this.setWidth(this.box.selectedValue);
+      this.setWidth(this.dataBox[this.box.selectedIndex].text);
     });
   }
 
@@ -200,8 +204,13 @@ export class BravoRangeTimeComponent
 }
 
 enum PeriodType {
-  Month = 'Tháng',
-  Quarter = 'Quý',
-  Year = 'Năm',
-  Custom = 'Tùy chỉnh',
+  Month,
+  Quarter,
+  Year,
+  Custom,
+}
+
+export interface DataType {
+  value: number;
+  text: string;
 }

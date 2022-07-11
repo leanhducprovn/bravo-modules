@@ -1,6 +1,6 @@
 <div class="content">
     <div class="select">
-        <wj-combo-box #box [itemsSource]="dataBox">
+        <wj-combo-box #box [itemsSource]="dataBox" [selectedValuePath]="'value'" [displayMemberPath]="'text'">
         </wj-combo-box>
     </div>
     <div class="selected">
