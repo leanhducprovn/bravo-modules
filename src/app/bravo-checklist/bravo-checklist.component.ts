@@ -154,20 +154,26 @@ export class BravoChecklistComponent
     for (let i = 0; i < this.controls.length; i++) {
       this.controls[i].checked = e.target.checked;
       if (this.controls[i].checked) {
+        if (this.valueList.indexOf(this.controls[i].value) == -1) {
+          this.valueList.push(this.controls[i].value);
+        }
       } else {
+        this.valueList = [];
       }
     }
+    console.log(this.valueList);
   }
 
   public addOption(pzName: string, pzText: string, pValue: any) {
     let _option = this.controls.find((item) => item.name == pzName);
-    if (!_option) {
+    if (_option == null) {
       _option = new BravoOptionBox(pzName, pzText, pValue);
       this.controls.push(_option);
     }
+    this.updateCheckBox();
   }
 
-  public updateCheckBox() {
+  private updateCheckBox() {
     for (let i = 0; i < this.controls.length; i++) {
       for (let j = 0; j < this.valueList.length; j++) {
         if (this.controls[i].value == this.valueList[j]) {
@@ -175,9 +181,6 @@ export class BravoChecklistComponent
         }
       }
     }
-    this.viewParent.checked = this.controls.every(
-      (option) => option.checked == true
-    );
   }
 }
 
@@ -187,7 +190,7 @@ export interface DataList {
   value: string;
 }
 
-enum TypeList {
+export enum TypeList {
   Checkbox,
   Button,
 }
