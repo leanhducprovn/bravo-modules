@@ -54,18 +54,6 @@ export class BravoChecklistComponent
     return this._dataList;
   }
 
-  private _dataSelected!: DataList[];
-  public set dataSelected(pValue: DataList[]) {
-    this._dataSelected = pValue;
-    this.invalidate();
-  }
-  public get dataSelected(): DataList[] {
-    if (!this._dataSelected) {
-      this._dataSelected = [];
-    }
-    return this._dataSelected;
-  }
-
   private _valueList!: string[];
   public set valueList(pzValue: string[]) {
     this._valueList = pzValue;
@@ -145,13 +133,6 @@ export class BravoChecklistComponent
   onSelectOption(e: any) {
     if (e.target.checked) {
       if (this.bSelectOnlyOne) {
-        this.dataSelected = [];
-        this.dataSelected.push({
-          name: e.target.name,
-          text: e.target.parentElement.innerText,
-          value: e.target.value,
-        });
-
         for (let i = 0; i < this.controls.length; i++) {
           if (this.controls[i].value !== e.target.value) {
             this.controls[i].checked = false;
@@ -167,32 +148,15 @@ export class BravoChecklistComponent
         this.valueList.splice(this.valueList.indexOf(e.target.value), 1);
       }
     }
-
-    ['rtrt', 'ghg'].join(this.zSeparator);
-
-    console.log(this.dataSelected);
-    // this.viewCheckList.checked = this.controls.every(
-    //   (option) => option.checked == true
-    // );
-    // this.onChange(this.valueList.join(this.zValueListSeparator));
   }
 
   public onSelectAll(e: any) {
     for (let i = 0; i < this.controls.length; i++) {
       this.controls[i].checked = e.target.checked;
       if (this.controls[i].checked) {
-        if (this.dataSelected.indexOf(this.controls[i].name) == -1) {
-          this.dataSelected.push({
-            name: this.controls[i].name,
-            text: this.controls[i].text,
-            value: this.controls[i].value,
-          });
-        }
       } else {
-        this.dataSelected = [];
       }
     }
-    console.log(this.dataSelected);
   }
 
   public addOption(pzName: string, pzText: string, pValue: any) {
@@ -226,6 +190,13 @@ export interface DataList {
 enum TypeList {
   Checkbox,
   Button,
+}
+
+export enum FlowDirection {
+  LeftToRight,
+  TopDown,
+  RightToLeft,
+  BottomUp,
 }
 
 export class BravoOptionBox {
