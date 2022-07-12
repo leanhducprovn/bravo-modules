@@ -34,6 +34,9 @@ export class BravoRangeTimeComponent
     this.invalidate();
   }
   public get listMonth(): number[] {
+    if (!this._listMonth) {
+      this._listMonth = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    }
     return this._listMonth;
   }
 
@@ -44,6 +47,9 @@ export class BravoRangeTimeComponent
     this.invalidate();
   }
   public get listQuarter(): string[] {
+    if (!this._listQuarter) {
+      this._listQuarter = ['I', 'II', 'II', 'IV'];
+    }
     return this._listQuarter;
   }
 
@@ -54,6 +60,14 @@ export class BravoRangeTimeComponent
     this.invalidate();
   }
   public get listYear(): number[] {
+    if (!this._listYear) {
+      this._listYear = [];
+      let _currentYear = new Date().getFullYear();
+      for (let i = 0; i < 9; i++) {
+        this._listYear.push(_currentYear);
+        _currentYear++;
+      }
+    }
     return this._listYear;
   }
 
@@ -84,11 +98,6 @@ export class BravoRangeTimeComponent
     super.refresh(fullUpdate);
     this.setWidth(this.dataBox[this.box.selectedIndex].text);
     this.dropDown();
-    this.box.isDroppedDownChanged.addHandler(() => {
-      if (this.box._tbx) {
-        this.box._tbx.blur();
-      }
-    });
   }
 
   ngAfterViewInit(): void {}
@@ -166,8 +175,8 @@ export class BravoRangeTimeComponent
   };
 
   dropDown() {
-    this.box.dropDownCssClass = 'range-time-drop-down';
     this.box.isDroppedDownChanging.addHandler((e) => {
+      this.box.dropDownCssClass = 'range-time-drop-down';
       e.dropDown.childNodes.forEach((element) => {
         wjc.removeClass(element as HTMLElement, 'range-time-checked');
       });
@@ -179,6 +188,11 @@ export class BravoRangeTimeComponent
     this.box.selectedIndexChanged.addHandler(() => {
       this.selectedIndex = NaN;
       this.setWidth(this.dataBox[this.box.selectedIndex].text);
+    });
+    this.box.isDroppedDownChanged.addHandler(() => {
+      if (this.box._tbx) {
+        this.box._tbx.blur();
+      }
     });
   }
 
