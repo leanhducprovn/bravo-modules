@@ -199,6 +199,13 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   };
 
   private dropDown() {
+    this.box?._tbx.addEventListener('click', () => {
+      if (this.box.isDroppedDown) {
+        this.box.isDroppedDown = false;
+      } else {
+        this.box.isDroppedDown = true;
+      }
+    });
     this.box.isDroppedDownChanging.addHandler((e) => {
       if (!e.isDroppedDown) {
         wjc.addClass(
@@ -215,9 +222,10 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
       this.selectedIndex = -1;
       this.setWidth(this.dataBox[this.box.selectedIndex].text);
     });
-    this.box.isDroppedDownChanged.addHandler((e) => {
+    this.box.isDroppedDownChanged.addHandler(() => {
       if (this.box._tbx) {
-        this.box._tbx.blur();
+        this.box._tbx.selectionStart = 0;
+        this.box._tbx.selectionEnd = 0;
       }
     });
   }
@@ -227,12 +235,11 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   }
 
   private setWidth(selectedValue: string) {
-    const input = document.getElementsByClassName(
-      'wj-form-control'
-    ) as HTMLCollection;
-    wjc.setCss(input[0], {
-      maxWidth: this.getWidth(selectedValue).width + 'px',
-    });
+    if (this.box._tbx) {
+      wjc.setCss(this.box._tbx, {
+        maxWidth: this.getWidth(selectedValue).width + 'px',
+      });
+    }
   }
 
   private getWidth(selectedValue: string) {
