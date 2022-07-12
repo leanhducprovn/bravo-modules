@@ -77,3 +77,8 @@
     background-color: #fff;
     border-radius: 4px;
 }
+
+:host >>> input, li {
+    cursor: pointer !important;
+    caret-color: transparent !important;
+}
