@@ -84,6 +84,7 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   constructor() {}
 
   ngAfterViewInit(): void {
+    this.box.dropDownCssClass = 'range-time-drop-down';
     this.setWidth(this.dataBox[this.box.selectedIndex].text);
   }
 
@@ -161,8 +162,11 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   };
 
   dropDown() {
-    this.box.isDroppedDownChanging.addHandler((e) => {
-      this.box.dropDownCssClass = 'range-time-drop-down';
+    this.box.selectedIndexChanged.addHandler(() => {
+      this.selectedIndex = NaN;
+      this.setWidth(this.dataBox[this.box.selectedIndex].text);
+    });
+    this.box.isDroppedDownChanged.addHandler((e) => {
       e.dropDown.childNodes.forEach((element) => {
         wjc.removeClass(element as HTMLElement, 'range-time-checked');
       });
@@ -170,12 +174,6 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
         e.dropDown.childNodes[this.box.selectedIndex] as HTMLElement,
         'range-time-checked'
       );
-    });
-    this.box.selectedIndexChanged.addHandler(() => {
-      this.selectedIndex = NaN;
-      this.setWidth(this.dataBox[this.box.selectedIndex].text);
-    });
-    this.box.isDroppedDownChanged.addHandler(() => {
       if (this.box._tbx) {
         this.box._tbx.blur();
       }
