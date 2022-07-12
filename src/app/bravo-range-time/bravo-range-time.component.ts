@@ -72,15 +72,51 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
     return this._dataBox;
   }
 
-  time = new Date();
-  min!: Date;
-  max!: Date;
-  selectedIndex!: number;
-  isDroppedDown!: boolean;
+  private _time!: Date;
+  public set time(pdValue: Date) {
+    this._time = pdValue;
+  }
+  public get time(): Date {
+    if (!this._time) {
+      this._time = new Date();
+    }
+    return this._time;
+  }
 
-  periodType = PeriodType;
+  private _min!: Date;
+  public set min(pdValue: Date) {
+    this._min = pdValue;
+  }
+  public get min(): Date {
+    if (!this._min) {
+      this._min = new Date();
+    }
+    return this._min;
+  }
 
-  @Output() timeEvent = new EventEmitter<any>();
+  private _max!: Date;
+  public set max(pdValue: Date) {
+    this._max = pdValue;
+  }
+  public get max(): Date {
+    if (!this._max) {
+      this._max = new Date();
+    }
+    return this._max;
+  }
+
+  private _selectedIndex!: number;
+  public set selectedIndex(pnValue: number) {
+    this._selectedIndex = pnValue;
+  }
+  public get selectedIndex(): number {
+    return this._selectedIndex;
+  }
+
+  public periodType = PeriodType;
+
+  @Output()
+  timeEvent = new EventEmitter<any>();
 
   constructor() {}
 
@@ -99,7 +135,7 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
     this.dropDown();
   }
 
-  onClickMonth(event: any) {
+  public onClickMonth(event: any) {
     this.min = new Date();
     this.max = new Date();
     this.min.setFullYear(this.time.getFullYear(), event.target.value - 1, 1);
@@ -111,7 +147,7 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
     this.timeEvent.emit({ minTime: this.min, maxTime: this.max });
   }
 
-  onClickQuarter(event: any) {
+  public onClickQuarter(event: any) {
     this.min = new Date();
     this.max = new Date();
     let quarter = event.target.textContent;
@@ -150,7 +186,7 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onClickYear(event: any) {
+  public onClickYear(event: any) {
     this.min = new Date();
     this.max = new Date();
     this.min.setFullYear(event.target.value, 0, 1);
@@ -158,24 +194,13 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
     this.timeEvent.emit({ minTime: this.min, maxTime: this.max });
   }
 
-  getDayOfMonth = (year: number, month: number) => {
+  private getDayOfMonth = (year: number, month: number) => {
     return new Date(year, month, 0).getDate();
   };
 
-  dropDown() {
+  private dropDown() {
     this.box.isDroppedDownChanging.addHandler((e) => {
       if (!e.isDroppedDown) {
-        this.isDroppedDown = true;
-      } else {
-        this.isDroppedDown = false;
-      }
-    });
-    this.box.selectedIndexChanged.addHandler(() => {
-      this.selectedIndex = NaN;
-      this.setWidth(this.dataBox[this.box.selectedIndex].text);
-    });
-    this.box.isDroppedDownChanged.addHandler((e) => {
-      if (this.isDroppedDown) {
         wjc.addClass(
           e.dropDown.childNodes[this.box.selectedIndex] as HTMLElement,
           'range-time-checked'
@@ -185,26 +210,32 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
           wjc.removeClass(element as HTMLElement, 'range-time-checked');
         });
       }
+    });
+    this.box.selectedIndexChanged.addHandler(() => {
+      this.selectedIndex = -1;
+      this.setWidth(this.dataBox[this.box.selectedIndex].text);
+    });
+    this.box.isDroppedDownChanged.addHandler((e) => {
       if (this.box._tbx) {
         this.box._tbx.blur();
       }
     });
   }
 
-  setIndex(index: number) {
+  public setIndex(index: number) {
     this.selectedIndex = index;
   }
 
-  setWidth(selectedValue: string) {
+  private setWidth(selectedValue: string) {
     const input = document.getElementsByClassName(
       'wj-form-control'
     ) as HTMLCollection;
     wjc.setCss(input[0], {
-      maxWidth: this.getPreferredSize(selectedValue).width + 'px',
+      maxWidth: this.getWidth(selectedValue).width + 'px',
     });
   }
 
-  getPreferredSize(selectedValue: string) {
+  private getWidth(selectedValue: string) {
     let size = new wjc.Size(
       Number(
         BravoGraphicsRenderer.measureString(
