@@ -76,6 +76,7 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   min!: Date;
   max!: Date;
   selectedIndex!: number;
+  isDroppedDown!: boolean;
 
   periodType = PeriodType;
 
@@ -162,18 +163,28 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   };
 
   dropDown() {
+    this.box.isDroppedDownChanging.addHandler((e) => {
+      if (!e.isDroppedDown) {
+        this.isDroppedDown = true;
+      } else {
+        this.isDroppedDown = false;
+      }
+    });
     this.box.selectedIndexChanged.addHandler(() => {
       this.selectedIndex = NaN;
       this.setWidth(this.dataBox[this.box.selectedIndex].text);
     });
     this.box.isDroppedDownChanged.addHandler((e) => {
-      e.dropDown.childNodes.forEach((element) => {
-        wjc.removeClass(element as HTMLElement, 'range-time-checked');
-      });
-      wjc.addClass(
-        e.dropDown.childNodes[this.box.selectedIndex] as HTMLElement,
-        'range-time-checked'
-      );
+      if (this.isDroppedDown) {
+        wjc.addClass(
+          e.dropDown.childNodes[this.box.selectedIndex] as HTMLElement,
+          'range-time-checked'
+        );
+      } else {
+        e.dropDown.childNodes.forEach((element) => {
+          wjc.removeClass(element as HTMLElement, 'range-time-checked');
+        });
+      }
       if (this.box._tbx) {
         this.box._tbx.blur();
       }
