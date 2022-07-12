@@ -1,7 +1,6 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef,
   EventEmitter,
   Input,
   OnInit,
@@ -10,7 +9,6 @@ import {
 } from '@angular/core';
 
 import * as wjc from '@grapecity/wijmo';
-import { Control } from '@grapecity/wijmo';
 import { WjComboBox } from '@grapecity/wijmo.angular2.input';
 
 import { BravoGraphicsRenderer } from '../bravo-graphics/bravo.graphics.renderer';
@@ -21,17 +19,13 @@ import { Font } from '../bravo-graphics/font';
   templateUrl: './bravo-range-time.component.html',
   styleUrls: ['./bravo-range-time.component.css'],
 })
-export class BravoRangeTimeComponent
-  extends Control
-  implements OnInit, AfterViewInit
-{
+export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   @ViewChild('box', { static: true }) box!: WjComboBox;
 
   private _listMonth!: number[];
   @Input()
   public set listMonth(pnValue: number[]) {
     this._listMonth = pnValue;
-    this.invalidate();
   }
   public get listMonth(): number[] {
     if (!this._listMonth) {
@@ -44,7 +38,6 @@ export class BravoRangeTimeComponent
   @Input()
   public set listQuarter(pnValue: string[]) {
     this._listQuarter = pnValue;
-    this.invalidate();
   }
   public get listQuarter(): string[] {
     if (!this._listQuarter) {
@@ -57,7 +50,6 @@ export class BravoRangeTimeComponent
   @Input()
   public set listYear(pnValue: number[]) {
     this._listYear = pnValue;
-    this.invalidate();
   }
   public get listYear(): number[] {
     if (!this._listYear) {
@@ -75,7 +67,6 @@ export class BravoRangeTimeComponent
   @Input()
   public set dataBox(pzValue: DataType[]) {
     this._dataBox = pzValue;
-    this.invalidate();
   }
   public get dataBox(): DataType[] {
     return this._dataBox;
@@ -90,17 +81,11 @@ export class BravoRangeTimeComponent
 
   @Output() timeEvent = new EventEmitter<any>();
 
-  constructor(elementRef: ElementRef) {
-    super(elementRef.nativeElement);
-  }
+  constructor() {}
 
-  public override refresh(fullUpdate?: boolean) {
-    super.refresh(fullUpdate);
+  ngAfterViewInit(): void {
     this.setWidth(this.dataBox[this.box.selectedIndex].text);
-    this.dropDown();
   }
-
-  ngAfterViewInit(): void {}
 
   ngOnInit(): void {
     this.dataBox = [
@@ -109,6 +94,7 @@ export class BravoRangeTimeComponent
       { value: 2, text: 'Năm' },
       { value: 3, text: 'Tùy chỉnh' },
     ];
+    this.dropDown();
   }
 
   onClickMonth(event: any) {
