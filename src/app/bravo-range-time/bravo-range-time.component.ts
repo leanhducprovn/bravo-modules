@@ -255,7 +255,7 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   }
 }
 
-enum PeriodType {
+export enum PeriodType {
   Month,
   Quarter,
   Year,
