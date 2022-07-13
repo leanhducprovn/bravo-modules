@@ -16,14 +16,14 @@ export class DataComponent implements OnInit, AfterViewInit {
   @ViewChild('timing', { static: true }) viewTiming!: BravoChecklistComponent;
 
   // bravo slider
-  optionsSlider!: Options;
+  public optionsSlider!: Options;
 
-  formSlider = this.fb.group({
+  public formSlider = this.fb.group({
     dataSlider: [[50, 150]],
   });
 
   // checklist data
-  tradingData = [
+  public tradingData = [
     {
       name: 'CustomerCareTrading',
       text: 'Chăm sóc khách hàng',
@@ -36,7 +36,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     },
   ];
 
-  ratingData = [
+  public ratingData = [
     {
       name: 'AttitudeRating',
       text: 'Thái độ nhân viên',
@@ -54,7 +54,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     },
   ];
 
-  timingData = [
+  public timingData = [
     {
       name: 'Month',
       text: 'Theo tháng',
@@ -74,9 +74,9 @@ export class DataComponent implements OnInit, AfterViewInit {
 
   constructor(private fb: FormBuilder) {}
 
-  ngAfterViewInit(): void {}
+  public ngAfterViewInit(): void {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     // bravo slider
     this.optionsSlider = {
       floor: 0,
@@ -88,8 +88,8 @@ export class DataComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // bravo range time
-  timeEvent(min: Date, max: Date) {
+  // range time
+  public timeEvent(min: Date, max: Date) {
     console.log(min, '=>', max);
   }
 }

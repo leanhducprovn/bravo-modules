@@ -6,7 +6,7 @@
     <div class="selected">
         <div class="month" *ngIf="box.selectedValue == periodType.Month">
             <ul (click)="onClickMonth($event)">
-                <li [ngClass]="selectedIndex == i ? 'range-time-selected' : ''"
+                <li [ngClass]="selectedIndex == i || monthIndex == i ? 'range-time-selected' : ''"
                     *ngFor="let month of listMonth; let i = index" (click)="setIndex(i)" [value]="month">{{
                     month }}
                 </li>
@@ -14,14 +14,14 @@
         </div>
         <div class="quarter" *ngIf="box.selectedValue == periodType.Quarter">
             <ul (click)="onClickQuarter($event)">
-                <li [ngClass]="selectedIndex == i ? 'range-time-selected' : ''"
+                <li [ngClass]="selectedIndex == i || quarterIndex == i ? 'range-time-selected' : ''"
                     *ngFor="let quarter of listQuarter; let i = index" (click)="setIndex(i)" [value]="quarter">{{
                     quarter }}</li>
             </ul>
         </div>
         <div class="year" *ngIf="box.selectedValue == periodType.Year">
             <ul (click)="onClickYear($event)">
-                <li [ngClass]="selectedIndex == i ? 'range-time-selected' : ''"
+                <li [ngClass]="selectedIndex == i || yearValue == year ? 'range-time-selected' : ''"
                     *ngFor="let year of listYear; let i = index" (click)="setIndex(i)" [value]="year">{{ year }}</li>
             </ul>
         </div>

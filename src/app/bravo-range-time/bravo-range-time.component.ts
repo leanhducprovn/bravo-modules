@@ -84,6 +84,7 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   }
 
   private _min!: Date;
+  @Input()
   public set min(pdValue: Date) {
     this._min = pdValue;
   }
@@ -95,6 +96,7 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   }
 
   private _max!: Date;
+  @Input()
   public set max(pdValue: Date) {
     this._max = pdValue;
   }
@@ -112,6 +114,10 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   public get selectedIndex(): number {
     return this._selectedIndex;
   }
+
+  public monthIndex!: number;
+  public quarterIndex!: number;
+  public yearValue!: number;
 
   public periodType = PeriodType;
 
@@ -133,11 +139,14 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
       { value: 3, text: 'Tùy chỉnh' },
     ];
     this.dropDown();
+
+    this.min = new Date(2022, 0, 1);
+    this.max = new Date(2022, 0, 31);
+
+    this.getIndex(this.min, this.max);
   }
 
   public onClickMonth(event: any) {
-    this.min = new Date();
-    this.max = new Date();
     this.min.setFullYear(this.time.getFullYear(), event.target.value - 1, 1);
     this.max.setFullYear(
       this.time.getFullYear(),
@@ -145,11 +154,10 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
       this.getDayOfMonth(this.time.getFullYear(), event.target.value)
     );
     this.timeEvent.emit({ minTime: this.min, maxTime: this.max });
+    this.monthIndex = -1;
   }
 
   public onClickQuarter(event: any) {
-    this.min = new Date();
-    this.max = new Date();
     let quarter = event.target.textContent;
     if (quarter == 'I') {
       this.min.setFullYear(this.time.getFullYear(), 0, 1);
@@ -184,14 +192,14 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
       );
       this.timeEvent.emit({ minTime: this.min, maxTime: this.max });
     }
+    this.quarterIndex = -1;
   }
 
   public onClickYear(event: any) {
-    this.min = new Date();
-    this.max = new Date();
     this.min.setFullYear(event.target.value, 0, 1);
     this.max.setFullYear(event.target.value, 11, 31);
     this.timeEvent.emit({ minTime: this.min, maxTime: this.max });
+    this.yearValue = -1;
   }
 
   private getDayOfMonth = (year: number, month: number) => {
@@ -232,6 +240,43 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
 
   public setIndex(index: number) {
     this.selectedIndex = index;
+  }
+
+  public getIndex(min: Date, max: Date) {
+    let _minMonth = min.getMonth();
+    let _maxMonth = max.getMonth();
+    let _minYear = min.getFullYear();
+    let _maxYear = max.getFullYear();
+    if (_minYear == _maxYear) {
+      if (_minMonth == _maxMonth) {
+        this.monthIndex = _minMonth || _maxMonth;
+        this.yearValue = _minYear || _maxYear;
+        if (this.monthIndex >= 0 && this.monthIndex <= 2) {
+          this.quarterIndex = 0;
+        } else if (this.monthIndex >= 3 && this.monthIndex <= 5) {
+          this.quarterIndex = 1;
+        } else if (this.monthIndex >= 6 && this.monthIndex <= 8) {
+          this.quarterIndex = 2;
+        } else if (this.monthIndex >= 9 && this.monthIndex <= 11) {
+          this.quarterIndex = 3;
+        } else {
+          this.quarterIndex = -1;
+        }
+      } else {
+        if (_minMonth >= 0 && _maxMonth <= 2) {
+          this.quarterIndex = 0;
+        } else if (_minMonth >= 3 && _maxMonth <= 5) {
+          this.quarterIndex = 1;
+        } else if (_minMonth >= 6 && _maxMonth <= 8) {
+          this.quarterIndex = 2;
+        } else if (_minMonth >= 9 && _maxMonth <= 11) {
+          this.quarterIndex = 3;
+        } else {
+          this.quarterIndex = -1;
+        }
+        this.yearValue = _minYear || _maxYear;
+      }
+    }
   }
 
   private setWidth(selectedValue: string) {
