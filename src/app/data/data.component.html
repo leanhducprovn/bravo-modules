@@ -14,23 +14,23 @@
 <br> -->
 
 <!-- range time -->
-<div class="range-time">
+<!-- <div class="range-time">
     <bravo-range-time (timeEvent)="timeEvent($event.minTime, $event.maxTime)">
     </bravo-range-time>
 </div>
-<br>
+<br> -->
 
 <!-- check list -->
-<!-- <div class="check-list">
+<div class="check-list">
 
-    <bravo-checklist #trading [zParentText]="'Loại giao dịch'" [dataList]="tradingData">
+    <bravo-checklist #trading [zParentText]="'Loại giao dịch'" [dataList]="tradingData" [bSelectOnlyOne]="true">
     </bravo-checklist>
 
-    <bravo-checklist #rating [zParentText]="'Loại đánh giá'" [dataList]="ratingData" [bSelectOnlyOne]="true">
+    <bravo-checklist #rating [zParentText]="'Loại đánh giá'" [dataList]="ratingData">
     </bravo-checklist>
 
-    <bravo-checklist #timing [zParentText]="'Thời gian'" [dataList]="timingData">
+    <bravo-checklist #timing [zParentText]="'Thời gian'" [dataList]="timingData" [typeList]="'button'">
     </bravo-checklist>
 
 </div>
-<br> -->
+<br>

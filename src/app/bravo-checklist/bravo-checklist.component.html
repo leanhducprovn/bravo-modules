@@ -1,16 +1,30 @@
-<div class="parent">
+<div class="parent" [hidden]="typeList == 'button'">
     <div class="form-check">
-        <input #parent class="form-check-input" type="checkbox" value="" (change)="onSelectAll($event)"
-            [disabled]="bSelectOnlyOne ? bSelectOnlyOne : false">
+        <input #parent class="form-check-input" type="checkbox" value="" (change)="onParent($event)"
+            [disabled]="bSelectOnlyOne" [checked]="viewParent.checked" [(ngModel)]="viewParent.checked">
         <label class="form-check-label">
             {{ zParentText }}
         </label>
     </div>
 </div>
 <div class="children">
-    <div class="form-check" *ngFor="let item of controls">
-        <input class="form-check-input" type="checkbox" value="{{ item.value }}" name="{{ item.name }}"
-            (change)="onSelectOption($event)" [checked]="item.checked" [(ngModel)]="item.checked">
-        <label class="form-check-label">{{ item.text }}</label>
-    </div>
+    <ul #children [ngStyle]="{'padding-inline-start': typeList == 'button' ? '0px' : ''}">
+        <li class="children-list" *ngFor="let item of controls">
+            <div *ngIf="typeList == 'button'; else checkbox">
+                <button (click)="onChildren($event)" name="{{ item.name }}" value="{{ item.value }}">{{ item.text
+                    }}</button>
+            </div>
+            <ng-template #checkbox>
+                <input class="form-check-input" type="checkbox" value="{{ item.value }}" name="{{ item.name }}"
+                    (change)="onChildren($event)" [checked]="item.checked" [(ngModel)]="item.checked">
+                <label class="form-check-label">
+                    {{ item.text }}
+                </label>
+            </ng-template>
+        </li>
+    </ul>
 </div>
+
+<ul #children>
+
+</ul>

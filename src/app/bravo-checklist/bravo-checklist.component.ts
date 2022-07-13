@@ -32,7 +32,7 @@ export class BravoChecklistComponent
   implements OnInit, ControlValueAccessor
 {
   @ViewChild('parent', { static: true }) viewParent!: any;
-  @ViewChild('children', { static: true }) viewChildren!: ElementRef;
+  @ViewChild('children', { static: true }) viewChildren!: any;
 
   private _zParentText!: string;
   @Input()
@@ -44,29 +44,8 @@ export class BravoChecklistComponent
     return this._zParentText;
   }
 
-  private _dataList!: DataList[];
-  @Input()
-  public set dataList(pValue: DataList[]) {
-    this._dataList = pValue;
-    this.invalidate();
-  }
-  public get dataList(): DataList[] {
-    return this._dataList;
-  }
-
-  private _valueList!: string[];
-  public set valueList(pzValue: string[]) {
-    this._valueList = pzValue;
-    this.invalidate();
-  }
-  public get valueList(): string[] {
-    if (!this._valueList) {
-      this._valueList = [];
-    }
-    return this._valueList;
-  }
-
   private _zSeparator!: string;
+  @Input()
   public set zSeparator(pzValue: string) {
     this._zSeparator = pzValue;
     this.invalidate();
@@ -82,16 +61,33 @@ export class BravoChecklistComponent
     this.invalidate();
   }
   public get bSelectOnlyOne(): boolean {
+    if (!this._bSelectOnlyOne) {
+      this._bSelectOnlyOne = false;
+    }
     return this._bSelectOnlyOne;
   }
 
-  private _listType!: TypeList;
-  public set listType(pnValue: TypeList) {
-    this._listType = pnValue;
+  private _dataList!: DataList[];
+  @Input()
+  public set dataList(pValue: DataList[]) {
+    this._dataList = pValue;
     this.invalidate();
   }
-  public get listType(): TypeList {
-    return this._listType;
+  public get dataList(): DataList[] {
+    return this._dataList;
+  }
+
+  private _typeList!: string;
+  @Input()
+  public set typeList(pnValue: string) {
+    this._typeList = pnValue;
+    this.invalidate();
+  }
+  public get typeList(): string {
+    if (!this._typeList) {
+      this._typeList = 'checkbox';
+    }
+    return this._typeList;
   }
 
   private _controls!: wjc.ObservableArray;
@@ -104,6 +100,18 @@ export class BravoChecklistComponent
       this._controls = new wjc.ObservableArray();
     }
     return this._controls;
+  }
+
+  private _valueList!: string[];
+  public set valueList(pzValue: string[]) {
+    this._valueList = pzValue;
+    this.invalidate();
+  }
+  public get valueList(): string[] {
+    if (!this._valueList) {
+      this._valueList = [];
+    }
+    return this._valueList;
   }
 
   constructor(
@@ -130,27 +138,7 @@ export class BravoChecklistComponent
 
   public ngOnInit(): void {}
 
-  onSelectOption(e: any) {
-    if (e.target.checked) {
-      if (this.bSelectOnlyOne) {
-        for (let i = 0; i < this.controls.length; i++) {
-          if (this.controls[i].value !== e.target.value) {
-            this.controls[i].checked = false;
-          }
-        }
-      } else {
-        if (this.valueList.indexOf(e.target.value) == -1) {
-          this.valueList.push(e.target.value);
-        }
-      }
-    } else {
-      if (this.valueList.indexOf(e.target.value) !== -1) {
-        this.valueList.splice(this.valueList.indexOf(e.target.value), 1);
-      }
-    }
-  }
-
-  public onSelectAll(e: any) {
+  public onParent(e: any) {
     for (let i = 0; i < this.controls.length; i++) {
       this.controls[i].checked = e.target.checked;
       if (this.controls[i].checked) {
@@ -164,35 +152,96 @@ export class BravoChecklistComponent
     console.log(this.valueList);
   }
 
-  public addOption(pzName: string, pzText: string, pValue: any) {
+  public onChildren(e: any) {
+    // click checkbox
+    if (e.type == 'change') {
+      if (e.target.checked) {
+        if (this.bSelectOnlyOne) {
+          // chỉ được phép chọn 1
+          // checkbox
+          for (let i = 0; i < this.controls.length; i++) {
+            if (this.controls[i].value != e.target.value) {
+              this.controls[i].checked = false;
+            }
+          }
+          // button
+          // if (this.checkAppearance == AppearanceStyleEnum.Button) {
+          //   var current = document.getElementsByClassName('active');
+          //   if (current.length > 0) {
+          //     current[0].className = current[0].className.replace(' active', '');
+          //   }
+          //   e.target.parentElement.className += ' active';
+          // }
+
+          this.valueList = [];
+          this.valueList.push(e.target.value);
+          console.log(this.valueList);
+        } else {
+          // được phép chọn tất cả
+          if (this.valueList.indexOf(e.target.value) === -1) {
+            this.valueList.push(e.target.value);
+          }
+
+          // if (this.checkAppearance == AppearanceStyleEnum.Button) {
+          //   e.target.parentElement.className += ' active';
+          // }
+
+          if (this.typeList == 'button') {
+            // console.log(e);
+          }
+          console.log(this.valueList);
+        }
+      } else {
+        if (this.valueList.indexOf(e.target.value) !== -1) {
+          this.valueList.splice(this.valueList.indexOf(e.target.value), 1);
+        }
+
+        // if (this.checkAppearance == AppearanceStyleEnum.Button) {
+        //   e.target.parentElement.className = 'button-appearance';
+        // }
+
+        console.log(this.valueList);
+      }
+
+      this.viewParent.nativeElement.checked = this.controls.every(
+        (option) => option.checked == true
+      );
+    }
+
+    // click button
+    else {
+      console.log(e.bubbles);
+    }
+    // this.onChange(this.valueList.join(this.zValueListSeparator));
+  }
+
+  private addOption(pzName: string, pzText: string, pValue: any) {
     let _option = this.controls.find((item) => item.name == pzName);
     if (_option == null) {
       _option = new BravoOptionBox(pzName, pzText, pValue);
       this.controls.push(_option);
     }
-    this.updateCheckBox();
+    // this.updateCheckBox();
   }
 
-  private updateCheckBox() {
-    for (let i = 0; i < this.controls.length; i++) {
-      for (let j = 0; j < this.valueList.length; j++) {
-        if (this.controls[i].value == this.valueList[j]) {
-          this.controls[i].checked = true;
-        }
-      }
-    }
-  }
+  // private updateCheckBox() {
+  //   for (let i = 0; i < this.controls.length; i++) {
+  //     for (let j = 0; j < this.valueList.length; j++) {
+  //       if (this.controls[i].value == this.valueList[j]) {
+  //         this.controls[i].checked = true;
+  //       }
+  //     }
+  //   }
+  //   this.viewParent.nativeElement.checked = this.controls.every(
+  //     (option) => option.checked == true
+  //   );
+  // }
 }
 
 export interface DataList {
   name: string;
   text: string;
   value: string;
-}
-
-export enum TypeList {
-  Checkbox,
-  Button,
 }
 
 export enum FlowDirection {
