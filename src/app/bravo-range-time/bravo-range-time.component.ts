@@ -134,8 +134,8 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
       { value: 2, text: 'Năm' },
       { value: 3, text: 'Tùy chỉnh' },
     ];
-    this.min = new Date(2026, 0, 1);
-    this.max = new Date(2026, 11, 31);
+    this.min = new Date(2025, 0, 1);
+    this.max = new Date(2025, 0, 31);
     this.dropDown();
   }
 
