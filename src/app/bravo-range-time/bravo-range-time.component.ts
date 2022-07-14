@@ -225,13 +225,7 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
       }
     });
     this.box.selectedIndexChanged.addHandler((e) => {
-      if (e.selectedIndex == this.periodType.Month) {
-        this.selectedIndexBox = this.periodType.Month;
-      } else if (e.selectedIndex == this.periodType.Quarter) {
-        this.selectedIndexBox = this.periodType.Quarter;
-      } else if (e.selectedIndex == this.periodType.Year) {
-        this.selectedIndexBox = this.periodType.Year;
-      }
+      this.selectedIndexBox = e.selectedIndex;
       this.getIndex(this.min, this.max);
       this.setWidth(this.dataBox[this.box.selectedIndex].text);
     });
