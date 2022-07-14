@@ -115,10 +115,6 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
     return this._selectedIndex;
   }
 
-  public monthIndex!: number;
-  public quarterIndex!: number;
-  public yearValue!: number;
-
   public periodType = PeriodType;
 
   @Output()
@@ -138,12 +134,9 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
       { value: 2, text: 'Năm' },
       { value: 3, text: 'Tùy chỉnh' },
     ];
+    this.min = new Date(2026, 0, 1);
+    this.max = new Date(2026, 11, 31);
     this.dropDown();
-
-    this.min = new Date(2023, 0, 1);
-    this.max = new Date(2023, 0, 31);
-
-    this.getIndex(this.min, this.max);
   }
 
   public onClickMonth(event: any) {
@@ -154,7 +147,6 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
       this.getDayOfMonth(this.time.getFullYear(), event.target.value)
     );
     this.timeEvent.emit({ minTime: this.min, maxTime: this.max });
-    this.monthIndex = -1;
   }
 
   public onClickQuarter(event: any) {
@@ -192,14 +184,12 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
       );
       this.timeEvent.emit({ minTime: this.min, maxTime: this.max });
     }
-    this.quarterIndex = -1;
   }
 
   public onClickYear(event: any) {
     this.min.setFullYear(event.target.value, 0, 1);
     this.max.setFullYear(event.target.value, 11, 31);
     this.timeEvent.emit({ minTime: this.min, maxTime: this.max });
-    this.yearValue = -1;
   }
 
   private getDayOfMonth = (year: number, month: number) => {
@@ -226,8 +216,62 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
         });
       }
     });
-    this.box.selectedIndexChanged.addHandler(() => {
-      this.selectedIndex = -1;
+    this.box.selectedIndexChanged.addHandler((e) => {
+      let _minDate = this.min.getDate();
+      let _maxDate = this.max.getDate();
+      let _minMonth = this.min.getMonth();
+      let _maxMonth = this.max.getMonth();
+      let _minYear = this.min.getFullYear();
+      let _maxYear = this.max.getFullYear();
+      if (_minYear == _maxYear) {
+        this.selectedIndex = -1;
+        if (
+          e.selectedIndex == this.periodType.Month &&
+          _minMonth == _maxMonth &&
+          _minDate == 1 &&
+          _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
+        ) {
+          this.selectedIndex = _minMonth || _maxMonth;
+        } else if (e.selectedIndex == this.periodType.Quarter) {
+          if (
+            _minMonth == 0 &&
+            _maxMonth == 2 &&
+            _minDate == 1 &&
+            _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
+          ) {
+            this.selectedIndex = 0;
+          } else if (
+            _minMonth == 3 &&
+            _maxMonth == 5 &&
+            _minDate == 1 &&
+            _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
+          ) {
+            this.selectedIndex = 1;
+          } else if (
+            _minMonth == 6 &&
+            _maxMonth == 8 &&
+            _minDate == 1 &&
+            _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
+          ) {
+            this.selectedIndex = 2;
+          } else if (
+            _minMonth == 9 &&
+            _maxMonth == 11 &&
+            _minDate == 1 &&
+            _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
+          ) {
+            this.selectedIndex = 0;
+          }
+        } else if (
+          e.selectedIndex == this.periodType.Year &&
+          _minMonth == 0 &&
+          _maxMonth == 11 &&
+          _minDate == 1 &&
+          _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
+        ) {
+          this.selectedIndex = this.listYear.indexOf(_minYear || _maxYear);
+        }
+      }
       this.setWidth(this.dataBox[this.box.selectedIndex].text);
     });
     this.box.isDroppedDownChanged.addHandler(() => {
@@ -240,61 +284,6 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
 
   public setIndex(index: number) {
     this.selectedIndex = index;
-  }
-
-  private getIndex(min: Date, max: Date) {
-    let _minDate = min.getDate();
-    let _maxDate = max.getDate();
-    let _minMonth = min.getMonth();
-    let _maxMonth = max.getMonth();
-    let _minYear = min.getFullYear();
-    let _maxYear = max.getFullYear();
-    if (_minYear == _maxYear) {
-      if (
-        _minMonth == _maxMonth &&
-        _minDate == 1 &&
-        _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
-      ) {
-        this.monthIndex = _minMonth || _maxMonth;
-      } else {
-        if (
-          _minMonth == 0 &&
-          _maxMonth == 2 &&
-          _minDate == 1 &&
-          _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
-        ) {
-          this.quarterIndex = 0;
-        } else if (
-          _minMonth == 3 &&
-          _maxMonth == 5 &&
-          _minDate == 1 &&
-          _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
-        ) {
-          this.quarterIndex = 1;
-        } else if (
-          _minMonth == 6 &&
-          _maxMonth == 8 &&
-          _minDate == 1 &&
-          _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
-        ) {
-          this.quarterIndex = 2;
-        } else if (
-          _minMonth == 9 &&
-          _maxMonth == 11 &&
-          _minDate == 1 &&
-          _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
-        ) {
-          this.quarterIndex = 3;
-        } else if (
-          _minMonth == 0 &&
-          _maxMonth == 11 &&
-          _minDate == 1 &&
-          _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
-        ) {
-          this.yearValue = _minYear || _maxYear;
-        }
-      }
-    }
   }
 
   private setWidth(selectedValue: string) {
