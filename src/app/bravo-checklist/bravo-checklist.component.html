@@ -8,19 +8,13 @@
     </div>
 </div>
 <div class="children">
-    <ul #children [ngStyle]="{'padding-inline-start': typeList == 'button' ? '0px' : ''}">
-        <li class="children-list" *ngFor="let item of controls">
-            <div *ngIf="typeList == 'button'; else checkbox">
-                <button (click)="onChildren($event)" name="{{ item.name }}" value="{{ item.value }}">{{ item.text
-                    }}</button>
-            </div>
-            <ng-template #checkbox>
-                <input class="form-check-input" type="checkbox" value="{{ item.value }}" name="{{ item.name }}"
-                    (change)="onChildren($event)" [checked]="item.checked" [(ngModel)]="item.checked">
-                <label class="form-check-label">
-                    {{ item.text }}
-                </label>
-            </ng-template>
+    <ul #children [ngClass]="typeList == 'button' ? 'button' : 'checkbox'">
+        <li [ngClass]="typeList == 'button' ? 'button-list' : 'checkbox-list'" *ngFor="let item of controls">
+            <input class="form-check-input" type="checkbox" value="{{ item.value }}" name="{{ item.name }}"
+                (change)="onChildren($event)" [checked]="item.checked" [(ngModel)]="item.checked">
+            <label class="form-check-label">
+                {{ item.text }}
+            </label>
         </li>
     </ul>
 </div>

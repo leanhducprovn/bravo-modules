@@ -1,0 +1,20 @@
+.children {
+  ul {
+    list-style: none !important;
+    padding-inline-start: 15px !important;
+  }
+  .button {
+    padding-inline-start: 0px !important;
+    input[type="checkbox"] {
+      display: none !important;
+    }
+    .button-list {
+      background-color: #ddd;
+      margin: 3px;
+      border: none;
+      padding: 3px;
+      text-align: center;
+      display: inline-block;
+    }
+  }
+}

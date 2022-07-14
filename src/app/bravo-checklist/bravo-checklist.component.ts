@@ -18,7 +18,7 @@ import * as wjc from '@grapecity/wijmo';
 @Component({
   selector: 'bravo-checklist',
   templateUrl: './bravo-checklist.component.html',
-  styleUrls: ['./bravo-checklist.component.css'],
+  styleUrls: ['./bravo-checklist.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -153,65 +153,58 @@ export class BravoChecklistComponent
   }
 
   public onChildren(e: any) {
-    // click checkbox
-    if (e.type == 'change') {
-      if (e.target.checked) {
-        if (this.bSelectOnlyOne) {
-          // chỉ được phép chọn 1
-          // checkbox
-          for (let i = 0; i < this.controls.length; i++) {
-            if (this.controls[i].value != e.target.value) {
-              this.controls[i].checked = false;
-            }
+    if (e.target.checked) {
+      if (this.bSelectOnlyOne) {
+        // chỉ được phép chọn 1
+        // checkbox
+        for (let i = 0; i < this.controls.length; i++) {
+          if (this.controls[i].value != e.target.value) {
+            this.controls[i].checked = false;
           }
-          // button
-          // if (this.checkAppearance == AppearanceStyleEnum.Button) {
-          //   var current = document.getElementsByClassName('active');
-          //   if (current.length > 0) {
-          //     current[0].className = current[0].className.replace(' active', '');
-          //   }
-          //   e.target.parentElement.className += ' active';
-          // }
-
-          this.valueList = [];
-          this.valueList.push(e.target.value);
-          console.log(this.valueList);
-        } else {
-          // được phép chọn tất cả
-          if (this.valueList.indexOf(e.target.value) === -1) {
-            this.valueList.push(e.target.value);
-          }
-
-          // if (this.checkAppearance == AppearanceStyleEnum.Button) {
-          //   e.target.parentElement.className += ' active';
-          // }
-
-          if (this.typeList == 'button') {
-            // console.log(e);
-          }
-          console.log(this.valueList);
         }
+        // button
+        // if (this.checkAppearance == AppearanceStyleEnum.Button) {
+        //   var current = document.getElementsByClassName('active');
+        //   if (current.length > 0) {
+        //     current[0].className = current[0].className.replace(' active', '');
+        //   }
+        //   e.target.parentElement.className += ' active';
+        // }
+
+        this.valueList = [];
+        this.valueList.push(e.target.value);
+        console.log(this.valueList);
       } else {
-        if (this.valueList.indexOf(e.target.value) !== -1) {
-          this.valueList.splice(this.valueList.indexOf(e.target.value), 1);
+        // được phép chọn tất cả
+        if (this.valueList.indexOf(e.target.value) === -1) {
+          this.valueList.push(e.target.value);
         }
 
         // if (this.checkAppearance == AppearanceStyleEnum.Button) {
-        //   e.target.parentElement.className = 'button-appearance';
+        //   e.target.parentElement.className += ' active';
         // }
 
+        if (this.typeList == 'button') {
+          // console.log(e);
+        }
         console.log(this.valueList);
       }
+    } else {
+      if (this.valueList.indexOf(e.target.value) !== -1) {
+        this.valueList.splice(this.valueList.indexOf(e.target.value), 1);
+      }
 
-      this.viewParent.nativeElement.checked = this.controls.every(
-        (option) => option.checked == true
-      );
+      // if (this.checkAppearance == AppearanceStyleEnum.Button) {
+      //   e.target.parentElement.className = 'button-appearance';
+      // }
+
+      console.log(this.valueList);
     }
 
-    // click button
-    else {
-      console.log(e.bubbles);
-    }
+    this.viewParent.nativeElement.checked = this.controls.every(
+      (option) => option.checked == true
+    );
+
     // this.onChange(this.valueList.join(this.zValueListSeparator));
   }
 
