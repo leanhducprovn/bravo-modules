@@ -41,7 +41,7 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
   }
   public get listQuarter(): string[] {
     if (!this._listQuarter) {
-      this._listQuarter = ['I', 'II', 'II', 'IV'];
+      this._listQuarter = ['I', 'II', 'III', 'IV'];
     }
     return this._listQuarter;
   }
@@ -140,8 +140,8 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
     ];
     this.dropDown();
 
-    this.min = new Date(2022, 0, 1);
-    this.max = new Date(2022, 0, 31);
+    this.min = new Date(2023, 0, 1);
+    this.max = new Date(2023, 0, 31);
 
     this.getIndex(this.min, this.max);
   }
@@ -242,39 +242,57 @@ export class BravoRangeTimeComponent implements OnInit, AfterViewInit {
     this.selectedIndex = index;
   }
 
-  public getIndex(min: Date, max: Date) {
+  private getIndex(min: Date, max: Date) {
+    let _minDate = min.getDate();
+    let _maxDate = max.getDate();
     let _minMonth = min.getMonth();
     let _maxMonth = max.getMonth();
     let _minYear = min.getFullYear();
     let _maxYear = max.getFullYear();
     if (_minYear == _maxYear) {
-      if (_minMonth == _maxMonth) {
+      if (
+        _minMonth == _maxMonth &&
+        _minDate == 1 &&
+        _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
+      ) {
         this.monthIndex = _minMonth || _maxMonth;
-        this.yearValue = _minYear || _maxYear;
-        if (this.monthIndex >= 0 && this.monthIndex <= 2) {
-          this.quarterIndex = 0;
-        } else if (this.monthIndex >= 3 && this.monthIndex <= 5) {
-          this.quarterIndex = 1;
-        } else if (this.monthIndex >= 6 && this.monthIndex <= 8) {
-          this.quarterIndex = 2;
-        } else if (this.monthIndex >= 9 && this.monthIndex <= 11) {
-          this.quarterIndex = 3;
-        } else {
-          this.quarterIndex = -1;
-        }
       } else {
-        if (_minMonth >= 0 && _maxMonth <= 2) {
+        if (
+          _minMonth == 0 &&
+          _maxMonth == 2 &&
+          _minDate == 1 &&
+          _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
+        ) {
           this.quarterIndex = 0;
-        } else if (_minMonth >= 3 && _maxMonth <= 5) {
+        } else if (
+          _minMonth == 3 &&
+          _maxMonth == 5 &&
+          _minDate == 1 &&
+          _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
+        ) {
           this.quarterIndex = 1;
-        } else if (_minMonth >= 6 && _maxMonth <= 8) {
+        } else if (
+          _minMonth == 6 &&
+          _maxMonth == 8 &&
+          _minDate == 1 &&
+          _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
+        ) {
           this.quarterIndex = 2;
-        } else if (_minMonth >= 9 && _maxMonth <= 11) {
+        } else if (
+          _minMonth == 9 &&
+          _maxMonth == 11 &&
+          _minDate == 1 &&
+          _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
+        ) {
           this.quarterIndex = 3;
-        } else {
-          this.quarterIndex = -1;
+        } else if (
+          _minMonth == 0 &&
+          _maxMonth == 11 &&
+          _minDate == 1 &&
+          _maxDate == this.getDayOfMonth(_maxYear, _maxMonth + 1)
+        ) {
+          this.yearValue = _minYear || _maxYear;
         }
-        this.yearValue = _minYear || _maxYear;
       }
     }
   }
