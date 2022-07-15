@@ -59,7 +59,7 @@ export class BravoChecklistComponent
     return this._zSeparator;
   }
 
-  private _bAllowSelectMultiValue = true;
+  private _bAllowSelectMultiValue: boolean = true;
   @Input()
   public set bAllowSelectMultiValue(pbValue: boolean) {
     this._bAllowSelectMultiValue = pbValue;
@@ -79,17 +79,24 @@ export class BravoChecklistComponent
     return this._dataList;
   }
 
-  private _typeList!: AppearanceStyleEnum;
+  private _eAppearanceStyle: AppearanceStyleEnum = AppearanceStyleEnum.Checkbox;
   @Input()
-  public set typeList(pnValue: AppearanceStyleEnum) {
-    this._typeList = pnValue;
+  public set eAppearanceStyle(pValue: AppearanceStyleEnum) {
+    this._eAppearanceStyle = pValue;
     this.invalidate();
   }
-  public get typeList(): AppearanceStyleEnum {
-    if (!this._typeList) {
-      this._typeList = AppearanceStyleEnum.Checkbox;
-    }
-    return this._typeList;
+  public get eAppearanceStyle(): AppearanceStyleEnum {
+    return this._eAppearanceStyle;
+  }
+
+  private _eFlowDirection: FlowDirection = FlowDirection.LeftToRight;
+  @Input()
+  public set eFlowDirection(pValue: FlowDirection) {
+    this._eFlowDirection = pValue;
+    this.invalidate();
+  }
+  public get eFlowDirection(): FlowDirection {
+    return this._eFlowDirection;
   }
 
   private _controls!: wjc.ObservableArray;
@@ -105,8 +112,8 @@ export class BravoChecklistComponent
   }
 
   private _valueList!: string[];
-  public set valueList(pzValue: string[]) {
-    this._valueList = pzValue;
+  public set valueList(pValue: string[]) {
+    this._valueList = pValue;
     this.invalidate();
   }
   public get valueList(): string[] {
@@ -129,13 +136,8 @@ export class BravoChecklistComponent
 
   public override refresh(fullUpdate?: boolean) {
     super.refresh(fullUpdate);
-    for (let i = 0; i < this.dataList.length; i++) {
-      this.addOption(
-        this.dataList[i].name,
-        this.dataList[i].text,
-        this.dataList[i].value
-      );
-    }
+    this.setData(this.dataList);
+    this.setFlowDirection(this.eFlowDirection);
   }
 
   public ngOnInit(): void {}
@@ -160,14 +162,6 @@ export class BravoChecklistComponent
         if (this.valueList.indexOf(e.target.value) === -1) {
           this.valueList.push(e.target.value);
         }
-
-        //  if (this.checkAppearance == AppearanceStyleEnum.Button) {
-        //    e.target.parentElement.className += ' active';
-        //  }
-
-        if (this.typeList == AppearanceStyleEnum.Button) {
-        }
-
         console.log(this.valueList);
       } else {
         for (let i = 0; i < this.controls.length; i++) {
@@ -175,30 +169,15 @@ export class BravoChecklistComponent
             this.controls[i].checked = false;
           }
         }
-
-        //  if (this.checkAppearance == AppearanceStyleEnum.Button) {
-        //    var current = document.getElementsByClassName('active');
-        //    if (current.length > 0) {
-        //      current[0].className = current[0].className.replace(' active', '');
-        //    }
-        //    e.target.parentElement.className += ' active';
-        //  }
-
         this.valueList = [];
         this.valueList.push(e.target.value);
-
         console.log(this.valueList);
       }
     } else {
       if (this.valueList.indexOf(e.target.value) !== -1) {
         this.valueList.splice(this.valueList.indexOf(e.target.value), 1);
       }
-
       console.log(this.valueList);
-
-      //  if (this.checkAppearance == AppearanceStyleEnum.Button) {
-      //    e.target.parentElement.className = 'button-appearance';
-      //  }
     }
 
     this.viewParent.checked = this.controls.every(
@@ -207,27 +186,37 @@ export class BravoChecklistComponent
     //  this.onChange(this.valueList.join(this.zValueListSeparator));
   }
 
-  private addOption(pzName: string, pzText: string, pValue: any) {
-    let _option = this.controls.find((item) => item.name == pzName);
-    if (_option == null) {
-      _option = new BravoOptionBox(pzName, pzText, pValue);
+  private addOption(zName: string, zText: string, zValue: any) {
+    let _option = this.controls.find((item) => item.name == zName);
+    if (!_option) {
+      _option = new BravoOptionBox(zName, zText, zValue);
       this.controls.push(_option);
     }
-    // this.updateCheckBox();
   }
 
-  // private updateCheckBox() {
-  //   for (let i = 0; i < this.controls.length; i++) {
-  //     for (let j = 0; j < this.valueList.length; j++) {
-  //       if (this.controls[i].value == this.valueList[j]) {
-  //         this.controls[i].checked = true;
-  //       }
-  //     }
-  //   }
-  //   this.viewParent.nativeElement.checked = this.controls.every(
-  //     (option) => option.checked == true
-  //   );
-  // }
+  private setData(value: DataList[]) {
+    for (let i = 0; i < value.length; i++) {
+      this.addOption(value[i].name, value[i].text, value[i].value);
+    }
+  }
+
+  private setFlowDirection(value: FlowDirection) {
+    let _style!: string;
+    if (value == FlowDirection.LeftToRight) {
+      _style = 'row';
+    } else if (value == FlowDirection.RightToLeft) {
+      _style = 'row-reverse';
+    } else if (value == FlowDirection.TopDown) {
+      _style = 'column';
+    } else if (value == FlowDirection.BottomUp) {
+      _style = 'column-reverse';
+    } else {
+      _style = 'row';
+    }
+    wjc.setCss(this.viewChildren.nativeElement, {
+      'flex-flow': _style,
+    });
+  }
 }
 
 export interface DataList {

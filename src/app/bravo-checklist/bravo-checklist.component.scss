@@ -1,48 +1,81 @@
 .parent {
-  .checkbox {
-    color: inherit;
-    &:hover {
+  div {
+    &.checkbox {
+      display: flex;
+      white-space: nowrap;
+      overflow: auto;
+      color: inherit;
+      &:hover {
+          color: blue
+        }
+      &.active-checkbox {
         color: blue
       }
-    &.active-checkbox {
-      color: blue
+      input {
+        cursor: pointer;
+      }
+      label {
+        cursor: pointer;
+        margin: 0 4px 0 4px;
+      }
     }
   }
 }
 
 .children {
+  white-space: nowrap;
+  overflow: auto;
   ul {
-    list-style: none !important;
-  }
-  .checkbox {
-    padding-inline-start: 17px !important;
-    .checkbox-list {
-      color: inherit;
-      &:hover {
-        color: blue
-      }
-      &.active-checkbox {
-        color: blue
+    list-style: none;
+    &.checkbox {
+      display: flex;
+      padding-inline-start: 18px;
+      li {
+        display: flex;
+        &.checkbox-list {
+          color: inherit;
+          &:hover {
+            color: blue
+          }
+          &.active-checkbox {
+            color: blue
+          }
+          input {
+            cursor: pointer;
+          }
+          label {
+            cursor: pointer;
+            margin: 0 4px 0 4px;
+          }
+        }
       }
     }
-  }
-  .button {
-    padding-inline-start: 0px !important;
-    input[type="checkbox"] {
-      display: none !important;
-    }
-    .button-list {
-      color: inherit;
-      background-color: #ddd;
-      margin: 3px;
-      padding: 3px;
-      &:hover {
-        color: #eee;
-        background-color: #165ea1;
-      }
-      &.active-button {
-        color: #eee;
-        background-color: #165ea1
+    &.button {
+      display: inline-flex;
+      padding-inline-start: 0px;
+      margin-left: -3px;
+      li {
+        display: flex;
+        &.button-list {
+          color: inherit;
+          background-color: #ddd;
+          margin: 3px;
+          padding: 3px;
+          &:hover {
+            color: #eee;
+            background-color: #165ea1;
+          }
+          &.active-button {
+            color: #eee;
+            background-color: #165ea1
+          }
+          input[type="checkbox"] {
+            display: none;
+          }
+          label {
+            cursor: pointer;
+          }
+        }
       }
     }
   }

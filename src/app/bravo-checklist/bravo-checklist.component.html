@@ -1,5 +1,5 @@
-<div class="parent" [hidden]="typeList == AppearanceStyleEnum.Button">
-    <div [class]="{'checkbox': typeList != AppearanceStyleEnum.Button, 'active-checkbox': viewParent.checked }">
+<div class="parent" [hidden]="eAppearanceStyle == AppearanceStyleEnum.Button">
+    <div [class]="{'checkbox': eAppearanceStyle != AppearanceStyleEnum.Button, 'active-checkbox': viewParent.checked }">
         <input #parent class="form-check-input" type="checkbox" id="{{ zParentText }}" (change)="onParent($event)"
             [disabled]="!bAllowSelectMultiValue" [checked]="viewParent.checked" [(ngModel)]="viewParent.checked">
         <label class="form-check-label" for="{{ zParentText }}">
@@ -8,12 +8,12 @@
     </div>
 </div>
 <div class="children">
-    <ul #children [class]="typeList == AppearanceStyleEnum.Button ? 'button' : 'checkbox'">
+    <ul #children [class]="eAppearanceStyle == AppearanceStyleEnum.Button ? 'button' : 'checkbox'">
         <li *ngFor="let item of controls; let i = index" [class]="{
-                'button-list': typeList == AppearanceStyleEnum.Button,
-                'checkbox-list': typeList != AppearanceStyleEnum.Button,
-                'active-button': typeList == AppearanceStyleEnum.Button && item.checked,
-                'active-checkbox': typeList != AppearanceStyleEnum.Button && item.checked
+                'button-list': eAppearanceStyle == AppearanceStyleEnum.Button,
+                'checkbox-list': eAppearanceStyle != AppearanceStyleEnum.Button,
+                'active-button': eAppearanceStyle == AppearanceStyleEnum.Button && item.checked,
+                'active-checkbox': eAppearanceStyle != AppearanceStyleEnum.Button && item.checked
             }">
             <input class="form-check-input" type="checkbox" id="{{ item.value }}" value="{{ item.value }}"
                 name="{{ item.name }}" (change)="onChildren($event)" [checked]="item.checked"

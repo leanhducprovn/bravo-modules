@@ -23,15 +23,17 @@
 <!-- check list -->
 <div class="check-list">
 
-    <bravo-checklist #trading [zParentText]="'Loại giao dịch'" [dataList]="tradingData"
-        [bAllowSelectMultiValue]="false">
+    <bravo-checklist #trading [zParentText]="'Loại giao dịch'" [dataList]="tradingData" [bAllowSelectMultiValue]="false"
+        [eFlowDirection]="FlowDirection.TopDown">
     </bravo-checklist>
 
-    <bravo-checklist #rating [zParentText]="'Loại đánh giá'" [dataList]="ratingData">
+    <bravo-checklist #rating [zParentText]="'Loại đánh giá'" [dataList]="ratingData"
+        [eFlowDirection]="FlowDirection.TopDown">
     </bravo-checklist>
 
-    <bravo-checklist #timing [zParentText]="'Thời gian'" [dataList]="timingData" [typeList]="AppearanceStyleEnum.Button"
-        [bAllowSelectMultiValue]="false">
+    <bravo-checklist #timing [zParentText]="'Thời gian'" [dataList]="timingData"
+        [eAppearanceStyle]="AppearanceStyleEnum.Button" [bAllowSelectMultiValue]="true"
+        [eFlowDirection]="FlowDirection.LeftToRight">
     </bravo-checklist>
 
 </div>
