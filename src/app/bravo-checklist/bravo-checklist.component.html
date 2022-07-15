@@ -1,18 +1,24 @@
-<div class="parent" [hidden]="typeList == 'button'">
-    <div class="form-check">
-        <input #parent class="form-check-input" type="checkbox" value="" (change)="onParent($event)"
-            [disabled]="bSelectOnlyOne" [checked]="viewParent.checked" [(ngModel)]="viewParent.checked">
-        <label class="form-check-label">
+<div class="parent" [hidden]="typeList == AppearanceStyleEnum.Button">
+    <div [class]="{'checkbox': typeList != AppearanceStyleEnum.Button, 'active-checkbox': viewParent.checked }">
+        <input #parent class="form-check-input" type="checkbox" id="{{ zParentText }}" (change)="onParent($event)"
+            [disabled]="!bAllowSelectMultiValue" [checked]="viewParent.checked" [(ngModel)]="viewParent.checked">
+        <label class="form-check-label" for="{{ zParentText }}">
             {{ zParentText }}
         </label>
     </div>
 </div>
 <div class="children">
-    <ul #children [ngClass]="typeList == 'button' ? 'button' : 'checkbox'">
-        <li [ngClass]="typeList == 'button' ? 'button-list' : 'checkbox-list'" *ngFor="let item of controls">
-            <input class="form-check-input" type="checkbox" value="{{ item.value }}" name="{{ item.name }}"
-                (change)="onChildren($event)" [checked]="item.checked" [(ngModel)]="item.checked">
-            <label class="form-check-label">
+    <ul #children [class]="typeList == AppearanceStyleEnum.Button ? 'button' : 'checkbox'">
+        <li *ngFor="let item of controls; let i = index" [class]="{
+                'button-list': typeList == AppearanceStyleEnum.Button,
+                'checkbox-list': typeList != AppearanceStyleEnum.Button,
+                'active-button': typeList == AppearanceStyleEnum.Button && item.checked,
+                'active-checkbox': typeList != AppearanceStyleEnum.Button && item.checked
+            }">
+            <input class="form-check-input" type="checkbox" id="{{ item.value }}" value="{{ item.value }}"
+                name="{{ item.name }}" (change)="onChildren($event)" [checked]="item.checked"
+                [(ngModel)]="item.checked">
+            <label class="form-check-label" for="{{ item.value }}">
                 {{ item.text }}
             </label>
         </li>

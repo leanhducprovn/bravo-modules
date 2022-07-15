@@ -4,6 +4,9 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { BravoChecklistComponent } from '../bravo-checklist/bravo-checklist.component';
 
+import { FlowDirection } from '../data-types/enum/flow-direction';
+import { AppearanceStyleEnum } from '../data-types/enum/appearance-style-enum';
+
 @Component({
   selector: 'data',
   templateUrl: './data.component.html',
@@ -14,6 +17,9 @@ export class DataComponent implements OnInit, AfterViewInit {
   @ViewChild('trading', { static: true }) viewTrading!: BravoChecklistComponent;
   @ViewChild('rating', { static: true }) viewRating!: BravoChecklistComponent;
   @ViewChild('timing', { static: true }) viewTiming!: BravoChecklistComponent;
+
+  public FlowDirection = FlowDirection;
+  public AppearanceStyleEnum = AppearanceStyleEnum;
 
   // bravo slider
   public optionsSlider!: Options;

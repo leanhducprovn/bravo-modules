@@ -10,6 +10,8 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Control } from '@grapecity/wijmo';
 import { WjDirectiveBehavior } from '@grapecity/wijmo.angular2.directivebase';
+import { FlowDirection } from '../data-types/enum/flow-direction';
+import { AppearanceStyleEnum } from '../data-types/enum/appearance-style-enum';
 import { BravoGraphicsRenderer } from '../bravo-graphics/bravo.graphics.renderer';
 import { Font } from '../bravo-graphics/font';
 
@@ -34,6 +36,9 @@ export class BravoChecklistComponent
   @ViewChild('parent', { static: true }) viewParent!: any;
   @ViewChild('children', { static: true }) viewChildren!: any;
 
+  public FlowDirection = FlowDirection;
+  public AppearanceStyleEnum = AppearanceStyleEnum;
+
   private _zParentText!: string;
   @Input()
   public set zParentText(pzValue: string) {
@@ -54,17 +59,14 @@ export class BravoChecklistComponent
     return this._zSeparator;
   }
 
-  private _bSelectOnlyOne!: boolean;
+  private _bAllowSelectMultiValue = true;
   @Input()
-  public set bSelectOnlyOne(pbValue: boolean) {
-    this._bSelectOnlyOne = pbValue;
+  public set bAllowSelectMultiValue(pbValue: boolean) {
+    this._bAllowSelectMultiValue = pbValue;
     this.invalidate();
   }
-  public get bSelectOnlyOne(): boolean {
-    if (!this._bSelectOnlyOne) {
-      this._bSelectOnlyOne = false;
-    }
-    return this._bSelectOnlyOne;
+  public get bAllowSelectMultiValue(): boolean {
+    return this._bAllowSelectMultiValue;
   }
 
   private _dataList!: DataList[];
@@ -77,15 +79,15 @@ export class BravoChecklistComponent
     return this._dataList;
   }
 
-  private _typeList!: string;
+  private _typeList!: AppearanceStyleEnum;
   @Input()
-  public set typeList(pnValue: string) {
+  public set typeList(pnValue: AppearanceStyleEnum) {
     this._typeList = pnValue;
     this.invalidate();
   }
-  public get typeList(): string {
+  public get typeList(): AppearanceStyleEnum {
     if (!this._typeList) {
-      this._typeList = 'checkbox';
+      this._typeList = AppearanceStyleEnum.Checkbox;
     }
     return this._typeList;
   }
@@ -154,39 +156,37 @@ export class BravoChecklistComponent
 
   public onChildren(e: any) {
     if (e.target.checked) {
-      if (this.bSelectOnlyOne) {
-        // chỉ được phép chọn 1
-        // checkbox
-        for (let i = 0; i < this.controls.length; i++) {
-          if (this.controls[i].value != e.target.value) {
-            this.controls[i].checked = false;
-          }
-        }
-        // button
-        // if (this.checkAppearance == AppearanceStyleEnum.Button) {
-        //   var current = document.getElementsByClassName('active');
-        //   if (current.length > 0) {
-        //     current[0].className = current[0].className.replace(' active', '');
-        //   }
-        //   e.target.parentElement.className += ' active';
-        // }
-
-        this.valueList = [];
-        this.valueList.push(e.target.value);
-        console.log(this.valueList);
-      } else {
-        // được phép chọn tất cả
+      if (this.bAllowSelectMultiValue) {
         if (this.valueList.indexOf(e.target.value) === -1) {
           this.valueList.push(e.target.value);
         }
 
-        // if (this.checkAppearance == AppearanceStyleEnum.Button) {
-        //   e.target.parentElement.className += ' active';
-        // }
+        //  if (this.checkAppearance == AppearanceStyleEnum.Button) {
+        //    e.target.parentElement.className += ' active';
+        //  }
 
-        if (this.typeList == 'button') {
-          // console.log(e);
+        if (this.typeList == AppearanceStyleEnum.Button) {
         }
+
+        console.log(this.valueList);
+      } else {
+        for (let i = 0; i < this.controls.length; i++) {
+          if (this.controls[i].value !== e.target.value) {
+            this.controls[i].checked = false;
+          }
+        }
+
+        //  if (this.checkAppearance == AppearanceStyleEnum.Button) {
+        //    var current = document.getElementsByClassName('active');
+        //    if (current.length > 0) {
+        //      current[0].className = current[0].className.replace(' active', '');
+        //    }
+        //    e.target.parentElement.className += ' active';
+        //  }
+
+        this.valueList = [];
+        this.valueList.push(e.target.value);
+
         console.log(this.valueList);
       }
     } else {
@@ -194,18 +194,17 @@ export class BravoChecklistComponent
         this.valueList.splice(this.valueList.indexOf(e.target.value), 1);
       }
 
-      // if (this.checkAppearance == AppearanceStyleEnum.Button) {
-      //   e.target.parentElement.className = 'button-appearance';
-      // }
-
       console.log(this.valueList);
+
+      //  if (this.checkAppearance == AppearanceStyleEnum.Button) {
+      //    e.target.parentElement.className = 'button-appearance';
+      //  }
     }
 
-    this.viewParent.nativeElement.checked = this.controls.every(
+    this.viewParent.checked = this.controls.every(
       (option) => option.checked == true
     );
-
-    // this.onChange(this.valueList.join(this.zValueListSeparator));
+    //  this.onChange(this.valueList.join(this.zValueListSeparator));
   }
 
   private addOption(pzName: string, pzText: string, pValue: any) {
@@ -235,13 +234,6 @@ export interface DataList {
   name: string;
   text: string;
   value: string;
-}
-
-export enum FlowDirection {
-  LeftToRight,
-  TopDown,
-  RightToLeft,
-  BottomUp,
 }
 
 export class BravoOptionBox {

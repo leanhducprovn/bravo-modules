@@ -1,7 +1,30 @@
+.parent {
+  .checkbox {
+    color: inherit;
+    &:hover {
+        color: blue
+      }
+    &.active-checkbox {
+      color: blue
+    }
+  }
+}
+
 .children {
   ul {
     list-style: none !important;
-    padding-inline-start: 15px !important;
+  }
+  .checkbox {
+    padding-inline-start: 17px !important;
+    .checkbox-list {
+      color: inherit;
+      &:hover {
+        color: blue
+      }
+      &.active-checkbox {
+        color: blue
+      }
+    }
   }
   .button {
     padding-inline-start: 0px !important;
@@ -9,12 +32,18 @@
       display: none !important;
     }
     .button-list {
+      color: inherit;
       background-color: #ddd;
       margin: 3px;
-      border: none;
       padding: 3px;
-      text-align: center;
-      display: inline-block;
+      &:hover {
+        color: #eee;
+        background-color: #165ea1;
+      }
+      &.active-button {
+        color: #eee;
+        background-color: #165ea1
+      }
     }
   }
 }
