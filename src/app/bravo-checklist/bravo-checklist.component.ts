@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  forwardRef,
   Inject,
   Injector,
   Input,
@@ -24,8 +25,8 @@ import * as wjc from '@grapecity/wijmo';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: BravoChecklistComponent,
       multi: true,
+      useExisting: forwardRef(() => BravoChecklistComponent),
     },
   ],
 })
@@ -56,6 +57,9 @@ export class BravoChecklistComponent
     this.invalidate();
   }
   public get zSeparator(): string {
+    if (!this._zSeparator) {
+      this._zSeparator = ',';
+    }
     return this._zSeparator;
   }
 
@@ -130,9 +134,23 @@ export class BravoChecklistComponent
     super(WjDirectiveBehavior.getHostElement(elRef, injector));
   }
 
-  public writeValue(obj: any): void {}
-  public registerOnChange(fn: any): void {}
-  public registerOnTouched(fn: any): void {}
+  public onChange = (changed: any) => {};
+  public onTouch = () => {};
+  public writeValue(obj: any): void {
+    if (obj instanceof Array) {
+      for (let i = 0; i < obj.length; i++) {
+        this.valueList[i] = obj[i];
+      }
+    } else {
+      this.valueList = obj.split(this.zSeparator);
+    }
+  }
+  public registerOnChange(changed: any): void {
+    this.onChange = changed;
+  }
+  public registerOnTouched(touched: any): void {
+    this.onTouch = touched;
+  }
 
   public override refresh(fullUpdate?: boolean) {
     super.refresh(fullUpdate);
@@ -179,11 +197,9 @@ export class BravoChecklistComponent
       }
       console.log(this.valueList);
     }
-
     this.viewParent.checked = this.controls.every(
       (option) => option.checked == true
     );
-    //  this.onChange(this.valueList.join(this.zValueListSeparator));
   }
 
   private addOption(zName: string, zText: string, zValue: any) {
@@ -192,6 +208,20 @@ export class BravoChecklistComponent
       _option = new BravoOptionBox(zName, zText, zValue);
       this.controls.push(_option);
     }
+    this.onActive();
+  }
+
+  private onActive() {
+    for (let i = 0; i < this.controls.length; i++) {
+      for (let j = 0; j < this.valueList.length; j++) {
+        if (this.controls[i].value == this.valueList[j]) {
+          this.controls[i].checked = true;
+        }
+      }
+    }
+    this.viewParent.checked = this.controls.every(
+      (option) => option.checked == true
+    );
   }
 
   private setData(value: DataList[]) {
@@ -217,6 +247,10 @@ export class BravoChecklistComponent
       'flex-flow': _style,
     });
   }
+
+  public getCurrentDisplayText(pzSeparator: string) {}
+
+  public getPreferredSize() {}
 }
 
 export interface DataList {

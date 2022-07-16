@@ -78,6 +78,19 @@ export class DataComponent implements OnInit, AfterViewInit {
     },
   ];
 
+  // checklist form group
+  public formTrading = this.fb.group({
+    dataActive: ['CustomerCareTradingCode'],
+  });
+
+  public formRating = this.fb.group({
+    dataActive: ['AttitudeRatingCode,WorkRatingCode'],
+  });
+
+  public formTiming = this.fb.group({
+    dataActive: ['MonthCode;YearCode'],
+  });
+
   constructor(private fb: FormBuilder) {}
 
   public ngAfterViewInit(): void {}

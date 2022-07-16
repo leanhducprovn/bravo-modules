@@ -22,19 +22,23 @@
 
 <!-- check list -->
 <div class="check-list">
-
-    <bravo-checklist #trading [zParentText]="'Loại giao dịch'" [dataList]="tradingData" [bAllowSelectMultiValue]="false"
-        [eFlowDirection]="FlowDirection.TopDown">
-    </bravo-checklist>
-
-    <bravo-checklist #rating [zParentText]="'Loại đánh giá'" [dataList]="ratingData"
-        [eFlowDirection]="FlowDirection.TopDown">
-    </bravo-checklist>
-
-    <bravo-checklist #timing [zParentText]="'Thời gian'" [dataList]="timingData"
-        [eAppearanceStyle]="AppearanceStyleEnum.Button" [bAllowSelectMultiValue]="true"
-        [eFlowDirection]="FlowDirection.LeftToRight">
-    </bravo-checklist>
-
+    <form [formGroup]="formTrading">
+        <bravo-checklist #trading formControlName="dataActive" [zParentText]="'Loại giao dịch'" [dataList]="tradingData"
+            [bAllowSelectMultiValue]="false" [eFlowDirection]="FlowDirection.TopDown" [zSeparator]="','">
+        </bravo-checklist>
+    </form>
+    <br>
+    <form [formGroup]="formRating">
+        <bravo-checklist #rating formControlName="dataActive" [zParentText]="'Loại đánh giá'" [dataList]="ratingData"
+            [bAllowSelectMultiValue]="true" [eFlowDirection]="FlowDirection.TopDown" [zSeparator]="','">
+        </bravo-checklist>
+    </form>
+    <br>
+    <form [formGroup]="formTiming">
+        <bravo-checklist #timing formControlName="dataActive" [zParentText]="'Thời gian'" [dataList]="timingData"
+            [eAppearanceStyle]="AppearanceStyleEnum.Button" [bAllowSelectMultiValue]="true"
+            [eFlowDirection]="FlowDirection.LeftToRight" [zSeparator]="';'">
+        </bravo-checklist>
+    </form>
 </div>
 <br>
