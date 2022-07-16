@@ -248,7 +248,19 @@ export class BravoChecklistComponent
     });
   }
 
-  public getCurrentDisplayText(pzSeparator: string) {}
+  public getCurrentDisplayText(pzSeparator: string) {
+    let _currentText: string;
+    let _listText = [];
+    for (let i = 0; i < this.controls.length; i++) {
+      for (let j = 0; j < this.valueList.length; j++) {
+        if (this.controls[i].value == this.valueList[j]) {
+          _currentText = this.controls[i].text;
+          _listText.push(_currentText);
+        }
+      }
+    }
+    return _listText.join(pzSeparator);
+  }
 
   public getPreferredSize() {}
 }
