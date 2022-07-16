@@ -9,7 +9,10 @@
           color: blue
         }
       &.active-checkbox {
-        color: blue
+        color: blue;
+        &:hover {
+          color: rgb(0, 0, 188);
+        }
       }
       input {
         cursor: pointer;
@@ -38,7 +41,10 @@
             color: blue
           }
           &.active-checkbox {
-            color: blue
+            color: blue;
+            &:hover {
+              color: rgb(0, 0, 188);
+            }
           }
           input {
             cursor: pointer;
@@ -61,13 +67,18 @@
           background-color: #ddd;
           margin: 3px;
           padding: 3px;
+          border-radius: 3px;
+          text-align: center;
           &:hover {
             color: #eee;
             background-color: #165ea1;
           }
           &.active-button {
             color: #eee;
-            background-color: #165ea1
+            background-color: #165ea1;
+            &:hover {
+              background-color: #00417e;
+            }
           }
           input[type="checkbox"] {
             display: none;
