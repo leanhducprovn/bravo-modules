@@ -280,17 +280,33 @@ export class BravoChecklistComponent
       // kiểu checklist hoặc null
 
       // parent
-      let _sParentText = new wjc.Size(
-        BravoGraphicsRenderer.measureString(this.zParentText, _fontSize)?.width,
-        BravoGraphicsRenderer.measureString(this.zParentText, _fontSize)?.height
-      );
-      _nwParent = 13 + 4 + _sParentText.width + 4;
-      if (_sParentText.height <= 13) {
-        _nhParent = 13;
+      /*------------------------------------- 
+      13: chiều rộng, chiều cao của checkbox
+      4: margin trái phải của text
+      18: margin left đầu dòng của children
+      --------------------------------------*/
+
+      if (this.zParentText) {
+        let _sParentText = new wjc.Size(
+          BravoGraphicsRenderer.measureString(
+            this.zParentText,
+            _fontSize
+          )?.width,
+          BravoGraphicsRenderer.measureString(
+            this.zParentText,
+            _fontSize
+          )?.height
+        );
+        _nwParent = 13 + 4 + _sParentText.width + 4;
+        if (_sParentText.height <= 13) {
+          _nhParent = 13;
+        } else {
+          _nhParent = _sParentText.height;
+        }
+        _sParent = new wjc.Size(_nwParent, _nhParent);
       } else {
-        _nhParent = _sParentText.height;
+        _sParent = new wjc.Size(13, 13);
       }
-      _sParent = new wjc.Size(_nwParent, _nhParent);
 
       // children
       if (
@@ -325,7 +341,6 @@ export class BravoChecklistComponent
           _nhChildren = _nhChildrenText;
         }
         _sChildren = new wjc.Size(_nwChildren, _nhChildren);
-        console.log(_sChildren);
       } else if (
         this.eFlowDirection == FlowDirection.TopDown ||
         this.eFlowDirection == FlowDirection.BottomUp
@@ -340,7 +355,7 @@ export class BravoChecklistComponent
           _sParent.width,
           _sParent.height + _sChildren.height
         );
-        console.log(1);
+        console.log(_sControl);
         return _sControl;
       } else {
         // children lớn hơn parent
@@ -348,6 +363,7 @@ export class BravoChecklistComponent
           _sChildren.width,
           _sParent.height + _sChildren.height
         );
+        console.log(_sControl);
         return _sControl;
       }
     }
