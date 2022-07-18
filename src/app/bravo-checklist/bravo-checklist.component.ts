@@ -156,6 +156,7 @@ export class BravoChecklistComponent
     super.refresh(fullUpdate);
     this.setData(this.dataList);
     this.setFlowDirection(this.eFlowDirection);
+    this.getPreferredSize();
   }
 
   public ngOnInit(): void {}
@@ -262,7 +263,95 @@ export class BravoChecklistComponent
     return _listText.join(pzSeparator);
   }
 
-  public getPreferredSize() {}
+  public getPreferredSize() {
+    let _fontSize = new Font('Segoe UI', 9.75);
+    let _sControl = new wjc.Size();
+    let _sParent = new wjc.Size();
+    let _sChildren = new wjc.Size();
+    let _nwParent: number = 0;
+    let _nhParent: number = 0;
+    let _nwChildren: number = 0;
+    let _nhChildren: number = 0;
+
+    if (this.eAppearanceStyle == AppearanceStyleEnum.Button) {
+      // kiểu button
+      console.log('Button');
+    } else {
+      // kiểu checklist hoặc null
+
+      // parent
+      let _sParentText = new wjc.Size(
+        BravoGraphicsRenderer.measureString(this.zParentText, _fontSize)?.width,
+        BravoGraphicsRenderer.measureString(this.zParentText, _fontSize)?.height
+      );
+      _nwParent = 13 + 4 + _sParentText.width + 4;
+      if (_sParentText.height <= 13) {
+        _nhParent = 13;
+      } else {
+        _nhParent = _sParentText.height;
+      }
+      _sParent = new wjc.Size(_nwParent, _nhParent);
+
+      // children
+      if (
+        this.eFlowDirection == FlowDirection.LeftToRight ||
+        this.eFlowDirection == FlowDirection.RightToLeft
+      ) {
+        // từ trái sang phải và từ phải sang trái
+        let _nwChildrenText: number = 0;
+        let _nhChildrenText: number = 0;
+        for (let i = 0; i < this.controls.length; i++) {
+          _nwChildrenText += Number(
+            BravoGraphicsRenderer.measureString(
+              this.controls[i].text,
+              _fontSize
+            )?.width
+          );
+          _nhChildrenText = Number(
+            BravoGraphicsRenderer.measureString(
+              this.controls[i].text,
+              _fontSize
+            )?.height
+          );
+        }
+        _nwChildren =
+          18 +
+          13 * this.controls.length +
+          8 * this.controls.length +
+          _nwChildrenText;
+        if (_nhChildrenText <= 13) {
+          _nhChildren = 13;
+        } else {
+          _nhChildren = _nhChildrenText;
+        }
+        _sChildren = new wjc.Size(_nwChildren, _nhChildren);
+        console.log(_sChildren);
+      } else if (
+        this.eFlowDirection == FlowDirection.TopDown ||
+        this.eFlowDirection == FlowDirection.BottomUp
+      ) {
+        // từ trên xuống dưới và từ dưới lên trên
+      }
+
+      // return
+      if (_sParent.width >= _sChildren.width) {
+        // parent lớn hơn hoặc bằng children
+        _sControl = new wjc.Size(
+          _sParent.width,
+          _sParent.height + _sChildren.height
+        );
+        console.log(1);
+        return _sControl;
+      } else {
+        // children lớn hơn parent
+        _sControl = new wjc.Size(
+          _sChildren.width,
+          _sParent.height + _sChildren.height
+        );
+        return _sControl;
+      }
+    }
+  }
 }
 
 export interface DataList {

@@ -10,7 +10,7 @@ import { AppearanceStyleEnum } from '../data-types/enum/appearance-style-enum';
 @Component({
   selector: 'data',
   templateUrl: './data.component.html',
-  styleUrls: ['./data.component.css'],
+  styleUrls: ['./data.component.scss'],
 })
 export class DataComponent implements OnInit, AfterViewInit {
   // checklist viewchild
