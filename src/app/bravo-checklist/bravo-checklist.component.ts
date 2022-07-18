@@ -156,7 +156,7 @@ export class BravoChecklistComponent
     super.refresh(fullUpdate);
     this.setData(this.dataList);
     this.setFlowDirection(this.eFlowDirection);
-    this.getPreferredSize();
+    console.log(this.getPreferredSize());
   }
 
   public ngOnInit(): void {}
@@ -275,7 +275,11 @@ export class BravoChecklistComponent
 
     if (this.eAppearanceStyle == AppearanceStyleEnum.Button) {
       // kiểu button
-      console.log('Button');
+      /*------------------------------------- 
+      3: margin
+      3: padding
+      --------------------------------------*/
+      return _sControl;
     } else {
       // kiểu checklist hoặc null
 
@@ -346,6 +350,35 @@ export class BravoChecklistComponent
         this.eFlowDirection == FlowDirection.BottomUp
       ) {
         // từ trên xuống dưới và từ dưới lên trên
+        let _nwChildrenText: number = 0;
+        let _nhChildrenText: number = 0;
+        let _awChildrenText: number[] = [];
+        for (let i = 0; i < this.controls.length; i++) {
+          _awChildrenText.push(
+            Number(
+              BravoGraphicsRenderer.measureString(
+                this.controls[i].text,
+                _fontSize
+              )?.width
+            )
+          );
+          if (_nwChildrenText <= _awChildrenText[i]) {
+            _nwChildrenText = _awChildrenText[i];
+          }
+          _nhChildrenText += Number(
+            BravoGraphicsRenderer.measureString(
+              this.controls[i].text,
+              _fontSize
+            )?.height
+          );
+        }
+        _nwChildren = 18 + 13 + 4 + _nwChildrenText + 4;
+        if (_nhChildrenText <= 13) {
+          _nhChildren = 13;
+        } else {
+          _nhChildren = _nhChildrenText;
+        }
+        _sChildren = new wjc.Size(_nwChildren, _nhChildren);
       }
 
       // return
@@ -355,7 +388,6 @@ export class BravoChecklistComponent
           _sParent.width,
           _sParent.height + _sChildren.height
         );
-        console.log(_sControl);
         return _sControl;
       } else {
         // children lớn hơn parent
@@ -363,7 +395,6 @@ export class BravoChecklistComponent
           _sChildren.width,
           _sParent.height + _sChildren.height
         );
-        console.log(_sControl);
         return _sControl;
       }
     }
