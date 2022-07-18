@@ -16,6 +16,8 @@ import * as wjc from '@grapecity/wijmo';
 
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { SliderTickStyle } from '../data-types/enum/slider-tick-style';
+
 @Component({
   selector: 'bravo-slider',
   templateUrl: './bravo-slider.component.html',
@@ -38,8 +40,28 @@ export class BravoSliderComponent
   @Input()
   public highValue!: number;
 
+  private _options!: Options;
   @Input()
-  public options!: Options;
+  public set options(pValue: Options) {
+    this._options = pValue;
+    this.invalidate();
+  }
+  public get options(): Options {
+    return this._options;
+  }
+
+  private _tickStyle!: SliderTickStyle;
+  @Input()
+  public set tickStyle(pValue: SliderTickStyle) {
+    this._tickStyle = pValue;
+    this.invalidate();
+  }
+  public get tickStyle(): SliderTickStyle {
+    if (!this._tickStyle) {
+      this._tickStyle = SliderTickStyle.None;
+    }
+    return this._tickStyle;
+  }
 
   private _isBubble!: boolean;
   @Input()
@@ -229,19 +251,34 @@ export class BravoSliderComponent
   }
 
   override refresh(fullUpdate?: boolean): void {
-    this.bubble(this.isBubble);
-    this.pointer(
-      this.pointerColor,
-      this.pointerSize,
-      this.pointerTop,
-      this.pointerBorder
-    );
-    this.bar(this.barColor, this.barSize);
-    this.selection(this.selectionColor);
-    this.tick(this.tickType, this.tickColor, this.tickBackground, this.tickTop);
+    this.setTickStyle(this.tickStyle);
+
+    // this.bubble(this.isBubble);
+    // this.pointer(
+    //   this.pointerColor,
+    //   this.pointerSize,
+    //   this.pointerTop,
+    //   this.pointerBorder
+    // );
+    // this.bar(this.barColor, this.barSize);
+    // this.selection(this.selectionColor);
+    // this.tick(this.tickType, this.tickColor, this.tickBackground, this.tickTop);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.options = {
+      floor: 0,
+      ceil: 100,
+      step: 10,
+      showTicks: true,
+    };
+  }
+
+  public setTickStyle(pValue: SliderTickStyle) {
+    if (pValue == SliderTickStyle.None) {
+      this.options.showTicks = true;
+    }
+  }
 
   bubble(boolean: boolean) {
     const bubble = Array.from(

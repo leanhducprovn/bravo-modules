@@ -6,6 +6,7 @@ import { BravoChecklistComponent } from '../bravo-checklist/bravo-checklist.comp
 
 import { FlowDirection } from '../data-types/enum/flow-direction';
 import { AppearanceStyleEnum } from '../data-types/enum/appearance-style-enum';
+import { SliderTickStyle } from '../data-types/enum/slider-tick-style';
 
 @Component({
   selector: 'data',
@@ -20,12 +21,13 @@ export class DataComponent implements OnInit, AfterViewInit {
 
   public FlowDirection = FlowDirection;
   public AppearanceStyleEnum = AppearanceStyleEnum;
+  public SliderTickStyle = SliderTickStyle;
 
   // bravo slider
   public optionsSlider!: Options;
 
   public formSlider = this.fb.group({
-    dataSlider: [[50, 150]],
+    dataSlider: [[10, 90]],
   });
 
   // checklist data
@@ -97,11 +99,6 @@ export class DataComponent implements OnInit, AfterViewInit {
 
   public ngOnInit(): void {
     // bravo slider
-    this.optionsSlider = {
-      floor: 0,
-      ceil: 200,
-    };
-
     this.formSlider.valueChanges.subscribe((value) => {
       console.log(value);
     });

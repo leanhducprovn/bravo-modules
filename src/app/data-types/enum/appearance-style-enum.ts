@@ -1,4 +1,4 @@
 export enum AppearanceStyleEnum {
-  Checkbox,
-  Button
+  Checkbox = 0,
+  Button = 1,
 }
