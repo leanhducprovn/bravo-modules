@@ -272,13 +272,71 @@ export class BravoChecklistComponent
     let _nhParent: number = 0;
     let _nwChildren: number = 0;
     let _nhChildren: number = 0;
+    let _nwButton: number = 0;
+    let _nhButton: number = 0;
 
     if (this.eAppearanceStyle == AppearanceStyleEnum.Button) {
       // kiểu button
+
       /*------------------------------------- 
       3: margin
       3: padding
       --------------------------------------*/
+      if (
+        this.eFlowDirection == FlowDirection.LeftToRight ||
+        this.eFlowDirection == FlowDirection.RightToLeft
+      ) {
+        // từ trái sang phải và từ phải sang trái
+        let _nwButtonText: number = 0;
+        let _nhButtonText: number = 0;
+        for (let i = 0; i < this.controls.length; i++) {
+          _nwButtonText += Number(
+            BravoGraphicsRenderer.measureString(
+              this.controls[i].text,
+              _fontSize
+            )?.width
+          );
+          _nhButtonText = Number(
+            BravoGraphicsRenderer.measureString(
+              this.controls[i].text,
+              _fontSize
+            )?.height
+          );
+        }
+        _nwButton = _nwButtonText + (3 * 2 + 3 * 2) * 3 - 3;
+        _nhButton = 3 + 3 + _nhButtonText + 3 + 3;
+        _sControl = new wjc.Size(_nwButton, _nhButton);
+      } else if (
+        this.eFlowDirection == FlowDirection.TopDown ||
+        this.eFlowDirection == FlowDirection.BottomUp
+      ) {
+        // từ trên xuống dưới và từ dưới lên trên
+        let _nwButtonText: number = 0;
+        let _nhButtonText: number = 0;
+        let _awButtonText: number[] = [];
+        for (let i = 0; i < this.controls.length; i++) {
+          _awButtonText.push(
+            Number(
+              BravoGraphicsRenderer.measureString(
+                this.controls[i].text,
+                _fontSize
+              )?.width
+            )
+          );
+          if (_nwButtonText <= _awButtonText[i]) {
+            _nwButtonText = _awButtonText[i];
+          }
+          _nhButtonText += Number(
+            BravoGraphicsRenderer.measureString(
+              this.controls[i].text,
+              _fontSize
+            )?.height
+          );
+        }
+        _nwButton = 3 + 3 + _nwButtonText + 3 + 3 - 3;
+        _nhButton = _nhButtonText + (3 * 2 + 3 * 2) * 3;
+        _sControl = new wjc.Size(_nwButton, _nhButton);
+      }
       return _sControl;
     } else {
       // kiểu checklist hoặc null
