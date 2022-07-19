@@ -1,52 +1,58 @@
-<!-- slider -->
-<div class="slider">
-    <form [formGroup]="formSlider">
-        <bravo-slider [tickStyle]="SliderTickStyle.None" formControlName="dataSlider">
-        </bravo-slider>
-    </form>
-</div>
-<br>
+<div class="main">
 
-<!-- chart -->
-<!-- <div class="chart">
-    <bravo-chart></bravo-chart>
-</div>
-<br> -->
-
-<!-- range time -->
-<!-- <div class="range-time">
-    <bravo-range-time (timeEvent)="timeEvent($event.minTime, $event.maxTime)">
-    </bravo-range-time>
-</div>
-<br> -->
-
-<!-- check list -->
-<!-- <div class="check-list">
-    <div class="trading">
-        <form [formGroup]="formTrading">
-            <bravo-checklist #trading formControlName="dataActive" [zParentText]="'Loại giao dịch'"
-                [dataList]="tradingData" [bAllowSelectMultiValue]="false" [eFlowDirection]="FlowDirection.TopDown"
-                [zSeparator]="','">
-            </bravo-checklist>
+    <!--------------------------------------->
+    <!-- slider -->
+    <div class="slider">
+        <form [formGroup]="formSlider">
+            <bravo-slider #slider formControlName="dataSlider">
+            </bravo-slider>
         </form>
     </div>
-    <br>
-    <div class="rating">
-        <form [formGroup]="formRating">
-            <bravo-checklist #rating formControlName="dataActive" [zParentText]="'Loại đánh giá'"
-                [dataList]="ratingData" [bAllowSelectMultiValue]="true" [eFlowDirection]="FlowDirection.TopDown"
-                [zSeparator]="','">
-            </bravo-checklist>
-        </form>
+    <!--------------------------------------->
+
+    <!--------------------------------------->
+    <!-- chart -->
+    <div class="chart">
+        <bravo-chart></bravo-chart>
     </div>
-    <br>
-    <div class="timing">
-        <form [formGroup]="formTiming">
-            <bravo-checklist #timing formControlName="dataActive" [zParentText]="'Thời gian'" [dataList]="timingData"
-                [eAppearanceStyle]="AppearanceStyleEnum.Button" [bAllowSelectMultiValue]="true"
-                [eFlowDirection]="FlowDirection.LeftToRight" [zSeparator]="';'">
-            </bravo-checklist>
-        </form>
+    <!--------------------------------------->
+
+    <!--------------------------------------->
+    <!-- range time -->
+    <div class="range-time">
+        <bravo-range-time (timeEvent)="timeEvent($event.minTime, $event.maxTime)">
+        </bravo-range-time>
     </div>
+    <!--------------------------------------->
+
+    <!--------------------------------------->
+    <!-- check list -->
+    <div class="check-list">
+        <div class="trading">
+            <form [formGroup]="formTrading">
+                <bravo-checklist #trading formControlName="dataActive" [zParentText]="'Loại giao dịch'"
+                    [dataList]="tradingData" [bAllowSelectMultiValue]="false" [eFlowDirection]="FlowDirection.TopDown"
+                    [zSeparator]="','">
+                </bravo-checklist>
+            </form>
+        </div>
+        <div class="rating">
+            <form [formGroup]="formRating">
+                <bravo-checklist #rating formControlName="dataActive" [zParentText]="'Loại đánh giá'"
+                    [dataList]="ratingData" [bAllowSelectMultiValue]="true" [eFlowDirection]="FlowDirection.TopDown"
+                    [zSeparator]="','">
+                </bravo-checklist>
+            </form>
+        </div>
+        <div class="timing">
+            <form [formGroup]="formTiming">
+                <bravo-checklist #timing formControlName="dataActive" [zParentText]="'Thời gian'"
+                    [dataList]="timingData" [eAppearanceStyle]="AppearanceStyleEnum.Button"
+                    [bAllowSelectMultiValue]="true" [eFlowDirection]="FlowDirection.LeftToRight" [zSeparator]="';'">
+                </bravo-checklist>
+            </form>
+        </div>
+    </div>
+    <!--------------------------------------->
+
 </div>
-<br> -->

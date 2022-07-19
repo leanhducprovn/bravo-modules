@@ -1,35 +1,46 @@
 import { Options } from '@angular-slider/ngx-slider';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { BravoChecklistComponent } from '../bravo-checklist/bravo-checklist.component';
 
 import { FlowDirection } from '../data-types/enum/flow-direction';
 import { AppearanceStyleEnum } from '../data-types/enum/appearance-style-enum';
 import { SliderTickStyle } from '../data-types/enum/slider-tick-style';
+import { BravoSliderComponent } from '../bravo-slider/bravo-slider.component';
 
 @Component({
-  selector: 'data',
+  selector: 'app-data',
   templateUrl: './data.component.html',
   styleUrls: ['./data.component.scss'],
 })
 export class DataComponent implements OnInit, AfterViewInit {
+  /*------------------------------------*/
+  // slider viewchild
+  @ViewChild('slider', { static: true }) viewSlider!: BravoSliderComponent;
+  /*------------------------------------*/
+
+  /*------------------------------------*/
   // checklist viewchild
   @ViewChild('trading', { static: true }) viewTrading!: BravoChecklistComponent;
   @ViewChild('rating', { static: true }) viewRating!: BravoChecklistComponent;
   @ViewChild('timing', { static: true }) viewTiming!: BravoChecklistComponent;
+  /*------------------------------------*/
 
+  /*------------------------------------*/
+  // public enum
   public FlowDirection = FlowDirection;
   public AppearanceStyleEnum = AppearanceStyleEnum;
   public SliderTickStyle = SliderTickStyle;
+  /*------------------------------------*/
 
+  /*------------------------------------*/
   // bravo slider
   public optionsSlider!: Options;
+  public formSlider!: FormGroup;
+  /*------------------------------------*/
 
-  public formSlider = this.fb.group({
-    dataSlider: [[10, 90]],
-  });
-
+  /*------------------------------------*/
   // checklist data
   public tradingData = [
     {
@@ -79,7 +90,9 @@ export class DataComponent implements OnInit, AfterViewInit {
       value: 'YearCode',
     },
   ];
+  /*------------------------------------*/
 
+  /*------------------------------------*/
   // checklist form group
   public formTrading = this.fb.group({
     dataActive: ['CustomerCareTradingCode'],
@@ -92,20 +105,32 @@ export class DataComponent implements OnInit, AfterViewInit {
   public formTiming = this.fb.group({
     dataActive: ['MonthCode;YearCode'],
   });
+  /*------------------------------------*/
 
   constructor(private fb: FormBuilder) {}
 
   public ngAfterViewInit(): void {}
 
   public ngOnInit(): void {
+    /*------------------------------------*/
     // bravo slider
+    this.formSlider = this.fb.group({
+      dataSlider: [[10, 90]],
+    });
     this.formSlider.valueChanges.subscribe((value) => {
       console.log(value);
     });
+
+    // custom slider
+    this.viewSlider.tickStyle = SliderTickStyle.None;
+
+    /*------------------------------------*/
   }
 
+  /*------------------------------------*/
   // range time
   public timeEvent(min: Date, max: Date) {
     console.log(min, '=>', max);
   }
+  /*------------------------------------*/
 }

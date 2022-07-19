@@ -1,24 +1,38 @@
-.range-time {
-    color: inherit;
-}
-
-.check-list {
-    .trading {
-        background-color: #fff;
-        border-radius: 3px;
-        width: 164.81689453125px;
-        height: 52.571400000000004px;
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .slider {
+        margin: 20px 0 20px 0;
     }
-    .rating {
-        background-color: #fff;
-        border-radius: 3px;
-        width: 209.6630859375px;
-        height: 70.0952px;
+    .chart {
+        margin: 20px 0 20px 0;
     }
-    .timing {
-        background-color: #fff;
-        border-radius: 3px;
-        width: 209.29345703125px;
-        height: 29.5238px;
+    .range-time {
+        margin: 20px 0 20px 0;
+    }
+    .check-list {
+        margin: 20px 0 20px 0;
+        .trading {
+            margin: 5px 0 5px 0;
+            border: 1px solid #ccc!important;
+            border-radius: 3px;
+            width: 164.81689453125px;
+            height: 52.571400000000004px;
+        }
+        .rating {
+            margin: 5px 0 5px 0;
+            border: 1px solid #ccc!important;
+            border-radius: 3px;
+            width: 209.6630859375px;
+            height: 70.0952px;
+        }
+        .timing {
+            margin: 5px 0 5px 0;
+            border: 1px solid #ccc!important;
+            border-radius: 3px;
+            width: 209.29345703125px;
+            height: 29.5238px;
+        }
     }
 }
