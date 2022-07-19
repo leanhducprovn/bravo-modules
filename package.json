@@ -22,6 +22,9 @@
     "@grapecity/wijmo": "^5.20221.842",
     "@grapecity/wijmo.angular2.all": "^5.20221.842",
     "crypto-js": "^4.1.1",
+    "highlight.js": "^11.6.0",
+    "highlightjs-line-numbers.js": "^2.8.0",
+    "ngx-highlightjs": "^7.0.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
