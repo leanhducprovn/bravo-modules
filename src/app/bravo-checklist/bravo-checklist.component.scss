@@ -6,12 +6,12 @@
       overflow: auto;
       color: inherit;
       &:hover {
-          color: blue
-        }
+        color: #006c64
+      }
       &.active-checkbox {
-        color: blue;
+        color: #006c64;
         &:hover {
-          color: rgb(0, 0, 188);
+          color: #005851;
         }
       }
       input {
@@ -38,12 +38,12 @@
         &.checkbox-list {
           color: inherit;
           &:hover {
-            color: blue
+            color: #149189
           }
           &.active-checkbox {
-            color: blue;
+            color: #149189;
             &:hover {
-              color: rgb(0, 0, 188);
+              color: hsl(176, 97%, 26%);
             }
           }
           input {
@@ -71,13 +71,13 @@
           text-align: center;
           &:hover {
             color: #eee;
-            background-color: #165ea1;
+            background-color: #149189;
           }
           &.active-button {
             color: #eee;
-            background-color: #165ea1;
+            background-color: #149189;
             &:hover {
-              background-color: #00417e;
+              background-color: hsl(176, 97%, 26%)
             }
           }
           input[type="checkbox"] {
