@@ -4,6 +4,7 @@ import {
   PointerType,
 } from '@angular-slider/ngx-slider';
 import {
+  AfterContentInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -32,7 +33,7 @@ import { SliderTickStyle } from '../data-types/enum/slider-tick-style';
 })
 export class BravoSliderComponent
   extends wjc.Control
-  implements OnInit, ControlValueAccessor
+  implements OnInit, ControlValueAccessor, AfterContentInit
 {
   @Input()
   public value!: number;
@@ -225,6 +226,9 @@ export class BravoSliderComponent
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
   }
+  ngAfterContentInit(): void {
+    this.setTickStyle(this.tickStyle);
+  }
 
   array!: boolean;
 
@@ -270,7 +274,6 @@ export class BravoSliderComponent
       floor: 0,
       ceil: 100,
       step: 10,
-      showTicks: true,
     };
   }
 
