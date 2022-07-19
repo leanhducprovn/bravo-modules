@@ -110,11 +110,33 @@ export class DataComponent implements OnInit, AfterViewInit {
   /*------------------------------------*/
   // code highlight
 
-  public codeSlider = `  <bravo-slider
-      formControlName="dataSlider"
-      [options]="optionsSlider"
-  >
-  </bravo-slider>`;
+  public codeSliderHTML = `  <form [formGroup]="formSlider">
+      <bravo-slider #slider formControlName="dataSlider">
+      </bravo-slider>
+  </form>`;
+
+  public codeSliderTS = `  // default slider
+  this.formSlider = this.fb.group({
+      dataSlider: [[10, 90]],
+  });
+  this.formSlider.valueChanges.subscribe((value) => {
+      console.log(value);
+  });
+  this.viewSlider.options = {
+      floor: 0,
+      ceil: 100,
+      step: 10,
+  };
+  
+  // custom slider
+  
+  // tickStyle
+  this.viewSlider.tickStyle = SliderTickStyle.Both;
+  this.viewSlider.tickWidth = '1px';
+  this.viewSlider.tickHeight = '10px';
+  this.viewSlider.tickTop = '0px';
+  this.viewSlider.tickColor = 'red';
+  `;
 
   public codePieChart = `  <wj-flex-pie #pieChart [selectionMode]="'Point'" (initialized)="click(pieChart)">
       <wj-flex-pie-data-label [content]="content"></wj-flex-pie-data-label>
@@ -179,15 +201,32 @@ export class DataComponent implements OnInit, AfterViewInit {
   public ngOnInit(): void {
     /*------------------------------------*/
     // bravo slider
+
+    // default slider
     this.formSlider = this.fb.group({
       dataSlider: [[10, 90]],
     });
     this.formSlider.valueChanges.subscribe((value) => {
       console.log(value);
     });
+    this.viewSlider.options = {
+      floor: 0,
+      ceil: 100,
+      step: 10,
+    };
 
     // custom slider
-    this.viewSlider.tickStyle = SliderTickStyle.None;
+
+    // tickStyle
+    this.viewSlider.tickStyle = SliderTickStyle.Both;
+    this.viewSlider.tickWidth = '1px';
+    this.viewSlider.tickHeight = '10px';
+    this.viewSlider.tickTop = '0px';
+    this.viewSlider.tickColor = 'red';
+
+    // barStyle
+    this.viewSlider.barSize = '6px';
+    this.viewSlider.barColor = 'blue';
 
     /*------------------------------------*/
   }
