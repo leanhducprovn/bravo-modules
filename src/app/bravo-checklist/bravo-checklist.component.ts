@@ -156,7 +156,7 @@ export class BravoChecklistComponent
     super.refresh(fullUpdate);
     this.setData(this.dataList);
     this.setFlowDirection(this.eFlowDirection);
-    console.log(this.getPreferredSize());
+    // console.log(this.getPreferredSize());
   }
 
   public ngOnInit(): void {}
