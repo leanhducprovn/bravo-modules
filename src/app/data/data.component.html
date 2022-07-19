@@ -2,6 +2,7 @@
 
     <!--------------------------------------->
     <!-- slider -->
+    <h2>Bravo Slider</h2>
     <div class="slider">
         <form [formGroup]="formSlider">
             <bravo-slider #slider formControlName="dataSlider">
@@ -12,6 +13,7 @@
 
     <!--------------------------------------->
     <!-- chart -->
+    <h2>Bravo Chart</h2>
     <div class="chart">
         <bravo-chart></bravo-chart>
     </div>
@@ -19,6 +21,7 @@
 
     <!--------------------------------------->
     <!-- range time -->
+    <h2>Bravo Range Time</h2>
     <div class="range-time">
         <bravo-range-time (timeEvent)="timeEvent($event.minTime, $event.maxTime)">
         </bravo-range-time>
@@ -27,6 +30,7 @@
 
     <!--------------------------------------->
     <!-- check list -->
+    <h2>Bravo Check List</h2>
     <div class="check-list">
         <div class="trading">
             <form [formGroup]="formTrading">
