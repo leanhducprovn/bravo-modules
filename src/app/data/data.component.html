@@ -9,6 +9,8 @@
             </bravo-slider>
         </form>
     </div>
+    <h3>Code</h3>
+    <pre><code [lineNumbers]="true" [highlight]="codeSlider"></code></pre>
     <!--------------------------------------->
 
     <!--------------------------------------->
@@ -17,6 +19,8 @@
     <div class="chart">
         <bravo-chart></bravo-chart>
     </div>
+    <h3>Code</h3>
+    <pre><code [lineNumbers]="true" [highlight]="codePieChart"></code></pre>
     <!--------------------------------------->
 
     <!--------------------------------------->
@@ -26,12 +30,14 @@
         <bravo-range-time (timeEvent)="timeEvent($event.minTime, $event.maxTime)">
         </bravo-range-time>
     </div>
+    <h3>Code</h3>
+    <pre><code [lineNumbers]="true" [highlight]="codeRangeTime"></code></pre>
     <!--------------------------------------->
 
     <!--------------------------------------->
     <!-- check list -->
-    <h2>Bravo Check List</h2>
-    <div class="check-list">
+    <h2>Bravo Checklist</h2>
+    <div class="checklist">
         <div class="trading">
             <form [formGroup]="formTrading">
                 <bravo-checklist #trading formControlName="dataActive" [zParentText]="'Loại giao dịch'"
@@ -57,6 +63,8 @@
             </form>
         </div>
     </div>
+    <h3>Code</h3>
+    <pre><code [lineNumbers]="true" [highlight]="codeChecklist"></code></pre>
     <!--------------------------------------->
 
 </div>

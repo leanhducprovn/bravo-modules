@@ -13,6 +13,12 @@ import { WjChartAnimationModule } from '@grapecity/wijmo.angular2.chart.animatio
 import { WjInputModule } from '@grapecity/wijmo.angular2.input';
 import { BravoRangeTimeComponent } from './bravo-range-time/bravo-range-time.component';
 import { BravoChecklistComponent } from './bravo-checklist/bravo-checklist.component';
+import { HighlightPlusModule } from 'ngx-highlightjs/plus';
+import {
+  HighlightModule,
+  HighlightOptions,
+  HIGHLIGHT_OPTIONS,
+} from 'ngx-highlightjs';
 
 @NgModule({
   declarations: [
@@ -33,8 +39,23 @@ import { BravoChecklistComponent } from './bravo-checklist/bravo-checklist.compo
     WjChartModule,
     WjChartAnimationModule,
     WjInputModule,
+    HighlightModule,
+    HighlightPlusModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: <HighlightOptions>{
+        lineNumbers: true,
+        coreLibraryLoader: () => import('highlight.js/lib/core'),
+        languages: {
+          typescript: () => import('highlight.js/lib/languages/typescript'),
+          css: () => import('highlight.js/lib/languages/css'),
+          xml: () => import('highlight.js/lib/languages/xml'),
+        },
+      },
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

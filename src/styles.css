@@ -27,6 +27,24 @@ h2 {
     -webkit-text-fill-color: transparent;
 }
 
+h3 {
+    background: linear-gradient(179.83deg,#9D9EC0 0.15%,#66689C 92.02%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+    font-size: 16px;
+    -webkit-text-fill-color: transparent;
+}
+
+pre {
+    margin: 10px 0;
+}
+
+pre code {
+    border-radius: 3px;
+}
+
 /* range time combo box  */
 .wj-state-selected {
     background: unset !important;
