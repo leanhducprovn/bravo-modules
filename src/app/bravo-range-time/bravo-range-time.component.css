@@ -74,8 +74,9 @@
 }
 
 .range-time-selected {
-    background-color: yellow;
-    border-radius: 4px;
+    background-color: #149189;
+    border-radius: 3px;
+    color: #eee;
 }
 
 :host >>> input, li {
