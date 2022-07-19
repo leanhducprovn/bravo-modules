@@ -19,8 +19,6 @@ a {
 h2 {
     font-size: 20px;
     font-weight: 700;
-    margin: 10px 0;
-    padding: 10px 0 0;
     background: linear-gradient(179.83deg,#1f9f94 0.15%,#008c80 92.02%);
     -webkit-background-clip: text;
     background-clip: text;
