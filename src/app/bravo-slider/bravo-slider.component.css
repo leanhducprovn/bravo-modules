@@ -3,6 +3,7 @@
     height: 50px !important;
     margin: unset !important;
     vertical-align: unset !important;
+    align-items: center !important;
 }
 
 :host >>> .ngx-slider .ngx-slider-bar-wrapper {
@@ -11,6 +12,16 @@
     height: unset !important;
 }
 
+:host >>> .ngx-slider .ngx-slider-ticks {
+    top: unset !important;
+}
+
 :host >>> .ngx-slider .ngx-slider-pointer:after {
-    display: none;
+    display: none !important;
+}
+
+:host >>> .ngx-slider .ngx-slider-bubble {
+    bottom: unset !important;
+    font-size: unset !important;
+    color: inherit !important;
 }

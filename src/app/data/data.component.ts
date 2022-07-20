@@ -119,23 +119,25 @@ export class DataComponent implements OnInit, AfterViewInit {
   this.formSlider = this.fb.group({
       dataSlider: [[10, 90]],
   });
+
+  // get event
   this.formSlider.valueChanges.subscribe((value) => {
       console.log(value);
   });
-  this.viewSlider.options = {
-      floor: 0,
-      ceil: 100,
-      step: 10,
-      noSwitching: true,
-  };
-  
+
   // custom slider
+
+  // options
+  this.viewSlider.options.floor = 0;
+  this.viewSlider.options.ceil = 100;
+  this.viewSlider.options.step = 10;
+  this.viewSlider.options.noSwitching = true;
 
   // tickStyle
   this.viewSlider.tickStyle = SliderTickStyle.Both;
   this.viewSlider.tickWidth = '1px';
   this.viewSlider.tickHeight = '10px';
-  this.viewSlider.tickTop = '0px';
+  this.viewSlider.tickTop = '-4px';
   this.viewSlider.tickMarginLeft = '6px';
   this.viewSlider.tickColor = '#178BE3';
 
@@ -147,7 +149,7 @@ export class DataComponent implements OnInit, AfterViewInit {
 
   // pointerStyle
   this.viewSlider.pointerSize = '12px';
-  this.viewSlider.pointerTop = '-6px';
+  this.viewSlider.pointerTop = '19px';
   this.viewSlider.pointerColor = '#1E90FF';
   this.viewSlider.pointerBorderSize = '2px';
   this.viewSlider.pointerBorderType = 'solid';
@@ -223,23 +225,25 @@ export class DataComponent implements OnInit, AfterViewInit {
     this.formSlider = this.fb.group({
       dataSlider: [[10, 90]],
     });
+
+    // get event
     this.formSlider.valueChanges.subscribe((value) => {
       console.log(value);
     });
-    this.viewSlider.options = {
-      floor: 0,
-      ceil: 100,
-      step: 10,
-      noSwitching: true,
-    };
 
     // custom slider
+
+    // options
+    this.viewSlider.options.floor = 0;
+    this.viewSlider.options.ceil = 100;
+    this.viewSlider.options.step = 10;
+    this.viewSlider.options.noSwitching = true;
 
     // tickStyle
     this.viewSlider.tickStyle = SliderTickStyle.Both;
     this.viewSlider.tickWidth = '1px';
     this.viewSlider.tickHeight = '10px';
-    this.viewSlider.tickTop = '0px';
+    this.viewSlider.tickTop = '-4px';
     this.viewSlider.tickMarginLeft = '6px';
     this.viewSlider.tickColor = '#178BE3';
 
@@ -251,12 +255,14 @@ export class DataComponent implements OnInit, AfterViewInit {
 
     // pointerStyle
     this.viewSlider.pointerSize = '12px';
-    this.viewSlider.pointerTop = '-6px';
+    this.viewSlider.pointerTop = '19px';
     this.viewSlider.pointerColor = '#1E90FF';
     this.viewSlider.pointerBorderSize = '2px';
     this.viewSlider.pointerBorderType = 'solid';
     this.viewSlider.pointerBorderColor = '#FFFFFF';
     this.viewSlider.pointerBorderRadius = '100%';
+
+    // labelStyle
 
     /*------------------------------------*/
   }

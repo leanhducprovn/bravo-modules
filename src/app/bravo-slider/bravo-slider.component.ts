@@ -41,7 +41,7 @@ export class BravoSliderComponent
   @Input()
   public highValue!: number;
 
-  private _options!: Options;
+  private _options: Options = new Options();
   @Input()
   public set options(pValue: Options) {
     this._options = pValue;
@@ -86,7 +86,7 @@ export class BravoSliderComponent
     return this._tickHeight;
   }
 
-  private _tickTop: string = '0px';
+  private _tickTop: string = '-4px';
   @Input()
   public set tickTop(pValue: string) {
     this._tickTop = pValue;
@@ -167,7 +167,7 @@ export class BravoSliderComponent
     return this._pointerSize;
   }
 
-  private _pointerTop: string = '-6px';
+  private _pointerTop: string = '19px';
   @Input()
   public set pointerTop(pValue: string) {
     this._pointerTop = pValue;
@@ -220,6 +220,10 @@ export class BravoSliderComponent
   public get pointerBorderRadius(): string {
     return this._pointerBorderRadius;
   }
+
+  // labelDisplayStyle
+
+  // labelPositionStyle
 
   @Output() valueEvent = new EventEmitter<any>();
   @Output() highValueEvent = new EventEmitter<any>();
@@ -296,7 +300,7 @@ export class BravoSliderComponent
 
   public ngOnInit(): void {}
 
-  // style
+  // set style
 
   public setTickStyle(
     pTickStyle: SliderTickStyle,
@@ -394,6 +398,10 @@ export class BravoSliderComponent
     });
   }
 
+  public setLabelDisplayStyle() {}
+
+  public setLabelPositionStyle() {}
+
   private getCollection(zClassName: string) {
     return Array.from(
       document.getElementsByClassName(
@@ -413,7 +421,7 @@ export class BravoSliderComponent
     });
   }
 
-  // event
+  // get event
 
   public onUserChangeStart(changeContext: ChangeContext): void {
     if (this._isArray) {
