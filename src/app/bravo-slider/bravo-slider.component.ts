@@ -310,8 +310,8 @@ export class BravoSliderComponent
       this.options.showTicks = false;
     } else {
       this.options.showTicks = true;
-      if (pTickStyle == SliderTickStyle.Both) {
-        this.getCollection('ngx-slider-tick').forEach((element) => {
+      this.getCollection('ngx-slider-tick').forEach((element) => {
+        if (pTickStyle == SliderTickStyle.Both) {
           wjc.setCss(element, {
             width: pTickWidth,
             height: pTickHeight,
@@ -320,8 +320,30 @@ export class BravoSliderComponent
             background: pTickColor,
             borderRadius: 'unset',
           });
-        });
-      }
+        } else if (pTickStyle == SliderTickStyle.TopLeft) {
+          wjc.setCss(element, {
+            width: pTickWidth,
+            height:
+              Number(pTickHeight.slice(0, pTickHeight.length - 2)) / 2 +
+              pTickHeight.slice(-2),
+            top: pTickTop,
+            marginLeft: pTickMarginLeft,
+            background: pTickColor,
+            borderRadius: 'unset',
+          });
+        } else if (pTickStyle == SliderTickStyle.BottomRight) {
+          wjc.setCss(element, {
+            width: pTickWidth,
+            height:
+              Number(pTickHeight.slice(0, pTickHeight.length - 2)) / 2 +
+              pTickHeight.slice(-2),
+            top: '5px',
+            marginLeft: pTickMarginLeft,
+            background: pTickColor,
+            borderRadius: 'unset',
+          });
+        }
+      });
     }
   }
 
