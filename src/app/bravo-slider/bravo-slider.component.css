@@ -1,3 +1,16 @@
-:host >>> .hidden {
-    display: none !important;
+:host >>> .ngx-slider {
+    display: flex !important;
+    height: 50px !important;
+    margin: unset !important;
+    vertical-align: unset !important;
+}
+
+:host >>> .ngx-slider .ngx-slider-bar-wrapper {
+    margin-top: unset !important;
+    padding-top: unset !important;
+    height: unset !important;
+}
+
+:host >>> .ngx-slider .ngx-slider-pointer:after {
+    display: none;
 }

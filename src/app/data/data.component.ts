@@ -126,16 +126,33 @@ export class DataComponent implements OnInit, AfterViewInit {
       floor: 0,
       ceil: 100,
       step: 10,
+      noSwitching: true,
   };
   
   // custom slider
-  
+
   // tickStyle
   this.viewSlider.tickStyle = SliderTickStyle.Both;
   this.viewSlider.tickWidth = '1px';
   this.viewSlider.tickHeight = '10px';
   this.viewSlider.tickTop = '0px';
-  this.viewSlider.tickColor = 'red';
+  this.viewSlider.tickMarginLeft = '6px';
+  this.viewSlider.tickColor = '#178BE3';
+
+  // barStyle
+  this.viewSlider.barSize = '2px';
+  this.viewSlider.barTop = '0px';
+  this.viewSlider.barColor = '#B9B9B9';
+  this.viewSlider.barSelectionColor = '#0079D7';
+
+  // pointerStyle
+  this.viewSlider.pointerSize = '12px';
+  this.viewSlider.pointerTop = '-6px';
+  this.viewSlider.pointerColor = '#1E90FF';
+  this.viewSlider.pointerBorderSize = '2px';
+  this.viewSlider.pointerBorderType = 'solid';
+  this.viewSlider.pointerBorderColor = '#FFFFFF';
+  this.viewSlider.pointerBorderRadius = '100%';
   `;
 
   public codePieChart = `  <wj-flex-pie #pieChart [selectionMode]="'Point'" (initialized)="click(pieChart)">
@@ -213,6 +230,7 @@ export class DataComponent implements OnInit, AfterViewInit {
       floor: 0,
       ceil: 100,
       step: 10,
+      noSwitching: true,
     };
 
     // custom slider
@@ -222,11 +240,23 @@ export class DataComponent implements OnInit, AfterViewInit {
     this.viewSlider.tickWidth = '1px';
     this.viewSlider.tickHeight = '10px';
     this.viewSlider.tickTop = '0px';
-    this.viewSlider.tickColor = 'red';
+    this.viewSlider.tickMarginLeft = '6px';
+    this.viewSlider.tickColor = '#178BE3';
 
     // barStyle
-    this.viewSlider.barSize = '6px';
-    this.viewSlider.barColor = 'blue';
+    this.viewSlider.barSize = '2px';
+    this.viewSlider.barTop = '0px';
+    this.viewSlider.barColor = '#B9B9B9';
+    this.viewSlider.barSelectionColor = '#0079D7';
+
+    // pointerStyle
+    this.viewSlider.pointerSize = '12px';
+    this.viewSlider.pointerTop = '-6px';
+    this.viewSlider.pointerColor = '#1E90FF';
+    this.viewSlider.pointerBorderSize = '2px';
+    this.viewSlider.pointerBorderType = 'solid';
+    this.viewSlider.pointerBorderColor = '#FFFFFF';
+    this.viewSlider.pointerBorderRadius = '100%';
 
     /*------------------------------------*/
   }
