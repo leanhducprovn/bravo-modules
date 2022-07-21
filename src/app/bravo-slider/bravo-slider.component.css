@@ -30,6 +30,12 @@
 }
 
 /* tick value */
+:host >>> .ngx-slider .ngx-slider-ticks-values-under .ngx-slider-tick-value {
+    bottom: unset !important
+}
+:host >>> .ngx-slider .ngx-slider-inner-tooltip {
+    height: unset !important;
+}
 :host >>> .ngx-slider .ngx-slider-tick-value {
     top: unset !important
 }

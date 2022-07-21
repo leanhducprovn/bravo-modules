@@ -69,7 +69,7 @@ export class BravoSliderComponent
 
   // custom slider
 
-  // tickStyle
+  // tick style
   private _tickStyle: SliderTickStyle = SliderTickStyle.None;
   @Input()
   public set tickStyle(pValue: SliderTickStyle) {
@@ -130,7 +130,7 @@ export class BravoSliderComponent
     return this._tickColor;
   }
 
-  // barStyle
+  // bar style
   private _barSize: string = '2px';
   @Input()
   public set barSize(pValue: string) {
@@ -171,7 +171,7 @@ export class BravoSliderComponent
     return this._barSelectionColor;
   }
 
-  // pointerStyle
+  // pointer style
   private _pointerSize: string = '12px';
   @Input()
   public set pointerSize(pValue: string) {
@@ -235,7 +235,7 @@ export class BravoSliderComponent
     return this._pointerBorderRadius;
   }
 
-  // labelDisplayStyle
+  // label style
   private _labelDisplayStyle: SliderLabelDisplay = SliderLabelDisplay.Tick;
   @Input()
   public set labelDisplayStyle(pValue: SliderLabelDisplay) {
@@ -245,7 +245,6 @@ export class BravoSliderComponent
     return this._labelDisplayStyle;
   }
 
-  // labelPositionStyle
   private _labelPositionStyle: SliderLabelPosition = SliderLabelPosition.Below;
   @Input()
   public set labelPositionStyle(pValue: SliderLabelPosition) {
@@ -255,6 +254,33 @@ export class BravoSliderComponent
     return this._labelPositionStyle;
   }
 
+  private _labelSize: string = 'inherit';
+  @Input()
+  public set labelSize(pValue: string) {
+    this._labelSize = pValue;
+  }
+  public get labelSize(): string {
+    return this._labelSize;
+  }
+
+  private _labelTop: string = '6px';
+  @Input()
+  public set labelTop(pValue: string) {
+    this._labelTop = pValue;
+  }
+  public get labelTop(): string {
+    return this._labelTop;
+  }
+
+  private _labelColor: string = 'inherit';
+  @Input()
+  public set labelColor(pValue: string) {
+    this._labelColor = pValue;
+  }
+  public get labelColor(): string {
+    return this._labelColor;
+  }
+
   @Output() valueEvent = new EventEmitter<any>();
   @Output() highValueEvent = new EventEmitter<any>();
 
@@ -262,6 +288,7 @@ export class BravoSliderComponent
     super(elementRef.nativeElement);
   }
 
+  // custom form
   public onChangeCallback = (value: any) => {};
   public onTouchedCallback = (value: any) => {};
 
@@ -284,6 +311,7 @@ export class BravoSliderComponent
     this.onTouchedCallback = onTouchedCallback;
   }
 
+  // render
   public override refresh(fullUpdate?: boolean): void {
     super.refresh(fullUpdate);
     this.setTickStyle(
@@ -309,6 +337,13 @@ export class BravoSliderComponent
       this.pointerBorderColor,
       this.pointerBorderRadius
     );
+    this.setLabelStyle(
+      this.labelDisplayStyle,
+      this.labelPositionStyle,
+      this.labelSize,
+      this.labelTop,
+      this.labelColor
+    );
   }
 
   public ngAfterContentInit(): void {
@@ -331,7 +366,6 @@ export class BravoSliderComponent
   public ngOnInit(): void {}
 
   // set style
-
   public setTickStyle(
     pTickStyle: SliderTickStyle,
     pTickWidth: string,
@@ -431,9 +465,13 @@ export class BravoSliderComponent
     });
   }
 
-  public setLabelDisplayStyle() {}
-
-  public setLabelPositionStyle() {}
+  public setLabelStyle(
+    pLabelDisplayStyle: SliderLabelDisplay,
+    plabelPositionStyle: SliderLabelPosition,
+    pLabelSize: string,
+    pLabelTop: string,
+    pLabelColor: string
+  ) {}
 
   private getCollection(zClassName: string) {
     return Array.from(
@@ -443,19 +481,7 @@ export class BravoSliderComponent
     );
   }
 
-  bubble(boolean: boolean) {
-    const bubble = Array.from(
-      document.getElementsByClassName(
-        'ngx-slider-bubble'
-      ) as HTMLCollectionOf<HTMLElement>
-    );
-    bubble.forEach((element) => {
-      wjc.toggleClass(element, 'hidden', !boolean);
-    });
-  }
-
   // get event
-
   public onUserChangeStart(changeContext: ChangeContext): void {
     if (this._isArray) {
       this.onChangeCallback([changeContext.value, changeContext.highValue]);
