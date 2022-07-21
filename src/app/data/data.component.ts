@@ -143,7 +143,7 @@ export class DataComponent implements OnInit, AfterViewInit {
   // tickStyle
   this.viewSlider.tickStyle = SliderTickStyle.Both;
   this.viewSlider.tickWidth = '1px';
-  this.viewSlider.tickHeight = '10px';
+  this.viewSlider.tickHeight = '6px';
   this.viewSlider.tickTop = '-2px';
   this.viewSlider.tickMarginLeft = '6px';
   this.viewSlider.tickColor = '#178BE3';
@@ -167,7 +167,7 @@ export class DataComponent implements OnInit, AfterViewInit {
   this.viewSlider.labelDisplayStyle = SliderLabelDisplay.Tick;
   this.viewSlider.labelPositionStyle = SliderLabelPosition.Below;
   this.viewSlider.labelSize = '13px';
-  this.viewSlider.labelTop = '6px';
+  this.viewSlider.labelTop = '12px';
   this.viewSlider.labelColor = 'inherit';`;
 
   public codePieChart = `  <wj-flex-pie #pieChart [selectionMode]="'Point'" (initialized)="click(pieChart)">
@@ -251,8 +251,6 @@ export class DataComponent implements OnInit, AfterViewInit {
     this.viewSlider.options.ceil = 100;
     this.viewSlider.options.step = 10;
     this.viewSlider.options.noSwitching = true;
-    // this.viewSlider.options.ticksArray = [0, 100];
-    this.viewSlider.options.showTicksValues = true;
 
     // tickStyle
     this.viewSlider.tickStyle = SliderTickStyle.Both;
@@ -281,7 +279,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     this.viewSlider.labelDisplayStyle = SliderLabelDisplay.Tick;
     this.viewSlider.labelPositionStyle = SliderLabelPosition.Below;
     this.viewSlider.labelSize = '13px';
-    this.viewSlider.labelTop = '6px';
+    this.viewSlider.labelTop = '12px';
     this.viewSlider.labelColor = 'inherit';
 
     /*------------------------------------*/

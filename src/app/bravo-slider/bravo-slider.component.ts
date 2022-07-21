@@ -41,6 +41,7 @@ export class BravoSliderComponent
   @Input()
   public set value(pValue: number) {
     this._value = pValue;
+    this.invalidate();
   }
   public get value(): number {
     return this._value;
@@ -50,6 +51,7 @@ export class BravoSliderComponent
   @Input()
   public set highValue(pValue: number) {
     this._highValue = pValue;
+    this.invalidate();
   }
   public get highValue(): number {
     return this._highValue;
@@ -176,6 +178,7 @@ export class BravoSliderComponent
   @Input()
   public set pointerSize(pValue: string) {
     this._pointerSize = pValue;
+    this.invalidate();
   }
   public get pointerSize(): string {
     return this._pointerSize;
@@ -185,6 +188,7 @@ export class BravoSliderComponent
   @Input()
   public set pointerTop(pValue: string) {
     this._pointerTop = pValue;
+    this.invalidate();
   }
   public get pointerTop(): string {
     return this._pointerTop;
@@ -194,6 +198,7 @@ export class BravoSliderComponent
   @Input()
   public set pointerColor(pValue: string) {
     this._pointerColor = pValue;
+    this.invalidate();
   }
   public get pointerColor(): string {
     return this._pointerColor;
@@ -203,6 +208,7 @@ export class BravoSliderComponent
   @Input()
   public set pointerBorderSize(pValue: string) {
     this._pointerBorderSize = pValue;
+    this.invalidate();
   }
   public get pointerBorderSize(): string {
     return this._pointerBorderSize;
@@ -212,6 +218,7 @@ export class BravoSliderComponent
   @Input()
   public set pointerBorderType(pValue: string) {
     this._pointerBorderType = pValue;
+    this.invalidate();
   }
   public get pointerBorderType(): string {
     return this._pointerBorderType;
@@ -221,6 +228,7 @@ export class BravoSliderComponent
   @Input()
   public set pointerBorderColor(pValue: string) {
     this._pointerBorderColor = pValue;
+    this.invalidate();
   }
   public get pointerBorderColor(): string {
     return this._pointerBorderColor;
@@ -230,6 +238,7 @@ export class BravoSliderComponent
   @Input()
   public set pointerBorderRadius(pValue: string) {
     this._pointerBorderRadius = pValue;
+    this.invalidate();
   }
   public get pointerBorderRadius(): string {
     return this._pointerBorderRadius;
@@ -240,6 +249,7 @@ export class BravoSliderComponent
   @Input()
   public set labelDisplayStyle(pValue: SliderLabelDisplay) {
     this._labelDisplayStyle = pValue;
+    this.invalidate();
   }
   public get labelDisplayStyle(): SliderLabelDisplay {
     return this._labelDisplayStyle;
@@ -249,6 +259,7 @@ export class BravoSliderComponent
   @Input()
   public set labelPositionStyle(pValue: SliderLabelPosition) {
     this._labelPositionStyle = pValue;
+    this.invalidate();
   }
   public get labelPositionStyle(): SliderLabelPosition {
     return this._labelPositionStyle;
@@ -258,15 +269,17 @@ export class BravoSliderComponent
   @Input()
   public set labelSize(pValue: string) {
     this._labelSize = pValue;
+    this.invalidate();
   }
   public get labelSize(): string {
     return this._labelSize;
   }
 
-  private _labelTop: string = '6px';
+  private _labelTop: string = '12px';
   @Input()
   public set labelTop(pValue: string) {
     this._labelTop = pValue;
+    this.invalidate();
   }
   public get labelTop(): string {
     return this._labelTop;
@@ -276,6 +289,7 @@ export class BravoSliderComponent
   @Input()
   public set labelColor(pValue: string) {
     this._labelColor = pValue;
+    this.invalidate();
   }
   public get labelColor(): string {
     return this._labelColor;
@@ -361,6 +375,22 @@ export class BravoSliderComponent
       this.barColor,
       this.barSelectionColor
     );
+    this.setPointerStyle(
+      this.pointerSize,
+      this.pointerTop,
+      this.pointerColor,
+      this.pointerBorderSize,
+      this.pointerBorderType,
+      this.pointerBorderColor,
+      this.pointerBorderRadius
+    );
+    this.setLabelStyle(
+      this.labelDisplayStyle,
+      this.labelPositionStyle,
+      this.labelSize,
+      this.labelTop,
+      this.labelColor
+    );
   }
 
   public ngOnInit(): void {}
@@ -376,7 +406,6 @@ export class BravoSliderComponent
   ) {
     if (pTickStyle == SliderTickStyle.None) {
       this.options.showTicks = false;
-      this.options.showTicksValues = false;
     } else {
       this.options.showTicks = true;
       this.getCollection('ngx-slider-tick').forEach((element) => {
@@ -412,6 +441,11 @@ export class BravoSliderComponent
             marginLeft: pTickMarginLeft,
             background: pTickColor,
             borderRadius: 'unset',
+          });
+        } else {
+          wjc.setCss(element, {
+            width: '0px',
+            height: '0px',
           });
         }
       });
@@ -471,7 +505,104 @@ export class BravoSliderComponent
     pLabelSize: string,
     pLabelTop: string,
     pLabelColor: string
-  ) {}
+  ) {
+    if (this.tickStyle == SliderTickStyle.None) {
+      this.getCollection('ngx-slider-tick').forEach((element) => {
+        wjc.setCss(element, {
+          width: '0px',
+          height: '0px',
+          marginLeft: this.tickMarginLeft,
+        });
+      });
+      if (pLabelDisplayStyle == SliderLabelDisplay.None) {
+        this.options.showTicksValues = false;
+      } else {
+        this.options.showTicksValues = true;
+        this.getCollection('ngx-slider-tick-value').forEach((element) => {
+          wjc.setCss(element, {
+            fontSize: pLabelSize,
+            color: pLabelColor,
+          });
+        });
+        if (pLabelDisplayStyle == SliderLabelDisplay.MinMax) {
+          this.options.ticksArray = [this.options.floor!, this.options.ceil!];
+          this.getCollection('ngx-slider-tick-value').forEach((element) => {
+            if (plabelPositionStyle == SliderLabelPosition.Above) {
+              wjc.setCss(element, {
+                top:
+                  '-' +
+                  Number(pLabelTop.slice(0, pLabelTop.length - 2)) * 2 +
+                  pLabelTop.slice(-2),
+              });
+            } else {
+              wjc.setCss(element, {
+                top: pLabelTop,
+              });
+            }
+          });
+        } else {
+          this.getCollection('ngx-slider-tick-value').forEach((element) => {
+            if (plabelPositionStyle == SliderLabelPosition.Above) {
+              wjc.setCss(element, {
+                top:
+                  '-' +
+                  Number(pLabelTop.slice(0, pLabelTop.length - 2)) * 2 +
+                  pLabelTop.slice(-2),
+              });
+            } else {
+              wjc.setCss(element, {
+                top: pLabelTop,
+              });
+            }
+          });
+        }
+      }
+    } else {
+      if (pLabelDisplayStyle == SliderLabelDisplay.None) {
+        this.options.showTicksValues = false;
+      } else {
+        this.options.showTicksValues = true;
+        this.getCollection('ngx-slider-tick-value').forEach((element) => {
+          wjc.setCss(element, {
+            fontSize: pLabelSize,
+            color: pLabelColor,
+          });
+        });
+        if (pLabelDisplayStyle == SliderLabelDisplay.MinMax) {
+          this.options.ticksArray = [this.options.floor!, this.options.ceil!];
+          this.getCollection('ngx-slider-tick-value').forEach((element) => {
+            if (plabelPositionStyle == SliderLabelPosition.Above) {
+              wjc.setCss(element, {
+                top:
+                  '-' +
+                  Number(pLabelTop.slice(0, pLabelTop.length - 2)) * 2 +
+                  pLabelTop.slice(-2),
+              });
+            } else {
+              wjc.setCss(element, {
+                top: pLabelTop,
+              });
+            }
+          });
+        } else {
+          this.getCollection('ngx-slider-tick-value').forEach((element) => {
+            if (plabelPositionStyle == SliderLabelPosition.Above) {
+              wjc.setCss(element, {
+                top:
+                  '-' +
+                  Number(pLabelTop.slice(0, pLabelTop.length - 2)) * 2 +
+                  pLabelTop.slice(-2),
+              });
+            } else {
+              wjc.setCss(element, {
+                top: pLabelTop,
+              });
+            }
+          });
+        }
+      }
+    }
+  }
 
   private getCollection(zClassName: string) {
     return Array.from(

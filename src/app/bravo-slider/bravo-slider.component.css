@@ -1,41 +1,42 @@
 /* slider */
 :host >>> .ngx-slider {
-    display: flex !important;
-    height: 50px !important;
-    margin: unset !important;
-    vertical-align: unset !important;
-    align-items: center !important;
+    display: flex;
+    height: 50px;
+    margin: unset;
+    vertical-align: unset;
+    align-items: center;
 }
 
 /* bar */
 :host >>> .ngx-slider .ngx-slider-bar-wrapper {
-    margin-top: unset !important;
-    padding-top: unset !important;
-    height: unset !important;
+    margin-top: unset;
+    padding-top: unset;
+    height: unset;
 }
 
 /* tick */
 :host >>> .ngx-slider .ngx-slider-ticks {
-    top: unset !important;
+    top: unset;
 }
 
 /* pointer */
 :host >>> .ngx-slider .ngx-slider-pointer:after {
-    display: none !important;
+    display: none;
 }
 
 /* bubble */
 :host >>> .ngx-slider .ngx-slider-bubble {
-    display: none !important;
+    display: none;
 }
 
 /* tick value */
 :host >>> .ngx-slider .ngx-slider-ticks-values-under .ngx-slider-tick-value {
-    bottom: unset !important
+    bottom: unset;
 }
 :host >>> .ngx-slider .ngx-slider-inner-tooltip {
-    height: unset !important;
+    font-size: inherit;
+    color: inherit;
 }
 :host >>> .ngx-slider .ngx-slider-tick-value {
-    top: unset !important
+    top: unset;
 }
