@@ -1,7 +1,7 @@
 <div class="parent" [hidden]="eAppearanceStyle == AppearanceStyleEnum.Button">
     <div [class]="{'checkbox': eAppearanceStyle != AppearanceStyleEnum.Button, 'active-checkbox': viewParent.checked }">
         <input #parent class="form-check-input" type="checkbox" id="{{ zParentText }}" (change)="onParent($event)"
-            [disabled]="!bAllowSelectMultiValue" [checked]="viewParent.checked" [(ngModel)]="viewParent.checked">
+            [disabled]="!bAllowSelectMultiValue" [checked]="viewParent.checked">
         <label class="form-check-label" for="{{ zParentText }}">
             {{ zParentText }}
         </label>

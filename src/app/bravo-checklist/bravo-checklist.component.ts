@@ -50,16 +50,13 @@ export class BravoChecklistComponent
     return this._zParentText;
   }
 
-  private _zSeparator!: string;
+  private _zSeparator: string = ',';
   @Input()
   public set zSeparator(pzValue: string) {
     this._zSeparator = pzValue;
     this.invalidate();
   }
   public get zSeparator(): string {
-    if (!this._zSeparator) {
-      this._zSeparator = ',';
-    }
     return this._zSeparator;
   }
 
@@ -103,27 +100,21 @@ export class BravoChecklistComponent
     return this._eFlowDirection;
   }
 
-  private _controls!: wjc.ObservableArray;
+  private _controls: wjc.ObservableArray = new wjc.ObservableArray();
   public set controls(pValue: wjc.ObservableArray) {
     this._controls = pValue;
     this.invalidate();
   }
   public get controls(): wjc.ObservableArray {
-    if (!this._controls) {
-      this._controls = new wjc.ObservableArray();
-    }
     return this._controls;
   }
 
-  private _valueList!: string[];
+  private _valueList: string[] = [];
   public set valueList(pValue: string[]) {
     this._valueList = pValue;
     this.invalidate();
   }
   public get valueList(): string[] {
-    if (!this._valueList) {
-      this._valueList = [];
-    }
     return this._valueList;
   }
 
@@ -220,7 +211,8 @@ export class BravoChecklistComponent
         }
       }
     }
-    this.viewParent.checked = this.controls.every(
+
+    this.viewParent.nativeElement.checked = this.controls.every(
       (option) => option.checked == true
     );
   }
