@@ -13,6 +13,56 @@ Code mẫu:
 ></bravo-slider>
 ```
 
+```ts
+// default slider
+this.formSlider = this.fb.group({
+  dataSlider: [[10, 90]],
+});
+
+// get event
+this.formSlider.valueChanges.subscribe((value) => {
+  console.log(value);
+});
+
+// custom slider
+
+// options
+this.viewSlider.options.floor = 0;
+this.viewSlider.options.ceil = 100;
+this.viewSlider.options.step = 10;
+this.viewSlider.options.noSwitching = true;
+
+// tickStyle
+this.viewSlider.tickStyle = SliderTickStyle.Both;
+this.viewSlider.tickWidth = "1px";
+this.viewSlider.tickHeight = "6px";
+this.viewSlider.tickTop = "-2px";
+this.viewSlider.tickMarginLeft = "6px";
+this.viewSlider.tickColor = "#178BE3";
+
+// barStyle
+this.viewSlider.barSize = "2px";
+this.viewSlider.barTop = "0px";
+this.viewSlider.barColor = "#B9B9B9";
+this.viewSlider.barSelectionColor = "#0079D7";
+
+// pointerStyle
+this.viewSlider.pointerSize = "12px";
+this.viewSlider.pointerTop = "19px";
+this.viewSlider.pointerColor = "#1E90FF";
+this.viewSlider.pointerBorderSize = "2px";
+this.viewSlider.pointerBorderType = "solid";
+this.viewSlider.pointerBorderColor = "#FFFFFF";
+this.viewSlider.pointerBorderRadius = "100%";
+
+// labelStyle
+this.viewSlider.labelDisplayStyle = SliderLabelDisplay.Tick;
+this.viewSlider.labelPositionStyle = SliderLabelPosition.Below;
+this.viewSlider.labelSize = "13px";
+this.viewSlider.labelTop = "12px";
+this.viewSlider.labelColor = "inherit";
+```
+
 ## Bravo Range Time
 
 Code mẫu:
