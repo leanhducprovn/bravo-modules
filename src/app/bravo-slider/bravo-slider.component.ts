@@ -14,10 +14,12 @@ import {
   Output,
 } from '@angular/core';
 import * as wjc from '@grapecity/wijmo';
-
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+// enum
 import { SliderTickStyle } from '../data-types/enum/slider-tick-style';
+import { SliderLabelDisplay } from '../data-types/enum/slider-label-display';
+import { SliderLabelPosition } from '../data-types/enum/slider-label-position';
 
 @Component({
   selector: 'bravo-slider',
@@ -35,11 +37,23 @@ export class BravoSliderComponent
   extends wjc.Control
   implements OnInit, ControlValueAccessor, AfterContentInit
 {
+  private _value!: number;
   @Input()
-  public value!: number;
+  public set value(pValue: number) {
+    this._value = pValue;
+  }
+  public get value(): number {
+    return this._value;
+  }
 
+  private _highValue!: number;
   @Input()
-  public highValue!: number;
+  public set highValue(pValue: number) {
+    this._highValue = pValue;
+  }
+  public get highValue(): number {
+    return this._highValue;
+  }
 
   private _options: Options = new Options();
   @Input()
@@ -222,8 +236,24 @@ export class BravoSliderComponent
   }
 
   // labelDisplayStyle
+  private _labelDisplayStyle: SliderLabelDisplay = SliderLabelDisplay.Tick;
+  @Input()
+  public set labelDisplayStyle(pValue: SliderLabelDisplay) {
+    this._labelDisplayStyle = pValue;
+  }
+  public get labelDisplayStyle(): SliderLabelDisplay {
+    return this._labelDisplayStyle;
+  }
 
   // labelPositionStyle
+  private _labelPositionStyle: SliderLabelPosition = SliderLabelPosition.Below;
+  @Input()
+  public set labelPositionStyle(pValue: SliderLabelPosition) {
+    this._labelPositionStyle = pValue;
+  }
+  public get labelPositionStyle(): SliderLabelPosition {
+    return this._labelPositionStyle;
+  }
 
   @Output() valueEvent = new EventEmitter<any>();
   @Output() highValueEvent = new EventEmitter<any>();
@@ -312,6 +342,7 @@ export class BravoSliderComponent
   ) {
     if (pTickStyle == SliderTickStyle.None) {
       this.options.showTicks = false;
+      this.options.showTicksValues = false;
     } else {
       this.options.showTicks = true;
       this.getCollection('ngx-slider-tick').forEach((element) => {
@@ -328,7 +359,8 @@ export class BravoSliderComponent
           wjc.setCss(element, {
             width: pTickWidth,
             height:
-              Number(pTickHeight.slice(0, pTickHeight.length - 2)) / 2 +
+              Number(pTickHeight.slice(0, pTickHeight.length - 2)) / 2 -
+              1 +
               pTickHeight.slice(-2),
             top: pTickTop,
             marginLeft: pTickMarginLeft,
@@ -339,9 +371,10 @@ export class BravoSliderComponent
           wjc.setCss(element, {
             width: pTickWidth,
             height:
-              Number(pTickHeight.slice(0, pTickHeight.length - 2)) / 2 +
+              Number(pTickHeight.slice(0, pTickHeight.length - 2)) / 2 -
+              1 +
               pTickHeight.slice(-2),
-            top: '5px',
+            top: '2px',
             marginLeft: pTickMarginLeft,
             background: pTickColor,
             borderRadius: 'unset',

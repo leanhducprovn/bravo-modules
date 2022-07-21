@@ -1,13 +1,18 @@
+// library
 import { Options } from '@angular-slider/ngx-slider';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { BravoChecklistComponent } from '../bravo-checklist/bravo-checklist.component';
 
+// enum
 import { FlowDirection } from '../data-types/enum/flow-direction';
 import { AppearanceStyleEnum } from '../data-types/enum/appearance-style-enum';
 import { SliderTickStyle } from '../data-types/enum/slider-tick-style';
+import { SliderLabelDisplay } from '../data-types/enum/slider-label-display';
+import { SliderLabelPosition } from '../data-types/enum/slider-label-position';
+
+// component
 import { BravoSliderComponent } from '../bravo-slider/bravo-slider.component';
+import { BravoChecklistComponent } from '../bravo-checklist/bravo-checklist.component';
 
 @Component({
   selector: 'app-data',
@@ -32,6 +37,8 @@ export class DataComponent implements OnInit, AfterViewInit {
   public FlowDirection = FlowDirection;
   public AppearanceStyleEnum = AppearanceStyleEnum;
   public SliderTickStyle = SliderTickStyle;
+  public SliderLabelDisplay = SliderLabelDisplay;
+  public SliderLabelPosition = SliderLabelPosition;
   /*------------------------------------*/
 
   /*------------------------------------*/
@@ -137,7 +144,7 @@ export class DataComponent implements OnInit, AfterViewInit {
   this.viewSlider.tickStyle = SliderTickStyle.Both;
   this.viewSlider.tickWidth = '1px';
   this.viewSlider.tickHeight = '10px';
-  this.viewSlider.tickTop = '-4px';
+  this.viewSlider.tickTop = '-2px';
   this.viewSlider.tickMarginLeft = '6px';
   this.viewSlider.tickColor = '#178BE3';
 
@@ -242,8 +249,8 @@ export class DataComponent implements OnInit, AfterViewInit {
     // tickStyle
     this.viewSlider.tickStyle = SliderTickStyle.Both;
     this.viewSlider.tickWidth = '1px';
-    this.viewSlider.tickHeight = '10px';
-    this.viewSlider.tickTop = '-4px';
+    this.viewSlider.tickHeight = '6px';
+    this.viewSlider.tickTop = '-2px';
     this.viewSlider.tickMarginLeft = '6px';
     this.viewSlider.tickColor = '#178BE3';
 
@@ -262,7 +269,9 @@ export class DataComponent implements OnInit, AfterViewInit {
     this.viewSlider.pointerBorderColor = '#FFFFFF';
     this.viewSlider.pointerBorderRadius = '100%';
 
-    // labelStyle
+    // labelDisplayStyle
+
+    // labelPositionStyle
 
     /*------------------------------------*/
   }
