@@ -155,8 +155,8 @@ export class DataComponent implements OnInit, AfterViewInit {
   this.viewSlider.barSelectionColor = '#0079D7';
 
   // pointerStyle
-  this.viewSlider.pointerSize = '12px';
-  this.viewSlider.pointerTop = '19px';
+  this.viewSlider.pointerSize = '10px';
+  this.viewSlider.pointerTop = '-6px';
   this.viewSlider.pointerColor = '#1E90FF';
   this.viewSlider.pointerBorderSize = '2px';
   this.viewSlider.pointerBorderType = 'solid';
@@ -166,8 +166,8 @@ export class DataComponent implements OnInit, AfterViewInit {
   // labelStyle
   this.viewSlider.labelDisplayStyle = SliderLabelDisplay.Tick;
   this.viewSlider.labelPositionStyle = SliderLabelPosition.Below;
-  this.viewSlider.labelSize = '13px';
-  this.viewSlider.labelTop = '12px';
+  this.viewSlider.labelSize = '85%';
+  this.viewSlider.labelTop = '10px';
   this.viewSlider.labelColor = 'inherit';`;
 
   public codePieChart = `  <wj-flex-pie #pieChart [selectionMode]="'Point'" (initialized)="click(pieChart)">
@@ -267,8 +267,8 @@ export class DataComponent implements OnInit, AfterViewInit {
     this.viewSlider.barSelectionColor = '#0079D7';
 
     // pointerStyle
-    this.viewSlider.pointerSize = '12px';
-    this.viewSlider.pointerTop = '19px';
+    this.viewSlider.pointerSize = '10px';
+    this.viewSlider.pointerTop = '-6px';
     this.viewSlider.pointerColor = '#1E90FF';
     this.viewSlider.pointerBorderSize = '2px';
     this.viewSlider.pointerBorderType = 'solid';
@@ -278,8 +278,8 @@ export class DataComponent implements OnInit, AfterViewInit {
     // labelStyle
     this.viewSlider.labelDisplayStyle = SliderLabelDisplay.Tick;
     this.viewSlider.labelPositionStyle = SliderLabelPosition.Below;
-    this.viewSlider.labelSize = '13px';
-    this.viewSlider.labelTop = '12px';
+    this.viewSlider.labelSize = '85%';
+    this.viewSlider.labelTop = '10px';
     this.viewSlider.labelColor = 'inherit';
 
     /*------------------------------------*/

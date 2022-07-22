@@ -174,7 +174,7 @@ export class BravoSliderComponent
   }
 
   // pointer style
-  private _pointerSize: string = '12px';
+  private _pointerSize: string = '10px';
   @Input()
   public set pointerSize(pValue: string) {
     this._pointerSize = pValue;
@@ -184,7 +184,7 @@ export class BravoSliderComponent
     return this._pointerSize;
   }
 
-  private _pointerTop: string = '19px';
+  private _pointerTop: string = '-6px';
   @Input()
   public set pointerTop(pValue: string) {
     this._pointerTop = pValue;
@@ -275,7 +275,7 @@ export class BravoSliderComponent
     return this._labelSize;
   }
 
-  private _labelTop: string = '12px';
+  private _labelTop: string = '10px';
   @Input()
   public set labelTop(pValue: string) {
     this._labelTop = pValue;
@@ -431,17 +431,31 @@ export class BravoSliderComponent
             borderRadius: 'unset',
           });
         } else if (pTickStyle == SliderTickStyle.BottomRight) {
-          wjc.setCss(element, {
-            width: pTickWidth,
-            height:
-              Number(pTickHeight.slice(0, pTickHeight.length - 2)) / 2 -
-              1 +
-              pTickHeight.slice(-2),
-            top: '2px',
-            marginLeft: pTickMarginLeft,
-            background: pTickColor,
-            borderRadius: 'unset',
-          });
+          if (this.labelPositionStyle == SliderLabelPosition.Above) {
+            wjc.setCss(element, {
+              width: pTickWidth,
+              height:
+                Number(pTickHeight.slice(0, pTickHeight.length - 2)) / 2 -
+                1 +
+                pTickHeight.slice(-2),
+              top: '14px',
+              marginLeft: pTickMarginLeft,
+              background: pTickColor,
+              borderRadius: 'unset',
+            });
+          } else {
+            wjc.setCss(element, {
+              width: pTickWidth,
+              height:
+                Number(pTickHeight.slice(0, pTickHeight.length - 2)) / 2 -
+                1 +
+                pTickHeight.slice(-2),
+              top: '2px',
+              marginLeft: pTickMarginLeft,
+              background: pTickColor,
+              borderRadius: 'unset',
+            });
+          }
         } else {
           wjc.setCss(element, {
             width: '0px',
@@ -518,7 +532,7 @@ export class BravoSliderComponent
         this.options.showTicksValues = false;
       } else {
         this.options.showTicksValues = true;
-        this.getCollection('ngx-slider-tick-value').forEach((element) => {
+        this.getCollection('ngx-slider-inner-tooltip').forEach((element) => {
           wjc.setCss(element, {
             fontSize: pLabelSize,
             color: pLabelColor,
@@ -526,14 +540,14 @@ export class BravoSliderComponent
         });
         if (pLabelDisplayStyle == SliderLabelDisplay.MinMax) {
           this.options.ticksArray = [this.options.floor!, this.options.ceil!];
-          this.getCollection('ngx-slider-tick-value').forEach((element) => {
+          this.getCollection('ngx-slider-inner-tooltip').forEach((element) => {
             if (plabelPositionStyle == SliderLabelPosition.Above) {
               wjc.setCss(element, {
-                top:
-                  '-' +
-                  Number(pLabelTop.slice(0, pLabelTop.length - 2)) * 2 +
-                  pLabelTop.slice(-2),
+                top: '-10px',
               });
+              this.barTop = '12px';
+              this.tickTop = '10px';
+              this.pointerTop = '6px';
             } else {
               wjc.setCss(element, {
                 top: pLabelTop,
@@ -541,14 +555,14 @@ export class BravoSliderComponent
             }
           });
         } else {
-          this.getCollection('ngx-slider-tick-value').forEach((element) => {
+          this.getCollection('ngx-slider-inner-tooltip').forEach((element) => {
             if (plabelPositionStyle == SliderLabelPosition.Above) {
               wjc.setCss(element, {
-                top:
-                  '-' +
-                  Number(pLabelTop.slice(0, pLabelTop.length - 2)) * 2 +
-                  pLabelTop.slice(-2),
+                top: '-10px',
               });
+              this.barTop = '12px';
+              this.tickTop = '10px';
+              this.pointerTop = '6px';
             } else {
               wjc.setCss(element, {
                 top: pLabelTop,
@@ -562,7 +576,7 @@ export class BravoSliderComponent
         this.options.showTicksValues = false;
       } else {
         this.options.showTicksValues = true;
-        this.getCollection('ngx-slider-tick-value').forEach((element) => {
+        this.getCollection('ngx-slider-inner-tooltip').forEach((element) => {
           wjc.setCss(element, {
             fontSize: pLabelSize,
             color: pLabelColor,
@@ -570,14 +584,14 @@ export class BravoSliderComponent
         });
         if (pLabelDisplayStyle == SliderLabelDisplay.MinMax) {
           this.options.ticksArray = [this.options.floor!, this.options.ceil!];
-          this.getCollection('ngx-slider-tick-value').forEach((element) => {
+          this.getCollection('ngx-slider-inner-tooltip').forEach((element) => {
             if (plabelPositionStyle == SliderLabelPosition.Above) {
               wjc.setCss(element, {
-                top:
-                  '-' +
-                  Number(pLabelTop.slice(0, pLabelTop.length - 2)) * 2 +
-                  pLabelTop.slice(-2),
+                top: '-20px',
               });
+              this.barTop = '12px';
+              this.tickTop = '10px';
+              this.pointerTop = '6px';
             } else {
               wjc.setCss(element, {
                 top: pLabelTop,
@@ -585,14 +599,14 @@ export class BravoSliderComponent
             }
           });
         } else {
-          this.getCollection('ngx-slider-tick-value').forEach((element) => {
+          this.getCollection('ngx-slider-inner-tooltip').forEach((element) => {
             if (plabelPositionStyle == SliderLabelPosition.Above) {
               wjc.setCss(element, {
-                top:
-                  '-' +
-                  Number(pLabelTop.slice(0, pLabelTop.length - 2)) * 2 +
-                  pLabelTop.slice(-2),
+                top: '-20px',
               });
+              this.barTop = '12px';
+              this.tickTop = '10px';
+              this.pointerTop = '6px';
             } else {
               wjc.setCss(element, {
                 top: pLabelTop,

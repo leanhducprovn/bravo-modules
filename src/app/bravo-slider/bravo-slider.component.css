@@ -1,10 +1,10 @@
 /* slider */
 :host >>> .ngx-slider {
-    display: flex;
-    height: 50px;
-    margin: unset;
     vertical-align: unset;
-    align-items: center;
+    position: relative;
+    margin: 2px;
+    width: calc(100% - 4px);
+    top: 0px;
 }
 
 /* bar */
@@ -17,9 +17,23 @@
 /* tick */
 :host >>> .ngx-slider .ngx-slider-ticks {
     top: unset;
+    position: relative;
+}
+
+:host >>> .ngx-slider .ngx-slider-tick {
+    width: 1px;
+    height: 6px;
 }
 
 /* pointer */
+:host >>> .ngx-slider .ngx-slider-pointer {
+    width: 10px;
+    height: 10px;
+    background-color: #1E90FF;
+    border: 2px solid #fff;
+    border-radius: 100%;
+}
+
 :host >>> .ngx-slider .ngx-slider-pointer:after {
     display: none;
 }
@@ -36,6 +50,8 @@
 :host >>> .ngx-slider .ngx-slider-inner-tooltip {
     font-size: inherit;
     color: inherit;
+    height: unset;
+    position: relative;
 }
 :host >>> .ngx-slider .ngx-slider-tick-value {
     top: unset;
