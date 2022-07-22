@@ -1,17 +1,24 @@
 <div class="main">
+    <!--------------------------------------->
+    <!-- slider base -->
+    <h2>Bravo Slider Base</h2>
+    <div class="slider-base">
+        <bravo-slider-base></bravo-slider-base>
+    </div>
+    <!--------------------------------------->
 
     <!--------------------------------------->
     <!-- slider -->
-    <h2>Bravo Slider</h2>
-    <div class="slider">
+    <h2>Bravo Range Slider</h2>
+    <div class="range-slider">
         <form [formGroup]="formSlider">
             <bravo-slider #slider formControlName="dataSlider">
             </bravo-slider>
         </form>
     </div>
     <h3>Code</h3>
-    <pre><code [lineNumbers]="true" [highlight]="codeSliderHTML"></code></pre>
-    <pre><code [lineNumbers]="true" [highlight]="codeSliderTS"></code></pre>
+    <pre><code [lineNumbers]="true" [highlight]="codeRangeSliderHTML"></code></pre>
+    <pre><code [lineNumbers]="true" [highlight]="codeRangeSliderTS"></code></pre>
     <!--------------------------------------->
 
     <!--------------------------------------->

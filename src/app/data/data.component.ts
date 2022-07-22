@@ -11,7 +11,7 @@ import { SliderLabelDisplay } from '../data-types/enum/slider-label-display';
 import { SliderLabelPosition } from '../data-types/enum/slider-label-position';
 
 // component
-import { BravoSliderComponent } from '../bravo-slider/bravo-slider.component';
+import { BravoRangeSliderComponent } from '../bravo-range-slider/bravo-range-slider.component';
 import { BravoChecklistComponent } from '../bravo-checklist/bravo-checklist.component';
 
 @Component({
@@ -22,7 +22,7 @@ import { BravoChecklistComponent } from '../bravo-checklist/bravo-checklist.comp
 export class DataComponent implements OnInit, AfterViewInit {
   /*------------------------------------*/
   // slider viewchild
-  @ViewChild('slider', { static: true }) viewSlider!: BravoSliderComponent;
+  @ViewChild('slider', { static: true }) viewSlider!: BravoRangeSliderComponent;
   /*------------------------------------*/
 
   /*------------------------------------*/
@@ -117,12 +117,12 @@ export class DataComponent implements OnInit, AfterViewInit {
   /*------------------------------------*/
   // code highlight
 
-  public codeSliderHTML = `  <form [formGroup]="formSlider">
+  public codeRangeSliderHTML = `  <form [formGroup]="formSlider">
       <bravo-slider #slider formControlName="dataSlider">
       </bravo-slider>
   </form>`;
 
-  public codeSliderTS = `  // default slider
+  public codeRangeSliderTS = `  // default slider
   this.formSlider = this.fb.group({
       dataSlider: [[10, 90]],
   });

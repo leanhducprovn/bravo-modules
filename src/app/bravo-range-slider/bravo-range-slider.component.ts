@@ -23,17 +23,17 @@ import { SliderLabelPosition } from '../data-types/enum/slider-label-position';
 
 @Component({
   selector: 'bravo-slider',
-  templateUrl: './bravo-slider.component.html',
-  styleUrls: ['./bravo-slider.component.css'],
+  templateUrl: './bravo-range-slider.component.html',
+  styleUrls: ['./bravo-range-slider.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef(() => BravoSliderComponent),
+      useExisting: forwardRef(() => BravoRangeSliderComponent),
     },
   ],
 })
-export class BravoSliderComponent
+export class BravoRangeSliderComponent
   extends wjc.Control
   implements OnInit, ControlValueAccessor, AfterContentInit
 {

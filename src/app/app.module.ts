@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { DataComponent } from './data/data.component';
-import { BravoSliderComponent } from './bravo-slider/bravo-slider.component';
+import { BravoRangeSliderComponent } from './bravo-range-slider/bravo-range-slider.component';
 import { BravoChartComponent } from './bravo-chart/bravo-chart.component';
 import { PieChartComponent } from './bravo-chart/pie-chart/pie-chart.component';
 import { WjChartModule } from '@grapecity/wijmo.angular2.chart';
@@ -19,16 +19,18 @@ import {
   HighlightOptions,
   HIGHLIGHT_OPTIONS,
 } from 'ngx-highlightjs';
+import { BravoSliderBaseComponent } from './bravo-slider-base/bravo-slider-base.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BravoSliderComponent,
+    BravoRangeSliderComponent,
     DataComponent,
     BravoChartComponent,
     PieChartComponent,
     BravoRangeTimeComponent,
     BravoChecklistComponent,
+    BravoSliderBaseComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BravoSliderComponent } from './bravo-slider.component';
+import { BravoSliderComponent } from './bravo-range-slider.component';
 
 describe('BravoSliderComponent', () => {
   let component: BravoSliderComponent;
@@ -8,9 +8,8 @@ describe('BravoSliderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BravoSliderComponent ]
-    })
-    .compileComponents();
+      declarations: [BravoSliderComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
