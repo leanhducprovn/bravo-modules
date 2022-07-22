@@ -618,12 +618,18 @@ export class BravoSliderComponent
     }
   }
 
-  private getCollection(zClassName: string) {
-    return Array.from(
-      document.getElementsByClassName(
-        zClassName
-      ) as HTMLCollectionOf<HTMLElement>
-    );
+  private getCollection(...className: Array<string>) {
+    const _elements = new Array<HTMLElement>();
+    for (const zClassName of className) {
+      _elements.push(
+        ...Array.from(
+          this.hostElement?.getElementsByClassName(
+            zClassName
+          ) as HTMLCollectionOf<HTMLElement>
+        )
+      );
+    }
+    return _elements;
   }
 
   // get event
