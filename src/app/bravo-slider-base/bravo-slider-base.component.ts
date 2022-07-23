@@ -39,6 +39,36 @@ export class BravoSliderBaseComponent extends wjc.Control implements OnInit {
     return `${value}`;
   }
 
+  private _isToolTip!: boolean;
+  private _startValue!: number;
+  private _changeValue!: number;
+
+  public onUserChangeStart(event: any) {
+    this._startValue = event.value;
+  }
+
+  public onUserChange(event: any) {
+    this._changeValue = event.value;
+    if (event.value != this._startValue) {
+      this._isToolTip = true;
+    }
+  }
+
+  public onUserChangeEnd(event: any) {
+    if (event.value == this._changeValue) {
+      this._isToolTip = false;
+      this.getCollection('ngx-slider-bubble').forEach((element) => {
+        wjc.addClass(element, 'remove-slider-tooltip');
+      });
+    }
+  }
+
+  public onValueChange(event: any) {
+    this.getCollection('ngx-slider-bubble').forEach((element) => {
+      wjc.toggleClass(element, 'remove-slider-tooltip', !this._isToolTip);
+    });
+  }
+
   private getCollection(...className: Array<string>) {
     const _elements = new Array<HTMLElement>();
     for (const zClassName of className) {

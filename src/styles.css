@@ -28,7 +28,7 @@
     --slider-pointer-border: 2px solid #FFFFFF;
     --slider-pointer-border-radius: 100%;
 
-    /* bubble */
+    /* bubble/tooltip */
     --slider-bubble-size: 85%;
     --slider-bubble-top: -25px;
     --slider-bubble-color: inherit;

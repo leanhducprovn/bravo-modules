@@ -7,6 +7,11 @@
     align-items: flex-start;
 }
 
+/* remove tooltip */
+:host>>>.remove-slider-tooltip {
+    display: none !important;
+}
+
 /* reset slider */
 :host>>>.ngx-slider {
     height: unset;
@@ -39,7 +44,13 @@
 
 /* reset bubble */
 :host>>>.ngx-slider .ngx-slider-bubble {
+    cursor: pointer;
     bottom: unset;
+}
+
+/* reset bubble limit */
+:host>>>.ngx-slider .ngx-slider-limit {
+    display: none;
 }
 
 /* ------------------------------------- */
