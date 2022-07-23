@@ -28,10 +28,13 @@
     --slider-pointer-border: 2px solid #FFFFFF;
     --slider-pointer-border-radius: 100%;
 
-    /* label */
-    --slider-label-size: 85%;
-    --slider-label-top: 10px;
-    --slider-label-color: inherit;
+    /* bubble */
+    --slider-bubble-size: 85%;
+    --slider-bubble-top: -25px;
+    --slider-bubble-color: inherit;
+    --slider-bubble-padding: 0px 1px;
+    --slider-bubble-background: #FFFFFF;
+    --slider-bubble-border-radius: 3px;
 }
 
 * {

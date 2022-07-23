@@ -37,6 +37,11 @@
     margin-bottom: unset;
 }
 
+/* reset bubble */
+:host>>>.ngx-slider .ngx-slider-bubble {
+    bottom: unset;
+}
+
 /* ------------------------------------- */
 
 /* set tick */
@@ -55,10 +60,6 @@
     top: var(--slider-tick-legend-top);
     color: var(--slider-tick-legend-color);
 }
-
-/* :host>>>.ngx-slider .ngx-slider-inner-tooltip {
-    background: var(--slider-tick-color);
-} */
 
 /* set bar */
 :host>>>.ngx-slider .ngx-slider-bar {
@@ -79,4 +80,14 @@
     background: var(--slider-pointer-color);
     border: var(--slider-pointer-border);
     border-radius: var(--slider-pointer-border-radius);
+}
+
+/* set bubble */
+:host>>>.ngx-slider .ngx-slider-bubble {
+    font-size: var(--slider-bubble-size);
+    top: var(--slider-bubble-top);
+    padding: var(--slider-bubble-padding);
+    color: var(--slider-bubble-color);
+    background-color: var(--slider-bubble-background);
+    border-radius: var(--slider-bubble-border-radius);
 }
