@@ -1,0 +1,82 @@
+/* set slider base */
+.slider-base {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    height: 20px;
+    display: flex;
+    align-items: flex-start;
+}
+
+/* reset slider */
+:host>>>.ngx-slider {
+    height: unset;
+    margin: unset;
+    vertical-align: unset;
+}
+
+/* reset bar wrapper */
+:host>>>.ngx-slider .ngx-slider-bar-wrapper {
+    margin-top: unset;
+    padding-top: unset;
+    height: unset;
+    font-size: 0px;
+}
+
+/* reset pointer */
+:host>>>.ngx-slider .ngx-slider-pointer:after {
+    display: none;
+}
+
+/* reset ticks */
+:host>>>.ngx-slider .ngx-slider-ticks {
+    top: unset;
+}
+
+/* reset tick legend */
+:host>>>.ngx-slider.with-legend {
+    margin-bottom: unset;
+}
+
+/* ------------------------------------- */
+
+/* set tick */
+:host>>>.ngx-slider .ngx-slider-tick {
+    width: var(--slider-tick-width);
+    height: var(--slider-tick-height);
+    top: var(--slider-tick-top);
+    margin-left: var(--slider-tick-margir-left);
+    background: var(--slider-tick-color);
+    border-radius: var(--slider-tick-border-radius);
+}
+
+/* set tick legend */
+:host>>>.ngx-slider .ngx-slider-tick-legend {
+    font-size: var(--slider-tick-legend-size);
+    top: var(--slider-tick-legend-top);
+    color: var(--slider-tick-legend-color);
+}
+
+/* :host>>>.ngx-slider .ngx-slider-inner-tooltip {
+    background: var(--slider-tick-color);
+} */
+
+/* set bar */
+:host>>>.ngx-slider .ngx-slider-bar {
+    height: var(--slider-bar-size);
+    background: var(--slider-bar-color);
+    top: var(--slider-bar-top);
+}
+
+:host>>>.ngx-slider .ngx-slider-selection {
+    background: var(--slider-bar-selection-color);
+}
+
+/* set pointer */
+:host>>>.ngx-slider .ngx-slider-pointer {
+    width: var(--slider-pointer-size);
+    height: var(--slider-pointer-size);
+    top: var(--slider-pointer-top);
+    background: var(--slider-pointer-color);
+    border: var(--slider-pointer-border);
+    border-radius: var(--slider-pointer-border-radius);
+}

@@ -1,6 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://cdn.jsdelivr.net/npm/segoe-fonts@1.0.1/segoe-fonts.min.css');
 
+:root {
+    /* tick */
+    --slider-tick-width: 0.5px;
+    --slider-tick-height: 6px;
+    --slider-tick-top: -2px;
+    --slider-tick-margir-left: 7px;
+    --slider-tick-color: #178BE3;
+    --slider-tick-border-radius: unset;
+
+    /* tick legend */
+    --slider-tick-legend-size: 85%;
+    --slider-tick-legend-top: 10px;
+    --slider-tick-legend-color: inherit;
+
+    /* bar */
+    --slider-bar-size: 2px;
+    --slider-bar-top: 0px;
+    --slider-bar-color: #B9B9B9;
+    --slider-bar-selection-color: #0079D7;
+
+    /* pointer */
+    --slider-pointer-size: 10px;
+    --slider-pointer-top: -6px;
+    --slider-pointer-color: #1E90FF;
+    --slider-pointer-border: 2px solid #FFFFFF;
+    --slider-pointer-border-radius: 100%;
+
+    /* label */
+    --slider-label-size: 85%;
+    --slider-label-top: 10px;
+    --slider-label-color: inherit;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -19,7 +52,7 @@ a {
 h2 {
     font-size: 20px;
     font-weight: 700;
-    background: linear-gradient(179.83deg,#1f9f94 0.15%,#008c80 92.02%);
+    background: linear-gradient(179.83deg, #1f9f94 0.15%, #008c80 92.02%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -28,7 +61,7 @@ h2 {
 }
 
 h3 {
-    background: linear-gradient(179.83deg,#9D9EC0 0.15%,#66689C 92.02%);
+    background: linear-gradient(179.83deg, #9D9EC0 0.15%, #66689C 92.02%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
