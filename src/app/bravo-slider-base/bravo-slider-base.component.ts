@@ -86,7 +86,6 @@ export class BravoSliderBaseComponent
   public ngOnInit(): void {
     this.setTickStyle(this.tickStyle);
     this.setLabelDisplay(this.labelDisplay);
-    console.log(this.getPreferredSize());
   }
 
   // get legend
