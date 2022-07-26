@@ -70,6 +70,17 @@ export class BravoChecklistComponent
     return this._bAllowSelectMultiValue;
   }
 
+  private _bShowCheckAll: boolean = true;
+  @Input()
+  public set bShowCheckAll(pValue: boolean) {
+    this._bShowCheckAll = pValue;
+    this.invalidate();
+  }
+
+  public get bShowCheckAll(): boolean {
+    return this._bShowCheckAll;
+  }
+
   private _dataList!: DataList[];
   @Input()
   public set dataList(pValue: DataList[]) {

@@ -61,7 +61,7 @@
             <form [formGroup]="formRating">
                 <bravo-checklist #rating formControlName="dataActive" [zParentText]="'Loại đánh giá'"
                     [dataList]="ratingData" [bAllowSelectMultiValue]="true" [eFlowDirection]="FlowDirection.TopDown"
-                    [zSeparator]="','">
+                    [zSeparator]="','" [bShowCheckAll]="false">
                 </bravo-checklist>
             </form>
         </div>

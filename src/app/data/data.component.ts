@@ -236,6 +236,7 @@ export class DataComponent implements OnInit, AfterViewInit {
           [bAllowSelectMultiValue]="true"
           [eFlowDirection]="FlowDirection.TopDown"
           [zSeparator]="','"
+          [bShowCheckAll]="false"
       >
       </bravo-checklist>
   </form>

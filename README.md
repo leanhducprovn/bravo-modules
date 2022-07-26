@@ -130,6 +130,7 @@ Code mẫu:
     [bAllowSelectMultiValue]="true"
     [eFlowDirection]="FlowDirection.TopDown"
     [zSeparator]="','"
+    [bShowCheckAll]="false"
   >
   </bravo-checklist>
 </form>

@@ -1,4 +1,4 @@
-<div class="parent" [hidden]="eAppearanceStyle == AppearanceStyleEnum.Button">
+<div class="parent" [hidden]="eAppearanceStyle == AppearanceStyleEnum.Button || !bShowCheckAll">
     <div [class]="{'checkbox': eAppearanceStyle != AppearanceStyleEnum.Button, 'active-checkbox': viewParent.checked }">
         <input #parent class="form-check-input" type="checkbox" id="{{ zParentText }}" (change)="onParent($event)"
             [disabled]="!bAllowSelectMultiValue" [checked]="viewParent.checked">
@@ -8,7 +8,8 @@
     </div>
 </div>
 <div class="children">
-    <ul #children [class]="eAppearanceStyle == AppearanceStyleEnum.Button ? 'button' : 'checkbox'">
+    <ul #children [class]="eAppearanceStyle == AppearanceStyleEnum.Button ? 'button' : 'checkbox'"
+        [ngStyle]="{'padding-inline-start': !bShowCheckAll ? '0px' : ''}">
         <li *ngFor="let item of controls; let i = index" [class]="{
                 'button-list': eAppearanceStyle == AppearanceStyleEnum.Button,
                 'checkbox-list': eAppearanceStyle != AppearanceStyleEnum.Button,
