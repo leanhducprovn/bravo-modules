@@ -1,5 +1,11 @@
 import { Options } from '@angular-slider/ngx-slider';
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+} from '@angular/core';
 
 // wijmo
 import * as wjc from '@grapecity/wijmo';
@@ -8,23 +14,28 @@ import * as wjc from '@grapecity/wijmo';
 import { SliderTickStyle } from '../data-types/enum/slider-tick-style';
 import { SliderLabelDisplay } from '../data-types/enum/slider-label-display';
 import { SliderLabelPosition } from '../data-types/enum/slider-label-position';
+import { Font } from '../bravo-graphics/font';
+import { BravoGraphicsRenderer } from '../bravo-graphics/bravo.graphics.renderer';
 
 @Component({
   selector: 'bravo-slider-base',
   templateUrl: './bravo-slider-base.component.html',
   styleUrls: ['./bravo-slider-base.component.css'],
 })
-export class BravoSliderBaseComponent extends wjc.Control implements OnInit {
-  // default options
-  public options: Options = {
-    floor: 0,
-    ceil: 100,
-    tickStep: 10,
-    showTicks: true,
-    ticksArray: undefined,
-    showSelectionBar: true,
-    getLegend: this.getLegend,
-  };
+export class BravoSliderBaseComponent
+  extends wjc.Control
+  implements OnInit, AfterViewInit
+{
+  // options
+  private _options: Options = new Options();
+  @Input()
+  public set options(pValue: Options) {
+    this._options = pValue;
+    this.invalidate();
+  }
+  public get options(): Options {
+    return this._options;
+  }
 
   // tick style
   private _tickStyle: SliderTickStyle = SliderTickStyle.None;
@@ -62,14 +73,106 @@ export class BravoSliderBaseComponent extends wjc.Control implements OnInit {
     super(elementRef.nativeElement);
   }
 
-  public override refresh(fullUpdate?: boolean): void {
-    super.refresh(fullUpdate);
+  ngAfterViewInit(): void {
+    this.setLabelDisplay(this.labelDisplay);
   }
 
-  public ngOnInit(): void {}
+  public override refresh(fullUpdate?: boolean): void {
+    super.refresh(fullUpdate);
+    this.setTickStyle(this.tickStyle);
+    this.setLabelPosition(this.labelPosition);
+  }
 
+  public ngOnInit(): void {
+    this.setTickStyle(this.tickStyle);
+    this.setLabelDisplay(this.labelDisplay);
+    console.log(this.getPreferredSize());
+  }
+
+  // get legend
   public getLegend(value: number): string {
     return `${value}`;
+  }
+
+  // set tick style
+  public setTickStyle(pTickStyle: SliderTickStyle) {
+    if (pTickStyle == SliderTickStyle.None) {
+      this.options.showTicks = false;
+    } else {
+      this.options.showTicks = true;
+      this.getCollection('ngx-slider-tick').forEach((element) => {
+        if (pTickStyle == SliderTickStyle.Both) {
+          return;
+        } else if (pTickStyle == SliderTickStyle.TopLeft) {
+          wjc.setCss(element, {
+            height: '2px',
+          });
+        } else if (pTickStyle == SliderTickStyle.BottomRight) {
+          wjc.setCss(element, {
+            height: '2px',
+            top: '2px',
+          });
+        } else {
+          wjc.setCss(element, {
+            width: '0px',
+            height: '0px',
+          });
+        }
+      });
+    }
+  }
+
+  // set label display
+  public setLabelDisplay(pLabelDisplay: SliderLabelDisplay) {
+    if (this.tickStyle == SliderTickStyle.None) {
+      this.getCollection('ngx-slider-tick').forEach((element) => {
+        wjc.setCss(element, {
+          width: '0px',
+          height: '0px',
+        });
+      });
+    }
+    if (pLabelDisplay == SliderLabelDisplay.None) {
+      this.options.ticksArray = [];
+    } else if (pLabelDisplay == SliderLabelDisplay.MinMax) {
+      this.options.ticksArray = [this.options.floor!, this.options.ceil!];
+    } else {
+      // chuyền vào 1 mảng bất kỳ
+      this.options.ticksArray = [10, 30, 50, 70, 90];
+    }
+  }
+
+  // set label position
+  public setLabelPosition(pLabelPosition: SliderLabelPosition) {
+    if (pLabelPosition == SliderLabelPosition.Above) {
+      this.getCollection('slider-base').forEach((element) => {
+        wjc.addClass(element, 'label-above');
+      });
+      this.getCollection('ngx-slider-tick-legend').forEach((element) => {
+        if (this.tickStyle == SliderTickStyle.BottomRight) {
+          wjc.setCss(element, {
+            top: '-24px',
+          });
+        } else {
+          wjc.setCss(element, {
+            top: '-20px',
+          });
+        }
+      });
+      this.getCollection('ngx-slider-bubble').forEach((element) => {
+        wjc.setCss(element, {
+          top: '-45px',
+        });
+      });
+    } else {
+      this.getCollection('ngx-slider-tick-legend').forEach((element) => {
+        if (this.tickStyle == SliderTickStyle.BottomRight) {
+          wjc.setCss(element, {
+            top: '6px',
+          });
+        }
+      });
+    }
   }
 
   // Tooltip chỉ hiển thị khi kéo
@@ -116,5 +219,23 @@ export class BravoSliderBaseComponent extends wjc.Control implements OnInit {
       );
     }
     return _elements;
+  }
+
+  // get size
+  public getPreferredSize() {
+    let _control = new wjc.Size();
+    let _fontSize = new Font('Segoe UI', (9.75 / 100) * 85);
+    if (this.labelDisplay == SliderLabelDisplay.None) {
+      _control = new wjc.Size(200, 14);
+      return _control;
+    } else {
+      _control = new wjc.Size(
+        200,
+        6 +
+          4 +
+          Number(BravoGraphicsRenderer.measureString('0', _fontSize)?.height)
+      );
+      return _control;
+    }
   }
 }

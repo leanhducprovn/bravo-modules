@@ -23,7 +23,7 @@ import { BravoSliderBaseComponent } from '../bravo-slider-base/bravo-slider-base
 export class DataComponent implements OnInit, AfterViewInit {
   /*------------------------------------*/
   // #sliderBase viewchild
-  @ViewChild('rangeSlider', { static: true })
+  @ViewChild('sliderBase', { static: true })
   viewSliderBase!: BravoSliderBaseComponent;
   /*------------------------------------*/
 
@@ -240,7 +240,35 @@ export class DataComponent implements OnInit, AfterViewInit {
 
   public ngOnInit(): void {
     /*------------------------------------*/
-    // bravo slider
+    // bravo slider base
+
+    // custom slider base
+
+    // options
+    this.viewSliderBase.options.floor = 0;
+    this.viewSliderBase.options.ceil = 100;
+    this.viewSliderBase.options.showSelectionBar = true;
+    this.viewSliderBase.options.getLegend = this.viewSliderBase.getLegend;
+
+    // tick style
+    // this.viewSliderBase.tickStyle = SliderTickStyle.None;
+    // this.viewSliderBase.tickStyle = SliderTickStyle.Both;
+    // this.viewSliderBase.tickStyle = SliderTickStyle.TopLeft;
+    this.viewSliderBase.tickStyle = SliderTickStyle.BottomRight;
+
+    // label display
+    // this.viewSliderBase.labelDisplay = SliderLabelDisplay.None;
+    // this.viewSliderBase.labelDisplay = SliderLabelDisplay.MinMax;
+    // this.viewSliderBase.labelDisplay = SliderLabelDisplay.Tick;
+
+    // label position
+    // this.viewSliderBase.labelPosition = SliderLabelPosition.Above;
+    // this.viewSliderBase.labelPosition = SliderLabelPosition.Below;
+
+    /*------------------------------------*/
+
+    /*------------------------------------*/
+    // bravo range slider
 
     // default slider
     this.formRangeSlider = this.fb.group({
@@ -252,7 +280,7 @@ export class DataComponent implements OnInit, AfterViewInit {
       console.log(value);
     });
 
-    // custom slider
+    // custom range slider
 
     // options
     this.viewRangeSlider.options.floor = 0;

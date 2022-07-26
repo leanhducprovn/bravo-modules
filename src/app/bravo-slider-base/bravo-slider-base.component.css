@@ -2,9 +2,13 @@
 .slider-base {
     border: 1px solid #ccc;
     border-radius: 3px;
-    height: 20px;
+    height: 25.1515px;
     display: flex;
-    align-items: flex-start;
+}
+
+/* set label above */
+.label-above {
+    align-items: flex-end;
 }
 
 /* remove tooltip */
