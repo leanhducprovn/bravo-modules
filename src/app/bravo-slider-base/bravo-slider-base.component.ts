@@ -1,5 +1,5 @@
 import { Options } from '@angular-slider/ngx-slider';
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 
 // wijmo
 import * as wjc from '@grapecity/wijmo';
@@ -15,6 +15,7 @@ import { SliderLabelPosition } from '../data-types/enum/slider-label-position';
   styleUrls: ['./bravo-slider-base.component.css'],
 })
 export class BravoSliderBaseComponent extends wjc.Control implements OnInit {
+  // default options
   public options: Options = {
     floor: 0,
     ceil: 100,
@@ -24,6 +25,38 @@ export class BravoSliderBaseComponent extends wjc.Control implements OnInit {
     showSelectionBar: true,
     getLegend: this.getLegend,
   };
+
+  // tick style
+  private _tickStyle: SliderTickStyle = SliderTickStyle.None;
+  @Input()
+  public set tickStyle(pValue: SliderTickStyle) {
+    this._tickStyle = pValue;
+    this.invalidate();
+  }
+  public get tickStyle(): SliderTickStyle {
+    return this._tickStyle;
+  }
+
+  // label style
+  private _labelDisplay: SliderLabelDisplay = SliderLabelDisplay.Tick;
+  @Input()
+  public set labelDisplay(pValue: SliderLabelDisplay) {
+    this._labelDisplay = pValue;
+    this.invalidate();
+  }
+  public get labelDisplay(): SliderLabelDisplay {
+    return this._labelDisplay;
+  }
+
+  private _labelPosition: SliderLabelPosition = SliderLabelPosition.Below;
+  @Input()
+  public set labelPosition(pValue: SliderLabelPosition) {
+    this._labelPosition = pValue;
+    this.invalidate();
+  }
+  public get labelPosition(): SliderLabelPosition {
+    return this._labelPosition;
+  }
 
   public constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
@@ -39,6 +72,7 @@ export class BravoSliderBaseComponent extends wjc.Control implements OnInit {
     return `${value}`;
   }
 
+  // Tooltip chỉ hiển thị khi kéo
   private _isToolTip!: boolean;
   private _startValue!: number;
   private _changeValue!: number;
@@ -69,6 +103,7 @@ export class BravoSliderBaseComponent extends wjc.Control implements OnInit {
     });
   }
 
+  // get collection
   private getCollection(...className: Array<string>) {
     const _elements = new Array<HTMLElement>();
     for (const zClassName of className) {

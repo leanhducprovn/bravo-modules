@@ -13,6 +13,7 @@ import { SliderLabelPosition } from '../data-types/enum/slider-label-position';
 // component
 import { BravoRangeSliderComponent } from '../bravo-range-slider/bravo-range-slider.component';
 import { BravoChecklistComponent } from '../bravo-checklist/bravo-checklist.component';
+import { BravoSliderBaseComponent } from '../bravo-slider-base/bravo-slider-base.component';
 
 @Component({
   selector: 'app-data',
@@ -21,8 +22,15 @@ import { BravoChecklistComponent } from '../bravo-checklist/bravo-checklist.comp
 })
 export class DataComponent implements OnInit, AfterViewInit {
   /*------------------------------------*/
-  // slider viewchild
-  @ViewChild('slider', { static: true }) viewSlider!: BravoRangeSliderComponent;
+  // #sliderBase viewchild
+  @ViewChild('rangeSlider', { static: true })
+  viewSliderBase!: BravoSliderBaseComponent;
+  /*------------------------------------*/
+
+  /*------------------------------------*/
+  // rangeSlider viewchild
+  @ViewChild('rangeSlider', { static: true })
+  viewRangeSlider!: BravoRangeSliderComponent;
   /*------------------------------------*/
 
   /*------------------------------------*/
@@ -44,7 +52,7 @@ export class DataComponent implements OnInit, AfterViewInit {
   /*------------------------------------*/
   // bravo slider
   public optionsSlider!: Options;
-  public formSlider!: FormGroup;
+  public formRangeSlider!: FormGroup;
   /*------------------------------------*/
 
   /*------------------------------------*/
@@ -117,58 +125,58 @@ export class DataComponent implements OnInit, AfterViewInit {
   /*------------------------------------*/
   // code highlight
 
-  public codeRangeSliderHTML = `  <form [formGroup]="formSlider">
-      <bravo-slider #slider formControlName="dataSlider">
-      </bravo-slider>
+  public codeRangeSliderHTML = `  <form [formGroup]="formRangeSlider">
+      <bravo-range-slider #slider formControlName="dataRangeSlider">
+      </bravo-range-slider>
   </form>`;
 
   public codeRangeSliderTS = `  // default slider
-  this.formSlider = this.fb.group({
-      dataSlider: [[10, 90]],
+  this.formRangeSlider = this.fb.group({
+      dataRangeSlider: [[10, 90]],
   });
 
   // get event
-  this.formSlider.valueChanges.subscribe((value) => {
+  this.formRangeSlider.valueChanges.subscribe((value) => {
       console.log(value);
   });
 
   // custom slider
 
   // options
-  this.viewSlider.options.floor = 0;
-  this.viewSlider.options.ceil = 100;
-  this.viewSlider.options.step = 10;
-  this.viewSlider.options.noSwitching = true;
+  this.viewRangeSlider.options.floor = 0;
+  this.viewRangeSlider.options.ceil = 100;
+  this.viewRangeSlider.options.step = 10;
+  this.viewRangeSlider.options.noSwitching = true;
 
   // tickStyle
-  this.viewSlider.tickStyle = SliderTickStyle.Both;
-  this.viewSlider.tickWidth = '1px';
-  this.viewSlider.tickHeight = '6px';
-  this.viewSlider.tickTop = '-2px';
-  this.viewSlider.tickMarginLeft = '6px';
-  this.viewSlider.tickColor = '#178BE3';
+  this.viewRangeSlider.tickStyle = SliderTickStyle.Both;
+  this.viewRangeSlider.tickWidth = '1px';
+  this.viewRangeSlider.tickHeight = '6px';
+  this.viewRangeSlider.tickTop = '-2px';
+  this.viewRangeSlider.tickMarginLeft = '6px';
+  this.viewRangeSlider.tickColor = '#178BE3';
 
   // barStyle
-  this.viewSlider.barSize = '2px';
-  this.viewSlider.barTop = '0px';
-  this.viewSlider.barColor = '#B9B9B9';
-  this.viewSlider.barSelectionColor = '#0079D7';
+  this.viewRangeSlider.barSize = '2px';
+  this.viewRangeSlider.barTop = '0px';
+  this.viewRangeSlider.barColor = '#B9B9B9';
+  this.viewRangeSlider.barSelectionColor = '#0079D7';
 
   // pointerStyle
-  this.viewSlider.pointerSize = '10px';
-  this.viewSlider.pointerTop = '-6px';
-  this.viewSlider.pointerColor = '#1E90FF';
-  this.viewSlider.pointerBorderSize = '2px';
-  this.viewSlider.pointerBorderType = 'solid';
-  this.viewSlider.pointerBorderColor = '#FFFFFF';
-  this.viewSlider.pointerBorderRadius = '100%';
+  this.viewRangeSlider.pointerSize = '10px';
+  this.viewRangeSlider.pointerTop = '-6px';
+  this.viewRangeSlider.pointerColor = '#1E90FF';
+  this.viewRangeSlider.pointerBorderSize = '2px';
+  this.viewRangeSlider.pointerBorderType = 'solid';
+  this.viewRangeSlider.pointerBorderColor = '#FFFFFF';
+  this.viewRangeSlider.pointerBorderRadius = '100%';
 
   // labelStyle
-  this.viewSlider.labelDisplayStyle = SliderLabelDisplay.Tick;
-  this.viewSlider.labelPositionStyle = SliderLabelPosition.Below;
-  this.viewSlider.labelSize = '85%';
-  this.viewSlider.labelTop = '10px';
-  this.viewSlider.labelColor = 'inherit';`;
+  this.viewRangeSlider.labelDisplayStyle = SliderLabelDisplay.Tick;
+  this.viewRangeSlider.labelPositionStyle = SliderLabelPosition.Below;
+  this.viewRangeSlider.labelSize = '85%';
+  this.viewRangeSlider.labelTop = '10px';
+  this.viewRangeSlider.labelColor = 'inherit';`;
 
   public codePieChart = `  <wj-flex-pie #pieChart [selectionMode]="'Point'" (initialized)="click(pieChart)">
       <wj-flex-pie-data-label [content]="content"></wj-flex-pie-data-label>
@@ -235,52 +243,52 @@ export class DataComponent implements OnInit, AfterViewInit {
     // bravo slider
 
     // default slider
-    this.formSlider = this.fb.group({
-      dataSlider: [[10, 90]],
+    this.formRangeSlider = this.fb.group({
+      dataRangeSlider: [[10, 90]],
     });
 
     // get event
-    this.formSlider.valueChanges.subscribe((value) => {
+    this.formRangeSlider.valueChanges.subscribe((value) => {
       console.log(value);
     });
 
     // custom slider
 
     // options
-    this.viewSlider.options.floor = 0;
-    this.viewSlider.options.ceil = 100;
-    this.viewSlider.options.step = 10;
-    this.viewSlider.options.noSwitching = true;
+    this.viewRangeSlider.options.floor = 0;
+    this.viewRangeSlider.options.ceil = 100;
+    this.viewRangeSlider.options.step = 10;
+    this.viewRangeSlider.options.noSwitching = true;
 
     // tickStyle
-    this.viewSlider.tickStyle = SliderTickStyle.Both;
-    this.viewSlider.tickWidth = '1px';
-    this.viewSlider.tickHeight = '6px';
-    this.viewSlider.tickTop = '-2px';
-    this.viewSlider.tickMarginLeft = '6px';
-    this.viewSlider.tickColor = '#178BE3';
+    this.viewRangeSlider.tickStyle = SliderTickStyle.Both;
+    this.viewRangeSlider.tickWidth = '1px';
+    this.viewRangeSlider.tickHeight = '6px';
+    this.viewRangeSlider.tickTop = '-2px';
+    this.viewRangeSlider.tickMarginLeft = '6px';
+    this.viewRangeSlider.tickColor = '#178BE3';
 
     // barStyle
-    this.viewSlider.barSize = '2px';
-    this.viewSlider.barTop = '0px';
-    this.viewSlider.barColor = '#B9B9B9';
-    this.viewSlider.barSelectionColor = '#0079D7';
+    this.viewRangeSlider.barSize = '2px';
+    this.viewRangeSlider.barTop = '0px';
+    this.viewRangeSlider.barColor = '#B9B9B9';
+    this.viewRangeSlider.barSelectionColor = '#0079D7';
 
     // pointerStyle
-    this.viewSlider.pointerSize = '10px';
-    this.viewSlider.pointerTop = '-6px';
-    this.viewSlider.pointerColor = '#1E90FF';
-    this.viewSlider.pointerBorderSize = '2px';
-    this.viewSlider.pointerBorderType = 'solid';
-    this.viewSlider.pointerBorderColor = '#FFFFFF';
-    this.viewSlider.pointerBorderRadius = '100%';
+    this.viewRangeSlider.pointerSize = '10px';
+    this.viewRangeSlider.pointerTop = '-6px';
+    this.viewRangeSlider.pointerColor = '#1E90FF';
+    this.viewRangeSlider.pointerBorderSize = '2px';
+    this.viewRangeSlider.pointerBorderType = 'solid';
+    this.viewRangeSlider.pointerBorderColor = '#FFFFFF';
+    this.viewRangeSlider.pointerBorderRadius = '100%';
 
     // labelStyle
-    this.viewSlider.labelDisplayStyle = SliderLabelDisplay.Tick;
-    this.viewSlider.labelPositionStyle = SliderLabelPosition.Below;
-    this.viewSlider.labelSize = '85%';
-    this.viewSlider.labelTop = '10px';
-    this.viewSlider.labelColor = 'inherit';
+    this.viewRangeSlider.labelDisplayStyle = SliderLabelDisplay.Tick;
+    this.viewRangeSlider.labelPositionStyle = SliderLabelPosition.Below;
+    this.viewRangeSlider.labelSize = '85%';
+    this.viewRangeSlider.labelTop = '10px';
+    this.viewRangeSlider.labelColor = 'inherit';
 
     /*------------------------------------*/
   }

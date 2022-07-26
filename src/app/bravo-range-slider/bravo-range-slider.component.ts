@@ -22,7 +22,7 @@ import { SliderLabelDisplay } from '../data-types/enum/slider-label-display';
 import { SliderLabelPosition } from '../data-types/enum/slider-label-position';
 
 @Component({
-  selector: 'bravo-slider',
+  selector: 'bravo-range-slider',
   templateUrl: './bravo-range-slider.component.html',
   styleUrls: ['./bravo-range-slider.component.css'],
   providers: [
