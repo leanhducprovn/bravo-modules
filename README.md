@@ -2,15 +2,40 @@
 
 Phát triển một số module đơn giản!
 
-## Bravo Slider
+## Bravo Slider Base
 
 Code mẫu:
 
 ```html
-<bravo-slider
-  formControlName="dataSlider"
-  [options]="optionsSlider"
-></bravo-slider>
+<bravo-slider-base #sliderBase></bravo-slider-base>
+```
+
+```ts
+// options
+this.viewSliderBase.options.floor = 0;
+this.viewSliderBase.options.ceil = 100;
+this.viewSliderBase.options.showSelectionBar = true;
+this.viewSliderBase.options.getLegend = this.viewSliderBase.getLegend;
+
+// tick style
+this.viewSliderBase.tickStyle = SliderTickStyle.BottomRight;
+
+// label display
+this.viewSliderBase.labelDisplay = SliderLabelDisplay.Tick;
+
+// label position
+this.viewSliderBase.labelPosition = SliderLabelPosition.Below;
+```
+
+## Bravo Range Slider
+
+Code mẫu:
+
+```html
+<form [formGroup]="formRangeSlider">
+  <bravo-range-slider #rangeSlider formControlName="dataRangeSlider">
+  </bravo-range-slider>
+</form>
 ```
 
 ```ts
@@ -27,40 +52,40 @@ this.formSlider.valueChanges.subscribe((value) => {
 // custom slider
 
 // options
-this.viewSlider.options.floor = 0;
-this.viewSlider.options.ceil = 100;
-this.viewSlider.options.step = 10;
-this.viewSlider.options.noSwitching = true;
+this.viewRangeSlider.options.floor = 0;
+this.viewRangeSlider.options.ceil = 100;
+this.viewRangeSlider.options.step = 10;
+this.viewRangeSlider.options.noSwitching = true;
 
 // tickStyle
-this.viewSlider.tickStyle = SliderTickStyle.Both;
-this.viewSlider.tickWidth = "1px";
-this.viewSlider.tickHeight = "6px";
-this.viewSlider.tickTop = "-2px";
-this.viewSlider.tickMarginLeft = "6px";
-this.viewSlider.tickColor = "#178BE3";
+this.viewRangeSlider.tickStyle = SliderTickStyle.Both;
+this.viewRangeSlider.tickWidth = "1px";
+this.viewRangeSlider.tickHeight = "6px";
+this.viewRangeSlider.tickTop = "-2px";
+this.viewRangeSlider.tickMarginLeft = "6px";
+this.viewRangeSlider.tickColor = "#178BE3";
 
 // barStyle
-this.viewSlider.barSize = "2px";
-this.viewSlider.barTop = "0px";
-this.viewSlider.barColor = "#B9B9B9";
-this.viewSlider.barSelectionColor = "#0079D7";
+this.viewRangeSlider.barSize = "2px";
+this.viewRangeSlider.barTop = "0px";
+this.viewRangeSlider.barColor = "#B9B9B9";
+this.viewRangeSlider.barSelectionColor = "#0079D7";
 
 // pointerStyle
-this.viewSlider.pointerSize = "12px";
-this.viewSlider.pointerTop = "19px";
-this.viewSlider.pointerColor = "#1E90FF";
-this.viewSlider.pointerBorderSize = "2px";
-this.viewSlider.pointerBorderType = "solid";
-this.viewSlider.pointerBorderColor = "#FFFFFF";
-this.viewSlider.pointerBorderRadius = "100%";
+this.viewRangeSlider.pointerSize = "12px";
+this.viewRangeSlider.pointerTop = "19px";
+this.viewRangeSlider.pointerColor = "#1E90FF";
+this.viewRangeSlider.pointerBorderSize = "2px";
+this.viewRangeSlider.pointerBorderType = "solid";
+this.viewRangeSlider.pointerBorderColor = "#FFFFFF";
+this.viewRangeSlider.pointerBorderRadius = "100%";
 
 // labelStyle
-this.viewSlider.labelDisplayStyle = SliderLabelDisplay.Tick;
-this.viewSlider.labelPositionStyle = SliderLabelPosition.Below;
-this.viewSlider.labelSize = "13px";
-this.viewSlider.labelTop = "12px";
-this.viewSlider.labelColor = "inherit";
+this.viewRangeSlider.labelDisplayStyle = SliderLabelDisplay.Tick;
+this.viewRangeSlider.labelPositionStyle = SliderLabelPosition.Below;
+this.viewRangeSlider.labelSize = "13px";
+this.viewRangeSlider.labelTop = "12px";
+this.viewRangeSlider.labelColor = "inherit";
 ```
 
 ## Bravo Range Time

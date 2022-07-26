@@ -51,7 +51,6 @@ export class DataComponent implements OnInit, AfterViewInit {
 
   /*------------------------------------*/
   // bravo slider
-  public optionsSlider!: Options;
   public formRangeSlider!: FormGroup;
   /*------------------------------------*/
 
