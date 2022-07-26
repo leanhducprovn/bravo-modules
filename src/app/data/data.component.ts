@@ -125,8 +125,27 @@ export class DataComponent implements OnInit, AfterViewInit {
   /*------------------------------------*/
   // code highlight
 
+  // slider base
+  public codeSliderBaseHTML = `<bravo-slider-base #sliderBase></bravo-slider-base>`;
+
+  public codeSliderBaseTS = `  // options
+  this.viewSliderBase.options.floor = 0;
+  this.viewSliderBase.options.ceil = 100;
+  this.viewSliderBase.options.showSelectionBar = true;
+  this.viewSliderBase.options.getLegend = this.viewSliderBase.getLegend;
+
+  // tick style
+  this.viewSliderBase.tickStyle = SliderTickStyle.BottomRight;
+
+  // label display
+  this.viewSliderBase.labelDisplay = SliderLabelDisplay.Tick;
+
+  // label position
+  this.viewSliderBase.labelPosition = SliderLabelPosition.Below;`;
+
+  // range slider
   public codeRangeSliderHTML = `  <form [formGroup]="formRangeSlider">
-      <bravo-range-slider #slider formControlName="dataRangeSlider">
+      <bravo-range-slider #rangeSlider formControlName="dataRangeSlider">
       </bravo-range-slider>
   </form>`;
 
@@ -178,12 +197,14 @@ export class DataComponent implements OnInit, AfterViewInit {
   this.viewRangeSlider.labelTop = '10px';
   this.viewRangeSlider.labelColor = 'inherit';`;
 
+  // pie chart
   public codePieChart = `  <wj-flex-pie #pieChart [selectionMode]="'Point'" (initialized)="click(pieChart)">
       <wj-flex-pie-data-label [content]="content"></wj-flex-pie-data-label>
       <wj-flex-chart-animation [animationMode]="'Point'" [duration]="1000">
       </wj-flex-chart-animation>
   </wj-flex-pie>`;
 
+  // range time
   public codeRangeTime = `  <bravo-range-time
       [listMonth]="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
       [listQuarter]="['I', 'II', 'III', 'IV']"
@@ -192,6 +213,7 @@ export class DataComponent implements OnInit, AfterViewInit {
   >
   </bravo-range-time>`;
 
+  // checklist
   public codeChecklist = `  <!-- Dạng Checkbox, chỉ được phép chọn 1 giá trị -->
   <form [formGroup]="formTrading">
       <bravo-checklist
@@ -259,11 +281,11 @@ export class DataComponent implements OnInit, AfterViewInit {
     // label display
     // this.viewSliderBase.labelDisplay = SliderLabelDisplay.None;
     // this.viewSliderBase.labelDisplay = SliderLabelDisplay.MinMax;
-    // this.viewSliderBase.labelDisplay = SliderLabelDisplay.Tick;
+    this.viewSliderBase.labelDisplay = SliderLabelDisplay.Tick;
 
     // label position
     // this.viewSliderBase.labelPosition = SliderLabelPosition.Above;
-    // this.viewSliderBase.labelPosition = SliderLabelPosition.Below;
+    this.viewSliderBase.labelPosition = SliderLabelPosition.Below;
 
     /*------------------------------------*/
 
