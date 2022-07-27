@@ -351,26 +351,31 @@ export class BravoChecklistComponent
       18: margin left đầu dòng của children
       --------------------------------------*/
 
-      if (this.zParentText) {
-        let _sParentText = new wjc.Size(
-          BravoGraphicsRenderer.measureString(
-            this.zParentText,
-            _fontSize
-          )?.width,
-          BravoGraphicsRenderer.measureString(
-            this.zParentText,
-            _fontSize
-          )?.height
-        );
-        _nwParent = 13 + 4 + _sParentText.width + 4;
-        if (_sParentText.height <= 13) {
-          _nhParent = 13;
-        } else {
-          _nhParent = _sParentText.height;
-        }
-        _sParent = new wjc.Size(_nwParent, _nhParent);
+      // không có check all
+      if (this.bShowCheckAll == false) {
+        _sParent = new wjc.Size(0, 0);
       } else {
-        _sParent = new wjc.Size(13, 13);
+        if (this.zParentText) {
+          let _sParentText = new wjc.Size(
+            BravoGraphicsRenderer.measureString(
+              this.zParentText,
+              _fontSize
+            )?.width,
+            BravoGraphicsRenderer.measureString(
+              this.zParentText,
+              _fontSize
+            )?.height
+          );
+          _nwParent = 13 + 4 + _sParentText.width + 4;
+          if (_sParentText.height <= 13) {
+            _nhParent = 13;
+          } else {
+            _nhParent = _sParentText.height;
+          }
+          _sParent = new wjc.Size(_nwParent, _nhParent);
+        } else {
+          _sParent = new wjc.Size(13, 13);
+        }
       }
 
       // children
@@ -396,7 +401,7 @@ export class BravoChecklistComponent
           );
         }
         _nwChildren =
-          18 +
+          this.isCheckAll(this.bShowCheckAll) +
           13 * this.controls.length +
           8 * this.controls.length +
           _nwChildrenText;
@@ -433,7 +438,8 @@ export class BravoChecklistComponent
             )?.height
           );
         }
-        _nwChildren = 18 + 13 + 4 + _nwChildrenText + 4;
+        _nwChildren =
+          this.isCheckAll(this.bShowCheckAll) + 13 + 4 + _nwChildrenText + 4;
         if (_nhChildrenText <= 13) {
           _nhChildren = 13;
         } else {
@@ -458,6 +464,14 @@ export class BravoChecklistComponent
         );
         return _sControl;
       }
+    }
+  }
+
+  private isCheckAll(value: boolean) {
+    if (value == true) {
+      return 18; // thụt đầu dòng 18px
+    } else {
+      return 0; // không thụt đầu dòng
     }
   }
 }
