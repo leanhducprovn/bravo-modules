@@ -306,7 +306,7 @@ export class BravoChecklistComponent
             )?.height
           );
         }
-        _nwButton = _nwButtonText + (3 * 2 + 3 * 2) * 3 - 3;
+        _nwButton = _nwButtonText + (3 * 2 + 3 * 2) * this.controls.length - 3;
         _nhButton = 3 + 3 + _nhButtonText + 3 + 3;
         _sControl = new wjc.Size(_nwButton, _nhButton);
       } else if (
@@ -337,7 +337,7 @@ export class BravoChecklistComponent
           );
         }
         _nwButton = 3 + 3 + _nwButtonText + 3 + 3 - 3;
-        _nhButton = _nhButtonText + (3 * 2 + 3 * 2) * 3;
+        _nhButton = _nhButtonText + (3 * 2 + 3 * 2) * this.controls.length;
         _sControl = new wjc.Size(_nwButton, _nhButton);
       }
       return _sControl;
