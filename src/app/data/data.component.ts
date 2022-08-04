@@ -358,6 +358,9 @@ export class DataComponent implements OnInit, AfterViewInit {
     this.viewBarCode.type = CodeType.Code39;
     this.viewBarCode.value = 'A1312BCV';
 
+    this.viewBarCode.type = CodeType.Ansi39;
+    this.viewBarCode.value = 'A1312BCV';
+
     this.viewBarCode.type = CodeType.Code49;
     this.viewBarCode.value = 'Code49_123';
 

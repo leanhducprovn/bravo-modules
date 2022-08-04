@@ -1,5 +1,6 @@
 <wj-barcode-codabar *ngIf="CodeType.Codabar == type" [value]="value" [autoWidthZoom]="2"></wj-barcode-codabar>
 <wj-barcode-code39 *ngIf="CodeType.Code39 == type" [value]="value" [autoWidthZoom]="2"></wj-barcode-code39>
+<wj-barcode-code49 *ngIf="CodeType.Ansi39 == type" [value]="value" fullAscii="true"></wj-barcode-code49>
 <wj-barcode-code49 *ngIf="CodeType.Code49 == type" [value]="value"></wj-barcode-code49>
 <wj-barcode-code93 *ngIf="CodeType.Code_93 == type" [value]="value" [checkDigit]="true" [autoWidthZoom]="2">
 </wj-barcode-code93>
