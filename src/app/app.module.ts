@@ -20,6 +20,12 @@ import {
   HIGHLIGHT_OPTIONS,
 } from 'ngx-highlightjs';
 import { BravoSliderBaseComponent } from './bravo-slider-base/bravo-slider-base.component';
+import { BravoBarcodeBoxComponent } from './bravo-barcode-box/bravo-barcode-box.component';
+
+// Barcode Box
+import { WjBarcodeCommonModule } from '@grapecity/wijmo.angular2.barcode.common';
+import { WjBarcodeSpecializedModule } from '@grapecity/wijmo.angular2.barcode.specialized';
+import { WjBarcodeCompositeModule } from '@grapecity/wijmo.angular2.barcode.composite';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,7 @@ import { BravoSliderBaseComponent } from './bravo-slider-base/bravo-slider-base.
     BravoRangeTimeComponent,
     BravoChecklistComponent,
     BravoSliderBaseComponent,
+    BravoBarcodeBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +50,9 @@ import { BravoSliderBaseComponent } from './bravo-slider-base/bravo-slider-base.
     WjInputModule,
     HighlightModule,
     HighlightPlusModule,
+    WjBarcodeCommonModule,
+    WjBarcodeSpecializedModule,
+    WjBarcodeCompositeModule,
   ],
   providers: [
     {

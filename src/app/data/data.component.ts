@@ -9,11 +9,13 @@ import { AppearanceStyleEnum } from '../data-types/enum/appearance-style-enum.en
 import { SliderTickStyle } from '../data-types/enum/slider-tick-style.enum';
 import { SliderLabelDisplay } from '../data-types/enum/slider-label-display.enum';
 import { SliderLabelPosition } from '../data-types/enum/slider-label-position.enum';
+import { CodeType } from '../data-types/enum/code-type.enum';
 
 // component
 import { BravoRangeSliderComponent } from '../bravo-range-slider/bravo-range-slider.component';
 import { BravoChecklistComponent } from '../bravo-checklist/bravo-checklist.component';
 import { BravoSliderBaseComponent } from '../bravo-slider-base/bravo-slider-base.component';
+import { BravoBarcodeBoxComponent } from '../bravo-barcode-box/bravo-barcode-box.component';
 
 @Component({
   selector: 'app-data',
@@ -38,6 +40,12 @@ export class DataComponent implements OnInit, AfterViewInit {
   @ViewChild('trading', { static: true }) viewTrading!: BravoChecklistComponent;
   @ViewChild('rating', { static: true }) viewRating!: BravoChecklistComponent;
   @ViewChild('timing', { static: true }) viewTiming!: BravoChecklistComponent;
+  /*------------------------------------*/
+
+  /*------------------------------------*/
+  // barcode viewchild
+  @ViewChild('barcode', { static: true })
+  viewBarCode!: BravoBarcodeBoxComponent;
   /*------------------------------------*/
 
   /*------------------------------------*/
@@ -339,6 +347,56 @@ export class DataComponent implements OnInit, AfterViewInit {
     this.viewRangeSlider.labelSize = '85%';
     this.viewRangeSlider.labelTop = '10px';
     this.viewRangeSlider.labelColor = 'inherit';
+
+    /*------------------------------------*/
+
+    /*------------------------------------*/
+    // bravo barcode box
+    this.viewBarCode.type = CodeType.Codabar;
+    this.viewBarCode.value = 'A15126893B';
+
+    this.viewBarCode.type = CodeType.Code39;
+    this.viewBarCode.value = 'A1312BCV';
+
+    this.viewBarCode.type = CodeType.Code49;
+    this.viewBarCode.value = 'Code49_123';
+
+    this.viewBarCode.type = CodeType.Code_93;
+    this.viewBarCode.value = 'CODE93';
+
+    this.viewBarCode.type = CodeType.Code_128_A;
+    this.viewBarCode.value = 'Code128Demo';
+
+    this.viewBarCode.type = CodeType.DataMatrix;
+    this.viewBarCode.value =
+      'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+';
+
+    this.viewBarCode.type = CodeType.EAN_8;
+    this.viewBarCode.value = '9031101';
+
+    this.viewBarCode.type = CodeType.EAN_13;
+    this.viewBarCode.value = '963850741111';
+
+    this.viewBarCode.type = CodeType.JapanesePostal;
+    this.viewBarCode.value = '6540123789-A-K-Z';
+
+    this.viewBarCode.type = CodeType.Pdf417;
+    this.viewBarCode.value = 'This is a PDF417 barcode';
+
+    this.viewBarCode.type = CodeType.MicroPDF417;
+    this.viewBarCode.value = 'This is a MicroPDF417 barcode';
+
+    this.viewBarCode.type = CodeType.QRCode;
+    this.viewBarCode.value = 'QRCode';
+
+    this.viewBarCode.type = CodeType.UPC_A;
+    this.viewBarCode.value = '01234567890';
+
+    this.viewBarCode.type = CodeType.UPC_E0;
+    this.viewBarCode.value = '012345';
+
+    this.viewBarCode.type = CodeType.UPC_E1;
+    this.viewBarCode.value = '012345';
 
     /*------------------------------------*/
   }

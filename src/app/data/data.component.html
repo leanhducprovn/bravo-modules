@@ -1,81 +1,86 @@
 <div class="main">
-    <!--------------------------------------->
-    <!-- slider base -->
-    <h2>Bravo Slider Base</h2>
-    <div class="slider-base">
-        <bravo-slider-base #sliderBase></bravo-slider-base>
-    </div>
-    <h3>Code</h3>
-    <pre><code [lineNumbers]="true" [highlight]="codeSliderBaseHTML"></code></pre>
-    <pre><code [lineNumbers]="true" [highlight]="codeSliderBaseTS"></code></pre>
-    <!--------------------------------------->
+  <!--------------------------------------->
+  <!-- slider base -->
+  <h2>Bravo Slider Base</h2>
+  <div class="slider-base">
+    <bravo-slider-base #sliderBase></bravo-slider-base>
+  </div>
+  <h3>Code</h3>
+  <pre><code [lineNumbers]="true" [highlight]="codeSliderBaseHTML"></code></pre>
+  <pre><code [lineNumbers]="true" [highlight]="codeSliderBaseTS"></code></pre>
+  <!--------------------------------------->
 
-    <!--------------------------------------->
-    <!-- slider -->
-    <h2>Bravo Range Slider</h2>
-    <div class="range-slider">
-        <form [formGroup]="formRangeSlider">
-            <bravo-range-slider #rangeSlider formControlName="dataRangeSlider">
-            </bravo-range-slider>
-        </form>
-    </div>
-    <h3>Code</h3>
-    <pre><code [lineNumbers]="true" [highlight]="codeRangeSliderHTML"></code></pre>
-    <pre><code [lineNumbers]="true" [highlight]="codeRangeSliderTS"></code></pre>
-    <!--------------------------------------->
+  <!--------------------------------------->
+  <!-- slider -->
+  <h2>Bravo Range Slider</h2>
+  <div class="range-slider">
+    <form [formGroup]="formRangeSlider">
+      <bravo-range-slider #rangeSlider formControlName="dataRangeSlider">
+      </bravo-range-slider>
+    </form>
+  </div>
+  <h3>Code</h3>
+  <pre><code [lineNumbers]="true" [highlight]="codeRangeSliderHTML"></code></pre>
+  <pre><code [lineNumbers]="true" [highlight]="codeRangeSliderTS"></code></pre>
+  <!--------------------------------------->
 
-    <!--------------------------------------->
-    <!-- chart -->
-    <h2>Bravo Chart</h2>
-    <div class="chart">
-        <bravo-chart></bravo-chart>
-    </div>
-    <h3>Code</h3>
-    <pre><code [lineNumbers]="true" [highlight]="codePieChart"></code></pre>
-    <!--------------------------------------->
+  <!--------------------------------------->
+  <!-- chart -->
+  <h2>Bravo Chart</h2>
+  <div class="chart">
+    <bravo-chart></bravo-chart>
+  </div>
+  <h3>Code</h3>
+  <pre><code [lineNumbers]="true" [highlight]="codePieChart"></code></pre>
+  <!--------------------------------------->
 
-    <!--------------------------------------->
-    <!-- range time -->
-    <h2>Bravo Range Time</h2>
-    <div class="range-time">
-        <bravo-range-time (timeEvent)="timeEvent($event.minTime, $event.maxTime)">
-        </bravo-range-time>
-    </div>
-    <h3>Code</h3>
-    <pre><code [lineNumbers]="true" [highlight]="codeRangeTime"></code></pre>
-    <!--------------------------------------->
+  <!--------------------------------------->
+  <!-- range time -->
+  <h2>Bravo Range Time</h2>
+  <div class="range-time">
+    <bravo-range-time (timeEvent)="timeEvent($event.minTime, $event.maxTime)">
+    </bravo-range-time>
+  </div>
+  <h3>Code</h3>
+  <pre><code [lineNumbers]="true" [highlight]="codeRangeTime"></code></pre>
+  <!--------------------------------------->
 
-    <!--------------------------------------->
-    <!-- check list -->
-    <h2>Bravo Checklist</h2>
-    <div class="checklist">
-        <div class="trading">
-            <form [formGroup]="formTrading">
-                <bravo-checklist #trading formControlName="dataActive" [zParentText]="'Loại giao dịch'"
-                    [dataList]="tradingData" [bAllowSelectMultiValue]="false" [eFlowDirection]="FlowDirection.TopDown"
-                    [zSeparator]="','">
-                </bravo-checklist>
-            </form>
-        </div>
-        <div class="rating">
-            <form [formGroup]="formRating">
-                <bravo-checklist #rating formControlName="dataActive" [zParentText]="'Loại đánh giá'"
-                    [dataList]="ratingData" [bAllowSelectMultiValue]="true" [eFlowDirection]="FlowDirection.TopDown"
-                    [zSeparator]="','" [bShowCheckAll]="false">
-                </bravo-checklist>
-            </form>
-        </div>
-        <div class="timing">
-            <form [formGroup]="formTiming">
-                <bravo-checklist #timing formControlName="dataActive" [zParentText]="'Thời gian'"
-                    [dataList]="timingData" [eAppearanceStyle]="AppearanceStyleEnum.Button"
-                    [bAllowSelectMultiValue]="true" [eFlowDirection]="FlowDirection.LeftToRight" [zSeparator]="';'">
-                </bravo-checklist>
-            </form>
-        </div>
+  <!--------------------------------------->
+  <!-- check list -->
+  <h2>Bravo Checklist</h2>
+  <div class="checklist">
+    <div class="trading">
+      <form [formGroup]="formTrading">
+        <bravo-checklist #trading formControlName="dataActive" [zParentText]="'Loại giao dịch'" [dataList]="tradingData"
+          [bAllowSelectMultiValue]="false" [eFlowDirection]="FlowDirection.TopDown" [zSeparator]="','">
+        </bravo-checklist>
+      </form>
     </div>
-    <h3>Code</h3>
-    <pre><code [lineNumbers]="true" [highlight]="codeChecklist"></code></pre>
-    <!--------------------------------------->
+    <div class="rating">
+      <form [formGroup]="formRating">
+        <bravo-checklist #rating formControlName="dataActive" [zParentText]="'Loại đánh giá'" [dataList]="ratingData"
+          [bAllowSelectMultiValue]="true" [eFlowDirection]="FlowDirection.TopDown" [zSeparator]="','"
+          [bShowCheckAll]="false">
+        </bravo-checklist>
+      </form>
+    </div>
+    <div class="timing">
+      <form [formGroup]="formTiming">
+        <bravo-checklist #timing formControlName="dataActive" [zParentText]="'Thời gian'" [dataList]="timingData"
+          [eAppearanceStyle]="AppearanceStyleEnum.Button" [bAllowSelectMultiValue]="true"
+          [eFlowDirection]="FlowDirection.LeftToRight" [zSeparator]="';'">
+        </bravo-checklist>
+      </form>
+    </div>
+  </div>
+  <h3>Code</h3>
+  <pre><code [lineNumbers]="true" [highlight]="codeChecklist"></code></pre>
+  <!--------------------------------------->
 
+  <!--------------------------------------->
+  <!-- Barcode Box -->
+  <h2>Barcode Box</h2>
+  <div class="barcode">
+    <bravo-barcode-box #barcode></bravo-barcode-box>
+  </div>
 </div>
