@@ -11,9 +11,9 @@ import {
 import * as wjc from '@grapecity/wijmo';
 
 // enum
-import { SliderTickStyle } from '../data-types/enum/slider-tick-style';
-import { SliderLabelDisplay } from '../data-types/enum/slider-label-display';
-import { SliderLabelPosition } from '../data-types/enum/slider-label-position';
+import { SliderTickStyle } from '../data-types/enum/slider-tick-style.enum';
+import { SliderLabelDisplay } from '../data-types/enum/slider-label-display.enum';
+import { SliderLabelPosition } from '../data-types/enum/slider-label-position.enum';
 import { Font } from '../bravo-graphics/font';
 import { BravoGraphicsRenderer } from '../bravo-graphics/bravo.graphics.renderer';
 

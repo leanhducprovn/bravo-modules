@@ -4,11 +4,11 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 // enum
-import { FlowDirection } from '../data-types/enum/flow-direction';
-import { AppearanceStyleEnum } from '../data-types/enum/appearance-style-enum';
-import { SliderTickStyle } from '../data-types/enum/slider-tick-style';
-import { SliderLabelDisplay } from '../data-types/enum/slider-label-display';
-import { SliderLabelPosition } from '../data-types/enum/slider-label-position';
+import { FlowDirection } from '../data-types/enum/flow-direction.enum';
+import { AppearanceStyleEnum } from '../data-types/enum/appearance-style-enum.enum';
+import { SliderTickStyle } from '../data-types/enum/slider-tick-style.enum';
+import { SliderLabelDisplay } from '../data-types/enum/slider-label-display.enum';
+import { SliderLabelPosition } from '../data-types/enum/slider-label-position.enum';
 
 // component
 import { BravoRangeSliderComponent } from '../bravo-range-slider/bravo-range-slider.component';
