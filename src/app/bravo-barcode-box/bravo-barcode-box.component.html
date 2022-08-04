@@ -3,7 +3,14 @@
 <wj-barcode-code49 *ngIf="CodeType.Code49 == type" [value]="value"></wj-barcode-code49>
 <wj-barcode-code93 *ngIf="CodeType.Code_93 == type" [value]="value" [checkDigit]="true" [autoWidthZoom]="2">
 </wj-barcode-code93>
-<wj-barcode-code128 *ngIf="CodeType.Code_128_A == type" [value]="value" [autoWidthZoom]="2"></wj-barcode-code128>
+<wj-barcode-code128 *ngIf="CodeType.Code_128_A == type" [value]="value" [codeSet]="1" [autoWidthZoom]="2">
+</wj-barcode-code128>
+<wj-barcode-code128 *ngIf="CodeType.Code_128_B == type" [value]="value" [codeSet]="2" [autoWidthZoom]="2">
+</wj-barcode-code128>
+<wj-barcode-code128 *ngIf="CodeType.Code_128_C == type" [value]="value" [codeSet]="3" [autoWidthZoom]="2">
+</wj-barcode-code128>
+<wj-barcode-code128 *ngIf="CodeType.Code_128auto == type" [value]="value" [codeSet]="0" [autoWidthZoom]="2">
+</wj-barcode-code128>
 <wj-barcode-data-matrix-ecc200 *ngIf="CodeType.DataMatrix == type" [value]="value"></wj-barcode-data-matrix-ecc200>
 <wj-barcode-ean8 *ngIf="CodeType.EAN_8 == type" [value]="value"></wj-barcode-ean8>
 <wj-barcode-ean13 *ngIf="CodeType.EAN_13 == type" [value]="value" [addOn]="86"></wj-barcode-ean13>
