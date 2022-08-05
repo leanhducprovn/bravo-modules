@@ -10,15 +10,17 @@ import { SliderTickStyle } from '../data-types/enum/slider-tick-style.enum';
 import { SliderLabelDisplay } from '../data-types/enum/slider-label-display.enum';
 import { SliderLabelPosition } from '../data-types/enum/slider-label-position.enum';
 import { CodeType } from '../data-types/enum/code-type.enum';
+import { LabelPosition } from '../data-types/enum/label-position.enum';
 
 // component
 import { BravoRangeSliderComponent } from '../bravo-range-slider/bravo-range-slider.component';
 import { BravoChecklistComponent } from '../bravo-checklist/bravo-checklist.component';
 import { BravoSliderBaseComponent } from '../bravo-slider-base/bravo-slider-base.component';
-import { BravoBarcodeBoxComponent } from '../bravo-barcode-box/bravo-barcode-box.component';
 
-// modules
-import { BravoBarcodeBoxModule } from '../modules/bravo-barcode-box/bravo-barcode-box.module';
+// class
+import { BravoBarCodeBox } from '../class/BravoBarCodeBox';
+
+import { ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-data',
@@ -355,67 +357,115 @@ export class DataComponent implements OnInit, AfterViewInit {
 
     /*------------------------------------*/
     // bravo barcode box
-    // this.viewBarCode.type = CodeType.Codabar;
-    // this.viewBarCode.value = 'A15126893B';
 
-    // this.viewBarCode.type = CodeType.Code39;
-    // this.viewBarCode.value = 'A1312BCV';
+    // barcode
+    let barcode = new BravoBarCodeBox();
+    barcode.element = document.getElementById('codabar');
+    barcode.type = CodeType.Codabar;
+    barcode.value = 'A15126893B';
+    barcode.color = 'red';
+    barcode.backgroundColor = '#FFFF00';
+    barcode.autoWidthZoom = 3;
+    barcode.showLabel = true;
+    barcode.labelPosition = LabelPosition.Top;
+    barcode.render();
 
-    // this.viewBarCode.type = CodeType.Ansi39;
-    // this.viewBarCode.value = 'A1312BCV';
+    // code39
+    let code39 = new BravoBarCodeBox();
+    code39.element = document.getElementById('code39');
+    code39.type = CodeType.Code39;
+    code39.value = 'A1312BCV';
+    code39.color = '#32CD32';
+    code39.backgroundColor = '#222222';
+    code39.showLabel = false;
+    code39.autoWidthZoom = 3;
+    code39.render();
 
-    // this.viewBarCode.type = CodeType.Code49;
-    // this.viewBarCode.value = 'Code49_123';
+    // ansi39
+    let ansi39 = new BravoBarCodeBox();
+    ansi39.element = document.getElementById('ansi39');
+    ansi39.type = CodeType.Ansi39;
+    ansi39.value = 'A1312ANSI';
+    ansi39.autoWidthZoom = 3;
+    ansi39.color = '#4682B4';
+    ansi39.backgroundColor = '#FFF8DC';
+    ansi39.render();
 
-    // this.viewBarCode.type = CodeType.Code_93;
-    // this.viewBarCode.value = 'CODE93';
+    // code49
+    let code49 = new BravoBarCodeBox();
+    code49.element = document.getElementById('code49');
+    code49.type = CodeType.Code49;
+    code49.value = 'Code49_123';
+    code49.color = '#000';
+    code49.backgroundColor = '#fff';
+    code49.showLabel = true;
+    code49.labelPosition = LabelPosition.Top;
+    code49.render();
 
-    // this.viewBarCode.type = CodeType.Code_128_A;
-    // this.viewBarCode.value = '99';
+    // code93
+    let code93 = new BravoBarCodeBox();
+    code93.element = document.getElementById('code93');
+    code93.type = CodeType.Code_93;
+    code93.value = 'CODE93';
+    code93.autoWidthZoom = 5;
+    code93.autoWidth = true;
+    code93.color = '#0000FF';
+    code93.backgroundColor = '#C0C0C0';
+    code93.showLabel = true;
+    code93.labelPosition = LabelPosition.Bottom;
+    code93.render();
 
-    // this.viewBarCode.type = CodeType.Code_128_B;
-    // this.viewBarCode.value = 'Code128Demo';
+    // code128A
+    let code128a = new BravoBarCodeBox();
+    code128a.element = document.getElementById('code128a');
+    code128a.type = CodeType.Code_128_A;
+    code128a.value = '99';
+    code128a.autoWidthZoom = 5;
+    code128a.autoWidth = true;
+    code128a.color = '#FF00FF';
+    code128a.backgroundColor = '#eeeeee';
+    code128a.showLabel = true;
+    code128a.labelPosition = LabelPosition.Bottom;
+    code128a.render();
 
-    // this.viewBarCode.type = CodeType.Code_128_C;
-    // this.viewBarCode.value = '99';
+    // code128B
+    let code128b = new BravoBarCodeBox();
+    code128b.element = document.getElementById('code128b');
+    code128b.type = CodeType.Code_128_B;
+    code128b.value = 'Code128Demo';
+    code128b.autoWidthZoom = 5;
+    code128b.autoWidth = true;
+    code128b.color = '#FF00FF';
+    code128b.backgroundColor = '#eeeeee';
+    code128b.showLabel = true;
+    code128b.labelPosition = LabelPosition.Bottom;
+    code128b.render();
 
-    // this.viewBarCode.type = CodeType.Code_128auto;
-    // this.viewBarCode.value = 'Code128Demo';
+    // code128C
+    let code128c = new BravoBarCodeBox();
+    code128c.element = document.getElementById('code128c');
+    code128c.type = CodeType.Code_128_C;
+    code128c.value = '99';
+    code128c.autoWidthZoom = 5;
+    code128c.autoWidth = true;
+    code128c.color = '#FF00FF';
+    code128c.backgroundColor = '#eeeeee';
+    code128c.showLabel = true;
+    code128c.labelPosition = LabelPosition.Bottom;
+    code128c.render();
 
-    // this.viewBarCode.type = CodeType.DataMatrix;
-    // this.viewBarCode.value =
-    //   'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+';
-
-    // this.viewBarCode.type = CodeType.EAN_8;
-    // this.viewBarCode.value = '9031101';
-
-    // this.viewBarCode.type = CodeType.EAN_13;
-    // this.viewBarCode.value = '963850741111';
-
-    // this.viewBarCode.type = CodeType.JapanesePostal;
-    // this.viewBarCode.value = '6540123789-A-K-Z';
-
-    // this.viewBarCode.type = CodeType.Pdf417;
-    // this.viewBarCode.value = 'This is a PDF417 barcode';
-
-    // this.viewBarCode.type = CodeType.MicroPDF417;
-    // this.viewBarCode.value = 'This is a MicroPDF417 barcode';
-
-    // this.viewBarCode.type = CodeType.QRCode;
-    // this.viewBarCode.value = 'QRCode';
-
-    // this.viewBarCode.type = CodeType.UPC_A;
-    // this.viewBarCode.value = '01234567890';
-
-    // this.viewBarCode.type = CodeType.UPC_E0;
-    // this.viewBarCode.value = '012345';
-
-    // this.viewBarCode.type = CodeType.UPC_E1;
-    // this.viewBarCode.value = '012345';
-
-    // let barcode = new BravoBarcodeBoxModule();
-    // barcode.type = CodeType.QRCode;
-    // barcode.value = 'Bravo';
+    // code128Auto
+    let code128auto = new BravoBarCodeBox();
+    code128auto.element = document.getElementById('code128auto');
+    code128auto.type = CodeType.Code_128auto;
+    code128auto.value = 'Code128Auto';
+    code128auto.autoWidthZoom = 5;
+    code128auto.autoWidth = true;
+    code128auto.color = '#FF00FF';
+    code128auto.backgroundColor = '#eeeeee';
+    code128auto.showLabel = true;
+    code128auto.labelPosition = LabelPosition.Bottom;
+    code128auto.render();
 
     /*------------------------------------*/
   }

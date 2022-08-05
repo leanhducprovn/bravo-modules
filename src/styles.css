@@ -71,6 +71,7 @@ h3 {
     font-weight: 700;
     font-size: 16px;
     -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
 }
 
 pre {

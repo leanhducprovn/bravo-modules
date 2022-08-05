@@ -21,9 +21,6 @@ import {
 } from 'ngx-highlightjs';
 import { BravoSliderBaseComponent } from './bravo-slider-base/bravo-slider-base.component';
 
-// modules
-import { BravoBarcodeBoxModule } from './modules/bravo-barcode-box/bravo-barcode-box.module';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +43,6 @@ import { BravoBarcodeBoxModule } from './modules/bravo-barcode-box/bravo-barcode
     WjInputModule,
     HighlightModule,
     HighlightPlusModule,
-    BravoBarcodeBoxModule,
   ],
   providers: [
     {
