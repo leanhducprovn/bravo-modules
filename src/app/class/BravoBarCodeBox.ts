@@ -40,6 +40,10 @@ export class BravoBarCodeBox {
   public labelPosition: BarCodeLabelPosition = BarCodeLabelPosition.Bottom;
   public hideExtraChecksum: boolean = false;
 
+  constructor(element: any) {
+    this.element = element;
+  }
+
   public render(): void {
     try {
       if (this.type == CodeType.None) {

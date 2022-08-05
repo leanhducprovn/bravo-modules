@@ -359,8 +359,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     // bravo barcode box
 
     // barcode
-    let barcode = new BravoBarCodeBox();
-    barcode.element = document.getElementById('codabar');
+    let barcode = new BravoBarCodeBox(document.getElementById('codabar'));
     barcode.type = CodeType.Codabar;
     barcode.value = 'A15126893B';
     barcode.color = 'red';
@@ -371,8 +370,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     barcode.render();
 
     // code39
-    let code39 = new BravoBarCodeBox();
-    code39.element = document.getElementById('code39');
+    let code39 = new BravoBarCodeBox(document.getElementById('code39'));
     code39.type = CodeType.Code39;
     code39.value = 'A1312BCV';
     code39.color = '#32CD32';
@@ -382,8 +380,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     code39.render();
 
     // ansi39
-    let ansi39 = new BravoBarCodeBox();
-    ansi39.element = document.getElementById('ansi39');
+    let ansi39 = new BravoBarCodeBox(document.getElementById('ansi39'));
     ansi39.type = CodeType.Ansi39;
     ansi39.value = 'A1312ANSI';
     ansi39.autoWidthZoom = 3;
@@ -392,8 +389,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     ansi39.render();
 
     // code49
-    let code49 = new BravoBarCodeBox();
-    code49.element = document.getElementById('code49');
+    let code49 = new BravoBarCodeBox(document.getElementById('code49'));
     code49.type = CodeType.Code49;
     code49.value = 'Code49_123';
     code49.color = '#000';
@@ -403,8 +399,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     code49.render();
 
     // code93
-    let code93 = new BravoBarCodeBox();
-    code93.element = document.getElementById('code93');
+    let code93 = new BravoBarCodeBox(document.getElementById('code93'));
     code93.type = CodeType.Code_93;
     code93.value = 'CODE93';
     code93.autoWidthZoom = 5;
@@ -416,8 +411,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     code93.render();
 
     // code128A
-    let code128a = new BravoBarCodeBox();
-    code128a.element = document.getElementById('code128a');
+    let code128a = new BravoBarCodeBox(document.getElementById('code128a'));
     code128a.type = CodeType.Code_128_A;
     code128a.value = '99';
     code128a.autoWidthZoom = 5;
@@ -429,8 +423,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     code128a.render();
 
     // code128B
-    let code128b = new BravoBarCodeBox();
-    code128b.element = document.getElementById('code128b');
+    let code128b = new BravoBarCodeBox(document.getElementById('code128b'));
     code128b.type = CodeType.Code_128_B;
     code128b.value = 'Code128Demo';
     code128b.autoWidthZoom = 5;
@@ -442,8 +435,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     code128b.render();
 
     // code128C
-    let code128c = new BravoBarCodeBox();
-    code128c.element = document.getElementById('code128c');
+    let code128c = new BravoBarCodeBox(document.getElementById('code128c'));
     code128c.type = CodeType.Code_128_C;
     code128c.value = '99';
     code128c.autoWidthZoom = 5;
@@ -455,8 +447,9 @@ export class DataComponent implements OnInit, AfterViewInit {
     code128c.render();
 
     // code128Auto
-    let code128auto = new BravoBarCodeBox();
-    code128auto.element = document.getElementById('code128auto');
+    let code128auto = new BravoBarCodeBox(
+      document.getElementById('code128auto')
+    );
     code128auto.type = CodeType.Code_128auto;
     code128auto.value = 'Code128Auto';
     code128auto.autoWidthZoom = 5;
@@ -468,8 +461,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     code128auto.render();
 
     // ean8
-    let ean8 = new BravoBarCodeBox();
-    ean8.element = document.getElementById('ean8');
+    let ean8 = new BravoBarCodeBox(document.getElementById('ean8'));
     ean8.type = CodeType.EAN_8;
     ean8.value = '9031101';
     ean8.color = '#333333';
@@ -479,8 +471,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     ean8.render();
 
     // ean13
-    let ean13 = new BravoBarCodeBox();
-    ean13.element = document.getElementById('ean13');
+    let ean13 = new BravoBarCodeBox(document.getElementById('ean13'));
     ean13.type = CodeType.EAN_13;
     ean13.value = '963850741111';
     ean13.addOn = 86;
@@ -493,8 +484,9 @@ export class DataComponent implements OnInit, AfterViewInit {
     ean13.render();
 
     // japanese postal
-    let japanesepostal = new BravoBarCodeBox();
-    japanesepostal.element = document.getElementById('japanesepostal');
+    let japanesepostal = new BravoBarCodeBox(
+      document.getElementById('japanesepostal')
+    );
     japanesepostal.type = CodeType.JapanesePostal;
     japanesepostal.value = '6540123789-A-K-Z';
     japanesepostal.color = 'red';
@@ -504,8 +496,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     japanesepostal.render();
 
     // pdf417
-    let pdf417 = new BravoBarCodeBox();
-    pdf417.element = document.getElementById('pdf417');
+    let pdf417 = new BravoBarCodeBox(document.getElementById('pdf417'));
     pdf417.type = CodeType.Pdf417;
     pdf417.value = 'This is a PDF417 barcode';
     pdf417.autoWidthZoom = 5;
@@ -515,8 +506,9 @@ export class DataComponent implements OnInit, AfterViewInit {
     pdf417.render();
 
     // micropdf417
-    let micropdf417 = new BravoBarCodeBox();
-    micropdf417.element = document.getElementById('micropdf417');
+    let micropdf417 = new BravoBarCodeBox(
+      document.getElementById('micropdf417')
+    );
     micropdf417.type = CodeType.MicroPDF417;
     micropdf417.value = 'This is a micropdf417 barcode';
     micropdf417.color = '#00FF33';
@@ -524,8 +516,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     micropdf417.render();
 
     // qrcode
-    let qrcode = new BravoBarCodeBox();
-    qrcode.element = document.getElementById('qrcode');
+    let qrcode = new BravoBarCodeBox(document.getElementById('qrcode'));
     qrcode.type = CodeType.QRCode;
     qrcode.value = 'This is a qrcode barcode';
     qrcode.color = '#000';
@@ -533,8 +524,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     qrcode.render();
 
     // upca
-    let upca = new BravoBarCodeBox();
-    upca.element = document.getElementById('upca');
+    let upca = new BravoBarCodeBox(document.getElementById('upca'));
     upca.type = CodeType.UPC_A;
     upca.value = '01234567890';
     upca.addOn = 96;
@@ -547,8 +537,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     upca.render();
 
     // upce0
-    let upce0 = new BravoBarCodeBox();
-    upce0.element = document.getElementById('upce0');
+    let upce0 = new BravoBarCodeBox(document.getElementById('upce0'));
     upce0.type = CodeType.UPC_E0;
     upce0.value = '012345';
     upce0.color = '#222222';
@@ -558,8 +547,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     upce0.render();
 
     // upce1
-    let upce1 = new BravoBarCodeBox();
-    upce1.element = document.getElementById('upce1');
+    let upce1 = new BravoBarCodeBox(document.getElementById('upce1'));
     upce1.type = CodeType.UPC_E1;
     upce1.value = '012345';
     upce1.color = '#222222';
