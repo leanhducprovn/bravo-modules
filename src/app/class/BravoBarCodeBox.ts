@@ -42,7 +42,9 @@ export class BravoBarCodeBox {
 
   public render(): void {
     try {
-      if (this.type == CodeType.Codabar) {
+      if (this.type == CodeType.None) {
+        return;
+      } else if (this.type == CodeType.Codabar) {
         new Codabar(this.element, {
           value: this.value,
           autoWidthZoom: this.autoWidthZoom,
@@ -231,6 +233,46 @@ export class BravoBarCodeBox {
           addOnHeight: this.addOnHeight,
           addOnLabelPosition: this.addOnLabelPosition,
         });
+      } else if (this.type == CodeType.Ansi39x) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.Code_2_of_5) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.Code25intlv) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.Matrix_2_of_5) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.Code39x) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.Code93x) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.MSI) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.PostNet) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.RM4SCC) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.UCCEAN128) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.EAN128FNC1) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.RSS14) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.RSS14Truncated) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.RSS14Stacked) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.RSS14StackedOmnidirectional) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.RSSExpanded) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.RSSExpandedStacked) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.RSSLimited) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.DataMatrix) {
+        throw 'Not yet supported!';
+      } else if (this.type == CodeType.IntelligentMail) {
+        throw 'Not yet supported!';
       }
     } catch (error) {
       console.log(error);
