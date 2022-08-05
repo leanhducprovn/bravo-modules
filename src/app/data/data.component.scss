@@ -50,7 +50,18 @@
         }
     }
 
-    .barcode {
+    .barcodebox {
         margin: 20px 0 20px 0;
+
+
+        #code49,
+        #ean8,
+        #ean13,
+        #japanesepostal,
+        #upca,
+        #upce0,
+        #upce1 {
+            width: 50%;
+        }
     }
 }

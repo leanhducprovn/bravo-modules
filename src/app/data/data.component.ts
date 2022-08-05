@@ -492,6 +492,84 @@ export class DataComponent implements OnInit, AfterViewInit {
     ean13.addOnLabelPosition = BarCodeLabelPosition.Top;
     ean13.render();
 
+    // japanese postal
+    let japanesepostal = new BravoBarCodeBox();
+    japanesepostal.element = document.getElementById('japanesepostal');
+    japanesepostal.type = CodeType.JapanesePostal;
+    japanesepostal.value = '6540123789-A-K-Z';
+    japanesepostal.color = 'red';
+    japanesepostal.backgroundColor = '#dddddd';
+    japanesepostal.showLabel = true;
+    japanesepostal.labelPosition = BarCodeLabelPosition.Top;
+    japanesepostal.render();
+
+    // pdf417
+    let pdf417 = new BravoBarCodeBox();
+    pdf417.element = document.getElementById('pdf417');
+    pdf417.type = CodeType.Pdf417;
+    pdf417.value = 'This is a PDF417 barcode';
+    pdf417.autoWidthZoom = 5;
+    pdf417.autoWidth = true;
+    pdf417.color = '#00FF33';
+    pdf417.backgroundColor = '#000000';
+    pdf417.render();
+
+    // micropdf417
+    let micropdf417 = new BravoBarCodeBox();
+    micropdf417.element = document.getElementById('micropdf417');
+    micropdf417.type = CodeType.MicroPDF417;
+    micropdf417.value = 'This is a micropdf417 barcode';
+    micropdf417.color = '#00FF33';
+    micropdf417.backgroundColor = '#000000';
+    micropdf417.render();
+
+    // qrcode
+    let qrcode = new BravoBarCodeBox();
+    qrcode.element = document.getElementById('qrcode');
+    qrcode.type = CodeType.QRCode;
+    qrcode.value = 'This is a qrcode barcode';
+    qrcode.color = '#000';
+    qrcode.backgroundColor = '#fff';
+    qrcode.render();
+
+    // upca
+    let upca = new BravoBarCodeBox();
+    upca.element = document.getElementById('upca');
+    upca.type = CodeType.UPC_A;
+    upca.value = '01234567890';
+    upca.addOn = 96;
+    upca.color = '#222222';
+    upca.backgroundColor = '#eeeeee';
+    upca.showLabel = true;
+    upca.labelPosition = BarCodeLabelPosition.Bottom;
+    upca.addOnHeight = 'auto';
+    upca.addOnLabelPosition = BarCodeLabelPosition.Top;
+    upca.render();
+
+    // upce0
+    let upce0 = new BravoBarCodeBox();
+    upce0.element = document.getElementById('upce0');
+    upce0.type = CodeType.UPC_E0;
+    upce0.value = '012345';
+    upce0.color = '#222222';
+    upce0.backgroundColor = '#eeeeee';
+    upce0.showLabel = true;
+    upce0.labelPosition = BarCodeLabelPosition.Bottom;
+    upce0.render();
+
+    // upce1
+    let upce1 = new BravoBarCodeBox();
+    upce1.element = document.getElementById('upce1');
+    upce1.type = CodeType.UPC_E1;
+    upce1.value = '012345';
+    upce1.color = '#222222';
+    upce1.backgroundColor = '#eeeeee';
+    upce1.showLabel = true;
+    upce1.labelPosition = BarCodeLabelPosition.Top;
+    upce1.addOn = 99;
+    upce1.addOnLabelPosition = BarCodeLabelPosition.Bottom;
+    upce1.render();
+
     /*------------------------------------*/
   }
 
