@@ -1,6 +1,6 @@
 // Enum
 import { CodeType } from '../data-types/enum/code-type.enum';
-import { LabelPosition } from '../data-types/enum/label-position.enum';
+import { BarCodeLabelPosition } from '../data-types/enum/barcode-label-position.enum';
 import { Code128CodeSet } from '../data-types/enum/code-128-code-set.enum';
 
 // BarCode
@@ -8,10 +8,8 @@ import {
   Codabar,
   Code39,
   Code128,
-  Code128A,
-  Code128B,
-  Code128C,
-  Code128Auto,
+  Ean8,
+  Ean13,
 } from '@grapecity/wijmo.barcode.common';
 import { Code49, Code93 } from '@grapecity/wijmo.barcode.specialized';
 
@@ -25,13 +23,15 @@ export class BravoBarCodeBox {
   public fullAscii: boolean = false;
   public checkDigit: boolean = false;
   public addOn!: number;
+  public addOnHeight: string | number = 'auto';
+  public addOnLabelPosition: BarCodeLabelPosition = BarCodeLabelPosition.Top;
   public color: string = 'rgb(0,0,0)';
   public backgroundColor: string = '#fff';
   public showLabel: boolean = true;
-  public labelPosition: LabelPosition = LabelPosition.Bottom;
+  public labelPosition: BarCodeLabelPosition = BarCodeLabelPosition.Bottom;
   public hideExtraChecksum: boolean = false;
 
-  public render(fullUpdate?: boolean): void {
+  public render(): void {
     if (this.type == CodeType.Codabar) {
       new Codabar(this.element, {
         value: this.value,
@@ -131,6 +131,27 @@ export class BravoBarCodeBox {
         showLabel: this.showLabel,
         labelPosition: this.labelPosition,
         hideExtraChecksum: this.hideExtraChecksum,
+      });
+    } else if (this.type == CodeType.EAN_8) {
+      new Ean8(this.element, {
+        value: this.value,
+        color: this.color,
+        backgroundColor: this.backgroundColor,
+        showLabel: this.showLabel,
+        labelPosition: this.labelPosition,
+        hideExtraChecksum: this.hideExtraChecksum,
+      });
+    } else if (this.type == CodeType.EAN_13) {
+      new Ean13(this.element, {
+        value: this.value,
+        color: this.color,
+        backgroundColor: this.backgroundColor,
+        showLabel: this.showLabel,
+        labelPosition: this.labelPosition,
+        hideExtraChecksum: this.hideExtraChecksum,
+        addOn: this.addOn,
+        addOnHeight: this.addOnHeight,
+        addOnLabelPosition: this.addOnLabelPosition,
       });
     }
   }

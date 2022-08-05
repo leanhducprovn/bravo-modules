@@ -10,7 +10,7 @@ import { SliderTickStyle } from '../data-types/enum/slider-tick-style.enum';
 import { SliderLabelDisplay } from '../data-types/enum/slider-label-display.enum';
 import { SliderLabelPosition } from '../data-types/enum/slider-label-position.enum';
 import { CodeType } from '../data-types/enum/code-type.enum';
-import { LabelPosition } from '../data-types/enum/label-position.enum';
+import { BarCodeLabelPosition } from '../data-types/enum/barcode-label-position.enum';
 
 // component
 import { BravoRangeSliderComponent } from '../bravo-range-slider/bravo-range-slider.component';
@@ -367,7 +367,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     barcode.backgroundColor = '#FFFF00';
     barcode.autoWidthZoom = 3;
     barcode.showLabel = true;
-    barcode.labelPosition = LabelPosition.Top;
+    barcode.labelPosition = BarCodeLabelPosition.Top;
     barcode.render();
 
     // code39
@@ -399,7 +399,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     code49.color = '#000';
     code49.backgroundColor = '#fff';
     code49.showLabel = true;
-    code49.labelPosition = LabelPosition.Top;
+    code49.labelPosition = BarCodeLabelPosition.Top;
     code49.render();
 
     // code93
@@ -412,7 +412,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     code93.color = '#0000FF';
     code93.backgroundColor = '#C0C0C0';
     code93.showLabel = true;
-    code93.labelPosition = LabelPosition.Bottom;
+    code93.labelPosition = BarCodeLabelPosition.Bottom;
     code93.render();
 
     // code128A
@@ -425,7 +425,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     code128a.color = '#FF00FF';
     code128a.backgroundColor = '#eeeeee';
     code128a.showLabel = true;
-    code128a.labelPosition = LabelPosition.Bottom;
+    code128a.labelPosition = BarCodeLabelPosition.Bottom;
     code128a.render();
 
     // code128B
@@ -438,7 +438,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     code128b.color = '#FF00FF';
     code128b.backgroundColor = '#eeeeee';
     code128b.showLabel = true;
-    code128b.labelPosition = LabelPosition.Bottom;
+    code128b.labelPosition = BarCodeLabelPosition.Bottom;
     code128b.render();
 
     // code128C
@@ -451,7 +451,7 @@ export class DataComponent implements OnInit, AfterViewInit {
     code128c.color = '#FF00FF';
     code128c.backgroundColor = '#eeeeee';
     code128c.showLabel = true;
-    code128c.labelPosition = LabelPosition.Bottom;
+    code128c.labelPosition = BarCodeLabelPosition.Bottom;
     code128c.render();
 
     // code128Auto
@@ -464,8 +464,33 @@ export class DataComponent implements OnInit, AfterViewInit {
     code128auto.color = '#FF00FF';
     code128auto.backgroundColor = '#eeeeee';
     code128auto.showLabel = true;
-    code128auto.labelPosition = LabelPosition.Bottom;
+    code128auto.labelPosition = BarCodeLabelPosition.Bottom;
     code128auto.render();
+
+    // ean8
+    let ean8 = new BravoBarCodeBox();
+    ean8.element = document.getElementById('ean8');
+    ean8.type = CodeType.EAN_8;
+    ean8.value = '9031101';
+    ean8.color = '#333333';
+    ean8.backgroundColor = '#eeeeee';
+    ean8.showLabel = true;
+    ean8.labelPosition = BarCodeLabelPosition.Top;
+    ean8.render();
+
+    // ean13
+    let ean13 = new BravoBarCodeBox();
+    ean13.element = document.getElementById('ean13');
+    ean13.type = CodeType.EAN_13;
+    ean13.value = '963850741111';
+    ean13.addOn = 86;
+    ean13.color = '#333333';
+    ean13.backgroundColor = '#eeeeee';
+    ean13.showLabel = true;
+    ean13.labelPosition = BarCodeLabelPosition.Bottom;
+    ean13.addOnHeight = 'auto';
+    ean13.addOnLabelPosition = BarCodeLabelPosition.Top;
+    ean13.render();
 
     /*------------------------------------*/
   }
