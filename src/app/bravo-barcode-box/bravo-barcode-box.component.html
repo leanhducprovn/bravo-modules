@@ -1,24 +1,34 @@
-<wj-barcode-codabar *ngIf="CodeType.Codabar == type" [value]="value" [autoWidthZoom]="2"></wj-barcode-codabar>
-<wj-barcode-code39 *ngIf="CodeType.Code39 == type" [value]="value" [autoWidthZoom]="2"></wj-barcode-code39>
-<wj-barcode-code49 *ngIf="CodeType.Ansi39 == type" [value]="value" fullAscii="true"></wj-barcode-code49>
-<wj-barcode-code49 *ngIf="CodeType.Code49 == type" [value]="value"></wj-barcode-code49>
-<wj-barcode-code93 *ngIf="CodeType.Code_93 == type" [value]="value" [checkDigit]="true" [autoWidthZoom]="2">
+<!-- <wj-barcode-codabar *ngIf="CodeType.Codabar == barCode.type" [value]="barCode.value" [autoWidthZoom]="2">
+</wj-barcode-codabar>
+<wj-barcode-code39 *ngIf="CodeType.Code39 == barCode.type" [value]="barCode.value" [autoWidthZoom]="2">
+</wj-barcode-code39>
+<wj-barcode-code49 *ngIf="CodeType.Ansi39 == barCode.type" [value]="barCode.value" fullAscii="true"></wj-barcode-code49>
+<wj-barcode-code49 *ngIf="CodeType.Code49 == barCode.type" [value]="barCode.value"></wj-barcode-code49>
+<wj-barcode-code93 *ngIf="CodeType.Code_93 == barCode.type" [value]="barCode.value" [checkDigit]="true"
+  [autoWidthZoom]="2">
 </wj-barcode-code93>
-<wj-barcode-code128 *ngIf="CodeType.Code_128_A == type" [value]="value" [codeSet]="1" [autoWidthZoom]="2">
+<wj-barcode-code128 *ngIf="CodeType.Code_128_A == barCode.type" [value]="barCode.value" [codeSet]="1"
+  [autoWidthZoom]="2">
 </wj-barcode-code128>
-<wj-barcode-code128 *ngIf="CodeType.Code_128_B == type" [value]="value" [codeSet]="2" [autoWidthZoom]="2">
+<wj-barcode-code128 *ngIf="CodeType.Code_128_B == barCode.type" [value]="barCode.value" [codeSet]="2"
+  [autoWidthZoom]="2">
 </wj-barcode-code128>
-<wj-barcode-code128 *ngIf="CodeType.Code_128_C == type" [value]="value" [codeSet]="3" [autoWidthZoom]="2">
+<wj-barcode-code128 *ngIf="CodeType.Code_128_C == barCode.type" [value]="barCode.value" [codeSet]="3"
+  [autoWidthZoom]="2">
 </wj-barcode-code128>
-<wj-barcode-code128 *ngIf="CodeType.Code_128auto == type" [value]="value" [codeSet]="0" [autoWidthZoom]="2">
+<wj-barcode-code128 *ngIf="CodeType.Code_128auto == barCode.type" [value]="barCode.value" [codeSet]="0"
+  [autoWidthZoom]="2">
 </wj-barcode-code128>
-<wj-barcode-data-matrix-ecc200 *ngIf="CodeType.DataMatrix == type" [value]="value"></wj-barcode-data-matrix-ecc200>
-<wj-barcode-ean8 *ngIf="CodeType.EAN_8 == type" [value]="value"></wj-barcode-ean8>
-<wj-barcode-ean13 *ngIf="CodeType.EAN_13 == type" [value]="value" [addOn]="86"></wj-barcode-ean13>
-<wj-barcode-japanese-postal *ngIf="CodeType.JapanesePostal == type" [value]="value"></wj-barcode-japanese-postal>
-<wj-barcode-pdf417 *ngIf="CodeType.Pdf417 == type" [value]="value" [autoWidthZoom]="2"></wj-barcode-pdf417>
-<wj-barcode-micro-pdf417 *ngIf="CodeType.MicroPDF417 == type" [value]="value"></wj-barcode-micro-pdf417>
-<wj-barcode-qr-code *ngIf="CodeType.QRCode == type" [value]="value"></wj-barcode-qr-code>
-<wj-barcode-upc-a *ngIf="CodeType.UPC_A == type" [value]="value"></wj-barcode-upc-a>
-<wj-barcode-upc-e0 *ngIf="CodeType.UPC_E0 == type" [value]="value"></wj-barcode-upc-e0>
-<wj-barcode-upc-e1 *ngIf="CodeType.UPC_E1 == type" [value]="value"></wj-barcode-upc-e1>
+<wj-barcode-data-matrix-ecc200 *ngIf="CodeType.DataMatrix == barCode.type" [value]="barCode.value">
+</wj-barcode-data-matrix-ecc200>
+<wj-barcode-ean8 *ngIf="CodeType.EAN_8 == barCode.type" [value]="barCode.value"></wj-barcode-ean8>
+<wj-barcode-ean13 *ngIf="CodeType.EAN_13 == barCode.type" [value]="barCode.value" [addOn]="86"></wj-barcode-ean13>
+<wj-barcode-japanese-postal *ngIf="CodeType.JapanesePostal == barCode.type" [value]="barCode.value">
+</wj-barcode-japanese-postal>
+<wj-barcode-pdf417 *ngIf="CodeType.Pdf417 == barCode.type" [value]="barCode.value" [autoWidthZoom]="2">
+</wj-barcode-pdf417>
+<wj-barcode-micro-pdf417 *ngIf="CodeType.MicroPDF417 == barCode.type" [value]="barCode.value"></wj-barcode-micro-pdf417>
+<wj-barcode-qr-code *ngIf="CodeType.QRCode == barCode.type" [value]="barCode.value"></wj-barcode-qr-code>
+<wj-barcode-upc-a *ngIf="CodeType.UPC_A == barCode.type" [value]="barCode.value"></wj-barcode-upc-a>
+<wj-barcode-upc-e0 *ngIf="CodeType.UPC_E0 == barCode.type" [value]="barCode.value"></wj-barcode-upc-e0>
+<wj-barcode-upc-e1 *ngIf="CodeType.UPC_E1 == barCode.type" [value]="barCode.value"></wj-barcode-upc-e1> -->

@@ -17,6 +17,9 @@ import { BravoChecklistComponent } from '../bravo-checklist/bravo-checklist.comp
 import { BravoSliderBaseComponent } from '../bravo-slider-base/bravo-slider-base.component';
 import { BravoBarcodeBoxComponent } from '../bravo-barcode-box/bravo-barcode-box.component';
 
+// modules
+import { BravoBarcodeBoxModule } from '../modules/bravo-barcode-box/bravo-barcode-box.module';
+
 @Component({
   selector: 'app-data',
   templateUrl: './data.component.html',
@@ -44,8 +47,8 @@ export class DataComponent implements OnInit, AfterViewInit {
 
   /*------------------------------------*/
   // barcode viewchild
-  @ViewChild('barcode', { static: true })
-  viewBarCode!: BravoBarcodeBoxComponent;
+  // @ViewChild('barcode', { static: true })
+  // viewBarCode!: BravoBarcodeBoxComponent;
   /*------------------------------------*/
 
   /*------------------------------------*/
@@ -352,63 +355,67 @@ export class DataComponent implements OnInit, AfterViewInit {
 
     /*------------------------------------*/
     // bravo barcode box
-    this.viewBarCode.type = CodeType.Codabar;
-    this.viewBarCode.value = 'A15126893B';
+    // this.viewBarCode.type = CodeType.Codabar;
+    // this.viewBarCode.value = 'A15126893B';
 
-    this.viewBarCode.type = CodeType.Code39;
-    this.viewBarCode.value = 'A1312BCV';
+    // this.viewBarCode.type = CodeType.Code39;
+    // this.viewBarCode.value = 'A1312BCV';
 
-    this.viewBarCode.type = CodeType.Ansi39;
-    this.viewBarCode.value = 'A1312BCV';
+    // this.viewBarCode.type = CodeType.Ansi39;
+    // this.viewBarCode.value = 'A1312BCV';
 
-    this.viewBarCode.type = CodeType.Code49;
-    this.viewBarCode.value = 'Code49_123';
+    // this.viewBarCode.type = CodeType.Code49;
+    // this.viewBarCode.value = 'Code49_123';
 
-    this.viewBarCode.type = CodeType.Code_93;
-    this.viewBarCode.value = 'CODE93';
+    // this.viewBarCode.type = CodeType.Code_93;
+    // this.viewBarCode.value = 'CODE93';
 
-    this.viewBarCode.type = CodeType.Code_128_A;
-    this.viewBarCode.value = '99';
+    // this.viewBarCode.type = CodeType.Code_128_A;
+    // this.viewBarCode.value = '99';
 
-    this.viewBarCode.type = CodeType.Code_128_B;
-    this.viewBarCode.value = 'Code128Demo';
+    // this.viewBarCode.type = CodeType.Code_128_B;
+    // this.viewBarCode.value = 'Code128Demo';
 
-    this.viewBarCode.type = CodeType.Code_128_C;
-    this.viewBarCode.value = '99';
+    // this.viewBarCode.type = CodeType.Code_128_C;
+    // this.viewBarCode.value = '99';
 
-    this.viewBarCode.type = CodeType.Code_128auto;
-    this.viewBarCode.value = 'Code128Demo';
+    // this.viewBarCode.type = CodeType.Code_128auto;
+    // this.viewBarCode.value = 'Code128Demo';
 
-    this.viewBarCode.type = CodeType.DataMatrix;
-    this.viewBarCode.value =
-      'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+';
+    // this.viewBarCode.type = CodeType.DataMatrix;
+    // this.viewBarCode.value =
+    //   'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+';
 
-    this.viewBarCode.type = CodeType.EAN_8;
-    this.viewBarCode.value = '9031101';
+    // this.viewBarCode.type = CodeType.EAN_8;
+    // this.viewBarCode.value = '9031101';
 
-    this.viewBarCode.type = CodeType.EAN_13;
-    this.viewBarCode.value = '963850741111';
+    // this.viewBarCode.type = CodeType.EAN_13;
+    // this.viewBarCode.value = '963850741111';
 
-    this.viewBarCode.type = CodeType.JapanesePostal;
-    this.viewBarCode.value = '6540123789-A-K-Z';
+    // this.viewBarCode.type = CodeType.JapanesePostal;
+    // this.viewBarCode.value = '6540123789-A-K-Z';
 
-    this.viewBarCode.type = CodeType.Pdf417;
-    this.viewBarCode.value = 'This is a PDF417 barcode';
+    // this.viewBarCode.type = CodeType.Pdf417;
+    // this.viewBarCode.value = 'This is a PDF417 barcode';
 
-    this.viewBarCode.type = CodeType.MicroPDF417;
-    this.viewBarCode.value = 'This is a MicroPDF417 barcode';
+    // this.viewBarCode.type = CodeType.MicroPDF417;
+    // this.viewBarCode.value = 'This is a MicroPDF417 barcode';
 
-    this.viewBarCode.type = CodeType.QRCode;
-    this.viewBarCode.value = 'QRCode';
+    // this.viewBarCode.type = CodeType.QRCode;
+    // this.viewBarCode.value = 'QRCode';
 
-    this.viewBarCode.type = CodeType.UPC_A;
-    this.viewBarCode.value = '01234567890';
+    // this.viewBarCode.type = CodeType.UPC_A;
+    // this.viewBarCode.value = '01234567890';
 
-    this.viewBarCode.type = CodeType.UPC_E0;
-    this.viewBarCode.value = '012345';
+    // this.viewBarCode.type = CodeType.UPC_E0;
+    // this.viewBarCode.value = '012345';
 
-    this.viewBarCode.type = CodeType.UPC_E1;
-    this.viewBarCode.value = '012345';
+    // this.viewBarCode.type = CodeType.UPC_E1;
+    // this.viewBarCode.value = '012345';
+
+    // let barcode = new BravoBarcodeBoxModule();
+    // barcode.type = CodeType.QRCode;
+    // barcode.value = 'Bravo';
 
     /*------------------------------------*/
   }
