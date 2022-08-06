@@ -4,7 +4,6 @@ export class Developer {
   public gender: string = 'Male';
   public address: string = 'Ha Noi, Viet Nam';
   public skills: string[] = [
-    'Python',
     'C/C++/C#',
     'HTML/CSS/JavaScript',
     'Angular',
