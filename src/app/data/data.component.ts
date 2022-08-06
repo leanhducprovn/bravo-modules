@@ -1,6 +1,11 @@
 // library
-import { Options } from '@angular-slider/ngx-slider';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 // enum
@@ -20,14 +25,18 @@ import { BravoSliderBaseComponent } from '../bravo-slider-base/bravo-slider-base
 // class
 import { BravoBarCodeBox } from '../class/BravoBarCodeBox';
 
-import { ElementRef } from '@angular/core';
+// wjc
+import * as wjc from '@grapecity/wijmo';
 
 @Component({
   selector: 'app-data',
   templateUrl: './data.component.html',
   styleUrls: ['./data.component.scss'],
 })
-export class DataComponent implements OnInit, AfterViewInit {
+export class DataComponent
+  extends wjc.Control
+  implements OnInit, AfterViewInit
+{
   /*------------------------------------*/
   // #sliderBase viewchild
   @ViewChild('sliderBase', { static: true })
@@ -469,9 +478,13 @@ export class DataComponent implements OnInit, AfterViewInit {
     upce1.render();`;
   /*------------------------------------*/
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, elementRef: ElementRef) {
+    super(elementRef.nativeElement);
+  }
 
   public ngAfterViewInit(): void {}
+
+  public test: any;
 
   public ngOnInit(): void {
     /*------------------------------------*/
@@ -559,7 +572,11 @@ export class DataComponent implements OnInit, AfterViewInit {
     // bravo barcode box
 
     // codabar
-    let codabar = new BravoBarCodeBox(document.getElementById('codabar'));
+
+    this.getCollection('codabar').forEach((e) => {
+      this.test = e;
+    });
+    let codabar = new BravoBarCodeBox(this.test);
     codabar.type = CodeType.Codabar;
     codabar.value = 'A15126893B';
     codabar.color = 'red';
@@ -765,6 +782,23 @@ export class DataComponent implements OnInit, AfterViewInit {
   // range time
   public timeEvent(min: Date, max: Date) {
     console.log(min, '=>', max);
+  }
+  /*------------------------------------*/
+
+  /*------------------------------------*/
+  // getCollection
+  private getCollection(...className: Array<string>) {
+    const _elements = new Array<HTMLElement>();
+    for (const zClassName of className) {
+      _elements.push(
+        ...Array.from(
+          this.hostElement?.getElementsByClassName(
+            zClassName
+          ) as HTMLCollectionOf<HTMLElement>
+        )
+      );
+    }
+    return _elements;
   }
   /*------------------------------------*/
 }
