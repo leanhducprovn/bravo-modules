@@ -269,15 +269,15 @@ export class DataComponent implements OnInit, AfterViewInit {
   </form>`;
 
   // codabar
-  public codeCodabarTS = `    let barcode = new BravoBarCodeBox(document.getElementById('codabar'));
-    barcode.type = CodeType.Codabar;
-    barcode.value = 'A15126893B';
-    barcode.color = 'red';
-    barcode.backgroundColor = '#FFFF00';
-    barcode.autoWidthZoom = 3;
-    barcode.showLabel = true;
-    barcode.labelPosition = BarCodeLabelPosition.Top;
-    barcode.render();`;
+  public codeCodabarTS = `    let codabar = new BravoBarCodeBox(document.getElementById('codabar'));
+    codabar.type = CodeType.Codabar;
+    codabar.value = 'A15126893B';
+    codabar.color = 'red';
+    codabar.backgroundColor = '#FFFF00';
+    codabar.autoWidthZoom = 3;
+    codabar.showLabel = true;
+    codabar.labelPosition = BarCodeLabelPosition.Top;
+    codabar.render();`;
 
   // code39
   public codeCode39TS = `    let code39 = new BravoBarCodeBox(document.getElementById('code39'));
@@ -558,16 +558,16 @@ export class DataComponent implements OnInit, AfterViewInit {
     /*------------------------------------*/
     // bravo barcode box
 
-    // barcode
-    let barcode = new BravoBarCodeBox(document.getElementById('codabar'));
-    barcode.type = CodeType.Codabar;
-    barcode.value = 'A15126893B';
-    barcode.color = 'red';
-    barcode.backgroundColor = '#FFFF00';
-    barcode.autoWidthZoom = 3;
-    barcode.showLabel = true;
-    barcode.labelPosition = BarCodeLabelPosition.Top;
-    barcode.render();
+    // codabar
+    let codabar = new BravoBarCodeBox(document.getElementById('codabar'));
+    codabar.type = CodeType.Codabar;
+    codabar.value = 'A15126893B';
+    codabar.color = 'red';
+    codabar.backgroundColor = '#FFFF00';
+    codabar.autoWidthZoom = 3;
+    codabar.showLabel = true;
+    codabar.labelPosition = BarCodeLabelPosition.Top;
+    codabar.render();
 
     // code39
     let code39 = new BravoBarCodeBox(document.getElementById('code39'));
