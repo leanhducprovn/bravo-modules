@@ -1,6 +1,7 @@
 // Enum
 import { CodeType } from '../data-types/enum/code-type.enum';
 import { BarCodeLabelPosition } from '../data-types/enum/barcode-label-position.enum';
+import { BarCodeRenderType } from '../data-types/enum/barcode-render-type.enum';
 import { Code128CodeSet } from '../data-types/enum/code-128-code-set.enum';
 
 // BarCode
@@ -39,6 +40,7 @@ export class BravoBarCodeBox {
   public showLabel: boolean = true;
   public labelPosition: BarCodeLabelPosition = BarCodeLabelPosition.Bottom;
   public hideExtraChecksum: boolean = false;
+  public renderType: BarCodeRenderType = BarCodeRenderType.Svg;
 
   constructor(element: any) {
     this.element = element;
@@ -58,6 +60,7 @@ export class BravoBarCodeBox {
           showLabel: this.showLabel,
           labelPosition: this.labelPosition,
           hideExtraChecksum: this.hideExtraChecksum,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.Code39) {
         new Code39(this.element, {
@@ -69,6 +72,7 @@ export class BravoBarCodeBox {
           showLabel: this.showLabel,
           labelPosition: this.labelPosition,
           hideExtraChecksum: this.hideExtraChecksum,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.Ansi39) {
         new Code39(this.element, {
@@ -81,6 +85,7 @@ export class BravoBarCodeBox {
           showLabel: this.showLabel,
           labelPosition: this.labelPosition,
           hideExtraChecksum: this.hideExtraChecksum,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.Code49) {
         new Code49(this.element, {
@@ -89,6 +94,7 @@ export class BravoBarCodeBox {
           backgroundColor: this.backgroundColor,
           showLabel: this.showLabel,
           labelPosition: this.labelPosition,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.Code_93) {
         new Code93(this.element, {
@@ -99,6 +105,7 @@ export class BravoBarCodeBox {
           backgroundColor: this.backgroundColor,
           showLabel: this.showLabel,
           labelPosition: this.labelPosition,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.Code_128_A) {
         new Code128(this.element, {
@@ -111,6 +118,7 @@ export class BravoBarCodeBox {
           showLabel: this.showLabel,
           labelPosition: this.labelPosition,
           hideExtraChecksum: this.hideExtraChecksum,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.Code_128_B) {
         new Code128(this.element, {
@@ -123,6 +131,7 @@ export class BravoBarCodeBox {
           showLabel: this.showLabel,
           labelPosition: this.labelPosition,
           hideExtraChecksum: this.hideExtraChecksum,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.Code_128_C) {
         new Code128(this.element, {
@@ -135,6 +144,7 @@ export class BravoBarCodeBox {
           showLabel: this.showLabel,
           labelPosition: this.labelPosition,
           hideExtraChecksum: this.hideExtraChecksum,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.Code_128auto) {
         new Code128(this.element, {
@@ -147,6 +157,7 @@ export class BravoBarCodeBox {
           showLabel: this.showLabel,
           labelPosition: this.labelPosition,
           hideExtraChecksum: this.hideExtraChecksum,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.EAN_8) {
         new Ean8(this.element, {
@@ -156,6 +167,7 @@ export class BravoBarCodeBox {
           showLabel: this.showLabel,
           labelPosition: this.labelPosition,
           hideExtraChecksum: this.hideExtraChecksum,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.EAN_13) {
         new Ean13(this.element, {
@@ -168,6 +180,7 @@ export class BravoBarCodeBox {
           addOn: this.addOn,
           addOnHeight: this.addOnHeight,
           addOnLabelPosition: this.addOnLabelPosition,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.JapanesePostal) {
         new JapanesePostal(this.element, {
@@ -177,6 +190,7 @@ export class BravoBarCodeBox {
           showLabel: this.showLabel,
           labelPosition: this.labelPosition,
           hideExtraChecksum: this.hideExtraChecksum,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.Pdf417) {
         new Pdf417(this.element, {
@@ -186,6 +200,7 @@ export class BravoBarCodeBox {
           color: this.color,
           backgroundColor: this.backgroundColor,
           hideExtraChecksum: this.hideExtraChecksum,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.MicroPDF417) {
         new MicroPdf417(this.element, {
@@ -193,6 +208,7 @@ export class BravoBarCodeBox {
           color: this.color,
           backgroundColor: this.backgroundColor,
           hideExtraChecksum: this.hideExtraChecksum,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.QRCode) {
         new QrCode(this.element, {
@@ -200,6 +216,7 @@ export class BravoBarCodeBox {
           color: this.color,
           backgroundColor: this.backgroundColor,
           hideExtraChecksum: this.hideExtraChecksum,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.UPC_A) {
         new UpcA(this.element, {
@@ -212,6 +229,7 @@ export class BravoBarCodeBox {
           addOn: this.addOn,
           addOnHeight: this.addOnHeight,
           addOnLabelPosition: this.addOnLabelPosition,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.UPC_E0) {
         new UpcE0(this.element, {
@@ -224,6 +242,7 @@ export class BravoBarCodeBox {
           addOn: this.addOn,
           addOnHeight: this.addOnHeight,
           addOnLabelPosition: this.addOnLabelPosition,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.UPC_E1) {
         new UpcE1(this.element, {
@@ -236,6 +255,7 @@ export class BravoBarCodeBox {
           addOn: this.addOn,
           addOnHeight: this.addOnHeight,
           addOnLabelPosition: this.addOnLabelPosition,
+          renderType: this.renderType,
         });
       } else if (this.type == CodeType.Ansi39x) {
         throw 'Not yet supported!';
