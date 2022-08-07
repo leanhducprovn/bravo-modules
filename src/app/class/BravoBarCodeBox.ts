@@ -186,9 +186,9 @@ export class BravoBarCodeBox {
 
   private invalidate() {
     setTimeout(() => {
-      if (!this._codabar) {
-        this.render();
-      }
+      // if (!this._codabar) {
+      this.render();
+      // }
     });
   }
 
