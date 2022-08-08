@@ -9,21 +9,21 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 // enum
-import { FlowDirection } from '../data-types/enum/flow-direction.enum';
-import { AppearanceStyleEnum } from '../data-types/enum/appearance-style-enum.enum';
-import { SliderTickStyle } from '../data-types/enum/slider-tick-style.enum';
-import { SliderLabelDisplay } from '../data-types/enum/slider-label-display.enum';
-import { SliderLabelPosition } from '../data-types/enum/slider-label-position.enum';
-import { CodeType } from '../data-types/enum/code-type.enum';
-import { BarCodeLabelPosition } from '../data-types/enum/barcode-label-position.enum';
+import { FlowDirection } from '../../types/enum/flow-direction.enum';
+import { AppearanceStyleEnum } from '../../types/enum/appearance-style-enum.enum';
+import { SliderTickStyle } from '../../types/enum/slider-tick-style.enum';
+import { SliderLabelDisplay } from '../../types/enum/slider-label-display.enum';
+import { SliderLabelPosition } from '../../types/enum/slider-label-position.enum';
+import { CodeType } from '../../types/enum/code-type.enum';
+import { BarCodeLabelPosition } from '../../types/enum/barcode-label-position.enum';
 
 // component
-import { BravoRangeSliderComponent } from '../bravo-range-slider/bravo-range-slider.component';
-import { BravoChecklistComponent } from '../bravo-checklist/bravo-checklist.component';
-import { BravoSliderBaseComponent } from '../bravo-slider-base/bravo-slider-base.component';
+import { BravoRangeSliderComponent } from '../../components/bravo-range-slider/bravo-range-slider.component';
+import { BravoChecklistComponent } from '../../components/bravo-checklist/bravo-checklist.component';
+import { BravoSliderBaseComponent } from '../../components/bravo-slider-base/bravo-slider-base.component';
 
 // class
-import { BravoBarCodeBox } from '../class/BravoBarCodeBox';
+import { BravoBarCodeBox } from '../../class/BravoBarCodeBox';
 
 // wjc
 import * as wjc from '@grapecity/wijmo';

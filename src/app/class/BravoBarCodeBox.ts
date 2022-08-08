@@ -1,8 +1,8 @@
 // Enum
-import { CodeType } from '../data-types/enum/code-type.enum';
-import { BarCodeLabelPosition } from '../data-types/enum/barcode-label-position.enum';
-import { BarCodeRenderType } from '../data-types/enum/barcode-render-type.enum';
-import { Code128CodeSet } from '../data-types/enum/code-128-code-set.enum';
+import { CodeType } from '../types/enum/code-type.enum';
+import { BarCodeLabelPosition } from '../types/enum/barcode-label-position.enum';
+import { BarCodeRenderType } from '../types/enum/barcode-render-type.enum';
+import { Code128CodeSet } from '../types/enum/code-128-code-set.enum';
 
 // BarCode
 import {

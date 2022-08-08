@@ -4,22 +4,24 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
-import { DataComponent } from './data/data.component';
-import { BravoRangeSliderComponent } from './bravo-range-slider/bravo-range-slider.component';
-import { BravoChartComponent } from './bravo-chart/bravo-chart.component';
-import { PieChartComponent } from './bravo-chart/pie-chart/pie-chart.component';
+import { DataComponent } from './home/data/data.component';
+import { BravoRangeSliderComponent } from './components/bravo-range-slider/bravo-range-slider.component';
+import { BravoChartComponent } from './components/bravo-chart/bravo-chart.component';
+import { PieChartComponent } from './components/bravo-chart/pie-chart/pie-chart.component';
 import { WjChartModule } from '@grapecity/wijmo.angular2.chart';
 import { WjChartAnimationModule } from '@grapecity/wijmo.angular2.chart.animation';
 import { WjInputModule } from '@grapecity/wijmo.angular2.input';
-import { BravoRangeTimeComponent } from './bravo-range-time/bravo-range-time.component';
-import { BravoChecklistComponent } from './bravo-checklist/bravo-checklist.component';
+import { BravoRangeTimeComponent } from './components/bravo-range-time/bravo-range-time.component';
+import { BravoChecklistComponent } from './components/bravo-checklist/bravo-checklist.component';
 import { HighlightPlusModule } from 'ngx-highlightjs/plus';
 import {
   HighlightModule,
   HighlightOptions,
   HIGHLIGHT_OPTIONS,
 } from 'ngx-highlightjs';
-import { BravoSliderBaseComponent } from './bravo-slider-base/bravo-slider-base.component';
+import { BravoSliderBaseComponent } from './components/bravo-slider-base/bravo-slider-base.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { BravoSliderBaseComponent } from './bravo-slider-base/bravo-slider-base.
     BravoRangeTimeComponent,
     BravoChecklistComponent,
     BravoSliderBaseComponent,
+    PageNotFoundComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

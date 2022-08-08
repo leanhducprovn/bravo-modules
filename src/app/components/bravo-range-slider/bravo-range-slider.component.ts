@@ -17,9 +17,9 @@ import * as wjc from '@grapecity/wijmo';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 // enum
-import { SliderTickStyle } from '../data-types/enum/slider-tick-style.enum';
-import { SliderLabelDisplay } from '../data-types/enum/slider-label-display.enum';
-import { SliderLabelPosition } from '../data-types/enum/slider-label-position.enum';
+import { SliderTickStyle } from '../../types/enum/slider-tick-style.enum';
+import { SliderLabelDisplay } from '../../types/enum/slider-label-display.enum';
+import { SliderLabelPosition } from '../../types/enum/slider-label-position.enum';
 
 @Component({
   selector: 'bravo-range-slider',

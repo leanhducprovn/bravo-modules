@@ -11,10 +11,10 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Control } from '@grapecity/wijmo';
 import { WjDirectiveBehavior } from '@grapecity/wijmo.angular2.directivebase';
-import { FlowDirection } from '../data-types/enum/flow-direction.enum';
-import { AppearanceStyleEnum } from '../data-types/enum/appearance-style-enum.enum';
-import { BravoGraphicsRenderer } from '../bravo-graphics/bravo.graphics.renderer';
-import { Font } from '../bravo-graphics/font';
+import { FlowDirection } from '../../types/enum/flow-direction.enum';
+import { AppearanceStyleEnum } from '../../types/enum/appearance-style-enum.enum';
+import { BravoGraphicsRenderer } from '../../library/bravo-graphics/bravo.graphics.renderer';
+import { Font } from '../../library/bravo-graphics/font';
 
 import * as wjc from '@grapecity/wijmo';
 

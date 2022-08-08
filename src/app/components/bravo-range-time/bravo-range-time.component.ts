@@ -11,8 +11,8 @@ import {
 import * as wjc from '@grapecity/wijmo';
 import { WjComboBox } from '@grapecity/wijmo.angular2.input';
 
-import { BravoGraphicsRenderer } from '../bravo-graphics/bravo.graphics.renderer';
-import { Font } from '../bravo-graphics/font';
+import { BravoGraphicsRenderer } from '../../library/bravo-graphics/bravo.graphics.renderer';
+import { Font } from '../../library/bravo-graphics/font';
 
 @Component({
   selector: 'bravo-range-time',
