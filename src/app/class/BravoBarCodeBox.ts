@@ -24,26 +24,172 @@ import {
 import { Pdf417, MicroPdf417 } from '@grapecity/wijmo.barcode.composite';
 
 export class BravoBarCodeBox {
-  public element!: any;
-  public type!: CodeType;
-  public value!: string;
-  public autoWidthZoom: number = 2;
-  public autoWidth: boolean = true;
-  public codeSet!: number;
-  public fullAscii: boolean = false;
-  public checkDigit: boolean = false;
-  public addOn!: number;
-  public addOnHeight: string | number = 'auto';
-  public addOnLabelPosition: BarCodeLabelPosition = BarCodeLabelPosition.Top;
-  public color: string = 'rgb(0,0,0)';
-  public backgroundColor: string = '#fff';
-  public showLabel: boolean = true;
-  public labelPosition: BarCodeLabelPosition = BarCodeLabelPosition.Bottom;
-  public hideExtraChecksum: boolean = false;
-  public renderType: BarCodeRenderType = BarCodeRenderType.Svg;
+  private _element!: any;
+  public set element(pValue: any) {
+    this._element = pValue;
+    this.invalidate();
+  }
+  public get element(): any {
+    return this._element;
+  }
+
+  private _type: CodeType = CodeType.None;
+  public set type(pValue: CodeType) {
+    this._type = pValue;
+    this.invalidate();
+  }
+  public get type(): CodeType {
+    return this._type;
+  }
+
+  private _value: string = 'Bravo';
+  public set value(pValue: string) {
+    this._value = pValue;
+    this.invalidate();
+  }
+  public get value(): string {
+    return this._value;
+  }
+
+  private _autoWidthZoom: number = 2;
+  public set autoWidthZoom(pValue: number) {
+    this._autoWidthZoom = pValue;
+    this.invalidate();
+  }
+  public get autoWidthZoom(): number {
+    return this._autoWidthZoom;
+  }
+
+  private _autoWidth: boolean = true;
+  public set autoWidth(pValue: boolean) {
+    this._autoWidth = pValue;
+    this.invalidate();
+  }
+  public get autoWidth(): boolean {
+    return this._autoWidth;
+  }
+
+  private _codeSet!: number;
+  public set codeSet(pValue: number) {
+    this._codeSet = pValue;
+    this.invalidate();
+  }
+  public get codeSet(): number {
+    return this._codeSet;
+  }
+
+  private _fullAscii: boolean = false;
+  public set fullAscii(pValue: boolean) {
+    this._fullAscii = pValue;
+    this.invalidate();
+  }
+  public get fullAscii(): boolean {
+    return this._fullAscii;
+  }
+
+  private _checkDigit: boolean = false;
+  public set checkDigit(pValue: boolean) {
+    this._checkDigit = pValue;
+    this.invalidate();
+  }
+  public get checkDigit(): boolean {
+    return this._checkDigit;
+  }
+
+  private _addOn!: number;
+  public set addOn(pValue: number) {
+    this._addOn = pValue;
+    this.invalidate();
+  }
+  public get addOn(): number {
+    return this._addOn;
+  }
+
+  private _addOnHeight: string | number = 'auto';
+  public set addOnHeight(pValue: string | number) {
+    this._addOnHeight = pValue;
+    this.invalidate();
+  }
+  public get addOnHeight(): string | number {
+    return this._addOnHeight;
+  }
+
+  private _addOnLabelPosition: BarCodeLabelPosition = BarCodeLabelPosition.Top;
+  public set addOnLabelPosition(pValue: BarCodeLabelPosition) {
+    this._addOnLabelPosition = pValue;
+    this.invalidate();
+  }
+  public get BarCodeLabelPosition(): BarCodeLabelPosition {
+    return this._addOnLabelPosition;
+  }
+
+  private _color: string = 'rgb(0,0,0)';
+  public set color(pValue: string) {
+    this._color = pValue;
+    this.invalidate();
+  }
+  public get color(): string {
+    return this._color;
+  }
+
+  private _backgroundColor: string = '#fff';
+  public set backgroundColor(pValue: string) {
+    this._backgroundColor = pValue;
+    this.invalidate();
+  }
+  public get backgroundColor(): string {
+    return this._backgroundColor;
+  }
+
+  private _showLabel: boolean = true;
+  public set showLabel(pValue: boolean) {
+    this._showLabel = pValue;
+    this.invalidate();
+  }
+  public get showLabel(): boolean {
+    return this._showLabel;
+  }
+
+  private _labelPosition: BarCodeLabelPosition = BarCodeLabelPosition.Bottom;
+  public set labelPosition(pValue: BarCodeLabelPosition) {
+    this._labelPosition = pValue;
+    this.invalidate();
+  }
+  public get labelPosition(): BarCodeLabelPosition {
+    return this._labelPosition;
+  }
+
+  private _hideExtraChecksum: boolean = false;
+  public set hideExtraChecksum(pValue: boolean) {
+    this._hideExtraChecksum = pValue;
+    this.invalidate();
+  }
+  public get hideExtraChecksum(): boolean {
+    return this._hideExtraChecksum;
+  }
+
+  private _renderType: BarCodeRenderType = BarCodeRenderType.Svg;
+  public set renderType(pValue: BarCodeRenderType) {
+    this._renderType = pValue;
+    this.invalidate();
+  }
+  public get renderType(): BarCodeRenderType {
+    return this._renderType;
+  }
 
   constructor(element: any) {
     this.element = element;
+  }
+
+  private _codabar!: Codabar;
+  private _code39!: Code39;
+
+  private invalidate() {
+    setTimeout(() => {
+      if (!this._codabar) {
+        this.render();
+      }
+    });
   }
 
   public render(): void {
@@ -51,7 +197,7 @@ export class BravoBarCodeBox {
       if (this.type == CodeType.None) {
         return;
       } else if (this.type == CodeType.Codabar) {
-        new Codabar(this.element, {
+        this._codabar = new Codabar(this.element, {
           value: this.value,
           autoWidthZoom: this.autoWidthZoom,
           autoWidth: this.autoWidth,
@@ -62,8 +208,9 @@ export class BravoBarCodeBox {
           hideExtraChecksum: this.hideExtraChecksum,
           renderType: this.renderType,
         });
+        this._codabar.invalidate();
       } else if (this.type == CodeType.Code39) {
-        new Code39(this.element, {
+        this._code39 = new Code39(this.element, {
           value: this.value,
           autoWidthZoom: this.autoWidthZoom,
           autoWidth: this.autoWidth,
@@ -74,6 +221,7 @@ export class BravoBarCodeBox {
           hideExtraChecksum: this.hideExtraChecksum,
           renderType: this.renderType,
         });
+        this._code39.invalidate();
       } else if (this.type == CodeType.Ansi39) {
         new Code39(this.element, {
           fullAscii: true,
