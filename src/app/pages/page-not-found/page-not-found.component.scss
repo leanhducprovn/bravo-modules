@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    background: #222;
+
+    .content {
+        color: #ddd;
+    }
+}
