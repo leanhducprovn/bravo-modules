@@ -191,11 +191,11 @@ export class BravoBarCodeBox {
     | MicroPdf417;
 
   private invalidate() {
-    console.log(this._element);
-    if (!this._barCode) {
-      this.render();
-      console.log(this._barCode);
-    }
+    setTimeout(() => {
+      if (!this._barCode) {
+        this.render();
+      }
+    });
   }
 
   public render(): void {

@@ -583,7 +583,6 @@ export class DataComponent
       this._codabar.showLabel = true;
       this._codabar.labelPosition = BarCodeLabelPosition.Top;
     });
-
     this._codabar.backgroundColor = 'black';
 
     // code39
@@ -596,7 +595,6 @@ export class DataComponent
       this._code39.showLabel = false;
       this._code39.autoWidthZoom = 3;
     });
-
     this._code39.color = 'blue';
 
     // ansi39
