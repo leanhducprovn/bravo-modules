@@ -583,6 +583,7 @@ export class DataComponent
       this._codabar.showLabel = true;
       this._codabar.labelPosition = BarCodeLabelPosition.Top;
     });
+
     this._codabar.backgroundColor = 'black';
 
     // code39
