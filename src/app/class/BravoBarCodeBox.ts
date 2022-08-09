@@ -199,217 +199,56 @@ export class BravoBarCodeBox {
     }
   }
 
-  public render() {
+  private render() {
     try {
       if (this.type == CodeType.None) {
         return;
       } else if (this.type == CodeType.Codabar) {
-        this._barCode = new Codabar(this._element, {
-          value: this.value,
-          autoWidthZoom: this.autoWidthZoom,
-          autoWidth: this.autoWidth,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          hideExtraChecksum: this.hideExtraChecksum,
-          renderType: this.renderType,
-        });
+        this._barCode = new Codabar(this._element);
       } else if (this.type == CodeType.Code39) {
-        this._barCode = new Code39(this._element, {
-          value: this.value,
-          autoWidthZoom: this.autoWidthZoom,
-          autoWidth: this.autoWidth,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          hideExtraChecksum: this.hideExtraChecksum,
-          renderType: this.renderType,
-        });
+        this._barCode = new Code39(this._element);
       } else if (this.type == CodeType.Ansi39) {
         this._barCode = new Code39(this._element, {
           fullAscii: true,
-          value: this.value,
-          autoWidthZoom: this.autoWidthZoom,
-          autoWidth: this.autoWidth,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          hideExtraChecksum: this.hideExtraChecksum,
-          renderType: this.renderType,
         });
       } else if (this.type == CodeType.Code49) {
-        this._barCode = new Code49(this._element, {
-          value: this.value,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          renderType: this.renderType,
-        });
+        this._barCode = new Code49(this._element);
       } else if (this.type == CodeType.Code_93) {
-        this._barCode = new Code93(this._element, {
-          value: this.value,
-          autoWidthZoom: this.autoWidthZoom,
-          autoWidth: this.autoWidth,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          renderType: this.renderType,
-        });
+        this._barCode = new Code93(this._element);
       } else if (this.type == CodeType.Code_128_A) {
         this._barCode = new Code128(this._element, {
           codeSet: Code128CodeSet.A,
-          value: this.value,
-          autoWidthZoom: this.autoWidthZoom,
-          autoWidth: this.autoWidth,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          hideExtraChecksum: this.hideExtraChecksum,
-          renderType: this.renderType,
         });
       } else if (this.type == CodeType.Code_128_B) {
         this._barCode = new Code128(this._element, {
           codeSet: Code128CodeSet.B,
-          value: this.value,
-          autoWidthZoom: this.autoWidthZoom,
-          autoWidth: this.autoWidth,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          hideExtraChecksum: this.hideExtraChecksum,
-          renderType: this.renderType,
         });
       } else if (this.type == CodeType.Code_128_C) {
         this._barCode = new Code128(this._element, {
           codeSet: Code128CodeSet.C,
-          value: this.value,
-          autoWidthZoom: this.autoWidthZoom,
-          autoWidth: this.autoWidth,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          hideExtraChecksum: this.hideExtraChecksum,
-          renderType: this.renderType,
         });
       } else if (this.type == CodeType.Code_128auto) {
         this._barCode = new Code128(this._element, {
           codeSet: Code128CodeSet.Auto,
-          value: this.value,
-          autoWidthZoom: this.autoWidthZoom,
-          autoWidth: this.autoWidth,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          hideExtraChecksum: this.hideExtraChecksum,
-          renderType: this.renderType,
         });
       } else if (this.type == CodeType.EAN_8) {
-        this._barCode = new Ean8(this._element, {
-          value: this.value,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          hideExtraChecksum: this.hideExtraChecksum,
-          renderType: this.renderType,
-        });
+        this._barCode = new Ean8(this._element);
       } else if (this.type == CodeType.EAN_13) {
-        this._barCode = new Ean13(this._element, {
-          value: this.value,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          hideExtraChecksum: this.hideExtraChecksum,
-          addOn: this.addOn,
-          addOnHeight: this.addOnHeight,
-          addOnLabelPosition: this.addOnLabelPosition,
-          renderType: this.renderType,
-        });
+        this._barCode = new Ean13(this._element);
       } else if (this.type == CodeType.JapanesePostal) {
-        this._barCode = new JapanesePostal(this._element, {
-          value: this.value,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          hideExtraChecksum: this.hideExtraChecksum,
-          renderType: this.renderType,
-        });
+        this._barCode = new JapanesePostal(this._element);
       } else if (this.type == CodeType.Pdf417) {
-        this._barCode = new Pdf417(this._element, {
-          value: this.value,
-          autoWidthZoom: this.autoWidthZoom,
-          autoWidth: this.autoWidth,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          hideExtraChecksum: this.hideExtraChecksum,
-          renderType: this.renderType,
-        });
+        this._barCode = new Pdf417(this._element);
       } else if (this.type == CodeType.MicroPDF417) {
-        this._barCode = new MicroPdf417(this._element, {
-          value: this.value,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          hideExtraChecksum: this.hideExtraChecksum,
-          renderType: this.renderType,
-        });
+        this._barCode = new MicroPdf417(this._element);
       } else if (this.type == CodeType.QRCode) {
-        this._barCode = new QrCode(this._element, {
-          value: this.value,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          hideExtraChecksum: this.hideExtraChecksum,
-          renderType: this.renderType,
-        });
+        this._barCode = new QrCode(this._element);
       } else if (this.type == CodeType.UPC_A) {
-        this._barCode = new UpcA(this._element, {
-          value: this.value,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          hideExtraChecksum: this.hideExtraChecksum,
-          addOn: this.addOn,
-          addOnHeight: this.addOnHeight,
-          addOnLabelPosition: this.addOnLabelPosition,
-          renderType: this.renderType,
-        });
+        this._barCode = new UpcA(this._element);
       } else if (this.type == CodeType.UPC_E0) {
-        this._barCode = new UpcE0(this._element, {
-          value: this.value,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          hideExtraChecksum: this.hideExtraChecksum,
-          addOn: this.addOn,
-          addOnHeight: this.addOnHeight,
-          addOnLabelPosition: this.addOnLabelPosition,
-          renderType: this.renderType,
-        });
+        this._barCode = new UpcE0(this._element);
       } else if (this.type == CodeType.UPC_E1) {
-        this._barCode = new UpcE1(this._element, {
-          value: this.value,
-          color: this.color,
-          backgroundColor: this.backgroundColor,
-          showLabel: this.showLabel,
-          labelPosition: this.labelPosition,
-          hideExtraChecksum: this.hideExtraChecksum,
-          addOn: this.addOn,
-          addOnHeight: this.addOnHeight,
-          addOnLabelPosition: this.addOnLabelPosition,
-          renderType: this.renderType,
-        });
+        this._barCode = new UpcE1(this._element);
       } else if (this.type == CodeType.Ansi39x) {
         throw 'Not yet supported!';
       } else if (this.type == CodeType.Code_2_of_5) {

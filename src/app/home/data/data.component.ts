@@ -584,8 +584,7 @@ export class DataComponent
       this._codabar.labelPosition = BarCodeLabelPosition.Top;
     });
 
-    this._codabar.backgroundColor = 'black';
-    this._codabar.color = 'green';
+    this._codabar.type = CodeType.QRCode;
 
     // code39
     this.getCollection('code39').forEach((element) => {
@@ -597,7 +596,6 @@ export class DataComponent
       this._code39.showLabel = false;
       this._code39.autoWidthZoom = 3;
     });
-    this._code39.color = '#FFFF00';
 
     // ansi39
     this.getCollection('ansi39').forEach((element) => {
