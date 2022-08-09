@@ -191,6 +191,7 @@ export class BravoBarCodeBox {
   }
 
   private _barCode!: any;
+  public notification!: any;
 
   private invalidate() {
     if (!this._barCode) {
@@ -284,48 +285,48 @@ export class BravoBarCodeBox {
       } else if (this.type == CodeType.UPC_E1) {
         this._barCode = new UpcE1(this._element);
       } else if (this.type == CodeType.Ansi39x) {
-        throw 'Not yet supported!';
+        throw 'Ansi39x not yet supported!';
       } else if (this.type == CodeType.Code_2_of_5) {
-        throw 'Not yet supported!';
+        throw 'Code_2_of_5 not yet supported!';
       } else if (this.type == CodeType.Code25intlv) {
-        throw 'Not yet supported!';
+        throw 'Code25intlv not yet supported!';
       } else if (this.type == CodeType.Matrix_2_of_5) {
-        throw 'Not yet supported!';
+        throw 'Matrix_2_of_5 not yet supported!';
       } else if (this.type == CodeType.Code39x) {
-        throw 'Not yet supported!';
+        throw 'Code39x not yet supported!';
       } else if (this.type == CodeType.Code93x) {
-        throw 'Not yet supported!';
+        throw 'Code93x not yet supported!';
       } else if (this.type == CodeType.MSI) {
-        throw 'Not yet supported!';
+        throw 'MSI not yet supported!';
       } else if (this.type == CodeType.PostNet) {
-        throw 'Not yet supported!';
+        throw 'PostNet not yet supported!';
       } else if (this.type == CodeType.RM4SCC) {
-        throw 'Not yet supported!';
+        throw 'RM4SCC not yet supported!';
       } else if (this.type == CodeType.UCCEAN128) {
-        throw 'Not yet supported!';
+        throw 'UCCEAN128 not yet supported!';
       } else if (this.type == CodeType.EAN128FNC1) {
-        throw 'Not yet supported!';
+        throw 'EAN128FNC1 not yet supported!';
       } else if (this.type == CodeType.RSS14) {
-        throw 'Not yet supported!';
+        throw 'RSS14 not yet supported!';
       } else if (this.type == CodeType.RSS14Truncated) {
-        throw 'Not yet supported!';
+        throw 'RSS14Truncated not yet supported!';
       } else if (this.type == CodeType.RSS14Stacked) {
-        throw 'Not yet supported!';
+        throw 'RSS14Stacked not yet supported!';
       } else if (this.type == CodeType.RSS14StackedOmnidirectional) {
-        throw 'Not yet supported!';
+        throw 'RSS14StackedOmnidirectional not yet supported!';
       } else if (this.type == CodeType.RSSExpanded) {
-        throw 'Not yet supported!';
+        throw 'RSSExpanded not yet supported!';
       } else if (this.type == CodeType.RSSExpandedStacked) {
-        throw 'Not yet supported!';
+        throw 'RSSExpandedStacked not yet supported!';
       } else if (this.type == CodeType.RSSLimited) {
-        throw 'Not yet supported!';
+        throw 'RSSLimited not yet supported!';
       } else if (this.type == CodeType.DataMatrix) {
-        throw 'Not yet supported!';
+        throw 'DataMatrix not yet supported!';
       } else if (this.type == CodeType.IntelligentMail) {
-        throw 'Not yet supported!';
+        throw 'IntelligentMail not yet supported!';
       }
     } catch (error) {
-      console.warn(error);
+      this.notification = error;
     }
   }
 }
