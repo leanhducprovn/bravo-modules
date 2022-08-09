@@ -585,6 +585,7 @@ export class DataComponent
     });
 
     this._codabar.backgroundColor = 'black';
+    this._codabar.color = 'green';
 
     // code39
     this.getCollection('code39').forEach((element) => {
@@ -596,7 +597,7 @@ export class DataComponent
       this._code39.showLabel = false;
       this._code39.autoWidthZoom = 3;
     });
-    this._code39.color = 'blue';
+    this._code39.color = '#FFFF00';
 
     // ansi39
     this.getCollection('ansi39').forEach((element) => {

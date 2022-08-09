@@ -62,7 +62,7 @@ export class BravoBarCodeBox {
     return this._autoWidth;
   }
 
-  private _codeSet!: number;
+  private _codeSet: Code128CodeSet = Code128CodeSet.Auto;
   public set codeSet(pValue: number) {
     this._codeSet = pValue;
     this.invalidate();
@@ -174,30 +174,32 @@ export class BravoBarCodeBox {
     this._element = _element;
   }
 
-  private _barCode!:
-    | Codabar
-    | Code39
-    | Code128
-    | Ean8
-    | Ean13
-    | QrCode
-    | UpcA
-    | UpcE0
-    | UpcE1
-    | Code49
-    | Code93
-    | JapanesePostal
-    | Pdf417
-    | MicroPdf417;
+  private _barCode!: any;
 
   private invalidate() {
     if (!this._barCode) {
       this.render();
+    } else {
+      this._barCode.type = this.type;
+      this._barCode.value = this.value;
+      this._barCode.autoWidthZoom = this.autoWidthZoom;
+      this._barCode.autoWidth = this.autoWidth;
+      this._barCode.color = this.color;
+      this._barCode.backgroundColor = this.backgroundColor;
+      this._barCode.showLabel = this.showLabel;
+      this._barCode.labelPosition = this.labelPosition;
+      this._barCode.hideExtraChecksum = this.hideExtraChecksum;
+      this._barCode.renderType = this.renderType;
+      this._barCode.codeSet = this.codeSet;
+      this._barCode.fullAscii = this.fullAscii;
+      this._barCode.checkDigit = this.checkDigit;
+      this._barCode.addOn = this.addOn;
+      this._barCode.addOnHeight = this.addOnHeight;
+      this._barCode.addOnLabelPosition = this.addOnLabelPosition;
     }
   }
 
-  public render(): void {
-    console.log(this.type, this.value, this.color);
+  public render() {
     try {
       if (this.type == CodeType.None) {
         return;
@@ -213,7 +215,6 @@ export class BravoBarCodeBox {
           hideExtraChecksum: this.hideExtraChecksum,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.Code39) {
         this._barCode = new Code39(this._element, {
           value: this.value,
@@ -226,7 +227,6 @@ export class BravoBarCodeBox {
           hideExtraChecksum: this.hideExtraChecksum,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.Ansi39) {
         this._barCode = new Code39(this._element, {
           fullAscii: true,
@@ -240,7 +240,6 @@ export class BravoBarCodeBox {
           hideExtraChecksum: this.hideExtraChecksum,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.Code49) {
         this._barCode = new Code49(this._element, {
           value: this.value,
@@ -250,7 +249,6 @@ export class BravoBarCodeBox {
           labelPosition: this.labelPosition,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.Code_93) {
         this._barCode = new Code93(this._element, {
           value: this.value,
@@ -262,7 +260,6 @@ export class BravoBarCodeBox {
           labelPosition: this.labelPosition,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.Code_128_A) {
         this._barCode = new Code128(this._element, {
           codeSet: Code128CodeSet.A,
@@ -276,7 +273,6 @@ export class BravoBarCodeBox {
           hideExtraChecksum: this.hideExtraChecksum,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.Code_128_B) {
         this._barCode = new Code128(this._element, {
           codeSet: Code128CodeSet.B,
@@ -290,7 +286,6 @@ export class BravoBarCodeBox {
           hideExtraChecksum: this.hideExtraChecksum,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.Code_128_C) {
         this._barCode = new Code128(this._element, {
           codeSet: Code128CodeSet.C,
@@ -304,7 +299,6 @@ export class BravoBarCodeBox {
           hideExtraChecksum: this.hideExtraChecksum,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.Code_128auto) {
         this._barCode = new Code128(this._element, {
           codeSet: Code128CodeSet.Auto,
@@ -318,7 +312,6 @@ export class BravoBarCodeBox {
           hideExtraChecksum: this.hideExtraChecksum,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.EAN_8) {
         this._barCode = new Ean8(this._element, {
           value: this.value,
@@ -329,7 +322,6 @@ export class BravoBarCodeBox {
           hideExtraChecksum: this.hideExtraChecksum,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.EAN_13) {
         this._barCode = new Ean13(this._element, {
           value: this.value,
@@ -343,7 +335,6 @@ export class BravoBarCodeBox {
           addOnLabelPosition: this.addOnLabelPosition,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.JapanesePostal) {
         this._barCode = new JapanesePostal(this._element, {
           value: this.value,
@@ -354,7 +345,6 @@ export class BravoBarCodeBox {
           hideExtraChecksum: this.hideExtraChecksum,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.Pdf417) {
         this._barCode = new Pdf417(this._element, {
           value: this.value,
@@ -365,7 +355,6 @@ export class BravoBarCodeBox {
           hideExtraChecksum: this.hideExtraChecksum,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.MicroPDF417) {
         this._barCode = new MicroPdf417(this._element, {
           value: this.value,
@@ -374,7 +363,6 @@ export class BravoBarCodeBox {
           hideExtraChecksum: this.hideExtraChecksum,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.QRCode) {
         this._barCode = new QrCode(this._element, {
           value: this.value,
@@ -383,7 +371,6 @@ export class BravoBarCodeBox {
           hideExtraChecksum: this.hideExtraChecksum,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.UPC_A) {
         this._barCode = new UpcA(this._element, {
           value: this.value,
@@ -397,7 +384,6 @@ export class BravoBarCodeBox {
           addOnLabelPosition: this.addOnLabelPosition,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.UPC_E0) {
         this._barCode = new UpcE0(this._element, {
           value: this.value,
@@ -411,7 +397,6 @@ export class BravoBarCodeBox {
           addOnLabelPosition: this.addOnLabelPosition,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.UPC_E1) {
         this._barCode = new UpcE1(this._element, {
           value: this.value,
@@ -425,7 +410,6 @@ export class BravoBarCodeBox {
           addOnLabelPosition: this.addOnLabelPosition,
           renderType: this.renderType,
         });
-        this._barCode.invalidate();
       } else if (this.type == CodeType.Ansi39x) {
         throw 'Not yet supported!';
       } else if (this.type == CodeType.Code_2_of_5) {
@@ -468,7 +452,7 @@ export class BravoBarCodeBox {
         throw 'Not yet supported!';
       }
     } catch (error) {
-      console.log(error);
+      console.warn(error);
     }
   }
 }
