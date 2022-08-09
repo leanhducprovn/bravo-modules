@@ -22,6 +22,7 @@ import {
 import { BravoSliderBaseComponent } from './components/bravo-slider-base/bravo-slider-base.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
+import { BravoControlBaseComponent } from './components/bravo-control-base/bravo-control-base.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { HomeComponent } from './home/home.component';
     BravoSliderBaseComponent,
     PageNotFoundComponent,
     HomeComponent,
+    BravoControlBaseComponent,
   ],
   imports: [
     BrowserModule,
