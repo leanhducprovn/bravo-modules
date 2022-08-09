@@ -180,22 +180,45 @@ export class BravoBarCodeBox {
     if (!this._barCode) {
       this.render();
     } else {
-      this._barCode.type = this.type;
-      this._barCode.value = this.value;
-      this._barCode.autoWidthZoom = this.autoWidthZoom;
-      this._barCode.autoWidth = this.autoWidth;
-      this._barCode.color = this.color;
-      this._barCode.backgroundColor = this.backgroundColor;
-      this._barCode.showLabel = this.showLabel;
-      this._barCode.labelPosition = this.labelPosition;
-      this._barCode.hideExtraChecksum = this.hideExtraChecksum;
-      this._barCode.renderType = this.renderType;
-      this._barCode.codeSet = this.codeSet;
-      this._barCode.fullAscii = this.fullAscii;
-      this._barCode.checkDigit = this.checkDigit;
-      this._barCode.addOn = this.addOn;
-      this._barCode.addOnHeight = this.addOnHeight;
-      this._barCode.addOnLabelPosition = this.addOnLabelPosition;
+      let _bIsUpdate = this._barCode.isUpdating;
+      if (!_bIsUpdate) {
+        try {
+          if (this._barCode.type != this.type) this._barCode.type = this.type;
+          if (this._barCode.value != this.value)
+            this._barCode.value = this.value;
+          if (this._barCode.autoWidthZoom != this.autoWidthZoom)
+            this._barCode.autoWidthZoom = this.autoWidthZoom;
+          if (this._barCode.autoWidth != this.autoWidth)
+            this._barCode.autoWidth = this.autoWidth;
+          if (this._barCode.color != this.color)
+            this._barCode.color = this.color;
+          if (this._barCode.backgroundColor != this.backgroundColor)
+            this._barCode.backgroundColor = this.backgroundColor;
+          if (this._barCode.showLabel != this.showLabel)
+            this._barCode.showLabel = this.showLabel;
+          if (this._barCode.labelPosition != this.labelPosition)
+            this._barCode.labelPosition = this.labelPosition;
+          if (this._barCode.hideExtraChecksum != this.hideExtraChecksum)
+            this._barCode.hideExtraChecksum = this.hideExtraChecksum;
+          if (this._barCode.renderType != this.renderType)
+            this._barCode.renderType = this.renderType;
+          if (this._barCode.codeSet != this.codeSet)
+            this._barCode.codeSet = this.codeSet;
+          if (this._barCode.fullAscii != this.fullAscii)
+            this._barCode.fullAscii = this.fullAscii;
+          if (this._barCode.checkDigit != this.checkDigit)
+            this._barCode.checkDigit = this.checkDigit;
+          if (this._barCode.addOn != this.addOn)
+            this._barCode.addOn = this.addOn;
+          if (this._barCode.addOnHeight != this.addOnHeight)
+            this._barCode.addOnHeight = this.addOnHeight;
+          if (this._barCode.addOnLabelPosition != this.addOnLabelPosition)
+            this._barCode.addOnLabelPosition = this.addOnLabelPosition;
+          this._barCode.beginUpdate();
+        } finally {
+          this._barCode.endUpdate();
+        }
+      }
     }
   }
 

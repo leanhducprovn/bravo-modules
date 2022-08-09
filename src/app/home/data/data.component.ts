@@ -584,8 +584,6 @@ export class DataComponent
       this._codabar.labelPosition = BarCodeLabelPosition.Top;
     });
 
-    this._codabar.type = CodeType.QRCode;
-
     // code39
     this.getCollection('code39').forEach((element) => {
       this._code39 = new BravoBarCodeBox(element);
