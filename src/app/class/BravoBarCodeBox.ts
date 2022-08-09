@@ -28,6 +28,7 @@ export class BravoBarCodeBox {
 
   private _type: CodeType = CodeType.None;
   public set type(pValue: CodeType) {
+    if (this.type == pValue) return;
     this._type = pValue;
     this.invalidate();
   }
@@ -37,6 +38,7 @@ export class BravoBarCodeBox {
 
   private _value: string = 'Bravo';
   public set value(pValue: string) {
+    if (this.value == pValue) return;
     this._value = pValue;
     this.invalidate();
   }
@@ -46,6 +48,7 @@ export class BravoBarCodeBox {
 
   private _autoWidthZoom: number = 2;
   public set autoWidthZoom(pValue: number) {
+    if (this.autoWidthZoom == pValue) return;
     this._autoWidthZoom = pValue;
     this.invalidate();
   }
@@ -55,6 +58,7 @@ export class BravoBarCodeBox {
 
   private _autoWidth: boolean = true;
   public set autoWidth(pValue: boolean) {
+    if (this.autoWidth == pValue) return;
     this._autoWidth = pValue;
     this.invalidate();
   }
@@ -64,6 +68,7 @@ export class BravoBarCodeBox {
 
   private _codeSet: Code128CodeSet = Code128CodeSet.Auto;
   public set codeSet(pValue: number) {
+    if (this.codeSet == pValue) return;
     this._codeSet = pValue;
     this.invalidate();
   }
@@ -73,6 +78,7 @@ export class BravoBarCodeBox {
 
   private _fullAscii: boolean = false;
   public set fullAscii(pValue: boolean) {
+    if (this.fullAscii == pValue) return;
     this._fullAscii = pValue;
     this.invalidate();
   }
@@ -82,6 +88,7 @@ export class BravoBarCodeBox {
 
   private _checkDigit: boolean = false;
   public set checkDigit(pValue: boolean) {
+    if (this.checkDigit == pValue) return;
     this._checkDigit = pValue;
     this.invalidate();
   }
@@ -91,6 +98,7 @@ export class BravoBarCodeBox {
 
   private _addOn!: number;
   public set addOn(pValue: number) {
+    if (this.addOn == pValue) return;
     this._addOn = pValue;
     this.invalidate();
   }
@@ -100,6 +108,7 @@ export class BravoBarCodeBox {
 
   private _addOnHeight: string | number = 'auto';
   public set addOnHeight(pValue: string | number) {
+    if (this.addOnHeight == pValue) return;
     this._addOnHeight = pValue;
     this.invalidate();
   }
@@ -109,6 +118,7 @@ export class BravoBarCodeBox {
 
   private _addOnLabelPosition: BarCodeLabelPosition = BarCodeLabelPosition.Top;
   public set addOnLabelPosition(pValue: BarCodeLabelPosition) {
+    if (this.addOnLabelPosition == pValue) return;
     this._addOnLabelPosition = pValue;
     this.invalidate();
   }
@@ -118,6 +128,7 @@ export class BravoBarCodeBox {
 
   private _color: string = 'rgb(0,0,0)';
   public set color(pValue: string) {
+    if (this.color == pValue) return;
     this._color = pValue;
     this.invalidate();
   }
@@ -127,6 +138,7 @@ export class BravoBarCodeBox {
 
   private _backgroundColor: string = '#fff';
   public set backgroundColor(pValue: string) {
+    if (this.backgroundColor == pValue) return;
     this._backgroundColor = pValue;
     this.invalidate();
   }
@@ -136,6 +148,7 @@ export class BravoBarCodeBox {
 
   private _showLabel: boolean = true;
   public set showLabel(pValue: boolean) {
+    if (this.showLabel == pValue) return;
     this._showLabel = pValue;
     this.invalidate();
   }
@@ -145,6 +158,7 @@ export class BravoBarCodeBox {
 
   private _labelPosition: BarCodeLabelPosition = BarCodeLabelPosition.Bottom;
   public set labelPosition(pValue: BarCodeLabelPosition) {
+    if (this.labelPosition == pValue) return;
     this._labelPosition = pValue;
     this.invalidate();
   }
@@ -154,6 +168,7 @@ export class BravoBarCodeBox {
 
   private _hideExtraChecksum: boolean = false;
   public set hideExtraChecksum(pValue: boolean) {
+    if (this.hideExtraChecksum == pValue) return;
     this._hideExtraChecksum = pValue;
     this.invalidate();
   }
@@ -163,6 +178,7 @@ export class BravoBarCodeBox {
 
   private _renderType: BarCodeRenderType = BarCodeRenderType.Svg;
   public set renderType(pValue: BarCodeRenderType) {
+    if (this.renderType == pValue) return;
     this._renderType = pValue;
     this.invalidate();
   }
@@ -181,43 +197,38 @@ export class BravoBarCodeBox {
       this.render();
     } else {
       let _bIsUpdate = this._barCode.isUpdating;
-      if (!_bIsUpdate) {
-        try {
-          if (this._barCode.type != this.type) this._barCode.type = this.type;
-          if (this._barCode.value != this.value)
-            this._barCode.value = this.value;
-          if (this._barCode.autoWidthZoom != this.autoWidthZoom)
-            this._barCode.autoWidthZoom = this.autoWidthZoom;
-          if (this._barCode.autoWidth != this.autoWidth)
-            this._barCode.autoWidth = this.autoWidth;
-          if (this._barCode.color != this.color)
-            this._barCode.color = this.color;
-          if (this._barCode.backgroundColor != this.backgroundColor)
-            this._barCode.backgroundColor = this.backgroundColor;
-          if (this._barCode.showLabel != this.showLabel)
-            this._barCode.showLabel = this.showLabel;
-          if (this._barCode.labelPosition != this.labelPosition)
-            this._barCode.labelPosition = this.labelPosition;
-          if (this._barCode.hideExtraChecksum != this.hideExtraChecksum)
-            this._barCode.hideExtraChecksum = this.hideExtraChecksum;
-          if (this._barCode.renderType != this.renderType)
-            this._barCode.renderType = this.renderType;
-          if (this._barCode.codeSet != this.codeSet)
-            this._barCode.codeSet = this.codeSet;
-          if (this._barCode.fullAscii != this.fullAscii)
-            this._barCode.fullAscii = this.fullAscii;
-          if (this._barCode.checkDigit != this.checkDigit)
-            this._barCode.checkDigit = this.checkDigit;
-          if (this._barCode.addOn != this.addOn)
-            this._barCode.addOn = this.addOn;
-          if (this._barCode.addOnHeight != this.addOnHeight)
-            this._barCode.addOnHeight = this.addOnHeight;
-          if (this._barCode.addOnLabelPosition != this.addOnLabelPosition)
-            this._barCode.addOnLabelPosition = this.addOnLabelPosition;
-          this._barCode.beginUpdate();
-        } finally {
-          this._barCode.endUpdate();
-        }
+      if (!_bIsUpdate) this._barCode.beginUpdate();
+      try {
+        if (this._barCode.type != this.type) this._barCode.type = this.type;
+        if (this._barCode.value != this.value) this._barCode.value = this.value;
+        if (this._barCode.autoWidthZoom != this.autoWidthZoom)
+          this._barCode.autoWidthZoom = this.autoWidthZoom;
+        if (this._barCode.autoWidth != this.autoWidth)
+          this._barCode.autoWidth = this.autoWidth;
+        if (this._barCode.color != this.color) this._barCode.color = this.color;
+        if (this._barCode.backgroundColor != this.backgroundColor)
+          this._barCode.backgroundColor = this.backgroundColor;
+        if (this._barCode.showLabel != this.showLabel)
+          this._barCode.showLabel = this.showLabel;
+        if (this._barCode.labelPosition != this.labelPosition)
+          this._barCode.labelPosition = this.labelPosition;
+        if (this._barCode.hideExtraChecksum != this.hideExtraChecksum)
+          this._barCode.hideExtraChecksum = this.hideExtraChecksum;
+        if (this._barCode.renderType != this.renderType)
+          this._barCode.renderType = this.renderType;
+        if (this._barCode.codeSet != this.codeSet)
+          this._barCode.codeSet = this.codeSet;
+        if (this._barCode.fullAscii != this.fullAscii)
+          this._barCode.fullAscii = this.fullAscii;
+        if (this._barCode.checkDigit != this.checkDigit)
+          this._barCode.checkDigit = this.checkDigit;
+        if (this._barCode.addOn != this.addOn) this._barCode.addOn = this.addOn;
+        if (this._barCode.addOnHeight != this.addOnHeight)
+          this._barCode.addOnHeight = this.addOnHeight;
+        if (this._barCode.addOnLabelPosition != this.addOnLabelPosition)
+          this._barCode.addOnLabelPosition = this.addOnLabelPosition;
+      } finally {
+        this._barCode.endUpdate();
       }
     }
   }
