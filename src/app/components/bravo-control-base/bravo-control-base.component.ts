@@ -20,24 +20,9 @@ export class BravoControlBaseComponent extends wjc.Control implements OnInit {
     });
   }
 
-  count = 0;
-  public onClick() {
-    debugger;
-    this.count = 0;
-    // this.beginUpdate();
-    this.invalidate();
-    this.invalidate();
-    this.invalidate();
-    this.invalidate();
-    this.invalidate();
-    this.invalidate();
-    // this.endUpdate();
-  }
+  public onClick() {}
 
-  override refresh(fullUpdate?: boolean | undefined): void {
-    // debugger;
-    this.count++;
-  }
+  override refresh(fullUpdate?: boolean | undefined): void {}
 
   public onT8() {
     this._calendar.displayMonth = new Date(2022, 7);

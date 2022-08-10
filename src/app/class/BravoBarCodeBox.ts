@@ -23,6 +23,9 @@ import {
 } from '@grapecity/wijmo.barcode.specialized';
 import { Pdf417, MicroPdf417 } from '@grapecity/wijmo.barcode.composite';
 
+// RXJS
+import { throwError } from 'rxjs';
+
 export class BravoBarCodeBox {
   private _element!: any;
 
@@ -191,6 +194,7 @@ export class BravoBarCodeBox {
   }
 
   private _barCode!: any;
+  private _throwError = throwError(() => new Error('not yet supported!'));
   public notification!: any;
 
   private invalidate() {
@@ -285,6 +289,7 @@ export class BravoBarCodeBox {
       } else if (this.type == CodeType.UPC_E1) {
         this._barCode = new UpcE1(this._element);
       } else if (this.type == CodeType.Ansi39x) {
+        this._throwError.subscribe();
         throw 'Ansi39x not yet supported!';
       } else if (this.type == CodeType.Code_2_of_5) {
         throw 'Code_2_of_5 not yet supported!';
@@ -325,8 +330,6 @@ export class BravoBarCodeBox {
       } else if (this.type == CodeType.IntelligentMail) {
         throw 'IntelligentMail not yet supported!';
       }
-    } catch (error) {
-      this.notification = error;
-    }
+    } catch (error) {}
   }
 }

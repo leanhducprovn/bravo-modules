@@ -587,9 +587,9 @@ export class DataComponent
       this._codabar.labelPosition = BarCodeLabelPosition.Top;
     });
 
-    if (this._codabar.notification) {
-      Swal.fire('Warning!', this._codabar.notification, 'warning');
-    }
+    // if (this._codabar.notification) {
+    //   Swal.fire('Warning!', this._codabar.notification, 'warning');
+    // }
 
     // code39
     this.getCollection('code39').forEach((element) => {
