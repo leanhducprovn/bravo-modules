@@ -194,8 +194,7 @@ export class BravoBarCodeBox {
   }
 
   private _barCode!: any;
-  private _throwError = throwError(() => new Error('not yet supported!'));
-  public notification!: any;
+  private _throwError: string = 'not yet supported!';
 
   private invalidate() {
     if (!this._barCode) {
@@ -239,97 +238,56 @@ export class BravoBarCodeBox {
   }
 
   private render() {
-    try {
-      if (this.type == CodeType.None) {
-        return;
-      } else if (this.type == CodeType.Codabar) {
-        this._barCode = new Codabar(this._element);
-      } else if (this.type == CodeType.Code39) {
-        this._barCode = new Code39(this._element);
-      } else if (this.type == CodeType.Ansi39) {
-        this._barCode = new Code39(this._element, {
-          fullAscii: true,
-        });
-      } else if (this.type == CodeType.Code49) {
-        this._barCode = new Code49(this._element);
-      } else if (this.type == CodeType.Code_93) {
-        this._barCode = new Code93(this._element);
-      } else if (this.type == CodeType.Code_128_A) {
-        this._barCode = new Code128(this._element, {
-          codeSet: Code128CodeSet.A,
-        });
-      } else if (this.type == CodeType.Code_128_B) {
-        this._barCode = new Code128(this._element, {
-          codeSet: Code128CodeSet.B,
-        });
-      } else if (this.type == CodeType.Code_128_C) {
-        this._barCode = new Code128(this._element, {
-          codeSet: Code128CodeSet.C,
-        });
-      } else if (this.type == CodeType.Code_128auto) {
-        this._barCode = new Code128(this._element, {
-          codeSet: Code128CodeSet.Auto,
-        });
-      } else if (this.type == CodeType.EAN_8) {
-        this._barCode = new Ean8(this._element);
-      } else if (this.type == CodeType.EAN_13) {
-        this._barCode = new Ean13(this._element);
-      } else if (this.type == CodeType.JapanesePostal) {
-        this._barCode = new JapanesePostal(this._element);
-      } else if (this.type == CodeType.Pdf417) {
-        this._barCode = new Pdf417(this._element);
-      } else if (this.type == CodeType.MicroPDF417) {
-        this._barCode = new MicroPdf417(this._element);
-      } else if (this.type == CodeType.QRCode) {
-        this._barCode = new QrCode(this._element);
-      } else if (this.type == CodeType.UPC_A) {
-        this._barCode = new UpcA(this._element);
-      } else if (this.type == CodeType.UPC_E0) {
-        this._barCode = new UpcE0(this._element);
-      } else if (this.type == CodeType.UPC_E1) {
-        this._barCode = new UpcE1(this._element);
-      } else if (this.type == CodeType.Ansi39x) {
-        this._throwError.subscribe();
-        throw 'Ansi39x not yet supported!';
-      } else if (this.type == CodeType.Code_2_of_5) {
-        throw 'Code_2_of_5 not yet supported!';
-      } else if (this.type == CodeType.Code25intlv) {
-        throw 'Code25intlv not yet supported!';
-      } else if (this.type == CodeType.Matrix_2_of_5) {
-        throw 'Matrix_2_of_5 not yet supported!';
-      } else if (this.type == CodeType.Code39x) {
-        throw 'Code39x not yet supported!';
-      } else if (this.type == CodeType.Code93x) {
-        throw 'Code93x not yet supported!';
-      } else if (this.type == CodeType.MSI) {
-        throw 'MSI not yet supported!';
-      } else if (this.type == CodeType.PostNet) {
-        throw 'PostNet not yet supported!';
-      } else if (this.type == CodeType.RM4SCC) {
-        throw 'RM4SCC not yet supported!';
-      } else if (this.type == CodeType.UCCEAN128) {
-        throw 'UCCEAN128 not yet supported!';
-      } else if (this.type == CodeType.EAN128FNC1) {
-        throw 'EAN128FNC1 not yet supported!';
-      } else if (this.type == CodeType.RSS14) {
-        throw 'RSS14 not yet supported!';
-      } else if (this.type == CodeType.RSS14Truncated) {
-        throw 'RSS14Truncated not yet supported!';
-      } else if (this.type == CodeType.RSS14Stacked) {
-        throw 'RSS14Stacked not yet supported!';
-      } else if (this.type == CodeType.RSS14StackedOmnidirectional) {
-        throw 'RSS14StackedOmnidirectional not yet supported!';
-      } else if (this.type == CodeType.RSSExpanded) {
-        throw 'RSSExpanded not yet supported!';
-      } else if (this.type == CodeType.RSSExpandedStacked) {
-        throw 'RSSExpandedStacked not yet supported!';
-      } else if (this.type == CodeType.RSSLimited) {
-        throw 'RSSLimited not yet supported!';
-      } else if (this.type == CodeType.DataMatrix) {
-        throw 'DataMatrix not yet supported!';
-      } else if (this.type == CodeType.IntelligentMail) {
-        throw 'IntelligentMail not yet supported!';
-      }
-    } catch (error) {}
+    if (this.type == CodeType.None) {
+      return;
+    } else if (this.type == CodeType.Codabar) {
+      this._barCode = new Codabar(this._element);
+    } else if (this.type == CodeType.Code39) {
+      this._barCode = new Code39(this._element);
+    } else if (this.type == CodeType.Ansi39) {
+      this._barCode = new Code39(this._element, {
+        fullAscii: true,
+      });
+    } else if (this.type == CodeType.Code49) {
+      this._barCode = new Code49(this._element);
+    } else if (this.type == CodeType.Code_93) {
+      this._barCode = new Code93(this._element);
+    } else if (this.type == CodeType.Code_128_A) {
+      this._barCode = new Code128(this._element, {
+        codeSet: Code128CodeSet.A,
+      });
+    } else if (this.type == CodeType.Code_128_B) {
+      this._barCode = new Code128(this._element, {
+        codeSet: Code128CodeSet.B,
+      });
+    } else if (this.type == CodeType.Code_128_C) {
+      this._barCode = new Code128(this._element, {
+        codeSet: Code128CodeSet.C,
+      });
+    } else if (this.type == CodeType.Code_128auto) {
+      this._barCode = new Code128(this._element, {
+        codeSet: Code128CodeSet.Auto,
+      });
+    } else if (this.type == CodeType.EAN_8) {
+      this._barCode = new Ean8(this._element);
+    } else if (this.type == CodeType.EAN_13) {
+      this._barCode = new Ean13(this._element);
+    } else if (this.type == CodeType.JapanesePostal) {
+      this._barCode = new JapanesePostal(this._element);
+    } else if (this.type == CodeType.Pdf417) {
+      this._barCode = new Pdf417(this._element);
+    } else if (this.type == CodeType.MicroPDF417) {
+      this._barCode = new MicroPdf417(this._element);
+    } else if (this.type == CodeType.QRCode) {
+      this._barCode = new QrCode(this._element);
+    } else if (this.type == CodeType.UPC_A) {
+      this._barCode = new UpcA(this._element);
+    } else if (this.type == CodeType.UPC_E0) {
+      this._barCode = new UpcE0(this._element);
+    } else if (this.type == CodeType.UPC_E1) {
+      this._barCode = new UpcE1(this._element);
+    } else {
+      throw `${CodeType[this.type] + ' ' + this._throwError} `;
+    }
   }
 }

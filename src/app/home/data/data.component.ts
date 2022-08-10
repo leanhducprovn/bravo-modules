@@ -577,19 +577,19 @@ export class DataComponent
 
     // codabar
     this.getCollection('codabar').forEach((element) => {
-      this._codabar = new BravoBarCodeBox(element);
-      this._codabar.type = CodeType.Ansi39x;
-      this._codabar.value = 'A15126893B';
-      this._codabar.color = 'red';
-      this._codabar.backgroundColor = '#FFFF00';
-      this._codabar.autoWidthZoom = 3;
-      this._codabar.showLabel = true;
-      this._codabar.labelPosition = BarCodeLabelPosition.Top;
+      try {
+        this._codabar = new BravoBarCodeBox(element);
+        this._codabar.type = CodeType.Codabar;
+        this._codabar.value = 'A15126893B';
+        this._codabar.color = 'red';
+        this._codabar.backgroundColor = '#FFFF00';
+        this._codabar.autoWidthZoom = 3;
+        this._codabar.showLabel = true;
+        this._codabar.labelPosition = BarCodeLabelPosition.Top;
+      } catch (error: any) {
+        Swal.fire('Warning!', error, 'warning');
+      }
     });
-
-    // if (this._codabar.notification) {
-    //   Swal.fire('Warning!', this._codabar.notification, 'warning');
-    // }
 
     // code39
     this.getCollection('code39').forEach((element) => {
