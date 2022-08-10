@@ -22,9 +22,7 @@ import {
   JapanesePostal,
 } from '@grapecity/wijmo.barcode.specialized';
 import { Pdf417, MicroPdf417 } from '@grapecity/wijmo.barcode.composite';
-
-// RXJS
-import { throwError } from 'rxjs';
+import { CancelEventArgs, IEventHandler } from '@grapecity/wijmo';
 
 export class BravoBarCodeBox {
   private _element!: any;
@@ -195,6 +193,7 @@ export class BravoBarCodeBox {
 
   private _barCode!: any;
   private _zThrowError: string = 'not yet supported!';
+  private _zInvalidValue: string = 'Invalid value!';
 
   private invalidate() {
     let _bIsRender: boolean;
@@ -223,8 +222,6 @@ export class BravoBarCodeBox {
           this._barCode.hideExtraChecksum = this.hideExtraChecksum;
         if (this._barCode.renderType != this.renderType)
           this._barCode.renderType = this.renderType;
-        if (this._barCode.codeSet != this.codeSet)
-          this._barCode.codeSet = this.codeSet;
         if (this._barCode.fullAscii != this.fullAscii)
           this._barCode.fullAscii = this.fullAscii;
         if (this._barCode.checkDigit != this.checkDigit)
@@ -248,6 +245,9 @@ export class BravoBarCodeBox {
         this._barCode = new Codabar(this._element);
         if (_bIsRender) {
           this.invalidate();
+          if (!this._barCode.isValid) {
+            throw this._zInvalidValue;
+          }
         }
       } else if (this.type == CodeType.Code39) {
         this._barCode = new Code39(this._element);
@@ -339,10 +339,16 @@ export class BravoBarCodeBox {
         if (_bIsRender) {
           this.invalidate();
         }
+        if (!this._barCode.isValid) {
+          throw this._zInvalidValue;
+        }
       } else if (this.type == CodeType.UPC_E1) {
         this._barCode = new UpcE1(this._element);
         if (_bIsRender) {
           this.invalidate();
+        }
+        if (!this._barCode.isValid) {
+          throw this._zInvalidValue;
         }
       } else {
         throw `${CodeType[this.type] + ' ' + this._zThrowError} `;
