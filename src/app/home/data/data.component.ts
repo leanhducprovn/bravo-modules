@@ -579,13 +579,13 @@ export class DataComponent
     this.getCollection('codabar').forEach((element) => {
       try {
         this._codabar = new BravoBarCodeBox(element);
-        this._codabar.type = CodeType.Codabar;
         this._codabar.value = 'A15126893B';
         this._codabar.color = 'red';
         this._codabar.backgroundColor = '#FFFF00';
         this._codabar.autoWidthZoom = 3;
         this._codabar.showLabel = true;
         this._codabar.labelPosition = BarCodeLabelPosition.Top;
+        this._codabar.type = CodeType.Codabar;
       } catch (error: any) {
         Swal.fire('Warning!', error, 'warning');
       }
