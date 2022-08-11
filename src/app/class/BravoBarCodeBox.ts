@@ -196,14 +196,20 @@ export class BravoBarCodeBox {
   private _barCode!: any;
   private _zThrowError: string = 'not yet supported!';
   private _zInvalidValue: string = 'Invalid value!';
+  private _currentType: CodeType = CodeType.None;
 
   private invalidate() {
     if (!this._barCode) {
       this.render();
     } else {
+      if (this.type != this._currentType) {
+        // this._barCode.dispose();
+        // this.render();
+      }
       let _bIsUpdate = this._barCode.isUpdating;
       if (!_bIsUpdate) this._barCode.beginUpdate();
       try {
+        this._currentType = this.type;
         this._barCode.type = this.type;
         this._barCode.value = this.value;
         this._barCode.autoWidthZoom = this.autoWidthZoom;
