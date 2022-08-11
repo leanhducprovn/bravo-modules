@@ -780,15 +780,19 @@ export class DataComponent
 
     // upce1
     this.getCollection('upce1').forEach((element) => {
-      let upce1 = new BravoBarCodeBox(element);
-      upce1.type = CodeType.UPC_E1;
-      upce1.value = '012345';
-      upce1.color = '#222222';
-      upce1.backgroundColor = '#eeeeee';
-      upce1.showLabel = true;
-      upce1.labelPosition = BarCodeLabelPosition.Top;
-      upce1.addOn = 99;
-      upce1.addOnLabelPosition = BarCodeLabelPosition.Bottom;
+      try {
+        let upce1 = new BravoBarCodeBox(element);
+        upce1.type = CodeType.UPC_E1;
+        upce1.value = '012345';
+        upce1.color = '#222222';
+        upce1.backgroundColor = '#eeeeee';
+        upce1.showLabel = true;
+        upce1.labelPosition = BarCodeLabelPosition.Top;
+        upce1.addOn = 99;
+        upce1.addOnLabelPosition = BarCodeLabelPosition.Bottom;
+      } catch (error: any) {
+        Swal.fire('Warning!', error, 'warning');
+      }
     });
 
     /*------------------------------------*/

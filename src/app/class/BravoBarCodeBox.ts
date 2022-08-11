@@ -202,6 +202,7 @@ export class BravoBarCodeBox {
       this.render(_bIsRender);
     } else {
       _bIsRender = false;
+      this.render(_bIsRender);
       let _bIsUpdate = this._barCode.isUpdating;
       if (!_bIsUpdate) this._barCode.beginUpdate();
       try {
@@ -242,113 +243,104 @@ export class BravoBarCodeBox {
       return;
     } else {
       if (this.type == CodeType.Codabar) {
-        this._barCode = new Codabar(this._element);
         if (_bIsRender) {
+          this._barCode = new Codabar(this._element);
           this.invalidate();
-          if (!this._barCode.isValid) {
-            throw this._zInvalidValue;
-          }
         }
       } else if (this.type == CodeType.Code39) {
-        this._barCode = new Code39(this._element);
         if (_bIsRender) {
+          this._barCode = new Code39(this._element);
           this.invalidate();
         }
       } else if (this.type == CodeType.Ansi39) {
-        this._barCode = new Code39(this._element, {
-          fullAscii: true,
-        });
         if (_bIsRender) {
+          this._barCode = new Code39(this._element, {
+            fullAscii: true,
+          });
           this.invalidate();
         }
       } else if (this.type == CodeType.Code49) {
-        this._barCode = new Code49(this._element);
         if (_bIsRender) {
+          this._barCode = new Code49(this._element);
           this.invalidate();
         }
       } else if (this.type == CodeType.Code_93) {
-        this._barCode = new Code93(this._element);
         if (_bIsRender) {
+          this._barCode = new Code93(this._element);
           this.invalidate();
         }
       } else if (this.type == CodeType.Code_128_A) {
-        this._barCode = new Code128(this._element, {
-          codeSet: Code128CodeSet.A,
-        });
         if (_bIsRender) {
+          this._barCode = new Code128(this._element, {
+            codeSet: Code128CodeSet.A,
+          });
           this.invalidate();
         }
       } else if (this.type == CodeType.Code_128_B) {
-        this._barCode = new Code128(this._element, {
-          codeSet: Code128CodeSet.B,
-        });
         if (_bIsRender) {
+          this._barCode = new Code128(this._element, {
+            codeSet: Code128CodeSet.B,
+          });
           this.invalidate();
         }
       } else if (this.type == CodeType.Code_128_C) {
-        this._barCode = new Code128(this._element, {
-          codeSet: Code128CodeSet.C,
-        });
         if (_bIsRender) {
+          this._barCode = new Code128(this._element, {
+            codeSet: Code128CodeSet.C,
+          });
           this.invalidate();
         }
       } else if (this.type == CodeType.Code_128auto) {
-        this._barCode = new Code128(this._element, {
-          codeSet: Code128CodeSet.Auto,
-        });
         if (_bIsRender) {
+          this._barCode = new Code128(this._element, {
+            codeSet: Code128CodeSet.Auto,
+          });
           this.invalidate();
         }
       } else if (this.type == CodeType.EAN_8) {
-        this._barCode = new Ean8(this._element);
         if (_bIsRender) {
+          this._barCode = new Ean8(this._element);
           this.invalidate();
         }
       } else if (this.type == CodeType.EAN_13) {
-        this._barCode = new Ean13(this._element);
         if (_bIsRender) {
+          this._barCode = new Ean13(this._element);
           this.invalidate();
         }
       } else if (this.type == CodeType.JapanesePostal) {
-        this._barCode = new JapanesePostal(this._element);
         if (_bIsRender) {
+          this._barCode = new JapanesePostal(this._element);
           this.invalidate();
         }
       } else if (this.type == CodeType.Pdf417) {
-        this._barCode = new Pdf417(this._element);
         if (_bIsRender) {
+          this._barCode = new Pdf417(this._element);
           this.invalidate();
         }
       } else if (this.type == CodeType.MicroPDF417) {
-        this._barCode = new MicroPdf417(this._element);
         if (_bIsRender) {
+          this._barCode = new MicroPdf417(this._element);
           this.invalidate();
         }
       } else if (this.type == CodeType.QRCode) {
-        this._barCode = new QrCode(this._element);
         if (_bIsRender) {
+          this._barCode = new QrCode(this._element);
           this.invalidate();
         }
       } else if (this.type == CodeType.UPC_A) {
-        this._barCode = new UpcA(this._element);
         if (_bIsRender) {
+          this._barCode = new UpcA(this._element);
           this.invalidate();
         }
       } else if (this.type == CodeType.UPC_E0) {
-        this._barCode = new UpcE0(this._element);
         if (_bIsRender) {
+          this._barCode = new UpcE0(this._element);
           this.invalidate();
-        }
-        if (!this._barCode.isValid) {
-          throw this._zInvalidValue;
         }
       } else if (this.type == CodeType.UPC_E1) {
-        this._barCode = new UpcE1(this._element);
         if (_bIsRender) {
+          this._barCode = new UpcE1(this._element);
           this.invalidate();
-        }
-        if (!this._barCode.isValid) {
-          throw this._zInvalidValue;
         }
       } else {
         throw `${CodeType[this.type] + ' ' + this._zThrowError} `;
