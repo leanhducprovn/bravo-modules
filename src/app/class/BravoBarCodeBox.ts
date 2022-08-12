@@ -33,6 +33,8 @@ export class BravoBarCodeBox {
   public set type(pValue: CodeType) {
     if (this._type == pValue) return;
     this._type = pValue;
+    if (this._barCode) this._barCode.dispose();
+    this.render();
     this.invalidate();
   }
   public get type(): CodeType {
@@ -200,7 +202,6 @@ export class BravoBarCodeBox {
   private _barCode!: any;
   private _zThrowError: string = 'not yet supported!';
   private _zInvalidValue: string = 'Invalid value!';
-  private _currentType: CodeType = CodeType.None;
 
   private invalidate() {
     if (!this._barCode) {
@@ -209,10 +210,6 @@ export class BravoBarCodeBox {
       let _bIsUpdate = this._barCode.isUpdating;
       if (!_bIsUpdate) this._barCode.beginUpdate();
       try {
-        if (this._currentType != this.type) {
-          this._barCode.dispose();
-          this.render();
-        }
         this._barCode.type = this.type;
         this._barCode.value = this.value;
         this._barCode.autoWidthZoom = this.autoWidthZoom;
@@ -235,75 +232,56 @@ export class BravoBarCodeBox {
   }
 
   private render() {
-    this._currentType = this.type;
     if (this.type == CodeType.None) {
       return;
     } else {
       let _newElement = this._element.getElementsByClassName('barcodebox')[0];
       if (this.type == CodeType.Codabar) {
         this._barCode = new Codabar(_newElement);
-        this.invalidate();
       } else if (this.type == CodeType.Code39) {
         this._barCode = new Code39(_newElement);
-        this.invalidate();
       } else if (this.type == CodeType.Ansi39) {
         this._barCode = new Code39(_newElement, {
           fullAscii: true,
         });
-        this.invalidate();
       } else if (this.type == CodeType.Code49) {
         this._barCode = new Code49(_newElement);
-        this.invalidate();
       } else if (this.type == CodeType.Code_93) {
         this._barCode = new Code93(_newElement);
-        this.invalidate();
       } else if (this.type == CodeType.Code_128_A) {
         this._barCode = new Code128(_newElement, {
           codeSet: Code128CodeSet.A,
         });
-        this.invalidate();
       } else if (this.type == CodeType.Code_128_B) {
         this._barCode = new Code128(_newElement, {
           codeSet: Code128CodeSet.B,
         });
-        this.invalidate();
       } else if (this.type == CodeType.Code_128_C) {
         this._barCode = new Code128(_newElement, {
           codeSet: Code128CodeSet.C,
         });
-        this.invalidate();
       } else if (this.type == CodeType.Code_128auto) {
         this._barCode = new Code128(_newElement, {
           codeSet: Code128CodeSet.Auto,
         });
-        this.invalidate();
       } else if (this.type == CodeType.EAN_8) {
         this._barCode = new Ean8(_newElement);
-        this.invalidate();
       } else if (this.type == CodeType.EAN_13) {
         this._barCode = new Ean13(_newElement);
-        this.invalidate();
       } else if (this.type == CodeType.JapanesePostal) {
         this._barCode = new JapanesePostal(_newElement);
-        this.invalidate();
       } else if (this.type == CodeType.Pdf417) {
         this._barCode = new Pdf417(_newElement);
-        this.invalidate();
       } else if (this.type == CodeType.MicroPDF417) {
         this._barCode = new MicroPdf417(_newElement);
-        this.invalidate();
       } else if (this.type == CodeType.QRCode) {
         this._barCode = new QrCode(_newElement);
-        this.invalidate();
       } else if (this.type == CodeType.UPC_A) {
         this._barCode = new UpcA(_newElement);
-        this.invalidate();
       } else if (this.type == CodeType.UPC_E0) {
         this._barCode = new UpcE0(_newElement);
-        this.invalidate();
       } else if (this.type == CodeType.UPC_E1) {
         this._barCode = new UpcE1(_newElement);
-        this.invalidate();
       } else {
         throw `${CodeType[this.type] + ' ' + this._zThrowError} `;
       }

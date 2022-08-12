@@ -578,8 +578,8 @@ export class DataComponent
     this.getCollection('barcode').forEach((element) => {
       try {
         this._barcode = new BravoBarCodeBox(element);
-        this._barcode.type = CodeType.Codabar;
         this._barcode.value = 'A15126893B';
+        this._barcode.type = CodeType.Codabar;
         this._barcode.color = '#079085';
         this._barcode.backgroundColor = '#FFFFFF';
         this._barcode.autoWidthZoom = 3;
