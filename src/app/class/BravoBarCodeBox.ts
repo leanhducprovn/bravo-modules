@@ -242,50 +242,68 @@ export class BravoBarCodeBox {
       let _newElement = this._element.getElementsByClassName('barcodebox')[0];
       if (this.type == CodeType.Codabar) {
         this._barCode = new Codabar(_newElement);
+        this.invalidate();
       } else if (this.type == CodeType.Code39) {
         this._barCode = new Code39(_newElement);
+        this.invalidate();
       } else if (this.type == CodeType.Ansi39) {
         this._barCode = new Code39(_newElement, {
           fullAscii: true,
         });
+        this.invalidate();
       } else if (this.type == CodeType.Code49) {
         this._barCode = new Code49(_newElement);
+        this.invalidate();
       } else if (this.type == CodeType.Code_93) {
         this._barCode = new Code93(_newElement);
+        this.invalidate();
       } else if (this.type == CodeType.Code_128_A) {
         this._barCode = new Code128(_newElement, {
           codeSet: Code128CodeSet.A,
         });
+        this.invalidate();
       } else if (this.type == CodeType.Code_128_B) {
         this._barCode = new Code128(_newElement, {
           codeSet: Code128CodeSet.B,
         });
+        this.invalidate();
       } else if (this.type == CodeType.Code_128_C) {
         this._barCode = new Code128(_newElement, {
           codeSet: Code128CodeSet.C,
         });
+        this.invalidate();
       } else if (this.type == CodeType.Code_128auto) {
         this._barCode = new Code128(_newElement, {
           codeSet: Code128CodeSet.Auto,
         });
+        this.invalidate();
       } else if (this.type == CodeType.EAN_8) {
         this._barCode = new Ean8(_newElement);
+        this.invalidate();
       } else if (this.type == CodeType.EAN_13) {
         this._barCode = new Ean13(_newElement);
+        this.invalidate();
       } else if (this.type == CodeType.JapanesePostal) {
         this._barCode = new JapanesePostal(_newElement);
+        this.invalidate();
       } else if (this.type == CodeType.Pdf417) {
         this._barCode = new Pdf417(_newElement);
+        this.invalidate();
       } else if (this.type == CodeType.MicroPDF417) {
         this._barCode = new MicroPdf417(_newElement);
+        this.invalidate();
       } else if (this.type == CodeType.QRCode) {
         this._barCode = new QrCode(_newElement);
+        this.invalidate();
       } else if (this.type == CodeType.UPC_A) {
         this._barCode = new UpcA(_newElement);
+        this.invalidate();
       } else if (this.type == CodeType.UPC_E0) {
         this._barCode = new UpcE0(_newElement);
+        this.invalidate();
       } else if (this.type == CodeType.UPC_E1) {
         this._barCode = new UpcE1(_newElement);
+        this.invalidate();
       } else {
         throw `${CodeType[this.type] + ' ' + this._zThrowError} `;
       }
