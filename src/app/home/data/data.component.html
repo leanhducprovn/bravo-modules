@@ -82,83 +82,85 @@
   <h2>Bravo Barcode Box</h2>
   <div class="barcodebox">
     <div class="barcode"></div>
-    <form (ngSubmit)="onBarCode($event)">
-      <div class="barcode-form">
-        <label for="barcode-type">Type: </label>
-        <select id="barcode-type" (change)="onType($event)">
-          <option value="0">None</option>
-          <option value="1">Ansi39</option>
-          <option value="2">Ansi39x</option>
-          <option value="3">Code_2_of_5</option>
-          <option value="4">Code25intlv</option>
-          <option value="5">Matrix_2_of_5</option>
-          <option value="6">Code39</option>
-          <option value="7">Code39x</option>
-          <option value="8">Code_128_A</option>
-          <option value="9">Code_128_B</option>
-          <option value="10">Code_128_C</option>
-          <option value="11">Code_128auto</option>
-          <option value="12">Code_93</option>
-          <option value="13">Code93x</option>
-          <option value="14">MSI</option>
-          <option value="15">PostNet</option>
-          <option value="16">Codabar</option>
-          <option value="17">EAN_8</option>
-          <option value="18">EAN_13</option>
-          <option value="19">UPC_A</option>
-          <option value="20">UPC_E0</option>
-          <option value="21">UPC_E1</option>
-          <option value="22">RM4SCC</option>
-          <option value="23">UCCEAN128</option>
-          <option value="24">QRCode</option>
-          <option value="25">Code49</option>
-          <option value="26">JapanesePostal</option>
-          <option value="27">Pdf417</option>
-          <option value="28">EAN128FNC1</option>
-          <option value="29">RSS14</option>
-          <option value="30">RSS14Truncated</option>
-          <option value="31">RSS14Stacked</option>
-          <option value="32">RSS14StackedOmnidirectional</option>
-          <option value="33">RSSExpanded</option>
-          <option value="34">RSSExpandedStacked</option>
-          <option value="35">RSSLimited</option>
-          <option value="36">DataMatrix</option>
-          <option value="37">MicroPDF417</option>
-          <option value="38">IntelligentMail</option>
-        </select>
-      </div>
-      <div class="barcode-form">
-        <label for="barcode-value">Value: </label>
-        <input id="barcode-value" name="value" value="A88888888A">
-      </div>
-      <div class="barcode-form">
-        <label for="barcode-color">Color: </label>
-        <input id="barcode-color" name="color" value="#000000">
-      </div>
-      <div class="barcode-form">
-        <label for="barcode-background">Background: </label>
-        <input id="barcode-background" name="background" value="#ffffff">
-      </div>
-      <div class="barcode-form">
-        <label for="barcode-autoWidthZoom">autoWidthZoom: </label>
-        <input type="number" id="barcode-autoWidthZoom" name="autoWidthZoom" value="4">
-      </div>
-      <div class="barcode-form">
-        <label for="barcode-showLabel">showLabel: </label>
-        <select id="barcode-showLabel" (change)="onShowLabel($event)">
-          <option value="true">True</option>
-          <option value="false">False</option>
-        </select>
-      </div>
-      <div class="barcode-form">
-        <label for="barcode-labelPosition">labelPosition: </label>
-        <select id="barcode-labelPosition" (change)="onLabelPosition($event)">
-          <option value="1">Bottom</option>
-          <option value="0">Top</option>
-        </select>
-      </div>
-      <button>Set Barcode</button>
-    </form>
+    <div class="set-barcode">
+      <form (ngSubmit)="onBarCode($event)">
+        <div class="barcode-form">
+          <label for="barcode-type">Type: </label>
+          <select id="barcode-type" (change)="onType($event)">
+            <option value="0">None</option>
+            <option value="1">Ansi39</option>
+            <option value="2">Ansi39x</option>
+            <option value="3">Code_2_of_5</option>
+            <option value="4">Code25intlv</option>
+            <option value="5">Matrix_2_of_5</option>
+            <option value="6">Code39</option>
+            <option value="7">Code39x</option>
+            <option value="8">Code_128_A</option>
+            <option value="9">Code_128_B</option>
+            <option value="10">Code_128_C</option>
+            <option value="11">Code_128auto</option>
+            <option value="12">Code_93</option>
+            <option value="13">Code93x</option>
+            <option value="14">MSI</option>
+            <option value="15">PostNet</option>
+            <option value="16">Codabar</option>
+            <option value="17">EAN_8</option>
+            <option value="18">EAN_13</option>
+            <option value="19">UPC_A</option>
+            <option value="20">UPC_E0</option>
+            <option value="21">UPC_E1</option>
+            <option value="22">RM4SCC</option>
+            <option value="23">UCCEAN128</option>
+            <option value="24">QRCode</option>
+            <option value="25">Code49</option>
+            <option value="26">JapanesePostal</option>
+            <option value="27">Pdf417</option>
+            <option value="28">EAN128FNC1</option>
+            <option value="29">RSS14</option>
+            <option value="30">RSS14Truncated</option>
+            <option value="31">RSS14Stacked</option>
+            <option value="32">RSS14StackedOmnidirectional</option>
+            <option value="33">RSSExpanded</option>
+            <option value="34">RSSExpandedStacked</option>
+            <option value="35">RSSLimited</option>
+            <option value="36">DataMatrix</option>
+            <option value="37">MicroPDF417</option>
+            <option value="38">IntelligentMail</option>
+          </select>
+        </div>
+        <div class="barcode-form">
+          <label for="barcode-value">Value: </label>
+          <input id="barcode-value" name="value" value="A88888888A">
+        </div>
+        <div class="barcode-form">
+          <label for="barcode-color">Color: </label>
+          <input id="barcode-color" name="color" value="#000000">
+        </div>
+        <div class="barcode-form">
+          <label for="barcode-background">Background: </label>
+          <input id="barcode-background" name="background" value="#ffffff">
+        </div>
+        <div class="barcode-form">
+          <label for="barcode-autoWidthZoom">autoWidthZoom: </label>
+          <input type="number" id="barcode-autoWidthZoom" name="autoWidthZoom" value="4">
+        </div>
+        <div class="barcode-form">
+          <label for="barcode-showLabel">showLabel: </label>
+          <select id="barcode-showLabel" (change)="onShowLabel($event)">
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+        </div>
+        <div class="barcode-form">
+          <label for="barcode-labelPosition">labelPosition: </label>
+          <select id="barcode-labelPosition" (change)="onLabelPosition($event)">
+            <option value="1">Bottom</option>
+            <option value="0">Top</option>
+          </select>
+        </div>
+        <button>Set Barcode</button>
+      </form>
+    </div>
     <!-- <h3>Codabar</h3>
     <div class="codabar"></div>
     <h3>Code</h3>

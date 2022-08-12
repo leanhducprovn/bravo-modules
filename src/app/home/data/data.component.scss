@@ -62,5 +62,18 @@
         .upce1 {
             width: 50%;
         }
+
+        .set-barcode {
+            margin-top: 10px;
+
+            .barcode-form {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    margin: 5px 0 5px 0;
+                }
+            }
+        }
     }
 }
