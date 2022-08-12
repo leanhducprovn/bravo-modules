@@ -212,7 +212,6 @@ export class BravoBarCodeBox {
         if (this._currentType != this.type) {
           this._barCode.dispose();
           this.render();
-          console.log(this.type);
         }
         this._barCode.type = this.type;
         this._barCode.value = this.value;
