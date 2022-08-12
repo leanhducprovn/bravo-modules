@@ -31,7 +31,7 @@ export class BravoBarCodeBox {
 
   private _type: CodeType = CodeType.None;
   public set type(pValue: CodeType) {
-    if (this.type == pValue) return;
+    if (this._type == pValue) return;
     this._type = pValue;
     this.invalidate();
   }
@@ -39,9 +39,9 @@ export class BravoBarCodeBox {
     return this._type;
   }
 
-  private _value: string = 'Bravo';
+  private _value: string = 'Bravo8R3';
   public set value(pValue: string) {
-    if (this.value == pValue) return;
+    if (this._value == pValue) return;
     this._value = pValue;
     this.invalidate();
   }
@@ -51,7 +51,7 @@ export class BravoBarCodeBox {
 
   private _autoWidthZoom: number = 2;
   public set autoWidthZoom(pValue: number) {
-    if (this.autoWidthZoom == pValue) return;
+    if (this._autoWidthZoom == pValue) return;
     this._autoWidthZoom = pValue;
     this.invalidate();
   }
@@ -61,7 +61,7 @@ export class BravoBarCodeBox {
 
   private _autoWidth: boolean = true;
   public set autoWidth(pValue: boolean) {
-    if (this.autoWidth == pValue) return;
+    if (this._autoWidth == pValue) return;
     this._autoWidth = pValue;
     this.invalidate();
   }
@@ -71,7 +71,7 @@ export class BravoBarCodeBox {
 
   private _codeSet: Code128CodeSet = Code128CodeSet.Auto;
   public set codeSet(pValue: number) {
-    if (this.codeSet == pValue) return;
+    if (this._codeSet == pValue) return;
     this._codeSet = pValue;
     this.invalidate();
   }
@@ -81,7 +81,7 @@ export class BravoBarCodeBox {
 
   private _fullAscii: boolean = false;
   public set fullAscii(pValue: boolean) {
-    if (this.fullAscii == pValue) return;
+    if (this._fullAscii == pValue) return;
     this._fullAscii = pValue;
     this.invalidate();
   }
@@ -91,7 +91,7 @@ export class BravoBarCodeBox {
 
   private _checkDigit: boolean = false;
   public set checkDigit(pValue: boolean) {
-    if (this.checkDigit == pValue) return;
+    if (this._checkDigit == pValue) return;
     this._checkDigit = pValue;
     this.invalidate();
   }
@@ -101,7 +101,7 @@ export class BravoBarCodeBox {
 
   private _addOn!: number;
   public set addOn(pValue: number) {
-    if (this.addOn == pValue) return;
+    if (this._addOn == pValue) return;
     this._addOn = pValue;
     this.invalidate();
   }
@@ -111,7 +111,7 @@ export class BravoBarCodeBox {
 
   private _addOnHeight: string | number = 'auto';
   public set addOnHeight(pValue: string | number) {
-    if (this.addOnHeight == pValue) return;
+    if (this._addOnHeight == pValue) return;
     this._addOnHeight = pValue;
     this.invalidate();
   }
@@ -121,7 +121,7 @@ export class BravoBarCodeBox {
 
   private _addOnLabelPosition: LabelPosition = LabelPosition.Top;
   public set addOnLabelPosition(pValue: LabelPosition) {
-    if (this.addOnLabelPosition == pValue) return;
+    if (this._addOnLabelPosition == pValue) return;
     this._addOnLabelPosition = pValue;
     this.invalidate();
   }
@@ -131,7 +131,7 @@ export class BravoBarCodeBox {
 
   private _color: string = 'rgb(0,0,0)';
   public set color(pValue: string) {
-    if (this.color == pValue) return;
+    if (this._color == pValue) return;
     this._color = pValue;
     this.invalidate();
   }
@@ -141,7 +141,7 @@ export class BravoBarCodeBox {
 
   private _backgroundColor: string = '#fff';
   public set backgroundColor(pValue: string) {
-    if (this.backgroundColor == pValue) return;
+    if (this._backgroundColor == pValue) return;
     this._backgroundColor = pValue;
     this.invalidate();
   }
@@ -151,7 +151,7 @@ export class BravoBarCodeBox {
 
   private _showLabel: boolean = true;
   public set showLabel(pValue: boolean) {
-    if (this.showLabel == pValue) return;
+    if (this._showLabel == pValue) return;
     this._showLabel = pValue;
     this.invalidate();
   }
@@ -161,7 +161,7 @@ export class BravoBarCodeBox {
 
   private _labelPosition: LabelPosition = LabelPosition.Bottom;
   public set labelPosition(pValue: LabelPosition) {
-    if (this.labelPosition == pValue) return;
+    if (this._labelPosition == pValue) return;
     this._labelPosition = pValue;
     this.invalidate();
   }
@@ -171,7 +171,7 @@ export class BravoBarCodeBox {
 
   private _hideExtraChecksum: boolean = false;
   public set hideExtraChecksum(pValue: boolean) {
-    if (this.hideExtraChecksum == pValue) return;
+    if (this._hideExtraChecksum == pValue) return;
     this._hideExtraChecksum = pValue;
     this.invalidate();
   }
@@ -181,7 +181,7 @@ export class BravoBarCodeBox {
 
   private _renderType: RenderType = RenderType.Svg;
   public set renderType(pValue: RenderType) {
-    if (this.renderType == pValue) return;
+    if (this._renderType == pValue) return;
     this._renderType = pValue;
     this.invalidate();
   }
@@ -191,6 +191,10 @@ export class BravoBarCodeBox {
 
   constructor(_element: any) {
     this._element = _element;
+    this._element.insertAdjacentHTML(
+      'beforeend',
+      '<div class="barcodebox"></div>'
+    );
   }
 
   private _barCode!: any;
@@ -202,14 +206,14 @@ export class BravoBarCodeBox {
     if (!this._barCode) {
       this.render();
     } else {
-      if (this.type != this._currentType) {
-        // this._barCode.dispose();
-        // this.render();
-      }
       let _bIsUpdate = this._barCode.isUpdating;
       if (!_bIsUpdate) this._barCode.beginUpdate();
       try {
-        this._currentType = this.type;
+        if (this._currentType != this.type) {
+          this._barCode.dispose();
+          this.render();
+          console.log(this.type);
+        }
         this._barCode.type = this.type;
         this._barCode.value = this.value;
         this._barCode.autoWidthZoom = this.autoWidthZoom;
@@ -232,55 +236,57 @@ export class BravoBarCodeBox {
   }
 
   private render() {
+    this._currentType = this.type;
     if (this.type == CodeType.None) {
       return;
     } else {
+      let _newElement = this._element.getElementsByClassName('barcodebox')[0];
       if (this.type == CodeType.Codabar) {
-        this._barCode = new Codabar(this._element);
+        this._barCode = new Codabar(_newElement);
       } else if (this.type == CodeType.Code39) {
-        this._barCode = new Code39(this._element);
+        this._barCode = new Code39(_newElement);
       } else if (this.type == CodeType.Ansi39) {
-        this._barCode = new Code39(this._element, {
+        this._barCode = new Code39(_newElement, {
           fullAscii: true,
         });
       } else if (this.type == CodeType.Code49) {
-        this._barCode = new Code49(this._element);
+        this._barCode = new Code49(_newElement);
       } else if (this.type == CodeType.Code_93) {
-        this._barCode = new Code93(this._element);
+        this._barCode = new Code93(_newElement);
       } else if (this.type == CodeType.Code_128_A) {
-        this._barCode = new Code128(this._element, {
+        this._barCode = new Code128(_newElement, {
           codeSet: Code128CodeSet.A,
         });
       } else if (this.type == CodeType.Code_128_B) {
-        this._barCode = new Code128(this._element, {
+        this._barCode = new Code128(_newElement, {
           codeSet: Code128CodeSet.B,
         });
       } else if (this.type == CodeType.Code_128_C) {
-        this._barCode = new Code128(this._element, {
+        this._barCode = new Code128(_newElement, {
           codeSet: Code128CodeSet.C,
         });
       } else if (this.type == CodeType.Code_128auto) {
-        this._barCode = new Code128(this._element, {
+        this._barCode = new Code128(_newElement, {
           codeSet: Code128CodeSet.Auto,
         });
       } else if (this.type == CodeType.EAN_8) {
-        this._barCode = new Ean8(this._element);
+        this._barCode = new Ean8(_newElement);
       } else if (this.type == CodeType.EAN_13) {
-        this._barCode = new Ean13(this._element);
+        this._barCode = new Ean13(_newElement);
       } else if (this.type == CodeType.JapanesePostal) {
-        this._barCode = new JapanesePostal(this._element);
+        this._barCode = new JapanesePostal(_newElement);
       } else if (this.type == CodeType.Pdf417) {
-        this._barCode = new Pdf417(this._element);
+        this._barCode = new Pdf417(_newElement);
       } else if (this.type == CodeType.MicroPDF417) {
-        this._barCode = new MicroPdf417(this._element);
+        this._barCode = new MicroPdf417(_newElement);
       } else if (this.type == CodeType.QRCode) {
-        this._barCode = new QrCode(this._element);
+        this._barCode = new QrCode(_newElement);
       } else if (this.type == CodeType.UPC_A) {
-        this._barCode = new UpcA(this._element);
+        this._barCode = new UpcA(_newElement);
       } else if (this.type == CodeType.UPC_E0) {
-        this._barCode = new UpcE0(this._element);
+        this._barCode = new UpcE0(_newElement);
       } else if (this.type == CodeType.UPC_E1) {
-        this._barCode = new UpcE1(this._element);
+        this._barCode = new UpcE1(_newElement);
       } else {
         throw `${CodeType[this.type] + ' ' + this._zThrowError} `;
       }

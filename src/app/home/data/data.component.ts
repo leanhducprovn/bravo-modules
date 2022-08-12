@@ -834,7 +834,7 @@ export class DataComponent
 
   private _barCodeType: CodeType = CodeType.None;
   public onType(event: any) {
-    this._barCodeType = event.target.value;
+    this._barCodeType = Number(event.target.value);
   }
 
   private _barCodeShowLabel: boolean = true;
