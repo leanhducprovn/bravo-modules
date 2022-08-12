@@ -579,12 +579,13 @@ export class DataComponent
       try {
         this._barcode = new BravoBarCodeBox(element);
         this._barcode.value = 'A15126893B';
-        this._barcode.type = CodeType.Codabar;
+        this._barcode.type = CodeType.None;
         this._barcode.color = '#079085';
         this._barcode.backgroundColor = '#FFFFFF';
         this._barcode.autoWidthZoom = 3;
         this._barcode.showLabel = true;
         this._barcode.labelPosition = BarCodeLabelPosition.Bottom;
+        this._barcode.type = CodeType.Codabar;
       } catch (error: any) {
         Swal.fire('Warning!', error, 'warning');
       }
