@@ -20,7 +20,9 @@ export class BravoControlBaseComponent extends wjc.Control implements OnInit {
     });
   }
 
-  public onClick() {}
+  public onDebugger() {
+    debugger;
+  }
 
   override refresh(fullUpdate?: boolean | undefined): void {}
 
