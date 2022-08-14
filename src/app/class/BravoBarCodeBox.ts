@@ -202,6 +202,7 @@ export class BravoBarCodeBox {
   private _barCode!: any;
   private _zThrowError: string = 'not yet supported!';
   private _zInvalidValue: string = 'Invalid value!';
+  private _zInvalidImage: string = 'Invalid image!';
 
   private invalidate() {
     if (!this._barCode) {
@@ -286,5 +287,16 @@ export class BravoBarCodeBox {
         throw `${CodeType[this.type] + ' ' + this._zThrowError} `;
       }
     }
+  }
+
+  public getDataUrl() {
+    if (this._barCode) return this._barCode.getDataUrl();
+    else throw this._zInvalidImage;
+  }
+
+  public getImageData() {
+    if (this._barCode && this.renderType == RenderType.Canvas)
+      return this._barCode.getImageData();
+    else throw this._zInvalidImage + ' or ' + this._zThrowError;
   }
 }
