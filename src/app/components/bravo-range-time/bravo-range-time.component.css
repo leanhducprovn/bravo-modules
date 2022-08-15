@@ -1,5 +1,3 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
-
 .content {
     display: flex;
     flex-direction: row;
@@ -31,42 +29,42 @@
     border-radius: 4px;
 }
 
-:host >>> .wj-content {
+:host>>>.wj-content {
     border: unset !important;
     background: unset !important;
     color: inherit !important;
 }
 
-:host >>> .wj-btn {
+:host>>>.wj-btn {
     border-left: unset !important;
     padding: unset !important;
     min-width: unset !important
 }
 
-:host >>> .wj-input-group-btn {
+:host>>>.wj-input-group-btn {
     width: 20px !important;
     min-width: unset !important;
 }
 
-:host >>> .wj-btn-default {
+:host>>>.wj-btn-default {
     color: inherit !important;
 }
 
-:host >>> .wj-form-control {
+:host>>>.wj-form-control {
     font-size: inherit !important;
 }
 
-:host >>> .wj-btn-default:hover {
+:host>>>.wj-btn-default:hover {
     background: unset !important;
 }
 
-:host >>> .wj-glyph-down {
+:host>>>.wj-glyph-down {
     border-top: unset !important;
     border-right: unset !important;
     border-left: unset !important;
 }
 
-:host >>> .wj-glyph-down::before {
+:host>>>.wj-glyph-down::before {
     content: "\f107";
     font-family: FontAwesome;
     font-size: 13px;
@@ -79,7 +77,8 @@
     color: #eee;
 }
 
-:host >>> input, li {
+:host>>>input,
+li {
     cursor: pointer !important;
     caret-color: transparent !important;
 }

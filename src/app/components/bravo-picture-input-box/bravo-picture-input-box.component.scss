@@ -1,0 +1,40 @@
+.bravo-picture-input-box {
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    height: 120px;
+    border: 1px solid #bbbbbb;
+
+    &:focus-within {
+        border: 1px solid #FCC479;
+    }
+
+    .bravo-picture-preview {
+        width: 180px;
+
+        &:focus-within {
+            border: 1px dotted #bbbbbb;
+        }
+    }
+
+    .bravo-picture-selection {
+        width: calc(100% - 180px);
+
+        .bravo-dropdown-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #bbbbbb;
+            padding: 2px;
+
+            &:hover {
+                border: 1px solid #568FBA;
+                background-color: #E0EEF9;
+            }
+
+            svg {
+                opacity: 0.5;
+            }
+        }
+    }
+}
