@@ -11,19 +11,20 @@ export class BravoPictureInputBoxComponent
   extends wjc.Control
   implements OnInit
 {
-  @ViewChild('popup', { static: true }) popup!: input.Popup;
+  private _popup!: input.Popup;
 
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
   }
 
-  ngOnInit(): void {
-    this.setPopup();
-  }
-
-  private setPopup() {
-    this.popup.showTrigger = input.PopupTrigger.ClickOwner;
-    this.popup.hideTrigger =
-      input.PopupTrigger.ClickOwner || input.PopupTrigger.LeavePopup;
+  public ngOnInit(): void {
+    this._popup = new input.Popup(
+      this.hostElement.querySelector('.bravo-picture-popup')
+    );
+    this._popup.owner = this.hostElement.querySelector(
+      '.bravo-picture-dropdown'
+    );
+    this._popup.showTrigger = input.PopupTrigger.ClickOwner;
+    this._popup.hideTrigger = input.PopupTrigger.ClickOrBlur;
   }
 }

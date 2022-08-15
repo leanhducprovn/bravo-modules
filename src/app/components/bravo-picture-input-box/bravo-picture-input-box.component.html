@@ -7,7 +7,7 @@
   <!-- selection -->
   <div class="bravo-picture-selection">
     <!-- dropdown -->
-    <div #onDropdown class="bravo-dropdown-button">
+    <button class="bravo-picture-dropdown">
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
         xmlns:svgjs="http://svgjs.com/svgjs" width="14" height="14" x="0" y="0" viewBox="0 0 128 128"
         style="enable-background:new 0 0 14 14" xml:space="preserve" class="">
@@ -17,10 +17,10 @@
             fill="#000000" data-original="#000000" class=""></path>
         </g>
       </svg>
-    </div>
+    </button>
     <!-- popup -->
-    <wj-popup #popup [owner]="onDropdown">
-      Lê Anh Đức Bravo 8R3
-    </wj-popup>
+    <div class="bravo-picture-popup">
+      Lê Anh Đức
+    </div>
   </div>
 </div>
