@@ -23,6 +23,7 @@ import { BravoSliderBaseComponent } from './components/bravo-slider-base/bravo-s
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
 import { BravoControlBaseComponent } from './components/bravo-control-base/bravo-control-base.component';
+import { BravoPictureInputBoxComponent } from './components/bravo-picture-input-box/bravo-picture-input-box.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { BravoControlBaseComponent } from './components/bravo-control-base/bravo
     PageNotFoundComponent,
     HomeComponent,
     BravoControlBaseComponent,
+    BravoPictureInputBoxComponent,
   ],
   imports: [
     BrowserModule,
