@@ -21,14 +21,16 @@
         width: calc(100% - 180px);
 
         button {
+            cursor: pointer;
             background-color: unset;
             border: none;
             border-radius: unset;
-            cursor: pointer;
             color: unset;
             font-size: unset;
             padding: unset;
             margin: unset;
+            width: unset;
+            height: unset;
 
             &.bravo-picture-dropdown {
                 display: flex;
