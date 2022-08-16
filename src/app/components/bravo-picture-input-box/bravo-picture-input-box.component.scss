@@ -10,10 +10,16 @@
     }
 
     .bravo-picture-preview {
+        display: flex;
+        align-items: center;
         width: 180px;
 
         &:focus-within {
             border: 1px dotted #bbbbbb;
+        }
+
+        img {
+            width: 100%;
         }
     }
 
@@ -67,7 +73,11 @@
             cursor: all-scroll;
             width: 100%;
             height: calc(100% - 46px);
-            background-color: red;
+            overflow: auto;
+
+            img {
+                width: 100%;
+            }
         }
 
         .bravo-picture-popup-imagesize {
@@ -95,6 +105,14 @@
                     width: 26px;
                     height: 26px;
                     cursor: pointer;
+
+                    label {
+                        cursor: pointer;
+                    }
+
+                    input[type=file] {
+                        display: none;
+                    }
 
                     &:hover {
                         border: 1px solid #568FBA;

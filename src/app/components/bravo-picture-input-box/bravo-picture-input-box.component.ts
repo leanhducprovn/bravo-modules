@@ -11,9 +11,13 @@ export class BravoPictureInputBoxComponent
   extends wjc.Control
   implements OnInit
 {
-  // @ViewChild('popup', { static: true }) private _popup!: input.Popup;
-
   private _popup!: input.Popup;
+  private _imageSize!: number;
+
+  public imageInfo!: string;
+  public base64Url!: string;
+
+  @ViewChild('upload') private _upload!: ElementRef;
 
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
@@ -21,6 +25,37 @@ export class BravoPictureInputBoxComponent
 
   public ngOnInit(): void {
     this.setPopup();
+  }
+
+  public onUpload(e: any) {
+    this._imageSize = e.target.files[0].size;
+    let _url = window.URL || window.webkitURL;
+    let _imgage = new Image();
+    _imgage.src = _url.createObjectURL(e.target.files[0]);
+    _imgage.onload = () => {
+      this.imageInfo = `${
+        _imgage.width +
+        'x' +
+        _imgage.height +
+        ' ' +
+        '(' +
+        this.formatBytes(this._imageSize) +
+        ')'
+      }`;
+    };
+
+    let _fileReader = new FileReader();
+    _fileReader.readAsDataURL(e.target.files[0]);
+    _fileReader.onload = (eFile: any) => {
+      this.base64Url = eFile.target.result;
+    };
+  }
+
+  public onRemove() {
+    this._upload.nativeElement.value = '';
+    this.base64Url = '';
+    this.imageInfo = '';
+    this._popup.hide();
   }
 
   private setPopup() {
@@ -41,7 +76,12 @@ export class BravoPictureInputBoxComponent
     );
   }
 
-  public showPopup() {
-    this._popup.show();
+  private formatBytes(bytes: number, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
   }
 }

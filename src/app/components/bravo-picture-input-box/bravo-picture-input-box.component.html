@@ -1,8 +1,8 @@
 <div class="bravo-picture-input-box" tabindex="1"
   title="Click đúp chuột để mở/chọn file hoặc kéo thả file từ chương trình khác">
   <!-- preview -->
-  <div (dblclick)="showPopup()" class="bravo-picture-preview" tabindex="1">
-
+  <div (dblclick)="upload.click()" class="bravo-picture-preview" tabindex="1">
+    <img src="{{ base64Url }}">
   </div>
   <!-- selection -->
   <div class="bravo-picture-selection">
@@ -21,40 +21,45 @@
     <!-- popup -->
     <div class="bravo-picture-popup">
       <div class="bravo-picture-popup-display">
-        <div class="bravo-picture-popup-preview"></div>
-        <div class="bravo-picture-popup-imagesize">100x100</div>
+        <div class="bravo-picture-popup-preview">
+          <img src="{{ base64Url }}">
+        </div>
+        <div class="bravo-picture-popup-imagesize">{{ imageInfo }}</div>
         <div class="bravo-picture-popup-tools">
           <ul>
             <!-- add picture -->
             <li>
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                xmlns:svgjs="http://svgjs.com/svgjs" width="20" height="20" x="0" y="0" viewBox="0 0 64 64"
-                style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
-                <g>
-                  <g xmlns="http://www.w3.org/2000/svg" id="Ikon">
-                    <path
-                      d="m50 16h-23.5718a1 1 0 0 1 -.6642-.2526l-5.61-4.99a2.9983 2.9983 0 0 0 -1.9923-.7574h-13.1617a3 3 0 0 0 -3 3v33a3 3 0 0 0 3 3h46a2 2 0 0 0 2-2v-28a3 3 0 0 0 -3-3z"
-                      fill="#f57c00" data-original="#f57c00" class=""></path>
-                    <path d="m46 20h-37a3 3 0 0 0 -3 3v26h43v-26a3 3 0 0 0 -3-3z" fill="#e0e0e0" data-original="#e0e0e0"
-                      class=""></path>
-                    <path
-                      d="m57.41 28.65-4.191 18.7855a2 2 0 0 1 -1.952 1.5645h-46.267a2.9745 2.9745 0 0 1 -2.81-1.97l4.39-19.68a3.0059 3.0059 0 0 1 2.93-2.35h44.97a3.0183 3.0183 0 0 1 2.93 3.65z"
-                      fill="#ffa000" data-original="#ffa000" class=""></path>
-                    <rect fill="#e0e0e0" height="20" rx="3" width="27" x="35" y="34" data-original="#e0e0e0" class="">
-                    </rect>
-                    <path
-                      d="m48 51.07a1 1 0 0 1 -.4.73l-2.93 2.2h-6.67a3.0088 3.0088 0 0 1 -3-3v-2.08l3.93-3.44a3.0007 3.0007 0 0 1 4.1.14l2.77 2.76 1.91 1.91a1.03 1.03 0 0 1 .29.78z"
-                      fill="#7cb342" data-original="#7cb342"></path>
-                    <circle cx="45.5" cy="39.5" fill="#f57f17" r="2.5" data-original="#f57f17"></circle>
-                    <path
-                      d="m62 49.4v1.6a3.0088 3.0088 0 0 1 -3 3h-19.19l5.99-5.62 5.21-4.88a2.9869 2.9869 0 0 1 4-.09z"
-                      fill="#689f38" data-original="#689f38" class=""></path>
+              <label for="bravo-picture-upload">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  xmlns:svgjs="http://svgjs.com/svgjs" width="20" height="20" x="0" y="0" viewBox="0 0 64 64"
+                  style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
+                  <g>
+                    <g xmlns="http://www.w3.org/2000/svg" id="Ikon">
+                      <path
+                        d="m50 16h-23.5718a1 1 0 0 1 -.6642-.2526l-5.61-4.99a2.9983 2.9983 0 0 0 -1.9923-.7574h-13.1617a3 3 0 0 0 -3 3v33a3 3 0 0 0 3 3h46a2 2 0 0 0 2-2v-28a3 3 0 0 0 -3-3z"
+                        fill="#f57c00" data-original="#f57c00" class=""></path>
+                      <path d="m46 20h-37a3 3 0 0 0 -3 3v26h43v-26a3 3 0 0 0 -3-3z" fill="#e0e0e0"
+                        data-original="#e0e0e0" class=""></path>
+                      <path
+                        d="m57.41 28.65-4.191 18.7855a2 2 0 0 1 -1.952 1.5645h-46.267a2.9745 2.9745 0 0 1 -2.81-1.97l4.39-19.68a3.0059 3.0059 0 0 1 2.93-2.35h44.97a3.0183 3.0183 0 0 1 2.93 3.65z"
+                        fill="#ffa000" data-original="#ffa000" class=""></path>
+                      <rect fill="#e0e0e0" height="20" rx="3" width="27" x="35" y="34" data-original="#e0e0e0" class="">
+                      </rect>
+                      <path
+                        d="m48 51.07a1 1 0 0 1 -.4.73l-2.93 2.2h-6.67a3.0088 3.0088 0 0 1 -3-3v-2.08l3.93-3.44a3.0007 3.0007 0 0 1 4.1.14l2.77 2.76 1.91 1.91a1.03 1.03 0 0 1 .29.78z"
+                        fill="#7cb342" data-original="#7cb342"></path>
+                      <circle cx="45.5" cy="39.5" fill="#f57f17" r="2.5" data-original="#f57f17"></circle>
+                      <path
+                        d="m62 49.4v1.6a3.0088 3.0088 0 0 1 -3 3h-19.19l5.99-5.62 5.21-4.88a2.9869 2.9869 0 0 1 4-.09z"
+                        fill="#689f38" data-original="#689f38" class=""></path>
+                    </g>
                   </g>
-                </g>
-              </svg>
+                </svg>
+              </label>
+              <input #upload id="bravo-picture-upload" type="file" (change)="onUpload($event)">
             </li>
             <!-- remove picture -->
-            <li>
+            <li (click)="onRemove()">
               <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:svgjs="http://svgjs.com/svgjs" width="13" height="13" x="0" y="0" viewBox="0 0 365.71733 365"
                 style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
