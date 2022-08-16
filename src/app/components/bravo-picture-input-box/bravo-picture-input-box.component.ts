@@ -12,10 +12,13 @@ export class BravoPictureInputBoxComponent
   implements OnInit
 {
   private _popup!: input.Popup;
-  private _imageSize!: number;
+  private _isZoom: boolean = false;
+  private _imageWidth!: number;
+  private _currentWidth!: number;
 
   public imageInfo!: string;
   public base64Url!: string;
+  public zoomPercent!: number;
 
   @ViewChild('upload') private _upload!: ElementRef;
 
@@ -28,27 +31,45 @@ export class BravoPictureInputBoxComponent
   }
 
   public onUpload(e: any) {
-    this._imageSize = e.target.files[0].size;
+    // get image element
+    let _eImage = this._popup.hostElement.querySelector(
+      '.bravo-picture-popup-preview img'
+    );
+
+    // get image info
+    let _imageSize = e.target.files[0].size;
     let _url = window.URL || window.webkitURL;
-    let _imgage = new Image();
-    _imgage.src = _url.createObjectURL(e.target.files[0]);
-    _imgage.onload = () => {
+    let _image = new Image();
+    _image.src = _url.createObjectURL(e.target.files[0]);
+    _image.onload = () => {
+      this._imageWidth = _image.width;
       this.imageInfo = `${
-        _imgage.width +
+        _image.width +
         'x' +
-        _imgage.height +
+        _image.height +
         ' ' +
         '(' +
-        this.formatBytes(this._imageSize) +
+        this.formatBytes(_imageSize) +
         ')'
       }`;
+      // get zoom percent
+      if (_eImage) {
+        this.zoomPercent = Math.round(
+          (_eImage.clientWidth / _image.width) * 100
+        );
+      }
     };
-
+    // get base64url
     let _fileReader = new FileReader();
     _fileReader.readAsDataURL(e.target.files[0]);
     _fileReader.onload = (eFile: any) => {
       this.base64Url = eFile.target.result;
     };
+
+    // set image width
+    wjc.setCss(_eImage, {
+      width: '100%',
+    });
   }
 
   public onRemove() {
@@ -56,6 +77,57 @@ export class BravoPictureInputBoxComponent
     this.base64Url = '';
     this.imageInfo = '';
     this._popup.hide();
+  }
+
+  public onZoom() {
+    this._isZoom = !this._isZoom;
+    let _image = this._popup.hostElement.querySelector(
+      '.bravo-picture-popup-preview img'
+    );
+    if (this._isZoom) {
+      wjc.setCss(_image, {
+        width: 'auto',
+      });
+    } else {
+      wjc.setCss(_image, {
+        width: '100%',
+      });
+    }
+  }
+
+  public onZoomIn() {
+    let _image = this._popup.hostElement.querySelector(
+      '.bravo-picture-popup-preview img'
+    );
+    let _currWidth = _image?.clientWidth;
+    if (_currWidth) {
+      wjc.setCss(_image, {
+        width: `${_currWidth + 100 + 'px'}`,
+      });
+    }
+  }
+
+  public onZoomOut() {
+    let _image = this._popup.hostElement.querySelector(
+      '.bravo-picture-popup-preview img'
+    );
+    let _currWidth = _image?.clientWidth;
+    if (_currWidth) {
+      wjc.setCss(_image, {
+        width: `${_currWidth - 100 + 'px'}`,
+      });
+    }
+  }
+
+  public onPopup() {
+    let _eImage = this._popup.hostElement.querySelector(
+      '.bravo-picture-popup-preview img'
+    );
+    if (_eImage) {
+      this.zoomPercent = Math.round(
+        (_eImage.clientWidth / this._imageWidth) * 100
+      );
+    }
   }
 
   private setPopup() {

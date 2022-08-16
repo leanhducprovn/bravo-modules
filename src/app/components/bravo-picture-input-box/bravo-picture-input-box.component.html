@@ -7,7 +7,7 @@
   <!-- selection -->
   <div class="bravo-picture-selection">
     <!-- dropdown -->
-    <button class="bravo-picture-dropdown">
+    <button (click)="onPopup()" class="bravo-picture-dropdown">
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
         xmlns:svgjs="http://svgjs.com/svgjs" width="14" height="14" x="0" y="0" viewBox="0 0 128 128"
         style="enable-background:new 0 0 14 14" xml:space="preserve" class="">
@@ -76,7 +76,7 @@
               </svg>
             </li>
             <!-- zoom(-) -->
-            <li class="zoom-out">
+            <li (click)="onZoomOut()" class="zoom-out">
               <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:svgjs="http://svgjs.com/svgjs" width="16" height="16" x="0" y="0" viewBox="0 0 60 60"
                 style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -102,9 +102,9 @@
                 </g>
               </svg>
             </li>
-            <li class="zoom-value">100%</li>
+            <li class="zoom-value">{{ zoomPercent ? zoomPercent : "100" }}%</li>
             <!-- zoom(+) -->
-            <li class="zoom-in">
+            <li (click)="onZoomIn()" class="zoom-in">
               <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:svgjs="http://svgjs.com/svgjs" width="16" height="16" x="0" y="0" viewBox="0 0 60 60"
                 style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -131,7 +131,7 @@
               </svg>
             </li>
             <!-- zoom(100%) -->
-            <li>
+            <li (click)="onZoom()">
               <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:svgjs="http://svgjs.com/svgjs" width="18" height="18" x="0" y="0" viewBox="0 0 64 64"
                 style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
