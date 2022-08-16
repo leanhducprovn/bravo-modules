@@ -49,5 +49,77 @@
                 }
             }
         }
+
+
+    }
+}
+
+// popup
+.bravo-picture-popup {
+    .bravo-picture-popup-display {
+        display: flex;
+        flex-direction: column;
+        padding: 3px;
+        width: 100%;
+        height: 100%;
+
+        .bravo-picture-popup-preview {
+            cursor: all-scroll;
+            width: 100%;
+            height: calc(100% - 46px);
+            background-color: red;
+        }
+
+        .bravo-picture-popup-imagesize {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 20px;
+        }
+
+        .bravo-picture-popup-tools {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 26px;
+
+            ul {
+                list-style: none;
+                display: flex;
+                flex-direction: row;
+
+                li {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 26px;
+                    height: 26px;
+                    cursor: pointer;
+
+                    &:hover {
+                        border: 1px solid #568FBA;
+                        background-color: #E0EEF9;
+                    }
+
+                    &.zoom-in {
+                        cursor: zoom-in;
+                    }
+
+                    &.zoom-out {
+                        cursor: zoom-out;
+                    }
+
+                    &.zoom-value {
+                        cursor: no-drop;
+                        margin: 0 5px 0 5px;
+
+                        &:hover {
+                            border: unset;
+                            background-color: unset;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -11,7 +11,9 @@ export class BravoPictureInputBoxComponent
   extends wjc.Control
   implements OnInit
 {
-  @ViewChild('popup', { static: true }) private _popup!: input.Popup;
+  // @ViewChild('popup', { static: true }) private _popup!: input.Popup;
+
+  private _popup!: input.Popup;
 
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
@@ -22,17 +24,24 @@ export class BravoPictureInputBoxComponent
   }
 
   private setPopup() {
-    wjc.setCss(this.hostElement.querySelector('.bravo-picture-display'), {
+    wjc.setCss(this.hostElement.querySelector('.bravo-picture-popup'), {
       width: '300px',
-      height: '160px',
+      height: '200px',
       borderRadius: 'unset',
     });
-    this._popup.owner = this.hostElement.querySelector(
-      '.bravo-picture-dropdown'
+    this._popup = new input.Popup(
+      this.hostElement.querySelector('.bravo-picture-popup'),
+      {
+        owner: this.hostElement.querySelector('.bravo-picture-dropdown'),
+        position: wjc.PopupPosition.BelowRight,
+        showTrigger: input.PopupTrigger.ClickOwner,
+        hideTrigger: input.PopupTrigger.Blur | input.PopupTrigger.ClickOwner,
+        isResizable: true,
+      }
     );
-    this._popup.showTrigger = input.PopupTrigger.ClickOwner;
-    this._popup.hideTrigger =
-      input.PopupTrigger.Blur | input.PopupTrigger.ClickOwner;
-    this._popup.position = wjc.PopupPosition.BelowRight;
+  }
+
+  public showPopup() {
+    this._popup.show();
   }
 }
