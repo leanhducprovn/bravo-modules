@@ -18,6 +18,10 @@ export class BravoPictureInputBoxComponent
   }
 
   public ngOnInit(): void {
+    this.setPopup();
+  }
+
+  private setPopup() {
     wjc.setCss(this.hostElement.querySelector('.bravo-picture-display'), {
       width: '300px',
       height: '160px',
