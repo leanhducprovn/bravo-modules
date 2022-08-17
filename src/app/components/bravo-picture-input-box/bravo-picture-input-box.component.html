@@ -30,130 +30,26 @@
             <!-- add picture -->
             <li>
               <label for="bravo-picture-upload">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                  xmlns:svgjs="http://svgjs.com/svgjs" width="20" height="20" x="0" y="0" viewBox="0 0 64 64"
-                  style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
-                  <g>
-                    <g xmlns="http://www.w3.org/2000/svg" id="Ikon">
-                      <path
-                        d="m50 16h-23.5718a1 1 0 0 1 -.6642-.2526l-5.61-4.99a2.9983 2.9983 0 0 0 -1.9923-.7574h-13.1617a3 3 0 0 0 -3 3v33a3 3 0 0 0 3 3h46a2 2 0 0 0 2-2v-28a3 3 0 0 0 -3-3z"
-                        fill="#f57c00" data-original="#f57c00" class=""></path>
-                      <path d="m46 20h-37a3 3 0 0 0 -3 3v26h43v-26a3 3 0 0 0 -3-3z" fill="#e0e0e0"
-                        data-original="#e0e0e0" class=""></path>
-                      <path
-                        d="m57.41 28.65-4.191 18.7855a2 2 0 0 1 -1.952 1.5645h-46.267a2.9745 2.9745 0 0 1 -2.81-1.97l4.39-19.68a3.0059 3.0059 0 0 1 2.93-2.35h44.97a3.0183 3.0183 0 0 1 2.93 3.65z"
-                        fill="#ffa000" data-original="#ffa000" class=""></path>
-                      <rect fill="#e0e0e0" height="20" rx="3" width="27" x="35" y="34" data-original="#e0e0e0" class="">
-                      </rect>
-                      <path
-                        d="m48 51.07a1 1 0 0 1 -.4.73l-2.93 2.2h-6.67a3.0088 3.0088 0 0 1 -3-3v-2.08l3.93-3.44a3.0007 3.0007 0 0 1 4.1.14l2.77 2.76 1.91 1.91a1.03 1.03 0 0 1 .29.78z"
-                        fill="#7cb342" data-original="#7cb342"></path>
-                      <circle cx="45.5" cy="39.5" fill="#f57f17" r="2.5" data-original="#f57f17"></circle>
-                      <path
-                        d="m62 49.4v1.6a3.0088 3.0088 0 0 1 -3 3h-19.19l5.99-5.62 5.21-4.88a2.9869 2.9869 0 0 1 4-.09z"
-                        fill="#689f38" data-original="#689f38" class=""></path>
-                    </g>
-                  </g>
-                </svg>
+                <img src="./assets/img/OpenFolder.png" style="width: 20px">
               </label>
               <input #upload id="bravo-picture-upload" type="file" (change)="onUpload($event)">
             </li>
             <!-- remove picture -->
             <li (click)="onRemove()">
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                xmlns:svgjs="http://svgjs.com/svgjs" width="13" height="13" x="0" y="0" viewBox="0 0 365.71733 365"
-                style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
-                <g>
-                  <g xmlns="http://www.w3.org/2000/svg" fill="#f44336">
-                    <path
-                      d="m356.339844 296.347656-286.613282-286.613281c-12.5-12.5-32.765624-12.5-45.246093 0l-15.105469 15.082031c-12.5 12.503906-12.5 32.769532 0 45.25l286.613281 286.613282c12.503907 12.5 32.769531 12.5 45.25 0l15.082031-15.082032c12.523438-12.480468 12.523438-32.75.019532-45.25zm0 0"
-                      fill="#f44336" data-original="#f44336"></path>
-                    <path
-                      d="m295.988281 9.734375-286.613281 286.613281c-12.5 12.5-12.5 32.769532 0 45.25l15.082031 15.082032c12.503907 12.5 32.769531 12.5 45.25 0l286.632813-286.59375c12.503906-12.5 12.503906-32.765626 0-45.246094l-15.082032-15.082032c-12.5-12.523437-32.765624-12.523437-45.269531-.023437zm0 0"
-                      fill="#f44336" data-original="#f44336"></path>
-                  </g>
-                </g>
-              </svg>
+              <img src="./assets/img/Delete.png" style="width: 20px">
             </li>
             <!-- zoom(-) -->
             <li (click)="onZoomOut()" class="zoom-out">
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                xmlns:svgjs="http://svgjs.com/svgjs" width="16" height="16" x="0" y="0" viewBox="0 0 60 60"
-                style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
-                <g>
-                  <path xmlns="http://www.w3.org/2000/svg" d="m37.256 33.947h3.988v10.607h-3.988z" fill="#bfdbf0"
-                    transform="matrix(.707 -.707 .707 .707 -16.258 39.25)" data-original="#bfdbf0"></path>
-                  <path xmlns="http://www.w3.org/2000/svg"
-                    d="m58.408 55.588-2.82 2.82a1.986 1.986 0 0 1 -2.829 0l-12.167-12.167a1.986 1.986 0 0 1 0-2.829l2.82-2.82a1.986 1.986 0 0 1 2.829 0l12.167 12.167a1.986 1.986 0 0 1 0 2.829z"
-                    fill="#a9725e" data-original="#a9725e"></path>
-                  <circle xmlns="http://www.w3.org/2000/svg" cx="22" cy="22" fill="#9ebbce" r="21"
-                    data-original="#9ebbce"></circle>
-                  <circle xmlns="http://www.w3.org/2000/svg" cx="22" cy="22" fill="#3778c6" r="17"
-                    data-original="#3778c6"></circle>
-                  <path xmlns="http://www.w3.org/2000/svg"
-                    d="m15 20a2.012 2.012 0 0 0 -1.992 2.177 2.075 2.075 0 0 0 2.104 1.823h13.766a2.087 2.087 0 0 0 2.093-1.658 2.005 2.005 0 0 0 -1.971-2.342z"
-                    fill="#e1efff" data-original="#e1efff"></path>
-                  <path xmlns="http://www.w3.org/2000/svg"
-                    d="m9 23a1 1 0 0 1 -1-1 14.015 14.015 0 0 1 14-14 1 1 0 0 1 0 2 12.013 12.013 0 0 0 -12 12 1 1 0 0 1 -1 1z"
-                    fill="#4b95ff" data-original="#4b95ff"></path>
-                  <path xmlns="http://www.w3.org/2000/svg"
-                    d="m22 40a18 18 0 1 1 18-18 18.021 18.021 0 0 1 -18 18zm0-34a16 16 0 1 0 16 16 16.019 16.019 0 0 0 -16-16z"
-                    fill="#bfdbf0" data-original="#bfdbf0"></path>
-                </g>
-              </svg>
+              <img src="./assets/img/ZoomOut.svg" style="width: 18px">
             </li>
             <li class="zoom-value">{{ zoomPercent ? zoomPercent : "0" }}%</li>
             <!-- zoom(+) -->
             <li (click)="onZoomIn()" class="zoom-in">
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                xmlns:svgjs="http://svgjs.com/svgjs" width="16" height="16" x="0" y="0" viewBox="0 0 60 60"
-                style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
-                <g>
-                  <path xmlns="http://www.w3.org/2000/svg" d="m37.256 33.947h3.988v10.607h-3.988z" fill="#bfdbf0"
-                    transform="matrix(.707 -.707 .707 .707 -16.258 39.25)" data-original="#bfdbf0"></path>
-                  <path xmlns="http://www.w3.org/2000/svg"
-                    d="m58.408 55.588-2.82 2.82a1.986 1.986 0 0 1 -2.829 0l-12.167-12.167a1.986 1.986 0 0 1 0-2.829l2.82-2.82a1.986 1.986 0 0 1 2.829 0l12.167 12.167a1.986 1.986 0 0 1 0 2.829z"
-                    fill="#a9725e" data-original="#a9725e"></path>
-                  <circle xmlns="http://www.w3.org/2000/svg" cx="22" cy="22" fill="#9ebbce" r="21"
-                    data-original="#9ebbce"></circle>
-                  <circle xmlns="http://www.w3.org/2000/svg" cx="22" cy="22" fill="#3778c6" r="17"
-                    data-original="#3778c6"></circle>
-                  <path xmlns="http://www.w3.org/2000/svg"
-                    d="m30.971 22.342a2.087 2.087 0 0 1 -2.093 1.658h-3.878a1 1 0 0 0 -1 1v3.878a2.087 2.087 0 0 1 -1.658 2.093 2.005 2.005 0 0 1 -2.342-1.971v-4a1 1 0 0 0 -1-1h-3.888a2.075 2.075 0 0 1 -2.1-1.823 2.012 2.012 0 0 1 1.988-2.177h4a1 1 0 0 0 1-1v-3.888a2.075 2.075 0 0 1 1.823-2.1 2.012 2.012 0 0 1 2.177 1.988v4a1 1 0 0 0 1 1h4a2.005 2.005 0 0 1 1.971 2.342z"
-                    fill="#e1efff" data-original="#e1efff"></path>
-                  <path xmlns="http://www.w3.org/2000/svg"
-                    d="m9 23a1 1 0 0 1 -1-1 14.015 14.015 0 0 1 14-14 1 1 0 0 1 0 2 12.013 12.013 0 0 0 -12 12 1 1 0 0 1 -1 1z"
-                    fill="#4b95ff" data-original="#4b95ff"></path>
-                  <path xmlns="http://www.w3.org/2000/svg"
-                    d="m22 40a18 18 0 1 1 18-18 18.021 18.021 0 0 1 -18 18zm0-34a16 16 0 1 0 16 16 16.019 16.019 0 0 0 -16-16z"
-                    fill="#bfdbf0" data-original="#bfdbf0"></path>
-                </g>
-              </svg>
+              <img src="./assets/img/ZoomIn.svg" style="width: 18px">
             </li>
             <!-- zoom(100%) -->
             <li (click)="onZoom()">
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                xmlns:svgjs="http://svgjs.com/svgjs" width="18" height="18" x="0" y="0" viewBox="0 0 64 64"
-                style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
-                <g>
-                  <g xmlns="http://www.w3.org/2000/svg" id="Layer_100">
-                    <path
-                      d="m59.583 47.583c0 6.628-5.372 12-12 12h-31.166c-6.628 0-12-5.372-12-12v-31.166c0-6.628 5.372-12 12-12h31.166c6.628 0 12 5.372 12 12z"
-                      fill="#ed2224" data-original="#ed2224" class=""></path>
-                    <g fill="#fff">
-                      <path
-                        d="m19.242 18.674h-4.502c-.264 0-.505.189-.617.484-.533 1.393-1.279 2.58-2.218 3.527-.952.961-2.329 1.803-4.09 2.5-.283.113-.475.438-.475.805v5.5c0 .266.103.518.276.678.175.158.4.205.607.129 1.284-.484 2.375-1 3.238-1.535.519-.322 1.052-.705 1.593-1.146v14.454c0 .467.306.844.684.844h5.503c.377 0 .683-.377.683-.844v-24.552c.001-.467-.305-.844-.682-.844z"
-                        fill="#ffffff" data-original="#ffffff"></path>
-                      <path
-                        d="m37.05 23.311c-.339-.781-.806-1.531-1.388-2.23-.598-.721-1.373-1.309-2.302-1.748-.921-.436-2.094-.658-3.49-.658-2.931 0-5.162 1.02-6.631 3.029-1.47 2.014-2.185 5.348-2.185 10.197 0 1.916.138 3.693.408 5.287.279 1.639.682 2.963 1.195 3.93.712 1.371 1.64 2.428 2.758 3.143 1.107.707 2.557 1.066 4.308 1.066 3.154 0 5.429-1.141 6.761-3.393 1.302-2.201 1.935-5.508 1.935-10.115 0-2.014-.19-3.979-.567-5.832-.2-1.008-.471-1.909-.802-2.676zm-5.676 13.425c-.161.863-.396 1.484-.7 1.842-.28.33-.586.482-.964.482-.354 0-.876-.125-1.302-1.211-.27-.689-.592-2.281-.592-5.932 0-3.623.295-5.215.543-5.91.292-.82.699-1.184 1.323-1.184.622 0 1.042.365 1.37 1.184.271.674.591 2.279.591 6.092.001 2.112-.091 3.672-.269 4.637z"
-                        fill="#ffffff" data-original="#ffffff"></path>
-                      <path
-                        d="m56.093 25.986c-.2-1.008-.47-1.908-.803-2.676-.339-.781-.807-1.531-1.388-2.23-.598-.721-1.372-1.309-2.302-1.748-.921-.436-2.094-.658-3.49-.658-2.932 0-5.162 1.02-6.63 3.029-1.471 2.014-2.186 5.348-2.186 10.197 0 1.916.138 3.693.408 5.287.279 1.639.682 2.963 1.196 3.93.711 1.371 1.639 2.428 2.757 3.143 1.107.707 2.558 1.066 4.308 1.066 3.154 0 5.43-1.141 6.761-3.393 1.302-2.201 1.935-5.508 1.935-10.115 0-2.013-.19-3.978-.566-5.832zm-6.479 10.75c-.161.863-.397 1.484-.701 1.842-.278.33-.585.482-.963.482-.354 0-.875-.125-1.301-1.211-.271-.689-.593-2.281-.593-5.932 0-3.623.295-5.215.543-5.91.292-.82.699-1.184 1.323-1.184.621 0 1.043.365 1.37 1.184.271.674.591 2.279.591 6.092.001 2.112-.09 3.672-.269 4.637z"
-                        fill="#ffffff" data-original="#ffffff"></path>
-                    </g>
-                  </g>
-                </g>
-              </svg>
+              <img src="./assets/img/Zoom100.svg" style="width: 18px">
             </li>
           </ul>
         </div>
