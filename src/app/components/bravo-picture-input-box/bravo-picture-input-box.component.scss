@@ -43,6 +43,10 @@
                 height: 100%;
             }
         }
+
+        input[type=file] {
+            opacity: 0;
+        }
     }
 
     .bravo-picture-selection {
@@ -126,10 +130,6 @@
 
                     label {
                         cursor: pointer;
-                    }
-
-                    input[type=file] {
-                        display: none;
                     }
 
                     &:hover {

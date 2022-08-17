@@ -3,6 +3,8 @@
   <!-- preview -->
   <div (dblclick)="upload.click()" class="bravo-picture-preview" tabindex="1">
     <img src="{{ base64Url }}">
+    <input #upload id="bravo-picture-upload" type="file" multiple="true" (change)="onUpload($event)"
+      style="width: 100%; height: 100%">
   </div>
   <!-- selection -->
   <div class="bravo-picture-selection">
@@ -32,7 +34,6 @@
               <label for="bravo-picture-upload">
                 <img src="./assets/img/OpenFolder.svg" style="width: 18px">
               </label>
-              <input #upload id="bravo-picture-upload" type="file" (change)="onUpload($event)">
             </li>
             <!-- remove picture -->
             <li (click)="onRemove()">
