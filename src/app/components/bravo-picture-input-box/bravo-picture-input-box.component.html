@@ -30,13 +30,13 @@
             <!-- add picture -->
             <li>
               <label for="bravo-picture-upload">
-                <img src="./assets/img/OpenFolder.png" style="width: 20px">
+                <img src="./assets/img/OpenFolder.svg" style="width: 18px">
               </label>
               <input #upload id="bravo-picture-upload" type="file" (change)="onUpload($event)">
             </li>
             <!-- remove picture -->
             <li (click)="onRemove()">
-              <img src="./assets/img/Delete.png" style="width: 20px">
+              <img src="./assets/img/Delete.png" style="width: 18px">
             </li>
             <!-- zoom(-) -->
             <li (click)="onZoomOut()" class="zoom-out">
@@ -49,7 +49,7 @@
             </li>
             <!-- zoom(100%) -->
             <li (click)="onZoom()">
-              <img src="./assets/img/Zoom100.svg" style="width: 18px">
+              <img src="./assets/img/ZoomOriginalSize.svg" style="width: 18px">
             </li>
           </ul>
         </div>
