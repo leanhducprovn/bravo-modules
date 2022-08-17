@@ -246,7 +246,9 @@
   <!-- Picture Input Box -->
   <h2>Bravo Picture Input Box</h2>
   <div class="picture-input-box">
-    <bravo-picture-input-box></bravo-picture-input-box>
+    <form [formGroup]="formPictureBox">
+      <bravo-picture-input-box formControlName="dataImage"></bravo-picture-input-box>
+    </form>
   </div>
   <!--------------------------------------->
 </div>

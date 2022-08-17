@@ -1,11 +1,25 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  forwardRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import * as input from '@grapecity/wijmo.input';
 import * as wjc from '@grapecity/wijmo';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'bravo-picture-input-box',
   templateUrl: './bravo-picture-input-box.component.html',
   styleUrls: ['./bravo-picture-input-box.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => BravoPictureInputBoxComponent),
+    },
+  ],
 })
 export class BravoPictureInputBoxComponent
   extends wjc.Control
@@ -24,6 +38,42 @@ export class BravoPictureInputBoxComponent
 
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
+  }
+
+  public onChange = (changed: any) => {};
+
+  public onTouch = () => {};
+
+  public writeValue(obj: any): void {
+    this.base64Url = obj;
+    let _eImage = this._popup.hostElement.querySelector(
+      '.bravo-picture-popup-preview img'
+    );
+    let _image = new Image();
+    _image.src = this.base64Url;
+    _image.onload = () => {
+      this._imageWidth = _image.width;
+      this.imageInfo = `${
+        _image.width +
+        'x' +
+        _image.height +
+        ' ' +
+        '(' +
+        this.formatBytes(this.getSizeBase64(this.base64Url)) +
+        ')'
+      }`;
+    };
+    wjc.setCss(_eImage, {
+      width: '100%',
+    });
+  }
+
+  public registerOnChange(changed: any): void {
+    this.onChange = changed;
+  }
+
+  public registerOnTouched(touched: any): void {
+    this.onTouch = touched;
   }
 
   public ngOnInit(): void {
@@ -53,7 +103,7 @@ export class BravoPictureInputBoxComponent
         ')'
       }`;
 
-      // get zoom percent
+      // set zoom percent
       if (_eImage) {
         this.setZoomPercent();
       }
@@ -155,6 +205,12 @@ export class BravoPictureInputBoxComponent
         isResizable: true,
       }
     );
+  }
+
+  private getSizeBase64(base64: string) {
+    let stringLength = base64.length - 'data:image/png;base64,'.length;
+    let sizeInBytes = 4 * Math.ceil(stringLength / 3) * 0.5624896334383812;
+    return sizeInBytes;
   }
 
   private formatBytes(bytes: number, decimals = 2) {
