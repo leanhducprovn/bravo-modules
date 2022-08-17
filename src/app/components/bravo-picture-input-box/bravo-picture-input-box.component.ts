@@ -11,16 +11,16 @@ export class BravoPictureInputBoxComponent
   extends wjc.Control
   implements OnInit
 {
+  @ViewChild('upload') private _upload!: ElementRef;
+
   private _popup!: input.Popup;
   private _isZoom: boolean = false;
   private _imageWidth!: number;
-  private _currentWidth!: number;
+  private _currentZoomPercent!: number;
 
   public imageInfo!: string;
   public base64Url!: string;
   public zoomPercent!: number;
-
-  @ViewChild('upload') private _upload!: ElementRef;
 
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
@@ -52,11 +52,10 @@ export class BravoPictureInputBoxComponent
         this.formatBytes(_imageSize) +
         ')'
       }`;
+
       // get zoom percent
       if (_eImage) {
-        this.zoomPercent = Math.round(
-          (_eImage.clientWidth / _image.width) * 100
-        );
+        this.setZoomPercent();
       }
     };
     // get base64url
@@ -88,10 +87,12 @@ export class BravoPictureInputBoxComponent
       wjc.setCss(_image, {
         width: 'auto',
       });
+      this.zoomPercent = 100;
     } else {
       wjc.setCss(_image, {
         width: '100%',
       });
+      this.zoomPercent = this._currentZoomPercent;
     }
   }
 
@@ -99,35 +100,43 @@ export class BravoPictureInputBoxComponent
     let _image = this._popup.hostElement.querySelector(
       '.bravo-picture-popup-preview img'
     );
-    let _currWidth = _image?.clientWidth;
-    if (_currWidth) {
-      wjc.setCss(_image, {
-        width: `${_currWidth + 100 + 'px'}`,
-      });
-    }
+    wjc.setCss(_image, {
+      width: `${this.getCurrentWidth()! + this.getZoomValue() + 'px'}`,
+    });
+    this.zoomPercent = this.zoomPercent + 10;
   }
 
   public onZoomOut() {
     let _image = this._popup.hostElement.querySelector(
       '.bravo-picture-popup-preview img'
     );
-    let _currWidth = _image?.clientWidth;
-    if (_currWidth) {
-      wjc.setCss(_image, {
-        width: `${_currWidth - 100 + 'px'}`,
-      });
+    wjc.setCss(_image, {
+      width: `${this.getCurrentWidth()! - this.getZoomValue() + 'px'}`,
+    });
+    if (this.zoomPercent >= 10) {
+      this.zoomPercent = this.zoomPercent - 10;
     }
   }
 
   public onPopup() {
-    let _eImage = this._popup.hostElement.querySelector(
-      '.bravo-picture-popup-preview img'
+    this.setZoomPercent();
+  }
+
+  private getZoomValue() {
+    return (this._imageWidth * 10) / 100;
+  }
+
+  private setZoomPercent() {
+    this.zoomPercent = Math.round(
+      (this.getCurrentWidth()! / this._imageWidth) * 100
     );
-    if (_eImage) {
-      this.zoomPercent = Math.round(
-        (_eImage.clientWidth / this._imageWidth) * 100
-      );
-    }
+    this._currentZoomPercent = this.zoomPercent;
+  }
+
+  private getCurrentWidth() {
+    return this._popup.hostElement.querySelector(
+      '.bravo-picture-popup-preview img'
+    )?.clientWidth;
   }
 
   private setPopup() {
