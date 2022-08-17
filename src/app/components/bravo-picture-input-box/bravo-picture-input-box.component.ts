@@ -102,11 +102,13 @@ export class BravoPictureInputBoxComponent
       '.bravo-picture-popup-preview img'
     );
 
-    // remove class
-    wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
-
     // get image info
-    let _imageSize = e.target.files[0].size;
+    let _imageSize: number;
+    if (e.target.files[0]) {
+      _imageSize = e.target.files[0].size;
+    } else {
+      return;
+    }
     let _url = window.URL || window.webkitURL;
     let _image = new Image();
     _image.src = _url.createObjectURL(e.target.files[0]);
@@ -121,6 +123,9 @@ export class BravoPictureInputBoxComponent
         this.formatBytes(_imageSize) +
         ')'
       }`;
+
+      // remove class
+      wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
 
       // set picture preview
       if (_image.width >= 180) {
