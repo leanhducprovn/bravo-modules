@@ -65,7 +65,7 @@ export class BravoPictureInputBoxComponent
         this.formatBytes(this.getSizeBase64(this.base64Url)) +
         ')'
       }`;
-      wjc.removeClass(_imagePreview!, 'width-100 height-100 default');
+      wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
       if (_image.width >= 180) {
         if (_image.width > _image.height) {
           wjc.toggleClass(_imagePreview!, 'width-100');
@@ -103,7 +103,7 @@ export class BravoPictureInputBoxComponent
     );
 
     // remove class
-    wjc.removeClass(_imagePreview!, 'width-100 height-100 default');
+    wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
 
     // get image info
     let _imageSize = e.target.files[0].size;
@@ -152,6 +152,11 @@ export class BravoPictureInputBoxComponent
   }
 
   public onRemove() {
+    let _imagePreview = this.hostElement.querySelector(
+      '.bravo-picture-preview img'
+    );
+    wjc.removeClass(_imagePreview!, 'default width-100 height-100');
+    wjc.addClass(_imagePreview!, 'null');
     this._upload.nativeElement.value = '';
     this.base64Url = '';
     this.imageInfo = '';
