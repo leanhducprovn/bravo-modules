@@ -46,7 +46,10 @@ export class BravoPictureInputBoxComponent
 
   public writeValue(obj: any): void {
     this.base64Url = obj;
-    let _eImage = this._popup.hostElement.querySelector(
+    let _imagePreview = this.hostElement.querySelector(
+      '.bravo-picture-preview img'
+    );
+    let _imagePopupPreview = this._popup.hostElement.querySelector(
       '.bravo-picture-popup-preview img'
     );
     let _image = new Image();
@@ -62,8 +65,18 @@ export class BravoPictureInputBoxComponent
         this.formatBytes(this.getSizeBase64(this.base64Url)) +
         ')'
       }`;
+      wjc.removeClass(_imagePreview!, 'width-100 height-100 default');
+      if (_image.width >= 180) {
+        if (_image.width > _image.height) {
+          wjc.toggleClass(_imagePreview!, 'width-100');
+        } else {
+          wjc.toggleClass(_imagePreview!, 'height-100');
+        }
+      } else {
+        wjc.toggleClass(_imagePreview!, 'default');
+      }
     };
-    wjc.setCss(_eImage, {
+    wjc.setCss(_imagePopupPreview, {
       width: '100%',
     });
   }
@@ -82,9 +95,15 @@ export class BravoPictureInputBoxComponent
 
   public onUpload(e: any) {
     // get image element
-    let _eImage = this._popup.hostElement.querySelector(
+    let _imagePreview = this.hostElement.querySelector(
+      '.bravo-picture-preview img'
+    );
+    let _imagePopupPreview = this._popup.hostElement.querySelector(
       '.bravo-picture-popup-preview img'
     );
+
+    // remove class
+    wjc.removeClass(_imagePreview!, 'width-100 height-100 default');
 
     // get image info
     let _imageSize = e.target.files[0].size;
@@ -103,8 +122,19 @@ export class BravoPictureInputBoxComponent
         ')'
       }`;
 
+      // set picture preview
+      if (_image.width >= 180) {
+        if (_image.width > _image.height) {
+          wjc.toggleClass(_imagePreview!, 'width-100');
+        } else {
+          wjc.toggleClass(_imagePreview!, 'height-100');
+        }
+      } else {
+        wjc.toggleClass(_imagePreview!, 'default');
+      }
+
       // set zoom percent
-      if (_eImage) {
+      if (_imagePopupPreview) {
         this.setZoomPercent();
       }
     };
@@ -115,8 +145,8 @@ export class BravoPictureInputBoxComponent
       this.base64Url = eFile.target.result;
     };
 
-    // set image width
-    wjc.setCss(_eImage, {
+    // set image popup width
+    wjc.setCss(_imagePopupPreview, {
       width: '100%',
     });
   }
