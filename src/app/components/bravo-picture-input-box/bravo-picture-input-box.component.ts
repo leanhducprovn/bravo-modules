@@ -9,6 +9,8 @@ import * as input from '@grapecity/wijmo.input';
 import * as wjc from '@grapecity/wijmo';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { ImageValueType } from '../../types/enum/image-value-type.enum';
+
 @Component({
   selector: 'bravo-picture-input-box',
   templateUrl: './bravo-picture-input-box.component.html',
@@ -32,8 +34,37 @@ export class BravoPictureInputBoxComponent
   private _imageWidth!: number;
   private _currentZoomPercent!: number;
 
+  private _value: string = '';
+  public set value(pValue: string) {
+    if (this._value == pValue) return;
+    this._value = pValue;
+    this.invalidate();
+  }
+  public get value(): string {
+    return this._value;
+  }
+
+  private _bAutoFitPicture: boolean = true;
+  public set bAutoFitPicture(pValue: boolean) {
+    if (this._bAutoFitPicture == pValue) return;
+    this._bAutoFitPicture = pValue;
+    this.invalidate();
+  }
+  public get bAutoFitPicture(): boolean {
+    return this._bAutoFitPicture;
+  }
+
+  private _imageValueType: ImageValueType = ImageValueType.ByteArray;
+  public set imageValueType(pValue: ImageValueType) {
+    if (this._imageValueType == pValue) return;
+    this._imageValueType = pValue;
+    this.invalidate;
+  }
+  public get imageValueType(): ImageValueType {
+    return this._imageValueType;
+  }
+
   public imageInfo!: string;
-  public base64Url!: string;
   public zoomPercent!: number;
 
   constructor(elementRef: ElementRef) {
@@ -45,43 +76,7 @@ export class BravoPictureInputBoxComponent
   public onTouch = () => {};
 
   public writeValue(obj: any): void {
-    this.base64Url = obj;
-    let _imagePreview = this.hostElement.querySelector(
-      '.bravo-picture-preview img'
-    );
-    let _imagePopupPreview = this._popup.hostElement.querySelector(
-      '.bravo-picture-popup-preview img'
-    );
-    let _input = this.hostElement.querySelector('.bravo-picture-preview input');
-    let _image = new Image();
-    _image.src = this.base64Url;
-    _image.onload = () => {
-      this._imageWidth = _image.width;
-      this.imageInfo = `${
-        _image.width +
-        'x' +
-        _image.height +
-        ' ' +
-        '(' +
-        this.formatBytes(this.getSizeBase64(this.base64Url)) +
-        ')'
-      }`;
-      wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
-      wjc.removeClass(_input!, 'none');
-      if (_image.width >= 180) {
-        if (_image.width > _image.height) {
-          wjc.toggleClass(_imagePreview!, 'width-100');
-        } else {
-          wjc.toggleClass(_imagePreview!, 'height-100');
-        }
-      } else {
-        wjc.toggleClass(_imagePreview!, 'default');
-      }
-      wjc.toggleClass(_input!, 'none');
-    };
-    wjc.setCss(_imagePopupPreview, {
-      width: '100%',
-    });
+    this.value = obj;
   }
 
   public registerOnChange(changed: any): void {
@@ -90,6 +85,11 @@ export class BravoPictureInputBoxComponent
 
   public registerOnTouched(touched: any): void {
     this.onTouch = touched;
+  }
+
+  public override refresh(fullUpdate?: boolean | undefined): void {
+    super.refresh(fullUpdate);
+    this.reader();
   }
 
   public ngOnInit(): void {
@@ -104,9 +104,6 @@ export class BravoPictureInputBoxComponent
     let _imagePopupPreview = this._popup.hostElement.querySelector(
       '.bravo-picture-popup-preview img'
     );
-
-    // get input element
-    let _input = this.hostElement.querySelector('.bravo-picture-preview input');
 
     // get image info
     let _imageSize: number;
@@ -132,7 +129,6 @@ export class BravoPictureInputBoxComponent
 
       // remove class
       wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
-      wjc.removeClass(_input!, 'none');
 
       // set picture preview
       if (_image.width >= 180) {
@@ -144,18 +140,18 @@ export class BravoPictureInputBoxComponent
       } else {
         wjc.toggleClass(_imagePreview!, 'default');
       }
-      wjc.toggleClass(_input!, 'none');
 
       // set zoom percent
       if (_imagePopupPreview) {
         this.setZoomPercent();
       }
     };
+
     // get base64url
     let _fileReader = new FileReader();
     _fileReader.readAsDataURL(e.target.files[0]);
     _fileReader.onload = (eFile: any) => {
-      this.base64Url = eFile.target.result;
+      this.value = eFile.target.result;
     };
 
     // set image popup width
@@ -168,12 +164,10 @@ export class BravoPictureInputBoxComponent
     let _imagePreview = this.hostElement.querySelector(
       '.bravo-picture-preview img'
     );
-    let _input = this.hostElement.querySelector('.bravo-picture-preview input');
     wjc.removeClass(_imagePreview!, 'default width-100 height-100');
-    wjc.removeClass(_input!, 'none');
     wjc.addClass(_imagePreview!, 'null');
     this._upload.nativeElement.value = '';
-    this.base64Url = '';
+    this.value = '';
     this.imageInfo = '';
     this._popup.hide();
   }
@@ -220,6 +214,46 @@ export class BravoPictureInputBoxComponent
 
   public onPopup() {
     this.setZoomPercent();
+  }
+
+  private reader(
+    pValue: string = this.value,
+    pValueType: ImageValueType = ImageValueType.ByteArray,
+    pAutoFit: boolean = true
+  ) {
+    let _imagePreview = this.hostElement.querySelector(
+      '.bravo-picture-preview img'
+    );
+    let _imagePopupPreview = this._popup.hostElement.querySelector(
+      '.bravo-picture-popup-preview img'
+    );
+    let _image = new Image();
+    _image.src = pValue;
+    _image.onload = () => {
+      this._imageWidth = _image.width;
+      this.imageInfo = `${
+        _image.width +
+        'x' +
+        _image.height +
+        ' ' +
+        '(' +
+        this.formatBytes(this.getSizeBase64(pValue)) +
+        ')'
+      }`;
+      wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
+      if (_image.width >= 180) {
+        if (_image.width > _image.height) {
+          wjc.toggleClass(_imagePreview!, 'width-100');
+        } else {
+          wjc.toggleClass(_imagePreview!, 'height-100');
+        }
+      } else {
+        wjc.toggleClass(_imagePreview!, 'default');
+      }
+    };
+    wjc.setCss(_imagePopupPreview, {
+      width: '100%',
+    });
   }
 
   private getZoomValue() {
