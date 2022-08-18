@@ -120,8 +120,10 @@ export class BravoPictureInputBoxComponent
     let _imagePreview = this.hostElement?.querySelector(
       '.bravo-picture-preview img'
     );
-    wjc.removeClass(_imagePreview!, 'default width-100 height-100');
-    wjc.addClass(_imagePreview!, 'null');
+    if (_imagePreview) {
+      wjc.removeClass(_imagePreview!, 'default width-100 height-100');
+      wjc.addClass(_imagePreview!, 'null');
+    }
     this._upload.nativeElement.value = '';
     this.imageURL = '';
     this.imageInfo = '';
@@ -150,21 +152,25 @@ export class BravoPictureInputBoxComponent
     let _image = this._popup.hostElement?.querySelector(
       '.bravo-picture-popup-preview img'
     );
-    wjc.setCss(_image, {
-      width: `${this.getCurrentWidth()! + this.getZoomValue() + 'px'}`,
-    });
-    this.zoomPercent = this.zoomPercent + 10;
+    if (_image) {
+      wjc.setCss(_image, {
+        width: `${this.getCurrentWidth()! + this.getZoomValue() + 'px'}`,
+      });
+      this.zoomPercent = this.zoomPercent + 10;
+    }
   }
 
   public onZoomOut() {
     let _image = this._popup.hostElement?.querySelector(
       '.bravo-picture-popup-preview img'
     );
-    wjc.setCss(_image, {
-      width: `${this.getCurrentWidth()! - this.getZoomValue() + 'px'}`,
-    });
-    if (this.zoomPercent >= 10) {
-      this.zoomPercent = this.zoomPercent - 10;
+    if (_image) {
+      wjc.setCss(_image, {
+        width: `${this.getCurrentWidth()! - this.getZoomValue() + 'px'}`,
+      });
+      if (this.zoomPercent >= 10) {
+        this.zoomPercent = this.zoomPercent - 10;
+      }
     }
   }
 
