@@ -10,8 +10,7 @@ import * as wjc from '@grapecity/wijmo';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ImageValueType } from '../../types/enum/image-value-type.enum';
-
-import * as base64 from 'byte-base64';
+import { Convert } from '../../library/bravo-convert/convert';
 
 @Component({
   selector: 'bravo-picture-input-box',
@@ -82,7 +81,8 @@ export class BravoPictureInputBoxComponent
     this.value = obj;
     if (this.value instanceof Array) {
       this.imageURL =
-        'data:image/png;base64,' + base64.bytesToBase64(this.value);
+        'data:image/png;base64,' +
+        Convert.toBase64String(new Uint8Array(this.value));
     } else {
       this.imageURL = 'data:image/png;base64,' + this.value;
     }
@@ -200,29 +200,31 @@ export class BravoPictureInputBoxComponent
         ')'
       }`;
 
-      wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
-      if (pAutoFit) {
-        if (_image.width >= 180) {
-          if (_image.width > _image.height) {
-            wjc.toggleClass(_imagePreview!, 'width-100');
+      if (_imagePreview && _picturePreview) {
+        wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
+        if (pAutoFit) {
+          if (_image.width >= 180) {
+            if (_image.width > _image.height) {
+              wjc.toggleClass(_imagePreview!, 'width-100');
+            } else {
+              wjc.toggleClass(_imagePreview!, 'height-100');
+            }
           } else {
-            wjc.toggleClass(_imagePreview!, 'height-100');
+            wjc.toggleClass(_imagePreview!, 'default');
           }
         } else {
-          wjc.toggleClass(_imagePreview!, 'default');
+          wjc.setCss(_picturePreview, {
+            overflow: 'auto',
+          });
+          wjc.setCss(_imagePreview, {
+            width: 'unset',
+            height: 'unset',
+            position: 'unset',
+            top: 'unset',
+            left: 'unset',
+            transform: 'unset',
+          });
         }
-      } else {
-        wjc.setCss(_picturePreview, {
-          overflow: 'auto',
-        });
-        wjc.setCss(_imagePreview, {
-          width: 'unset',
-          height: 'unset',
-          position: 'unset',
-          top: 'unset',
-          left: 'unset',
-          transform: 'unset',
-        });
       }
     };
 
@@ -232,7 +234,7 @@ export class BravoPictureInputBoxComponent
         ''
       );
     } else {
-      this.value = base64.base64ToBytes(
+      this.value = Convert.fromBase64String(
         this.imageURL.replace(
           /^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
           ''
@@ -240,9 +242,11 @@ export class BravoPictureInputBoxComponent
       );
     }
 
-    wjc.setCss(_imagePopupPreview, {
-      width: '100%',
-    });
+    if (_imagePopupPreview) {
+      wjc.setCss(_imagePopupPreview, {
+        width: '100%',
+      });
+    }
   }
 
   private getZoomValue() {

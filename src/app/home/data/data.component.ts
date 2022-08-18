@@ -592,7 +592,7 @@ export class DataComponent
     /*------------------------------------*/
     // picture box
     this.viewPictureBox.bAutoFitPicture = true;
-    this.viewPictureBox.imageValueType = ImageValueType.Base64String;
+    this.viewPictureBox.imageValueType = ImageValueType.ByteArray;
     /*------------------------------------*/
 
     /*------------------------------------*/
