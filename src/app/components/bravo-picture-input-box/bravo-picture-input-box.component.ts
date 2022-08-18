@@ -52,6 +52,7 @@ export class BravoPictureInputBoxComponent
     let _imagePopupPreview = this._popup.hostElement.querySelector(
       '.bravo-picture-popup-preview img'
     );
+    let _input = this.hostElement.querySelector('.bravo-picture-preview input');
     let _image = new Image();
     _image.src = this.base64Url;
     _image.onload = () => {
@@ -66,6 +67,7 @@ export class BravoPictureInputBoxComponent
         ')'
       }`;
       wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
+      wjc.removeClass(_input!, 'none');
       if (_image.width >= 180) {
         if (_image.width > _image.height) {
           wjc.toggleClass(_imagePreview!, 'width-100');
@@ -75,6 +77,7 @@ export class BravoPictureInputBoxComponent
       } else {
         wjc.toggleClass(_imagePreview!, 'default');
       }
+      wjc.toggleClass(_input!, 'none');
     };
     wjc.setCss(_imagePopupPreview, {
       width: '100%',
@@ -102,6 +105,9 @@ export class BravoPictureInputBoxComponent
       '.bravo-picture-popup-preview img'
     );
 
+    // get input element
+    let _input = this.hostElement.querySelector('.bravo-picture-preview input');
+
     // get image info
     let _imageSize: number;
     if (e.target.files[0]) {
@@ -126,6 +132,7 @@ export class BravoPictureInputBoxComponent
 
       // remove class
       wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
+      wjc.removeClass(_input!, 'none');
 
       // set picture preview
       if (_image.width >= 180) {
@@ -137,6 +144,7 @@ export class BravoPictureInputBoxComponent
       } else {
         wjc.toggleClass(_imagePreview!, 'default');
       }
+      wjc.toggleClass(_input!, 'none');
 
       // set zoom percent
       if (_imagePopupPreview) {
@@ -160,7 +168,9 @@ export class BravoPictureInputBoxComponent
     let _imagePreview = this.hostElement.querySelector(
       '.bravo-picture-preview img'
     );
+    let _input = this.hostElement.querySelector('.bravo-picture-preview input');
     wjc.removeClass(_imagePreview!, 'default width-100 height-100');
+    wjc.removeClass(_input!, 'none');
     wjc.addClass(_imagePreview!, 'null');
     this._upload.nativeElement.value = '';
     this.base64Url = '';
