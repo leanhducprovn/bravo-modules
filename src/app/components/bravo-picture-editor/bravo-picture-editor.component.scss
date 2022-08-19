@@ -1,0 +1,146 @@
+.bravo-picture {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #bbbbbb;
+    background-color: #f0f0f0;
+
+    &:focus-within {
+        border: 1px solid #FCC479;
+    }
+
+    .bravo-picture-editor {
+        display: flex;
+        flex-direction: column;
+        padding: 2px;
+        width: calc(100% - 4px);
+        height: calc(100% - 4px);
+
+        .bravo-picture-editor-display {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: calc(100% - 15px - 20px);
+
+            .bravo-picture-editor-display-slider {
+                width: 40px;
+                background-color: red;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .bravo-picture-editor-display-preview {
+                width: calc(100% - 40px);
+                background-color: blue;
+
+                &:hover {
+                    cursor: crosshair;
+                }
+            }
+        }
+
+        .bravo-picture-editor-imagesize {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            width: 100%;
+            height: 15px;
+            font-size: 85%;
+        }
+
+        .bravo-picture-editor-tools {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 20px;
+
+            .bravo-picture-editor-tools-basic {
+                ul {
+                    list-style: none;
+                    display: flex;
+                    flex-direction: row;
+
+                    li {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 18px;
+                        width: 16px;
+                        cursor: pointer;
+                        border: 1px solid transparent;
+
+                        &:hover {
+                            border: 1px solid #568FBA;
+                            border-radius: 2px;
+                            background-color: #E0EEF9;
+                        }
+
+                        &.bravo-picture-editor-tools-zoom {
+                            width: auto;
+
+                            img {
+                                margin-right: 2px;
+                            }
+                        }
+
+                        img {
+                            width: 15px;
+                        }
+                    }
+                }
+            }
+
+            .bravo-picture-editor-tools-advanced {
+                button {
+                    cursor: pointer;
+                    background-color: unset;
+                    border: none;
+                    border-radius: unset;
+                    color: unset;
+                    font-size: unset;
+                    padding: unset;
+                    margin: unset;
+                    width: unset;
+                    height: unset;
+
+                    &.bravo-picture-editor-tools-advanced-popup {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border: 1px solid transparent;
+                        height: 20px;
+                        width: 20px;
+
+                        &:hover {
+                            background-color: #E0EEF9;
+                            border: 1px solid #568FBA;
+                            border-radius: 2px;
+                        }
+
+                        svg {
+                            opacity: 0.6;
+
+                            &:hover {
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .bravo-picture-editor-tools-bulkhead {
+                margin: 2px;
+                border-right: 1px solid #bbbbbb;
+            }
+
+            .bravo-picture-editor-tools-active {
+                background-color: #E0EEF9;
+                border: 1px solid #568FBA;
+                border-radius: 2px;
+            }
+        }
+    }
+}
