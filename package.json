@@ -21,7 +21,6 @@
     "@angular/router": "~14.0.6",
     "@grapecity/wijmo": "^5.20221.842",
     "@grapecity/wijmo.angular2.all": "^5.20221.842",
-    "byte-base64": "^1.1.0",
     "crypto-js": "^4.1.1",
     "highlight.js": "^11.6.0",
     "highlightjs-line-numbers.js": "^2.8.0",
