@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bravo-picture-editor.component.scss'],
 })
 export class BravoPictureEditorComponent implements OnInit {
+  public isZoom: boolean = false;
+  public isAdvanced: boolean = false;
+
   constructor() {}
 
   ngOnInit(): void {}

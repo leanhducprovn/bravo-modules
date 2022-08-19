@@ -31,7 +31,7 @@
             }
 
             .bravo-picture-editor-display-preview {
-                width: calc(100% - 40px);
+                width: 100%;
                 background-color: blue;
 
                 &:hover {
@@ -71,6 +71,7 @@
                         width: 16px;
                         cursor: pointer;
                         border: 1px solid transparent;
+                        user-select: none;
 
                         &:hover {
                             border: 1px solid #568FBA;
@@ -137,8 +138,8 @@
             }
 
             .bravo-picture-editor-tools-active {
-                background-color: #E0EEF9;
-                border: 1px solid #568FBA;
+                background-color: #cbe9ff;
+                border: 1px solid #568FBA !important;
                 border-radius: 2px;
             }
         }

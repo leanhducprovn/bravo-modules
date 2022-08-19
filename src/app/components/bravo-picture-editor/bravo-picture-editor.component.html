@@ -1,15 +1,17 @@
 <div class="bravo-picture" tabindex="1">
   <div class="bravo-picture-editor">
     <div class="bravo-picture-editor-display">
-      <div class="bravo-picture-editor-display-slider" [hidden]="false"></div>
-      <div class="bravo-picture-editor-display-preview"></div>
+      <div class="bravo-picture-editor-display-slider" [hidden]="!isZoom"></div>
+      <div class="bravo-picture-editor-display-preview" [style]="{'width': !isZoom ? '100%' : 'calc(100% - 40px)'}">
+      </div>
     </div>
     <div class="bravo-picture-editor-imagesize">100x100</div>
     <div class="bravo-picture-editor-tools">
       <div class="bravo-picture-editor-tools-basic">
         <ul>
           <!-- zoom picture -->
-          <li class="bravo-picture-editor-tools-zoom">
+          <li (click)="isZoom = !isZoom" [class]="isZoom ? 'bravo-picture-editor-tools-active' : ''"
+            class="bravo-picture-editor-tools-zoom">
             <img src="./assets/img/Search.png">100%
           </li>
           <div class="bravo-picture-editor-tools-bulkhead"></div>
@@ -41,8 +43,9 @@
           <div class="bravo-picture-editor-tools-bulkhead"></div>
         </ul>
       </div>
-      <div class="bravo-picture-editor-tools-advanced">
-        <button class="bravo-picture-editor-tools-advanced-popup">
+      <div (click)="isAdvanced = !isAdvanced" class="bravo-picture-editor-tools-advanced">
+        <button class="bravo-picture-editor-tools-advanced-popup"
+          [class]="isAdvanced ? 'bravo-picture-editor-tools-active' : ''">
           <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
             xmlns:svgjs="http://svgjs.com/svgjs" width="15" height="15" x="0" y="0" viewBox="0 0 24 24"
             style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
