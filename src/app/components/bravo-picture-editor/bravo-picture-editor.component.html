@@ -1,20 +1,19 @@
 <div class="bravo-picture" tabindex="1">
   <div class="bravo-picture-editor">
-    <div class="bravo-picture-editor-display">
-      <div class="bravo-picture-editor-display-slider" [hidden]="!isZoom"></div>
-      <div class="bravo-picture-editor-display-preview" [style]="{'width': !isZoom ? '100%' : 'calc(100% - 40px)'}">
+    <div class="bravo-picture-display">
+      <div class="bravo-picture-zoom" [hidden]="!isZoom"></div>
+      <div class="bravo-picture-preview" [style]="{'width': !isZoom ? '100%' : 'calc(100% - 40px)'}">
       </div>
     </div>
-    <div class="bravo-picture-editor-imagesize">100x100</div>
-    <div class="bravo-picture-editor-tools">
-      <div class="bravo-picture-editor-tools-basic">
+    <div class="bravo-picture-imagesize">100x100</div>
+    <div class="bravo-picture-tools">
+      <div class="bravo-picture-basic">
         <ul>
           <!-- zoom picture -->
-          <li (click)="isZoom = !isZoom" [class]="isZoom ? 'bravo-picture-editor-tools-active' : ''"
-            class="bravo-picture-editor-tools-zoom">
+          <li (click)="isZoom = !isZoom" [class]="isZoom ? 'active' : ''" class="zoom">
             <img src="./assets/img/Search.png">100%
           </li>
-          <div class="bravo-picture-editor-tools-bulkhead"></div>
+          <div class="bulkhead"></div>
           <!-- add picture -->
           <li>
             <img src="./assets/img/OpenFolder.svg">
@@ -27,7 +26,7 @@
           <li>
             <img src="./assets/img/Printer.png">
           </li>
-          <div class="bravo-picture-editor-tools-bulkhead"></div>
+          <div class="bulkhead"></div>
           <!-- delete picture -->
           <li>
             <img src="./assets/img/Delete.png">
@@ -40,12 +39,11 @@
           <li>
             <img src="./assets/img/Copy.png">
           </li>
-          <div class="bravo-picture-editor-tools-bulkhead"></div>
+          <div class="bulkhead"></div>
         </ul>
       </div>
-      <div (click)="isAdvanced = !isAdvanced" class="bravo-picture-editor-tools-advanced">
-        <button class="bravo-picture-editor-tools-advanced-popup"
-          [class]="isAdvanced ? 'bravo-picture-editor-tools-active' : ''">
+      <div class="bravo-picture-advanced">
+        <button class="bravo-picture-more" [class]="isPopup ? 'active' : ''">
           <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
             xmlns:svgjs="http://svgjs.com/svgjs" width="15" height="15" x="0" y="0" viewBox="0 0 24 24"
             style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -61,6 +59,20 @@
             </g>
           </svg>
         </button>
+        <!-- popup -->
+        <div class="bravo-picture-editor-popup">
+          <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

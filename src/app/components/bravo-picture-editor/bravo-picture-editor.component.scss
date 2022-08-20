@@ -15,13 +15,13 @@
         width: calc(100% - 4px);
         height: calc(100% - 4px);
 
-        .bravo-picture-editor-display {
+        .bravo-picture-display {
             display: flex;
             flex-direction: row;
             width: 100%;
             height: calc(100% - 15px - 20px);
 
-            .bravo-picture-editor-display-slider {
+            .bravo-picture-zoom {
                 width: 40px;
                 background-color: red;
 
@@ -30,7 +30,7 @@
                 }
             }
 
-            .bravo-picture-editor-display-preview {
+            .bravo-picture-preview {
                 width: 100%;
                 background-color: blue;
 
@@ -40,7 +40,7 @@
             }
         }
 
-        .bravo-picture-editor-imagesize {
+        .bravo-picture-imagesize {
             display: flex;
             flex-direction: row-reverse;
             align-items: center;
@@ -49,7 +49,7 @@
             font-size: 85%;
         }
 
-        .bravo-picture-editor-tools {
+        .bravo-picture-tools {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -57,7 +57,7 @@
             width: 100%;
             height: 20px;
 
-            .bravo-picture-editor-tools-basic {
+            .bravo-picture-basic {
                 ul {
                     list-style: none;
                     display: flex;
@@ -79,8 +79,14 @@
                             background-color: #E0EEF9;
                         }
 
-                        &.bravo-picture-editor-tools-zoom {
+                        &.zoom {
                             width: auto;
+
+                            &.active {
+                                border: 1px solid #568FBA;
+                                border-radius: 2px;
+                                background-color: #cbe9ff;
+                            }
 
                             img {
                                 margin-right: 2px;
@@ -91,10 +97,17 @@
                             width: 15px;
                         }
                     }
+
+                    div {
+                        &.bulkhead {
+                            margin: 2px;
+                            border-right: 1px solid #bbbbbb;
+                        }
+                    }
                 }
             }
 
-            .bravo-picture-editor-tools-advanced {
+            .bravo-picture-advanced {
                 button {
                     cursor: pointer;
                     background-color: unset;
@@ -107,7 +120,7 @@
                     width: unset;
                     height: unset;
 
-                    &.bravo-picture-editor-tools-advanced-popup {
+                    &.bravo-picture-more {
                         display: flex;
                         align-items: center;
                         justify-content: center;
@@ -121,6 +134,16 @@
                             border-radius: 2px;
                         }
 
+                        &.active {
+                            background-color: #cbe9ff;
+                            border: 1px solid #568FBA;
+                            border-radius: 2px;
+
+                            svg {
+                                opacity: 1;
+                            }
+                        }
+
                         svg {
                             opacity: 0.6;
 
@@ -131,16 +154,45 @@
                     }
                 }
             }
+        }
+    }
+}
 
-            .bravo-picture-editor-tools-bulkhead {
-                margin: 2px;
-                border-right: 1px solid #bbbbbb;
+.bravo-picture-editor-popup {
+    width: 142px;
+    height: 42px;
+    border-radius: unset;
+
+    ul {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            user-select: none;
+
+            &:hover {
+                border: 1px solid #568FBA;
+                border-radius: 2px;
+                background-color: #E0EEF9;
             }
 
-            .bravo-picture-editor-tools-active {
-                background-color: #cbe9ff;
-                border: 1px solid #568FBA !important;
+            &.active {
+                border: 1px solid #568FBA;
                 border-radius: 2px;
+                background-color: #cbe9ff;
+            }
+
+            img {
+                width: 15px;
             }
         }
     }
