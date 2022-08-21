@@ -21,24 +21,34 @@
             width: 100%;
             height: calc(100% - 15px - 20px);
 
-            .bravo-picture-zoom {
-                width: 40px;
-                background-color: red;
-
-                &:hover {
-                    cursor: pointer;
-                }
-            }
-
-            .bravo-picture-preview {
+            .bravo-picture-view {
+                display: flex;
+                flex-direction: row;
                 width: 100%;
-                background-color: blue;
+                height: 100%;
 
-                &:hover {
-                    cursor: crosshair;
+                .bravo-picture-zoom {
+                    width: 40px;
+                    background-color: red;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+                .bravo-picture-preview {
+                    width: 100%;
+                    background-color: blue;
+
+                    &:hover {
+                        cursor: crosshair;
+                    }
                 }
             }
 
+            .bravo-picture-edit {
+                width: 40px;
+            }
         }
 
         .bravo-picture-imagesize {
