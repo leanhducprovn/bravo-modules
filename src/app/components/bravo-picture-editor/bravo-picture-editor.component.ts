@@ -23,18 +23,37 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     return this._isZoom;
   }
 
-  private _isEdit: boolean = false;
-  public set isEdit(pValue: boolean) {
-    if (this._isEdit == pValue) return;
-    this._isEdit = pValue;
+  private _isBrightness: boolean = false;
+  public set isBrightness(pValue: boolean) {
+    if (this._isBrightness == pValue) return;
+    this._isBrightness = pValue;
     this.invalidate();
   }
-  public get isEdit(): boolean {
-    return this._isEdit;
+  public get isBrightness(): boolean {
+    return this._isBrightness;
+  }
+
+  private _isColor: boolean = false;
+  public set isColor(pValue: boolean) {
+    if (this._isColor == pValue) return;
+    this._isColor = pValue;
+    this.invalidate();
+  }
+  public get isColor(): boolean {
+    return this._isColor;
+  }
+
+  private _isBackground: boolean = false;
+  public set isBackground(pValue: boolean) {
+    if (this._isBackground == pValue) return;
+    this._isBackground = pValue;
+    this.invalidate();
+  }
+  public get isBackground(): boolean {
+    return this._isBackground;
   }
 
   public isPopup: boolean = false;
-  public editStyle!: string;
 
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
@@ -43,6 +62,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   public override refresh(fullUpdate?: boolean | undefined): void {
     super.refresh(fullUpdate);
     this.renderUI();
+    console.log(1);
   }
 
   public ngOnInit(): void {
@@ -51,47 +71,53 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
 
   public onZoom() {
     this.isZoom = !this.isZoom;
-    this.isEdit = false;
+    this.isBrightness = false;
+    this.isColor = false;
+    this.isBackground = false;
   }
 
-  public onEdit(style: string) {
-    this.isEdit = !this.isEdit;
+  public onBrightness() {
+    this.isBrightness = !this.isBrightness;
     this.isZoom = false;
-    this.editStyle = style;
+    this.isColor = false;
+    this.isBackground = false;
+  }
+
+  public onColor() {
+    this.isColor = !this.isColor;
+    this.isZoom = false;
+    this.isBrightness = false;
+    this.isBackground = false;
+  }
+
+  public onBackground() {
+    this.isBackground = !this.isBackground;
+    this.isZoom = false;
+    this.isBrightness = false;
+    this.isColor = false;
   }
 
   private renderUI() {
-    let _view = this.hostElement?.querySelector('.bravo-picture-view');
     let _preview = this.hostElement?.querySelector('.bravo-picture-preview');
-    let _edit = this.hostElement?.querySelector('.bravo-picture-edit');
-
-    // onZoom
     if (_preview) {
       if (this.isZoom) {
         wjc.setCss(_preview, {
-          width: 'calc(100% - 40px)',
+          width: 'calc(100% - 50px)',
+        });
+      } else if (this.isBrightness) {
+        wjc.setCss(_preview, {
+          width: 'calc(100% - 100px)',
+        });
+      } else if (this.isColor) {
+        wjc.setCss(_preview, {
+          width: 'calc(100% - 50px)',
+        });
+      } else if (this.isBackground) {
+        wjc.setCss(_preview, {
+          width: 'calc(100% - 50px)',
         });
       } else {
         wjc.setCss(_preview, {
-          width: '100%',
-        });
-      }
-    }
-
-    // onBrightness
-    if (_view && _edit) {
-      if (this.isEdit) {
-        wjc.setCss(_edit, {
-          width: '100px',
-        });
-        wjc.setCss(_view, {
-          width: 'calc(100% - 100px)',
-        });
-      } else {
-        wjc.setCss(_edit, {
-          width: '0px',
-        });
-        wjc.setCss(_view, {
           width: '100%',
         });
       }

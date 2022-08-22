@@ -28,7 +28,7 @@
                 height: 100%;
 
                 .bravo-picture-zoom {
-                    width: 40px;
+                    width: 50px;
                     background-color: red;
 
                     &:hover {
@@ -44,142 +44,146 @@
                         cursor: crosshair;
                     }
                 }
-            }
 
-            .bravo-picture-edit {
-                background-color: #FCC479;
-                width: 0px;
+                .bravo-picture-brightness {
+                    width: 100px;
+                    background-color: #FCC479;
 
-                .brightness {
-                    width: 100%;
-                    height: 100%;
-                    background-color: #568FBA;
-                }
-
-                .color {
-                    width: 100%;
-                    height: 100%;
-                    background-color: aqua;
-                }
-
-                .background {
-                    width: 100%;
-                    height: 100%;
-                    background-color: #bbbbbb;
-                }
-            }
-        }
-
-        .bravo-picture-imagesize {
-            display: flex;
-            flex-direction: row-reverse;
-            align-items: center;
-            width: 100%;
-            height: 15px;
-            font-size: 85%;
-        }
-
-        .bravo-picture-tools {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            height: 20px;
-
-            .bravo-picture-basic {
-                ul {
-                    list-style: none;
-                    display: flex;
-                    flex-direction: row;
-
-                    li {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        height: 18px;
-                        width: 16px;
+                    &:hover {
                         cursor: pointer;
-                        border: 1px solid transparent;
-                        user-select: none;
+                    }
+                }
 
-                        &:hover {
+                .bravo-picture-color {
+                    width: 50px;
+                    background-color: aqua;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+                .bravo-picture-background {
+                    width: 50px;
+                    background-color: #bbbbbb;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+
+    .bravo-picture-imagesize {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        width: 100%;
+        height: 15px;
+        font-size: 85%;
+    }
+
+    .bravo-picture-tools {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 20px;
+
+        .bravo-picture-basic {
+            ul {
+                list-style: none;
+                display: flex;
+                flex-direction: row;
+
+                li {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 18px;
+                    width: 16px;
+                    cursor: pointer;
+                    border: 1px solid transparent;
+                    user-select: none;
+
+                    &:hover {
+                        border: 1px solid #568FBA;
+                        border-radius: 2px;
+                        background-color: #E0EEF9;
+                    }
+
+                    &.zoom {
+                        width: auto;
+
+                        &.active {
                             border: 1px solid #568FBA;
                             border-radius: 2px;
-                            background-color: #E0EEF9;
-                        }
-
-                        &.zoom {
-                            width: auto;
-
-                            &.active {
-                                border: 1px solid #568FBA;
-                                border-radius: 2px;
-                                background-color: #cbe9ff;
-                            }
-
-                            img {
-                                margin-right: 2px;
-                            }
+                            background-color: #cbe9ff;
                         }
 
                         img {
-                            width: 15px;
+                            margin-right: 2px;
                         }
                     }
 
-                    div {
-                        &.bulkhead {
-                            margin: 2px;
-                            border-right: 1px solid #bbbbbb;
-                        }
+                    img {
+                        width: 15px;
+                    }
+                }
+
+                div {
+                    &.bulkhead {
+                        margin: 2px;
+                        border-right: 1px solid #bbbbbb;
                     }
                 }
             }
+        }
 
-            .bravo-picture-advanced {
-                button {
-                    cursor: pointer;
-                    background-color: unset;
-                    border: none;
-                    border-radius: unset;
-                    color: unset;
-                    font-size: unset;
-                    padding: unset;
-                    margin: unset;
-                    width: unset;
-                    height: unset;
+        .bravo-picture-advanced {
+            button {
+                cursor: pointer;
+                background-color: unset;
+                border: none;
+                border-radius: unset;
+                color: unset;
+                font-size: unset;
+                padding: unset;
+                margin: unset;
+                width: unset;
+                height: unset;
 
-                    &.bravo-picture-more {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        border: 1px solid transparent;
-                        height: 20px;
-                        width: 20px;
+                &.bravo-picture-more {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 1px solid transparent;
+                    height: 20px;
+                    width: 20px;
 
-                        &:hover {
-                            background-color: #E0EEF9;
-                            border: 1px solid #568FBA;
-                            border-radius: 2px;
-                        }
+                    &:hover {
+                        background-color: #E0EEF9;
+                        border: 1px solid #568FBA;
+                        border-radius: 2px;
+                    }
 
-                        &.active {
-                            background-color: #cbe9ff;
-                            border: 1px solid #568FBA;
-                            border-radius: 2px;
-
-                            svg {
-                                opacity: 1;
-                            }
-                        }
+                    &.active {
+                        background-color: #cbe9ff;
+                        border: 1px solid #568FBA;
+                        border-radius: 2px;
 
                         svg {
-                            opacity: 0.6;
+                            opacity: 1;
+                        }
+                    }
 
-                            &:hover {
-                                opacity: 1;
-                            }
+                    svg {
+                        opacity: 0.6;
+
+                        &:hover {
+                            opacity: 1;
                         }
                     }
                 }
