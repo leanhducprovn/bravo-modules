@@ -3,7 +3,9 @@
     <div class="bravo-picture-display">
       <div class="bravo-picture-view">
         <div class="bravo-picture-zoom" [hidden]="!isZoom"></div>
-        <div class="bravo-picture-preview"></div>
+        <div class="bravo-picture-preview"
+          [style]="{'width': isZoom || isColor || isBackground ? 'calc(100% - 50px)' : isBrightness ? 'calc(100% - 100px)' : '100%'}">
+        </div>
         <div class="bravo-picture-brightness" [hidden]="!isBrightness"></div>
         <div class="bravo-picture-color" [hidden]="!isColor"></div>
         <div class="bravo-picture-background" [hidden]="!isBackground"></div>
@@ -14,7 +16,8 @@
       <div class="bravo-picture-basic">
         <ul>
           <!-- zoom picture -->
-          <li (click)="onZoom()" [class]="isZoom ? 'active' : ''" class="zoom">
+          <li (click)="isZoom = !isZoom; isBrightness = false; isColor = false; isBackground = false"
+            [class]="isZoom ? 'active' : ''" class="zoom">
             <img src="./assets/img/Search.png">100%
           </li>
           <div class="bulkhead"></div>
@@ -72,9 +75,12 @@
             <li>4</li>
             <li>5</li>
             <li>6</li>
-            <li (click)="onBrightness()">7</li>
-            <li (click)="onColor()">8</li>
-            <li (click)="onBackground()">9</li>
+            <li (click)="isZoom = false; isBrightness = !isBrightness; isColor = false; isBackground = false"
+              [class]="isBrightness ? 'active' : ''">7</li>
+            <li (click)="isZoom = false; isBrightness = false; isColor = !isColor; isBackground = false"
+              [class]="isColor ? 'active' : ''">8</li>
+            <li (click)="isZoom = false; isBrightness = false; isColor = false; isBackground = !isBackground"
+              [class]="isBackground ? 'active' : ''">9</li>
           </ul>
         </div>
       </div>
