@@ -3,7 +3,14 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import * as input from '@grapecity/wijmo.input';
 import * as wjc from '@grapecity/wijmo';
 
+import { Options } from '@angular-slider/ngx-slider';
+
 import { Convert } from '../../library/bravo-convert/convert';
+
+interface SliderModel {
+  value: number;
+  options: Options;
+}
 
 @Component({
   selector: 'bravo-picture-editor',
@@ -19,6 +26,8 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   public isBackground: boolean = false;
   public isPopup: boolean = false;
 
+  public zoomSlider!: SliderModel;
+
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
   }
@@ -29,6 +38,21 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
 
   public ngOnInit(): void {
     this.setPopup();
+    this.setSlider();
+    this.setZoomSlider();
+  }
+
+  private setZoomSlider() {
+    this.zoomSlider = {
+      value: 0,
+      options: {
+        floor: 0,
+        ceil: 900,
+        vertical: true,
+        hidePointerLabels: true,
+        hideLimitLabels: true,
+      },
+    };
   }
 
   private setPopup() {
@@ -50,5 +74,12 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this._popup.hidden.addHandler((e: input.Popup) => {
       this.isPopup = e.isVisible;
     });
+  }
+
+  private setSlider() {
+    wjc.setCss(this.hostElement.querySelector('.ngx-slider-bar'), {
+      borderRadius: 'unset',
+    });
+    console.log(this.hostElement.querySelector('.ngx-slider .ngx-slider-bar'));
   }
 }

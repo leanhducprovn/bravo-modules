@@ -2,7 +2,9 @@
   <div class="bravo-picture-editor">
     <div class="bravo-picture-display">
       <div class="bravo-picture-view">
-        <div class="bravo-picture-zoom" [hidden]="!isZoom"></div>
+        <div class="bravo-picture-zoom" [hidden]="!isZoom">
+          <ngx-slider [value]="zoomSlider.value" [options]="zoomSlider.options"></ngx-slider>
+        </div>
         <div class="bravo-picture-preview"
           [style]="{'width': isZoom || isColor || isBackground ? 'calc(100% - 50px)' : isBrightness ? 'calc(100% - 100px)' : '100%'}">
         </div>
@@ -87,3 +89,56 @@
     </div>
   </div>
 </div>
+
+<style>
+  :host>>>.ngx-slider.vertical {
+    margin: 0px !important;
+    margin-left: 10px !important;
+  }
+
+  :host>>>.ngx-slider.vertical .ngx-slider-bar {
+    background-color: #E7EAEA !important;
+    border-radius: unset !important;
+    border: 1px solid #D7D7D7 !important;
+    width: 2px !important;
+    bottom: unset !important;
+    left: unset !important;
+    height: calc(100% - 2px);
+  }
+
+  :host>>>.ngx-slider.vertical .ngx-slider-bar-wrapper {
+    top: unset !important;
+    left: unset !important;
+    margin: unset !important;
+    padding: unset !important;
+    width: unset !important;
+  }
+
+  :host>>>.ngx-slider .ngx-slider-pointer:after {
+    display: none !important;
+  }
+
+  :host>>>.ngx-slider .ngx-slider-pointer {
+    width: 16px;
+    height: 10px;
+    background-color: #0078D7 !important;
+    border-radius: unset !important;
+  }
+
+  :host>>>.ngx-slider.vertical .ngx-slider-pointer:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid white;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+  }
+
+  :host>>>.ngx-slider.vertical .ngx-slider-pointer {
+    left: -6px !important;
+  }
+
+</style>

@@ -1,5 +1,5 @@
 /* slider */
-:host >>> .ngx-slider {
+:host>>>.ngx-slider {
     vertical-align: unset;
     position: relative;
     margin: 2px;
@@ -8,25 +8,25 @@
 }
 
 /* bar */
-:host >>> .ngx-slider .ngx-slider-bar-wrapper {
+:host>>>.ngx-slider .ngx-slider-bar-wrapper {
     margin-top: unset;
     padding-top: unset;
     height: unset;
 }
 
 /* tick */
-:host >>> .ngx-slider .ngx-slider-ticks {
+:host>>>.ngx-slider .ngx-slider-ticks {
     top: unset;
     position: relative;
 }
 
-:host >>> .ngx-slider .ngx-slider-tick {
+:host>>>.ngx-slider .ngx-slider-tick {
     width: 1px;
     height: 6px;
 }
 
 /* pointer */
-:host >>> .ngx-slider .ngx-slider-pointer {
+:host>>>.ngx-slider .ngx-slider-pointer {
     width: 10px;
     height: 10px;
     background-color: #1E90FF;
@@ -34,25 +34,27 @@
     border-radius: 100%;
 }
 
-:host >>> .ngx-slider .ngx-slider-pointer:after {
+:host>>>.ngx-slider .ngx-slider-pointer:after {
     display: none;
 }
 
 /* bubble */
-:host >>> .ngx-slider .ngx-slider-bubble {
+:host>>>.ngx-slider .ngx-slider-bubble {
     display: none;
 }
 
 /* tick value */
-:host >>> .ngx-slider .ngx-slider-ticks-values-under .ngx-slider-tick-value {
+:host>>>.ngx-slider .ngx-slider-ticks-values-under .ngx-slider-tick-value {
     bottom: unset;
 }
-:host >>> .ngx-slider .ngx-slider-inner-tooltip {
+
+:host>>>.ngx-slider .ngx-slider-inner-tooltip {
     font-size: inherit;
     color: inherit;
     height: unset;
     position: relative;
 }
-:host >>> .ngx-slider .ngx-slider-tick-value {
+
+:host>>>.ngx-slider .ngx-slider-tick-value {
     top: unset;
 }
