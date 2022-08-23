@@ -129,18 +129,6 @@
     background-color: #cccccc !important;
   }
 
-  :host>>>.ngx-slider .ngx-slider-pointer::after {
-    content: unset;
-    width: unset;
-    height: unset;
-    position: unset;
-    top: unset;
-    left: unset;
-    border-radius: unset;
-    background: unset;
-    transition: unset;
-  }
-
   :host>>>.ngx-slider .ngx-slider-pointer:hover::after {
     background-color: unset;
     border-left: 5px solid #000000 !important;
@@ -151,10 +139,16 @@
   }
 
   :host>>>.ngx-slider .ngx-slider-pointer.ngx-slider-active::after {
-    background-color: unset;
+    background-color: unset !important;
   }
 
   :host>>>.ngx-slider .ngx-slider-pointer::after {
+    width: unset;
+    height: unset;
+    left: unset;
+    border-radius: unset;
+    background: unset;
+    transition: unset;
     content: "" !important;
     position: absolute !important;
     right: -5px !important;
