@@ -5,8 +5,9 @@
         <div class="bravo-picture-zoom" [hidden]="!isZoom">
           <ngx-slider [value]="zoomSlider.value" [options]="zoomSlider.options"></ngx-slider>
         </div>
-        <div class="bravo-picture-preview"
+        <div (dblclick)="upload.click()" class="bravo-picture-preview"
           [style]="{'width': isZoom || isColor || isBackground ? 'calc(100% - 50px)' : isBrightness ? 'calc(100% - 100px)' : '100%'}">
+          <input #upload type="file" multiple="true" (change)="onUpload($event)">
         </div>
         <div class="bravo-picture-brightness" [hidden]="!isBrightness">
           <div class="bravo-slider">
@@ -89,7 +90,7 @@
           </li>
           <div class="bulkhead"></div>
           <!-- add picture -->
-          <li>
+          <li (click)="upload.click()">
             <img src="./assets/img/OpenFolder.svg">
           </li>
           <!-- save picture -->

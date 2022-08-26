@@ -51,6 +51,10 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.setBackgroundSlider();
   }
 
+  public onUpload(e: any) {
+    console.log(e);
+  }
+
   private setBackgroundSlider() {
     this.backgroundSlider = {
       value: 10,
