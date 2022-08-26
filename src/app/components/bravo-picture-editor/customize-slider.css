@@ -67,3 +67,16 @@
 :host>>>.ngx-slider.vertical .ngx-slider-pointer {
     left: -6px !important;
 }
+
+
+:host>>>.ngx-slider .ngx-slider-tick {
+    vertical-align: unset !important;
+    margin-left: unset !important;
+    margin-top: unset !important;
+    border-radius: unset !important;
+    width: 3px !important;
+    height: 1px !important;
+    background: #d6d6d6 !important;
+    left: 19px !important;
+    top: 4.5px;
+}

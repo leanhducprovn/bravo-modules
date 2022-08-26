@@ -41,7 +41,6 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
 
   public ngOnInit(): void {
     this.setPopup();
-    this.setSlider();
     this.setZoomSlider();
   }
 
@@ -54,6 +53,36 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         vertical: true,
         hidePointerLabels: true,
         hideLimitLabels: true,
+        showTicks: true,
+        stepsArray: [
+          { value: 5 },
+          { value: 10 },
+          { value: 20 },
+          { value: 30 },
+          { value: 40 },
+          { value: 50 },
+          { value: 60 },
+          { value: 70 },
+          { value: 80 },
+          { value: 90 },
+          { value: 100 },
+          { value: 150 },
+          { value: 200 },
+          { value: 250 },
+          { value: 300 },
+          { value: 350 },
+          { value: 400 },
+          { value: 450 },
+          { value: 500 },
+          { value: 550 },
+          { value: 600 },
+          { value: 650 },
+          { value: 700 },
+          { value: 750 },
+          { value: 800 },
+          { value: 850 },
+          { value: 900 },
+        ],
       },
     };
   }
@@ -77,12 +106,5 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this._popup.hidden.addHandler((e: input.Popup) => {
       this.isPopup = e.isVisible;
     });
-  }
-
-  private setSlider() {
-    wjc.setCss(this.hostElement.querySelector('.ngx-slider-bar'), {
-      borderRadius: 'unset',
-    });
-    console.log(this.hostElement.querySelector('.ngx-slider .ngx-slider-bar'));
   }
 }
