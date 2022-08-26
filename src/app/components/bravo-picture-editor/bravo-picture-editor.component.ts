@@ -30,6 +30,8 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   public isPopup: boolean = false;
 
   public zoomSlider!: SliderModel;
+  public brightnessSliderLeft!: SliderModel;
+  public brightnessSliderRight!: SliderModel;
   public colorSlider!: SliderModel;
   public backgroundSlider!: SliderModel;
 
@@ -45,14 +47,58 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.setPopup();
     this.setZoomSlider();
     this.setColorSlider();
+    this.setBrightnessSlider();
+    this.setBackgroundSlider();
+  }
+
+  private setBackgroundSlider() {
+    this.backgroundSlider = {
+      value: 10,
+      options: {
+        floor: 0,
+        ceil: 10,
+        step: 1,
+        vertical: true,
+        hidePointerLabels: true,
+        hideLimitLabels: true,
+        showTicks: true,
+      },
+    };
+  }
+
+  private setBrightnessSlider() {
+    this.brightnessSliderLeft = {
+      value: 10,
+      options: {
+        floor: 1,
+        ceil: 20,
+        step: 1,
+        vertical: true,
+        hidePointerLabels: true,
+        hideLimitLabels: true,
+        showTicks: true,
+      },
+    };
+    this.brightnessSliderRight = {
+      value: 10,
+      options: {
+        floor: 1,
+        ceil: 20,
+        step: 1,
+        vertical: true,
+        hidePointerLabels: true,
+        hideLimitLabels: true,
+        showTicks: true,
+      },
+    };
   }
 
   private setColorSlider() {
     this.colorSlider = {
-      value: 10,
+      value: 2,
       options: {
         floor: 0,
-        ceil: 20,
+        ceil: 2,
         step: 1,
         vertical: true,
         hidePointerLabels: true,

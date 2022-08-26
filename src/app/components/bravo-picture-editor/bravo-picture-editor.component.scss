@@ -218,7 +218,19 @@
 }
 
 .bravo-slider {
-    height: calc(100% - 26px);
+    display: flex;
+    flex-direction: row;
+    height: calc(100% - 24px);
+
+    .left {
+        width: 50%;
+        height: 100%;
+    }
+
+    .right {
+        width: 50%;
+        height: 100%;
+    }
 }
 
 .bravo-confirm {
@@ -226,19 +238,29 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #bbbbbb;
     margin: 4px 0 0 4px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
-    button:disabled,
-    button[disabled] {
+    button {
         width: 100%;
         height: 100%;
+        border: 1px solid #bbbbbb;
 
-        svg circle {
-            fill: #bbbbbb
+        &[disabled] {
+            width: 100%;
+            height: 100%;
+
+            svg circle {
+                fill: #bbbbbb
+            }
+
+            cursor: no-drop;
         }
 
-        cursor: no-drop;
+        &:hover:not([disabled]) {
+            border-left: 1px solid #ffffff;
+            border-top: 1px solid #ffffff;
+        }
     }
 }
 
