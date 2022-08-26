@@ -30,6 +30,8 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   public isPopup: boolean = false;
 
   public zoomSlider!: SliderModel;
+  public colorSlider!: SliderModel;
+  public backgroundSlider!: SliderModel;
 
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
@@ -42,6 +44,22 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   public ngOnInit(): void {
     this.setPopup();
     this.setZoomSlider();
+    this.setColorSlider();
+  }
+
+  private setColorSlider() {
+    this.colorSlider = {
+      value: 10,
+      options: {
+        floor: 0,
+        ceil: 20,
+        step: 1,
+        vertical: true,
+        hidePointerLabels: true,
+        hideLimitLabels: true,
+        showTicks: true,
+      },
+    };
   }
 
   private setZoomSlider() {

@@ -46,7 +46,6 @@
 
                 .bravo-picture-brightness {
                     width: 100px;
-                    background-color: #FCC479;
 
                     &:hover {
                         cursor: pointer;
@@ -55,7 +54,6 @@
 
                 .bravo-picture-color {
                     width: 50px;
-                    background-color: aqua;
 
                     &:hover {
                         cursor: pointer;
@@ -64,7 +62,6 @@
 
                 .bravo-picture-background {
                     width: 50px;
-                    background-color: #bbbbbb;
 
                     &:hover {
                         cursor: pointer;
@@ -143,17 +140,6 @@
 
         .bravo-picture-advanced {
             button {
-                cursor: pointer;
-                background-color: unset;
-                border: none;
-                border-radius: unset;
-                color: unset;
-                font-size: unset;
-                padding: unset;
-                margin: unset;
-                width: unset;
-                height: unset;
-
                 &.bravo-picture-more {
                     display: flex;
                     align-items: center;
@@ -231,11 +217,40 @@
     }
 }
 
-.ngx-slider .ngx-slider-bar {
-    left: 0;
-    width: 100%;
-    height: 4px;
-    z-index: 1;
-    background: #d8e0f3;
-    border-radius: unset !important;
+.bravo-slider {
+    height: calc(100% - 26px);
+}
+
+.bravo-confirm {
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #bbbbbb;
+    margin: 4px 0 0 4px;
+
+    button:disabled,
+    button[disabled] {
+        width: 100%;
+        height: 100%;
+
+        svg circle {
+            fill: #bbbbbb
+        }
+
+        cursor: no-drop;
+    }
+}
+
+button {
+    cursor: pointer;
+    background-color: unset;
+    border: none;
+    border-radius: unset;
+    color: unset;
+    font-size: unset;
+    padding: unset;
+    margin: unset;
+    width: unset;
+    height: unset;
 }
