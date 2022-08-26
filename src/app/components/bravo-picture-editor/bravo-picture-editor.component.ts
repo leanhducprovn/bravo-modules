@@ -15,7 +15,10 @@ interface SliderModel {
 @Component({
   selector: 'bravo-picture-editor',
   templateUrl: './bravo-picture-editor.component.html',
-  styleUrls: ['./bravo-picture-editor.component.scss'],
+  styleUrls: [
+    './bravo-picture-editor.component.scss',
+    './customize-slider.css',
+  ],
 })
 export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   private _popup!: input.Popup;
