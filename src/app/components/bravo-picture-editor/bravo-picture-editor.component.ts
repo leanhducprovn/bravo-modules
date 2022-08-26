@@ -35,12 +35,57 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   public colorSlider!: SliderModel;
   public backgroundSlider!: SliderModel;
 
+  public value: any;
+  public imageInfo!: string;
+  public zoomPercent!: number;
+
+  private _imageURL: string = '';
+  public set imageURL(pValue: string) {
+    if (this._imageURL == pValue) return;
+    this._imageURL = pValue;
+    this.invalidate();
+  }
+  public get imageURL(): string {
+    return this._imageURL;
+  }
+
+  private _bAutoFitPicture: boolean = true;
+  public set bAutoFitPicture(pValue: boolean) {
+    if (this._bAutoFitPicture == pValue) return;
+    this._bAutoFitPicture = pValue;
+    this.invalidate();
+  }
+  public get bAutoFitPicture(): boolean {
+    return this._bAutoFitPicture;
+  }
+
+  private _maximumZoomSize: number = 6000;
+  public set maximumZoomSize(pValue: number) {
+    if (this._maximumZoomSize == pValue) return;
+    this._maximumZoomSize = pValue;
+    this.invalidate();
+  }
+  public get maximumZoomSize(): number {
+    return this._maximumZoomSize;
+  }
+
+  private _minimumZoomSize: number = 12;
+  public set minimumZoomSize(pValue: number) {
+    if (this._minimumZoomSize == pValue) return;
+    this._minimumZoomSize = pValue;
+    this.invalidate();
+  }
+  public get minimumZoomSize(): number {
+    return this._minimumZoomSize;
+  }
+
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
   }
 
   public override refresh(fullUpdate?: boolean | undefined): void {
     super.refresh(fullUpdate);
+    this.reader();
   }
 
   public ngOnInit(): void {
@@ -52,7 +97,65 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   }
 
   public onUpload(e: any) {
-    console.log(e);
+    let _file = e.target.files[0];
+    if (_file) {
+      let _fileReader = new FileReader();
+      _fileReader.readAsDataURL(e.target.files[0]);
+      _fileReader.onload = (eFile: any) => {
+        this.imageURL = eFile.target.result;
+      };
+    }
+  }
+
+  private reader(
+    pValue: string = this.imageURL,
+    pAutoFit: boolean = this.bAutoFitPicture
+  ) {
+    let _picturePreview = this.hostElement?.querySelector(
+      '.bravo-picture-preview'
+    );
+    let _imagePreview = this.hostElement?.querySelector(
+      '.bravo-picture-preview img'
+    );
+    let _image = new Image();
+    _image.src = pValue;
+    _image.onload = () => {
+      this.imageInfo = `${
+        _image.width +
+        'x' +
+        _image.height +
+        ' ' +
+        '(' +
+        this.formatBytes(this.getSizeBase64(pValue)) +
+        ')'
+      }`;
+
+      if (_imagePreview && _picturePreview) {
+        wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
+        if (pAutoFit) {
+          if (_image.width >= 196) {
+            if (_image.width > _image.height) {
+              wjc.toggleClass(_imagePreview!, 'width-100');
+            } else {
+              wjc.toggleClass(_imagePreview!, 'height-100');
+              wjc.setCss(_picturePreview!, {
+                overflow: 'auto',
+              });
+            }
+          } else {
+            wjc.toggleClass(_imagePreview!, 'default');
+          }
+        } else {
+          wjc.setCss(_picturePreview, {
+            overflow: 'auto',
+          });
+          wjc.setCss(_imagePreview, {
+            width: 'unset',
+            height: 'unset',
+          });
+        }
+      }
+    };
   }
 
   private setBackgroundSlider() {
@@ -174,5 +277,20 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this._popup.hidden.addHandler((e: input.Popup) => {
       this.isPopup = e.isVisible;
     });
+  }
+
+  private getSizeBase64(base64: string) {
+    let stringLength = base64.length - 'data:image/png;base64,'.length;
+    let sizeInBytes = 4 * Math.ceil(stringLength / 3) * 0.5624896334383812;
+    return sizeInBytes;
+  }
+
+  private formatBytes(bytes: number, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
   }
 }

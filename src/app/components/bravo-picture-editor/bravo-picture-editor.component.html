@@ -7,6 +7,7 @@
         </div>
         <div (dblclick)="upload.click()" class="bravo-picture-preview"
           [style]="{'width': isZoom || isColor || isBackground ? 'calc(100% - 50px)' : isBrightness ? 'calc(100% - 100px)' : '100%'}">
+          <img src="{{ imageURL }}" class="null">
           <input #upload type="file" multiple="true" (change)="onUpload($event)">
         </div>
         <div class="bravo-picture-brightness" [hidden]="!isBrightness">
@@ -79,14 +80,14 @@
         </div>
       </div>
     </div>
-    <div class="bravo-picture-imagesize">100x100</div>
+    <div class="bravo-picture-imagesize">{{ imageInfo }}</div>
     <div class="bravo-picture-tools">
       <div class="bravo-picture-basic">
         <ul>
           <!-- zoom picture -->
           <li (click)="isZoom = !isZoom; isBrightness = false; isColor = false; isBackground = false"
             [class]="isZoom ? 'active' : ''" class="zoom">
-            <img src="./assets/img/Search.png">100%
+            <img src="./assets/img/Search.png">{{ zoomPercent ? zoomPercent : '100' }}%
           </li>
           <div class="bulkhead"></div>
           <!-- add picture -->
