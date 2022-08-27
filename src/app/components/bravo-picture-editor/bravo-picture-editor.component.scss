@@ -38,6 +38,7 @@
                 .bravo-picture-preview {
                     position: relative;
                     width: 100%;
+                    overflow: auto;
 
                     input[type=file] {
                         width: 100%;

@@ -22,6 +22,8 @@ interface SliderModel {
 })
 export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   private _popup!: input.Popup;
+  private _renderedSize!: string;
+  private _intrinsicSize!: string;
 
   public isZoom: boolean = false;
   public isBrightness: boolean = false;
@@ -120,16 +122,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     let _image = new Image();
     _image.src = pValue;
     _image.onload = () => {
-      this.imageInfo = `${
-        _image.width +
-        'x' +
-        _image.height +
-        ' ' +
-        '(' +
-        this.formatBytes(this.getSizeBase64(pValue)) +
-        ')'
-      }`;
-
+      this._intrinsicSize = _image.width + 'x' + _image.height;
       if (_imagePreview && _picturePreview) {
         wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
         if (pAutoFit) {
@@ -138,13 +131,13 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
               wjc.toggleClass(_imagePreview!, 'width-100');
             } else {
               wjc.toggleClass(_imagePreview!, 'height-100');
-              wjc.setCss(_picturePreview!, {
-                overflow: 'auto',
-              });
             }
           } else {
             wjc.toggleClass(_imagePreview!, 'default');
           }
+          this.zoomPercent = Math.round(
+            (_imagePreview.clientWidth / _image.width) * 100
+          );
         } else {
           wjc.setCss(_picturePreview, {
             overflow: 'auto',
@@ -153,8 +146,19 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
             width: 'unset',
             height: 'unset',
           });
+          this.zoomPercent = 100;
         }
+        this._renderedSize =
+          _imagePreview.clientWidth + 'x' + _imagePreview.clientHeight;
       }
+      this.imageInfo = `${
+        this._renderedSize +
+        ' / ' +
+        this._intrinsicSize +
+        ' (' +
+        this.formatBytes(this.getSizeBase64(pValue)) +
+        ')'
+      }`;
     };
   }
 
