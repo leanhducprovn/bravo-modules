@@ -39,7 +39,6 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
 
   public value: any;
   public imageInfo!: string;
-  public zoomPercent!: number;
 
   private _imageURL: string = '';
   public set imageURL(pValue: string) {
@@ -130,12 +129,16 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
             if (_image.width > _image.height) {
               wjc.toggleClass(_imagePreview!, 'width-100');
             } else {
-              wjc.toggleClass(_imagePreview!, 'height-100');
+              if (_picturePreview.clientWidth > _picturePreview.clientHeight) {
+                wjc.toggleClass(_imagePreview!, 'height-100');
+              } else {
+                wjc.toggleClass(_imagePreview!, 'width-100');
+              }
             }
           } else {
             wjc.toggleClass(_imagePreview!, 'default');
           }
-          this.zoomPercent = Math.round(
+          this.zoomSlider.value = Math.round(
             (_imagePreview.clientWidth / _image.width) * 100
           );
         } else {
@@ -146,7 +149,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
             width: 'unset',
             height: 'unset',
           });
-          this.zoomPercent = 100;
+          this.zoomSlider.value = 100;
         }
         this._renderedSize =
           _imagePreview.clientWidth + 'x' + _imagePreview.clientHeight;

@@ -85,9 +85,9 @@
       <div class="bravo-picture-basic">
         <ul>
           <!-- zoom picture -->
-          <li (click)="isZoom = !isZoom; isBrightness = false; isColor = false; isBackground = false"
+          <li (click)="isZoom = !isZoom; isBrightness = false; isColor = false; isBackground = false; invalidate();"
             [class]="isZoom ? 'active' : ''" class="zoom">
-            <img src="./assets/img/Search.png">{{ zoomPercent ? zoomPercent : '100' }}%
+            <img src="./assets/img/Search.png">{{ zoomSlider.value ? zoomSlider.value : '100' }}%
           </li>
           <div class="bulkhead"></div>
           <!-- add picture -->
@@ -144,11 +144,13 @@
             <li>4</li>
             <li>5</li>
             <li>6</li>
-            <li (click)="isZoom = false; isBrightness = !isBrightness; isColor = false; isBackground = false"
+            <li
+              (click)="isZoom = false; isBrightness = !isBrightness; isColor = false; isBackground = false; invalidate();"
               [class]="isBrightness ? 'active' : ''">7</li>
-            <li (click)="isZoom = false; isBrightness = false; isColor = !isColor; isBackground = false"
+            <li (click)="isZoom = false; isBrightness = false; isColor = !isColor; isBackground = false; invalidate();"
               [class]="isColor ? 'active' : ''">8</li>
-            <li (click)="isZoom = false; isBrightness = false; isColor = false; isBackground = !isBackground"
+            <li
+              (click)="isZoom = false; isBrightness = false; isColor = false; isBackground = !isBackground; invalidate();"
               [class]="isBackground ? 'active' : ''">9</li>
           </ul>
         </div>
