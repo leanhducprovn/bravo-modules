@@ -26,6 +26,7 @@ interface SliderModel {
 })
 export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   private _popup!: input.Popup;
+  private _imageWidth!: number;
   private _renderedSize!: string;
   private _intrinsicSize!: string;
 
@@ -125,6 +126,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     let _image = new Image();
     _image.src = pValue;
     _image.onload = () => {
+      this._imageWidth = _image.width;
       this._intrinsicSize = _image.width + 'x' + _image.height;
       if (_imagePreview && _picturePreview) {
         wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
@@ -270,7 +272,17 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   }
 
   public onZoomSliderChange(changeContext: ChangeContext): void {
+    let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
     this.zoomSlider.value = changeContext.value;
+    if (_image) {
+      wjc.setCss(_image, {
+        width: `${
+          _image.clientWidth +
+          (this._imageWidth * changeContext.value) / 100 +
+          'px'
+        }`,
+      });
+    }
   }
 
   private setPopup() {
