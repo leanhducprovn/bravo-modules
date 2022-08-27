@@ -275,14 +275,31 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
     this.zoomSlider.value = changeContext.value;
     if (_image) {
-      wjc.setCss(_image, {
-        width: `${
-          _image.clientWidth +
-          (this._imageWidth * changeContext.value) / 100 +
-          'px'
-        }`,
-      });
+      if (this.test < changeContext.value) {
+        wjc.setCss(_image, {
+          width: `${
+            _image.clientWidth +
+            (this._imageWidth * changeContext.value) / 100 +
+            'px'
+          }`,
+        });
+      } else {
+        wjc.setCss(_image, {
+          width: `${
+            _image.clientWidth -
+            (this._imageWidth * changeContext.value) / 100 +
+            'px'
+          }`,
+        });
+      }
     }
+  }
+
+  test!: number;
+
+  public onZoomSliderChangeEnd(changeContext: ChangeContext): void {
+    this.test = changeContext.value;
+    console.log(this.test);
   }
 
   private setPopup() {

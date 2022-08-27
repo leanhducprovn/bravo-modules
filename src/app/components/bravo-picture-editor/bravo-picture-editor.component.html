@@ -4,7 +4,7 @@
       <div class="bravo-picture-view">
         <div class="bravo-picture-zoom" [hidden]="!isZoom">
           <ngx-slider [value]="zoomSlider.value" [options]="zoomSlider.options"
-            (userChange)="onZoomSliderChange($event)">
+            (userChange)="onZoomSliderChange($event)" (userChangeEnd)="onZoomSliderChangeEnd($event)">
           </ngx-slider>
         </div>
         <div (dblclick)="upload.click()" class="bravo-picture-preview"
