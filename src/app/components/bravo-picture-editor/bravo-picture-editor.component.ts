@@ -3,7 +3,11 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import * as input from '@grapecity/wijmo.input';
 import * as wjc from '@grapecity/wijmo';
 
-import { Options } from '@angular-slider/ngx-slider';
+import {
+  ChangeContext,
+  Options,
+  PointerType,
+} from '@angular-slider/ngx-slider';
 
 import { Convert } from '../../library/bravo-convert/convert';
 
@@ -263,6 +267,10 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         ],
       },
     };
+  }
+
+  public onZoomSliderChange(changeContext: ChangeContext): void {
+    this.zoomSlider.value = changeContext.value;
   }
 
   private setPopup() {
