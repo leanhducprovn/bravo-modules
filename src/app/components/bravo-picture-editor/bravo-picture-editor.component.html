@@ -4,7 +4,7 @@
       <div class="bravo-picture-view">
         <div class="bravo-picture-zoom" [hidden]="!isZoom">
           <ngx-slider [value]="zoomSlider.value" [options]="zoomSlider.options"
-            (userChange)="onZoomSliderChange($event)" (userChangeEnd)="onZoomSliderChangeEnd($event)">
+            (userChange)="onZoomSliderChange($event)">
           </ngx-slider>
         </div>
         <div (dblclick)="upload.click()" class="bravo-picture-preview"
@@ -82,12 +82,12 @@
         </div>
       </div>
     </div>
-    <div class="bravo-picture-imagesize">{{ imageInfo }}</div>
+    <div class="bravo-picture-imagesize">{{ renderedSize }}{{  imageInfo }}</div>
     <div class="bravo-picture-tools">
       <div class="bravo-picture-basic">
         <ul>
           <!-- zoom picture -->
-          <li (click)="isZoom = !isZoom; isBrightness = false; isColor = false; isBackground = false; invalidate();"
+          <li (click)="isZoom = !isZoom; isBrightness = false; isColor = false; isBackground = false;"
             [class]="isZoom ? 'active' : ''" class="zoom">
             <img src="./assets/img/Search.png">{{ zoomSlider.value ? zoomSlider.value : '100' }}%
           </li>
@@ -146,13 +146,11 @@
             <li>4</li>
             <li>5</li>
             <li>6</li>
-            <li
-              (click)="isZoom = false; isBrightness = !isBrightness; isColor = false; isBackground = false; invalidate();"
+            <li (click)="isZoom = false; isBrightness = !isBrightness; isColor = false; isBackground = false;"
               [class]="isBrightness ? 'active' : ''">7</li>
-            <li (click)="isZoom = false; isBrightness = false; isColor = !isColor; isBackground = false; invalidate();"
+            <li (click)="isZoom = false; isBrightness = false; isColor = !isColor; isBackground = false;"
               [class]="isColor ? 'active' : ''">8</li>
-            <li
-              (click)="isZoom = false; isBrightness = false; isColor = false; isBackground = !isBackground; invalidate();"
+            <li (click)="isZoom = false; isBrightness = false; isColor = false; isBackground = !isBackground;"
               [class]="isBackground ? 'active' : ''">9</li>
           </ul>
         </div>

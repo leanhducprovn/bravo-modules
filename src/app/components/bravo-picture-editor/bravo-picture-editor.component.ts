@@ -27,7 +27,7 @@ interface SliderModel {
 export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   private _popup!: input.Popup;
   private _imageWidth!: number;
-  private _renderedSize!: string;
+  private _imageHeight!: number;
   private _intrinsicSize!: string;
 
   public isZoom: boolean = false;
@@ -44,6 +44,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
 
   public value: any;
   public imageInfo!: string;
+  public renderedSize!: string;
 
   private _imageURL: string = '';
   public set imageURL(pValue: string) {
@@ -127,6 +128,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     _image.src = pValue;
     _image.onload = () => {
       this._imageWidth = _image.width;
+      this._imageHeight = _image.height;
       this._intrinsicSize = _image.width + 'x' + _image.height;
       if (_imagePreview && _picturePreview) {
         wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
@@ -157,11 +159,10 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
           });
           this.zoomSlider.value = 100;
         }
-        this._renderedSize =
+        this.renderedSize =
           _imagePreview.clientWidth + 'x' + _imagePreview.clientHeight;
       }
       this.imageInfo = `${
-        this._renderedSize +
         ' / ' +
         this._intrinsicSize +
         ' (' +
@@ -273,33 +274,17 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
 
   public onZoomSliderChange(changeContext: ChangeContext): void {
     let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
-    this.zoomSlider.value = changeContext.value;
+    let _width = (this._imageWidth * changeContext.value) / 100;
+    let _height = (this._imageHeight * changeContext.value) / 100;
     if (_image) {
-      if (this.test < changeContext.value) {
-        wjc.setCss(_image, {
-          width: `${
-            _image.clientWidth +
-            (this._imageWidth * changeContext.value) / 100 +
-            'px'
-          }`,
-        });
-      } else {
-        wjc.setCss(_image, {
-          width: `${
-            _image.clientWidth -
-            (this._imageWidth * changeContext.value) / 100 +
-            'px'
-          }`,
-        });
-      }
+      if (_width > this.maximumZoomSize || _width < this.minimumZoomSize)
+        return;
+      this.zoomSlider.value = changeContext.value;
+      this.renderedSize = Math.round(_width) + 'x' + Math.round(_height);
+      wjc.setCss(_image, {
+        width: _width + 'px',
+      });
     }
-  }
-
-  test!: number;
-
-  public onZoomSliderChangeEnd(changeContext: ChangeContext): void {
-    this.test = changeContext.value;
-    console.log(this.test);
   }
 
   private setPopup() {
