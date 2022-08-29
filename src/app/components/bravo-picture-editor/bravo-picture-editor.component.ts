@@ -10,6 +10,7 @@ import {
 } from '@angular-slider/ngx-slider';
 
 import { Convert } from '../../library/bravo-convert/convert';
+import { FormControl } from '@angular/forms';
 
 interface SliderModel {
   value: number;
@@ -132,6 +133,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
       this._intrinsicSize = _image.width + 'x' + _image.height;
       if (_imagePreview && _picturePreview) {
         wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
+        wjc.setAttribute(_imagePreview!, 'style', null);
         if (pAutoFit) {
           if (_image.width >= 196) {
             if (_image.width > _image.height) {
