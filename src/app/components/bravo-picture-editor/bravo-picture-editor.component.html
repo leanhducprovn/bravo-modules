@@ -15,10 +15,12 @@
         <div class="bravo-picture-brightness" [hidden]="!isBrightness">
           <div class="bravo-slider">
             <div class="left">
-              <ngx-slider [value]="brightnessSliderLeft.value" [options]="brightnessSliderLeft.options"></ngx-slider>
+              <ngx-slider [value]="brightnessSliderLeft.value" [options]="brightnessSliderLeft.options"
+                (userChange)="onBrightnessSliderLeftChange($event)"></ngx-slider>
             </div>
             <div class="right">
-              <ngx-slider [value]="brightnessSliderRight.value" [options]="brightnessSliderRight.options"></ngx-slider>
+              <ngx-slider [value]="brightnessSliderRight.value" [options]="brightnessSliderRight.options"
+                (userChange)="onBrightnessSliderRightChange($event)"></ngx-slider>
             </div>
           </div>
           <div class="bravo-confirm">
@@ -45,7 +47,7 @@
             </ngx-slider>
           </div>
           <div class="bravo-confirm">
-            <button [disabled]="true">
+            <button (click)="onSaveEdit()" [disabled]="false">
               <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:svgjs="http://svgjs.com/svgjs" width="10" height="10" x="0" y="0" viewBox="0 0 2.54 2.54"
                 style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -63,7 +65,8 @@
         </div>
         <div class="bravo-picture-background" [hidden]="!isBackground">
           <div class="bravo-slider">
-            <ngx-slider [value]="backgroundSlider.value" [options]="backgroundSlider.options"></ngx-slider>
+            <ngx-slider [value]="backgroundSlider.value" [options]="backgroundSlider.options"
+              (userChange)="onBackgroundSliderChange($event)"></ngx-slider>
           </div>
           <div class="bravo-confirm">
             <button [disabled]="false">
@@ -89,7 +92,7 @@
       <div class="bravo-picture-basic">
         <ul>
           <!-- zoom picture -->
-          <li (click)="isZoom = !isZoom; isBrightness = false; isColor = false; isBackground = false;"
+          <li (click)="isZoom = !isZoom; isBrightness = false; isColor = false; isBackground = false; invalidate();"
             [class]="isZoom ? 'active' : ''" class="zoom">
             <img src="./assets/img/Search.png">{{ zoomSlider.value ? zoomSlider.value : '100' }}%
           </li>
@@ -148,11 +151,13 @@
             <li>4</li>
             <li>5</li>
             <li>6</li>
-            <li (click)="isZoom = false; isBrightness = !isBrightness; isColor = false; isBackground = false;"
+            <li
+              (click)="isZoom = false; isBrightness = !isBrightness; isColor = false; isBackground = false; invalidate();"
               [class]="isBrightness ? 'active' : ''">7</li>
-            <li (click)="isZoom = false; isBrightness = false; isColor = !isColor; isBackground = false;"
+            <li (click)="isZoom = false; isBrightness = false; isColor = !isColor; isBackground = false; invalidate();"
               [class]="isColor ? 'active' : ''">8</li>
-            <li (click)="isZoom = false; isBrightness = false; isColor = false; isBackground = !isBackground;"
+            <li
+              (click)="isZoom = false; isBrightness = false; isColor = false; isBackground = !isBackground; invalidate();"
               [class]="isBackground ? 'active' : ''">9</li>
           </ul>
         </div>

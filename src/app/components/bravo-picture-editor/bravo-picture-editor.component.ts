@@ -113,6 +113,36 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.setBackgroundSlider();
   }
 
+  public onSaveEdit() {
+    let previewImg = this.hostElement?.querySelector(
+      '.bravo-picture-preview img' as any
+    );
+    let canvas = document.createElement('canvas');
+    let ctx = canvas.getContext('2d');
+    if (previewImg) {
+      canvas.width = this._imageWidth;
+      canvas.height = this._imageHeight;
+
+      if (ctx) {
+        ctx.filter = `invert(${100}%)`;
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.scale(1, 1);
+        ctx.drawImage(
+          previewImg,
+          -canvas.width / 2,
+          -canvas.height / 2,
+          canvas.width,
+          canvas.height
+        );
+      }
+    }
+
+    const link = document.createElement('a');
+    link.download = 'image.jpg';
+    link.href = canvas.toDataURL();
+    link.click();
+  }
+
   public onPaste(e: any) {
     const items = (e.clipboardData || e.originalEvent.clipboardData).items;
     let blob = null;
@@ -254,13 +284,22 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     };
   }
 
+  public onBackgroundSliderChange(changeContext: ChangeContext) {
+    let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
+    if (_image) {
+      wjc.setCss(_image, {
+        opacity: changeContext.value / 10,
+      });
+    }
+  }
+
   private setBrightnessSlider() {
     this.brightnessSliderLeft = {
-      value: 10,
+      value: 100,
       options: {
-        floor: 1,
-        ceil: 20,
-        step: 1,
+        floor: 0,
+        ceil: 200,
+        step: 10,
         vertical: true,
         disabled: true,
         hidePointerLabels: true,
@@ -269,11 +308,11 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
       },
     };
     this.brightnessSliderRight = {
-      value: 10,
+      value: 100,
       options: {
-        floor: 1,
-        ceil: 20,
-        step: 1,
+        floor: 0,
+        ceil: 200,
+        step: 10,
         vertical: true,
         disabled: true,
         hidePointerLabels: true,
@@ -281,6 +320,24 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         showTicks: true,
       },
     };
+  }
+
+  public onBrightnessSliderLeftChange(changeContext: ChangeContext) {
+    let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
+    if (_image) {
+      wjc.setCss(_image, {
+        filter: `${'brightness' + '(' + changeContext.value + '%)'}`,
+      });
+    }
+  }
+
+  public onBrightnessSliderRightChange(changeContext: ChangeContext) {
+    let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
+    if (_image) {
+      wjc.setCss(_image, {
+        filter: `${'brightness' + '(' + changeContext.value + '%)'}`,
+      });
+    }
   }
 
   private setColorSlider() {
