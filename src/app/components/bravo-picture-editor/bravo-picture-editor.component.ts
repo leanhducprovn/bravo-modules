@@ -1,16 +1,12 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import * as input from '@grapecity/wijmo.input';
 import * as wjc from '@grapecity/wijmo';
 
-import {
-  ChangeContext,
-  Options,
-  PointerType,
-} from '@angular-slider/ngx-slider';
+import { ChangeContext, Options } from '@angular-slider/ngx-slider';
 
+import { ImageValueType } from '../../types/enum/image-value-type.enum';
 import { Convert } from '../../library/bravo-convert/convert';
-import { FormControl } from '@angular/forms';
 
 interface SliderModel {
   value: number;
@@ -26,6 +22,8 @@ interface SliderModel {
   ],
 })
 export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
+  @ViewChild('upload') private _upload!: ElementRef;
+
   private _popup!: input.Popup;
   private _imageWidth!: number;
   private _imageHeight!: number;
@@ -87,6 +85,16 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     return this._minimumZoomSize;
   }
 
+  private _imageValueType: ImageValueType = ImageValueType.ByteArray;
+  public set imageValueType(pValue: ImageValueType) {
+    if (this._imageValueType == pValue) return;
+    this._imageValueType = pValue;
+    this.invalidate;
+  }
+  public get imageValueType(): ImageValueType {
+    return this._imageValueType;
+  }
+
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
   }
@@ -94,6 +102,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   public override refresh(fullUpdate?: boolean | undefined): void {
     super.refresh(fullUpdate);
     this.reader();
+    this.setSlider();
   }
 
   public ngOnInit(): void {
@@ -115,8 +124,24 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
+  public onRemove() {
+    let _imagePreview = this.hostElement?.querySelector(
+      '.bravo-picture-preview img'
+    );
+    if (_imagePreview) {
+      wjc.removeClass(_imagePreview!, 'default width-100 height-100');
+      wjc.addClass(_imagePreview!, 'null');
+    }
+    this._upload.nativeElement.value = '';
+    this.imageURL = '';
+    this.imageInfo = '';
+    this.renderedSize = '';
+    this.value = '';
+  }
+
   private reader(
     pValue: string = this.imageURL,
+    pValueType: ImageValueType = this.imageValueType,
     pAutoFit: boolean = this.bAutoFitPicture
   ) {
     let _picturePreview = this.hostElement?.querySelector(
@@ -172,6 +197,19 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         ')'
       }`;
     };
+    if (pValueType == ImageValueType.Base64String) {
+      this.value = this.imageURL.replace(
+        /^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
+        ''
+      );
+    } else {
+      this.value = Convert.fromBase64String(
+        this.imageURL.replace(
+          /^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
+          ''
+        )
+      );
+    }
   }
 
   private setBackgroundSlider() {
@@ -182,6 +220,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         ceil: 10,
         step: 1,
         vertical: true,
+        disabled: true,
         hidePointerLabels: true,
         hideLimitLabels: true,
         showTicks: true,
@@ -197,6 +236,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         ceil: 20,
         step: 1,
         vertical: true,
+        disabled: true,
         hidePointerLabels: true,
         hideLimitLabels: true,
         showTicks: true,
@@ -209,6 +249,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         ceil: 20,
         step: 1,
         vertical: true,
+        disabled: true,
         hidePointerLabels: true,
         hideLimitLabels: true,
         showTicks: true,
@@ -224,6 +265,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         ceil: 2,
         step: 1,
         vertical: true,
+        disabled: true,
         hidePointerLabels: true,
         hideLimitLabels: true,
         showTicks: true,
@@ -238,6 +280,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         floor: 0,
         ceil: 900,
         vertical: true,
+        disabled: true,
         hidePointerLabels: true,
         hideLimitLabels: true,
         showTicks: true,
@@ -286,6 +329,66 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
       wjc.setCss(_image, {
         width: _width + 'px',
       });
+    }
+  }
+
+  private setSlider() {
+    if (this.value && this.value != '') {
+      this.zoomSlider.options = Object.assign({}, this.zoomSlider.options, {
+        disabled: false,
+      });
+      this.colorSlider.options = Object.assign({}, this.colorSlider.options, {
+        disabled: false,
+      });
+      this.brightnessSliderLeft.options = Object.assign(
+        {},
+        this.brightnessSliderLeft.options,
+        {
+          disabled: false,
+        }
+      );
+      this.brightnessSliderRight.options = Object.assign(
+        {},
+        this.brightnessSliderRight.options,
+        {
+          disabled: false,
+        }
+      );
+      this.backgroundSlider.options = Object.assign(
+        {},
+        this.backgroundSlider.options,
+        {
+          disabled: false,
+        }
+      );
+    } else {
+      this.zoomSlider.options = Object.assign({}, this.zoomSlider.options, {
+        disabled: true,
+      });
+      this.colorSlider.options = Object.assign({}, this.colorSlider.options, {
+        disabled: true,
+      });
+      this.brightnessSliderLeft.options = Object.assign(
+        {},
+        this.brightnessSliderLeft.options,
+        {
+          disabled: true,
+        }
+      );
+      this.brightnessSliderRight.options = Object.assign(
+        {},
+        this.brightnessSliderRight.options,
+        {
+          disabled: true,
+        }
+      );
+      this.backgroundSlider.options = Object.assign(
+        {},
+        this.backgroundSlider.options,
+        {
+          disabled: true,
+        }
+      );
     }
   }
 
