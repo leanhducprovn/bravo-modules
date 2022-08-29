@@ -40,7 +40,9 @@
         </div>
         <div class="bravo-picture-color" [hidden]="!isColor">
           <div class="bravo-slider">
-            <ngx-slider [value]="colorSlider.value" [options]="colorSlider.options"></ngx-slider>
+            <ngx-slider [value]="colorSlider.value" [options]="colorSlider.options"
+              (userChange)="onColorSliderChange($event)">
+            </ngx-slider>
           </div>
           <div class="bravo-confirm">
             <button [disabled]="true">
@@ -110,11 +112,11 @@
             <img src="./assets/img/Delete.png">
           </li>
           <!-- paste picture -->
-          <li>
+          <li (paste)="onPaste($event)">
             <img src="./assets/img/Paste.svg">
           </li>
           <!-- copy picture -->
-          <li>
+          <li (click)="onCopy()">
             <img src="./assets/img/Copy.png">
           </li>
           <div class="bulkhead"></div>

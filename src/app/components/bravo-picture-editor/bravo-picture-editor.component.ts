@@ -113,6 +113,32 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.setBackgroundSlider();
   }
 
+  public onPaste(e: any) {
+    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+    let blob = null;
+    for (const item of items) {
+      if (item.type.indexOf('image') === 0) {
+        blob = item.getAsFile();
+        console.log(blob);
+      }
+    }
+  }
+
+  public async onCopy() {
+    try {
+      const imgURL = this.imageURL;
+      const data = await fetch(imgURL);
+      const blob = await data.blob();
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          [blob.type]: blob,
+        }),
+      ]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   public onUpload(e: any) {
     let _file = e.target.files[0];
     if (_file) {
@@ -271,6 +297,25 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         showTicks: true,
       },
     };
+  }
+
+  public onColorSliderChange(changeContext: ChangeContext): void {
+    let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
+    if (_image) {
+      if (changeContext.value == 1) {
+        wjc.setCss(_image, {
+          filter: 'grayscale(100%)',
+        });
+      } else if (changeContext.value == 0) {
+        wjc.setCss(_image, {
+          filter: 'sepia(100%)',
+        });
+      } else {
+        wjc.setCss(_image, {
+          filter: 'unset',
+        });
+      }
+    }
   }
 
   private setZoomSlider() {
