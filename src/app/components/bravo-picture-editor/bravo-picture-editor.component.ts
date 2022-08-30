@@ -8,6 +8,8 @@ import { ChangeContext, Options } from '@angular-slider/ngx-slider';
 import { ImageValueType } from '../../types/enum/image-value-type.enum';
 import { Convert } from '../../library/bravo-convert/convert';
 
+import { FormControl } from '@angular/forms';
+
 interface SliderModel {
   value: number;
   options: Options;
@@ -27,6 +29,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   private _popup!: input.Popup;
   private _imageWidth!: number;
   private _imageHeight!: number;
+  private _imageOldName!: string;
   private _intrinsicSize!: string;
 
   public isZoom: boolean = false;
@@ -46,38 +49,13 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   public renderedSize!: string;
 
   private _brightness: number = 100;
-  public set brightness(pValue: number) {
-    if (this._brightness == pValue) return;
-    this._brightness = pValue;
-    this.invalidate();
-  }
-  public get brightness(): number {
-    return this._brightness;
-  }
-
   private _grayscale: number = 0;
-  public set grayscale(pValue: number) {
-    if (this._grayscale == pValue) return;
-    this._grayscale = pValue;
-    this.invalidate();
-  }
-  public get grayscale(): number {
-    return this._grayscale;
-  }
-
   private _sepia: number = 0;
-  public set sepia(pValue: number) {
-    if (this._sepia == pValue) return;
-    this._sepia = pValue;
-    this.invalidate();
-  }
-  public get sepia(): number {
-    return this._sepia;
-  }
+  private _rotate: number = 0;
+  private _flipHorizontal: number = 1;
+  private _flipVertical: number = 1;
 
-  rotate = 0;
-  flipHorizontal = 1;
-  flipVertical = 1;
+  public colorSliderControl: FormControl = new FormControl(2);
 
   private _imageURL: string = '';
   public set imageURL(pValue: string) {
@@ -119,7 +97,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     return this._minimumZoomSize;
   }
 
-  private _imageValueType: ImageValueType = ImageValueType.ByteArray;
+  private _imageValueType: ImageValueType = ImageValueType.Base64String;
   public set imageValueType(pValue: ImageValueType) {
     if (this._imageValueType == pValue) return;
     this._imageValueType = pValue;
@@ -147,33 +125,43 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.setBackgroundSlider();
   }
 
-  public onSaveEdit() {
-    let previewImg = this.hostElement?.querySelector(
+  public applyFilter() {
+    let _imagePreview = this.hostElement?.querySelector(
       '.bravo-picture-preview img' as any
     );
-    let canvas = document.createElement('canvas');
-    let ctx = canvas.getContext('2d');
-    if (previewImg) {
+    if (_imagePreview) {
+      wjc.setCss(_imagePreview, {
+        transform: `rotate(${this._rotate}deg) scale(${this._flipHorizontal}, ${this._flipVertical})`,
+        filter: `brightness(${this._brightness}%) grayscale(${this._grayscale}%) sepia(${this._sepia}%)`,
+      });
+      let canvas = document.createElement('canvas');
+      let ctx = canvas.getContext('2d');
       canvas.width = this._imageWidth;
       canvas.height = this._imageHeight;
-
       if (ctx) {
-        ctx.filter = `invert(${100}%)`;
+        ctx.filter = `brightness(${this._brightness}%) grayscale(${this._grayscale}%) sepia(${this._sepia}%)`;
         ctx.translate(canvas.width / 2, canvas.height / 2);
-        ctx.scale(1, 1);
+        if (this._rotate !== 0) {
+          ctx.rotate((this._rotate * Math.PI) / 180);
+        }
+        ctx.scale(this._flipHorizontal, this._flipVertical);
         ctx.drawImage(
-          previewImg,
+          _imagePreview,
           -canvas.width / 2,
           -canvas.height / 2,
           canvas.width,
           canvas.height
         );
       }
+      this.imageURL = canvas.toDataURL();
+      this.colorSliderControl.reset(2);
     }
+  }
 
+  public onSaveImage() {
     const link = document.createElement('a');
-    link.download = 'image.jpg';
-    link.href = canvas.toDataURL();
+    link.download = this._imageOldName;
+    link.href = this.imageURL;
     link.click();
   }
 
@@ -211,6 +199,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
       _fileReader.onload = (eFile: any) => {
         this.imageURL = eFile.target.result;
       };
+      this._imageOldName = _file.name;
     }
   }
 
@@ -227,6 +216,10 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.imageInfo = '';
     this.renderedSize = '';
     this.value = '';
+    this.isBackground = false;
+    this.isBrightness = false;
+    this.isColor = false;
+    this.isZoom = false;
   }
 
   private reader(
@@ -397,14 +390,20 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         wjc.setCss(_image, {
           filter: 'grayscale(100%)',
         });
+        this._grayscale = 100;
+        this._sepia = 0;
       } else if (changeContext.value == 0) {
         wjc.setCss(_image, {
           filter: 'sepia(100%)',
         });
+        this._grayscale = 0;
+        this._sepia = 100;
       } else {
         wjc.setCss(_image, {
           filter: 'unset',
         });
+        this._grayscale = 0;
+        this._sepia = 0;
       }
     }
   }
