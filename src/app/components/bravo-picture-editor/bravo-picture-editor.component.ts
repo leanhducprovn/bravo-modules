@@ -51,6 +51,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   private _brightness: number = 100;
   private _grayscale: number = 0;
   private _sepia: number = 0;
+  private _opacity: number = 100;
   private _rotate: number = 0;
   private _flipHorizontal: number = 1;
   private _flipVertical: number = 1;
@@ -59,7 +60,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   public isOpacityConFirm: boolean = false;
 
   public colorSliderControl: FormControl = new FormControl(2);
-  public opacitySliderControl: FormControl = new FormControl(10);
+  public opacitySliderControl: FormControl = new FormControl(100);
 
   private _imageURL: string = '';
   public set imageURL(pValue: string) {
@@ -139,7 +140,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
       canvas.width = this._imageWidth;
       canvas.height = this._imageHeight;
       if (ctx) {
-        ctx.filter = `brightness(${this._brightness}%) grayscale(${this._grayscale}%) sepia(${this._sepia}%)`;
+        ctx.filter = `brightness(${this._brightness}%) grayscale(${this._grayscale}%) sepia(${this._sepia}%) opacity(${this._opacity}%)`;
         ctx.translate(canvas.width / 2, canvas.height / 2);
         if (this._rotate !== 0) {
           ctx.rotate((this._rotate * Math.PI) / 180);
@@ -156,7 +157,20 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
       this.imageURL = canvas.toDataURL();
       this.colorSliderControl.reset(2);
       this.isColorConfirm = false;
+      this.opacitySliderControl.reset(100);
+      this.isOpacityConFirm = false;
+      this.resetValueFilter();
     }
+  }
+
+  private resetValueFilter() {
+    this._brightness = 100;
+    this._grayscale = 0;
+    this._sepia = 0;
+    this._opacity = 100;
+    this._rotate = 0;
+    this._flipHorizontal = 1;
+    this._flipVertical = 1;
   }
 
   public onSaveImage() {
@@ -296,27 +310,61 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
-  private setOpacitySlider() {
-    this.opacitySlider = {
-      value: 10,
+  private setZoomSlider() {
+    this.zoomSlider = {
+      value: 0,
       options: {
         floor: 0,
-        ceil: 10,
-        step: 1,
+        ceil: 900,
         vertical: true,
         disabled: true,
         hidePointerLabels: true,
         hideLimitLabels: true,
         showTicks: true,
+        stepsArray: [
+          { value: 5 },
+          { value: 10 },
+          { value: 20 },
+          { value: 30 },
+          { value: 40 },
+          { value: 50 },
+          { value: 60 },
+          { value: 70 },
+          { value: 80 },
+          { value: 90 },
+          { value: 100 },
+          { value: 150 },
+          { value: 200 },
+          { value: 250 },
+          { value: 300 },
+          { value: 350 },
+          { value: 400 },
+          { value: 450 },
+          { value: 500 },
+          { value: 550 },
+          { value: 600 },
+          { value: 650 },
+          { value: 700 },
+          { value: 750 },
+          { value: 800 },
+          { value: 850 },
+          { value: 900 },
+        ],
       },
     };
   }
 
-  public onOpacitySliderChange(changeContext: ChangeContext) {
+  public onZoomSliderChange(changeContext: ChangeContext): void {
     let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
+    let _width = (this._imageWidth * changeContext.value) / 100;
+    let _height = (this._imageHeight * changeContext.value) / 100;
     if (_image) {
+      if (_width > this.maximumZoomSize || _width < this.minimumZoomSize)
+        return;
+      this.zoomSlider.value = changeContext.value;
+      this.renderedSize = Math.round(_width) + 'x' + Math.round(_height);
       wjc.setCss(_image, {
-        opacity: changeContext.value / 10,
+        width: _width + 'px',
       });
     }
   }
@@ -411,61 +459,33 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
-  private setZoomSlider() {
-    this.zoomSlider = {
-      value: 0,
+  private setOpacitySlider() {
+    this.opacitySlider = {
+      value: 100,
       options: {
         floor: 0,
-        ceil: 900,
+        ceil: 100,
+        step: 10,
         vertical: true,
         disabled: true,
         hidePointerLabels: true,
         hideLimitLabels: true,
         showTicks: true,
-        stepsArray: [
-          { value: 5 },
-          { value: 10 },
-          { value: 20 },
-          { value: 30 },
-          { value: 40 },
-          { value: 50 },
-          { value: 60 },
-          { value: 70 },
-          { value: 80 },
-          { value: 90 },
-          { value: 100 },
-          { value: 150 },
-          { value: 200 },
-          { value: 250 },
-          { value: 300 },
-          { value: 350 },
-          { value: 400 },
-          { value: 450 },
-          { value: 500 },
-          { value: 550 },
-          { value: 600 },
-          { value: 650 },
-          { value: 700 },
-          { value: 750 },
-          { value: 800 },
-          { value: 850 },
-          { value: 900 },
-        ],
       },
     };
   }
 
-  public onZoomSliderChange(changeContext: ChangeContext): void {
+  public onOpacitySliderChange(changeContext: ChangeContext) {
+    this._opacity = changeContext.value;
+    if (changeContext.value == 100) {
+      this.isOpacityConFirm = false;
+    } else {
+      this.isOpacityConFirm = true;
+    }
     let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
-    let _width = (this._imageWidth * changeContext.value) / 100;
-    let _height = (this._imageHeight * changeContext.value) / 100;
     if (_image) {
-      if (_width > this.maximumZoomSize || _width < this.minimumZoomSize)
-        return;
-      this.zoomSlider.value = changeContext.value;
-      this.renderedSize = Math.round(_width) + 'x' + Math.round(_height);
       wjc.setCss(_image, {
-        width: _width + 'px',
+        filter: `opacity(${this._opacity}%)`,
       });
     }
   }
