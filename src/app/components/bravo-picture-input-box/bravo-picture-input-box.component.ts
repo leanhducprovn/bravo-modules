@@ -248,6 +248,8 @@ export class BravoPictureInputBoxComponent
       );
     }
 
+    this.onChange(this.value);
+
     if (_imagePopupPreview) {
       wjc.setCss(_imagePopupPreview, {
         width: '100%',
