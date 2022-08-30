@@ -58,6 +58,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
 
   public isColorConfirm: boolean = false;
   public isOpacityConFirm: boolean = false;
+  public isBrightnessConFirm: boolean = false;
 
   public colorSliderControl: FormControl = new FormControl(2);
   public opacitySliderControl: FormControl = new FormControl(100);
@@ -130,6 +131,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.setOpacitySlider();
   }
 
+  // set filter
   public applyFilter() {
     let _imagePreview = this.hostElement?.querySelector(
       '.bravo-picture-preview img' as any
@@ -163,6 +165,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
+  // reset value filter
   private resetValueFilter() {
     this._brightness = 100;
     this._grayscale = 0;
@@ -173,6 +176,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this._flipVertical = 1;
   }
 
+  // save
   public onSaveImage() {
     const link = document.createElement('a');
     link.download = this._imageOldName;
@@ -180,6 +184,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     link.click();
   }
 
+  // paste
   public onPaste(e: any) {
     const items = (e.clipboardData || e.originalEvent.clipboardData).items;
     let blob = null;
@@ -191,6 +196,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
+  // copy
   public async onCopy() {
     try {
       const imgURL = this.imageURL;
@@ -206,6 +212,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
+  // upload
   public onUpload(e: any) {
     let _file = e.target.files[0];
     if (_file) {
@@ -218,6 +225,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
+  // remove
   public onRemove() {
     let _imagePreview = this.hostElement?.querySelector(
       '.bravo-picture-preview img'
@@ -237,6 +245,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.isZoom = false;
   }
 
+  // render
   private reader(
     pValue: string = this.imageURL,
     pValueType: ImageValueType = this.imageValueType,
@@ -310,6 +319,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
+  // zoom
   private setZoomSlider() {
     this.zoomSlider = {
       value: 0,
@@ -369,6 +379,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
+  // bright
   private setBrightnessSlider() {
     this.brightnessSliderLeft = {
       value: 100,
@@ -416,6 +427,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
+  // color
   private setColorSlider() {
     this.colorSlider = {
       value: 2,
@@ -459,6 +471,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
+  // opacity
   private setOpacitySlider() {
     this.opacitySlider = {
       value: 100,
@@ -490,6 +503,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
+  // slider
   private setSlider() {
     if (this.value && this.value != '') {
       this.zoomSlider.options = Object.assign({}, this.zoomSlider.options, {
