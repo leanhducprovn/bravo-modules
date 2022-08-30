@@ -45,6 +45,40 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   public imageInfo!: string;
   public renderedSize!: string;
 
+  private _brightness: number = 100;
+  public set brightness(pValue: number) {
+    if (this._brightness == pValue) return;
+    this._brightness = pValue;
+    this.invalidate();
+  }
+  public get brightness(): number {
+    return this._brightness;
+  }
+
+  private _grayscale: number = 0;
+  public set grayscale(pValue: number) {
+    if (this._grayscale == pValue) return;
+    this._grayscale = pValue;
+    this.invalidate();
+  }
+  public get grayscale(): number {
+    return this._grayscale;
+  }
+
+  private _sepia: number = 0;
+  public set sepia(pValue: number) {
+    if (this._sepia == pValue) return;
+    this._sepia = pValue;
+    this.invalidate();
+  }
+  public get sepia(): number {
+    return this._sepia;
+  }
+
+  rotate = 0;
+  flipHorizontal = 1;
+  flipVertical = 1;
+
   private _imageURL: string = '';
   public set imageURL(pValue: string) {
     if (this._imageURL == pValue) return;
