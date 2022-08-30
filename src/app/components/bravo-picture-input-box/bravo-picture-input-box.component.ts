@@ -16,6 +16,15 @@ import { Convert } from '../../library/bravo-convert/convert';
   selector: 'bravo-picture-input-box',
   templateUrl: './bravo-picture-input-box.component.html',
   styleUrls: ['./bravo-picture-input-box.component.scss'],
+  styles: [
+    `
+      ::ng-deep bravo-picture-input-box {
+        display: flex;
+        min-width: 242px;
+        justify-content: flex-end;
+      }
+    `,
+  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
