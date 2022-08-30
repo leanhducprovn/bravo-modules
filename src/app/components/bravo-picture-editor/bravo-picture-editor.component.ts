@@ -35,14 +35,14 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   public isZoom: boolean = false;
   public isBrightness: boolean = false;
   public isColor: boolean = false;
-  public isBackground: boolean = false;
+  public isOpacity: boolean = false;
   public isPopup: boolean = false;
 
   public zoomSlider!: SliderModel;
   public brightnessSliderLeft!: SliderModel;
   public brightnessSliderRight!: SliderModel;
   public colorSlider!: SliderModel;
-  public backgroundSlider!: SliderModel;
+  public opacitySlider!: SliderModel;
 
   public value: any;
   public imageInfo!: string;
@@ -55,7 +55,11 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   private _flipHorizontal: number = 1;
   private _flipVertical: number = 1;
 
+  public isColorConfirm: boolean = false;
+  public isOpacityConFirm: boolean = false;
+
   public colorSliderControl: FormControl = new FormControl(2);
+  public opacitySliderControl: FormControl = new FormControl(10);
 
   private _imageURL: string = '';
   public set imageURL(pValue: string) {
@@ -122,7 +126,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.setZoomSlider();
     this.setColorSlider();
     this.setBrightnessSlider();
-    this.setBackgroundSlider();
+    this.setOpacitySlider();
   }
 
   public applyFilter() {
@@ -130,10 +134,6 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
       '.bravo-picture-preview img' as any
     );
     if (_imagePreview) {
-      wjc.setCss(_imagePreview, {
-        transform: `rotate(${this._rotate}deg) scale(${this._flipHorizontal}, ${this._flipVertical})`,
-        filter: `brightness(${this._brightness}%) grayscale(${this._grayscale}%) sepia(${this._sepia}%)`,
-      });
       let canvas = document.createElement('canvas');
       let ctx = canvas.getContext('2d');
       canvas.width = this._imageWidth;
@@ -155,6 +155,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
       }
       this.imageURL = canvas.toDataURL();
       this.colorSliderControl.reset(2);
+      this.isColorConfirm = false;
     }
   }
 
@@ -216,7 +217,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.imageInfo = '';
     this.renderedSize = '';
     this.value = '';
-    this.isBackground = false;
+    this.isOpacity = false;
     this.isBrightness = false;
     this.isColor = false;
     this.isZoom = false;
@@ -295,8 +296,8 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
-  private setBackgroundSlider() {
-    this.backgroundSlider = {
+  private setOpacitySlider() {
+    this.opacitySlider = {
       value: 10,
       options: {
         floor: 0,
@@ -311,7 +312,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     };
   }
 
-  public onBackgroundSliderChange(changeContext: ChangeContext) {
+  public onOpacitySliderChange(changeContext: ChangeContext) {
     let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
     if (_image) {
       wjc.setCss(_image, {
@@ -384,6 +385,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   }
 
   public onColorSliderChange(changeContext: ChangeContext): void {
+    this.isColorConfirm = true;
     let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
     if (_image) {
       if (changeContext.value == 1) {
@@ -404,6 +406,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         });
         this._grayscale = 0;
         this._sepia = 0;
+        this.isColorConfirm = false;
       }
     }
   }
@@ -489,9 +492,9 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
           disabled: false,
         }
       );
-      this.backgroundSlider.options = Object.assign(
+      this.opacitySlider.options = Object.assign(
         {},
-        this.backgroundSlider.options,
+        this.opacitySlider.options,
         {
           disabled: false,
         }
@@ -517,9 +520,9 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
           disabled: true,
         }
       );
-      this.backgroundSlider.options = Object.assign(
+      this.opacitySlider.options = Object.assign(
         {},
-        this.backgroundSlider.options,
+        this.opacitySlider.options,
         {
           disabled: true,
         }
