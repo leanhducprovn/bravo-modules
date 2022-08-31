@@ -257,16 +257,18 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   }
 
   // paste
-  public onPaste(e: any) {
-    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
-    let blob = null;
-    for (const item of items) {
-      if (item.type.indexOf('image') === 0) {
-        blob = item.getAsFile();
-        console.log(blob);
-        // developing...
+  public onPaste() {
+    this.hostElement.addEventListener('paste', (e) => {
+      const items = e.clipboardData?.items as any;
+      let blob = null;
+      for (const item of items) {
+        if (item.type.indexOf('image') === 0) {
+          blob = item.getAsFile();
+          console.log(blob);
+          // developing...
+        }
       }
-    }
+    });
   }
 
   // copy
