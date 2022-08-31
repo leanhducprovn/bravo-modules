@@ -224,6 +224,38 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     link.click();
   }
 
+  // printing
+  public onPrinting() {
+    const iframe = document.createElement('iframe') as any;
+    const image = (
+      this.hostElement.querySelector('.bravo-picture-preview img') as any
+    ).cloneNode();
+    wjc.setCss(image, {
+      maxWidth: '100%',
+    });
+    wjc.setCss(iframe, {
+      width: 0,
+      height: 0,
+      visibility: 'hidden',
+    });
+    wjc.setAttribute(iframe, 'srcdoc', '<html><body></body></html>');
+    this.hostElement.appendChild(iframe);
+    iframe.addEventListener('load', () => {
+      const body = iframe.contentDocument.body;
+      wjc.setCss(body, {
+        display: 'flex',
+        height: 'calc(96vh)',
+        'justify-content': 'center',
+        'align-items': 'center',
+      });
+      body.appendChild(image);
+      iframe.contentWindow.print();
+      iframe.contentWindow.addEventListener('afterprint', () => {
+        iframe.parentNode.removeChild(iframe);
+      });
+    });
+  }
+
   // paste
   public onPaste(e: any) {
     const items = (e.clipboardData || e.originalEvent.clipboardData).items;
@@ -232,6 +264,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
       if (item.type.indexOf('image') === 0) {
         blob = item.getAsFile();
         console.log(blob);
+        // developing...
       }
     }
   }
