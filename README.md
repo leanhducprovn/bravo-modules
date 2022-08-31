@@ -152,6 +152,8 @@ Code mẫu:
 
 ## Bravo Barcode Box
 
+Code mẫu:
+
 ### Codabar
 
 ```ts
@@ -403,6 +405,8 @@ upce1.render();
 
 ## Bravo Picture Input Box
 
+Code mẫu:
+
 ```html
 <form [formGroup]="formPictureBox">
   <bravo-picture-input-box
@@ -413,6 +417,8 @@ upce1.render();
 ```
 
 ## Bravo Picture Editor
+
+Code mẫu:
 
 ```html
 <form [formGroup]="formPictureBox">
