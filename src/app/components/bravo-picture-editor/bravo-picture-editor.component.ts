@@ -518,9 +518,33 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
-  // rotate left
-  public onRotateLeft() {
-    this._rotate -= 90;
+  // flip horizontal
+  public onFlipHorizontal() {
+    this._flipHorizontal = this._flipHorizontal === 1 ? -1 : 1;
+    let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
+    if (_image) {
+      wjc.setCss(_image, {
+        transform: `scale(${this._flipHorizontal}, ${this._flipVertical})`,
+      });
+    }
+    this.applyFilter();
+  }
+
+  // flip vertical
+  public onFlipVertical() {
+    this._flipVertical = this._flipVertical === 1 ? -1 : 1;
+    let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
+    if (_image) {
+      wjc.setCss(_image, {
+        transform: `scale(${this._flipHorizontal}, ${this._flipVertical})`,
+      });
+    }
+    this.applyFilter();
+  }
+
+  // rotate right
+  public onRotateRight() {
+    this._rotate += 90;
     let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
     if (_image) {
       wjc.setCss(_image, {
@@ -530,9 +554,9 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.applyFilter();
   }
 
-  // rotate right
-  public onRotateRight() {
-    this._rotate += 90;
+  // rotate left
+  public onRotateLeft() {
+    this._rotate -= 90;
     let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
     if (_image) {
       wjc.setCss(_image, {
@@ -603,6 +627,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
+  // popup
   private setPopup() {
     this._popup = new input.Popup(
       this.hostElement.querySelector('.bravo-picture-editor-popup'),
@@ -624,12 +649,14 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     });
   }
 
+  // get size image
   private getSizeBase64(base64: string) {
     let stringLength = base64.length - 'data:image/png;base64,'.length;
     let sizeInBytes = 4 * Math.ceil(stringLength / 3) * 0.5624896334383812;
     return sizeInBytes;
   }
 
+  // format bytes
   private formatBytes(bytes: number, decimals = 2) {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
