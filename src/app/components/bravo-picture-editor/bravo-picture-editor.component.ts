@@ -518,6 +518,30 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
+  // rotate left
+  public onRotateLeft() {
+    this._rotate -= 90;
+    let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
+    if (_image) {
+      wjc.setCss(_image, {
+        transform: `rotate(${this._rotate}deg)`,
+      });
+    }
+    this.applyFilter();
+  }
+
+  // rotate right
+  public onRotateRight() {
+    this._rotate += 90;
+    let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
+    if (_image) {
+      wjc.setCss(_image, {
+        transform: `rotate(${this._rotate}deg)`,
+      });
+    }
+    this.applyFilter();
+  }
+
   // slider
   private setSlider() {
     if (this.value && this.value != '') {
