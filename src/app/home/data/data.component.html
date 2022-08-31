@@ -252,4 +252,15 @@
     <!-- <bravo-picture-input-box></bravo-picture-input-box> -->
   </div>
   <!--------------------------------------->
+
+  <!--------------------------------------->
+  <!-- Picture Input Box -->
+  <h2>Bravo Picture Editer</h2>
+  <div class="picture-input-box">
+    <form [formGroup]="formPictureBox">
+      <bravo-picture-editor #pictureBox formControlName="dataImage">
+      </bravo-picture-editor>
+    </form>
+  </div>
+  <!--------------------------------------->
 </div>

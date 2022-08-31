@@ -118,7 +118,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     return this._minimumZoomSize;
   }
 
-  private _imageValueType: ImageValueType = ImageValueType.Base64String;
+  private _imageValueType: ImageValueType = ImageValueType.ByteArray;
   public set imageValueType(pValue: ImageValueType) {
     if (this._imageValueType == pValue) return;
     this._imageValueType = pValue;
