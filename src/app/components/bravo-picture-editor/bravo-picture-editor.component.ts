@@ -1,7 +1,14 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  forwardRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
 import * as input from '@grapecity/wijmo.input';
 import * as wjc from '@grapecity/wijmo';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ChangeContext, Options } from '@angular-slider/ngx-slider';
 
@@ -21,6 +28,13 @@ interface SliderModel {
   styleUrls: [
     './bravo-picture-editor.component.scss',
     './customize-slider.css',
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => BravoPictureEditorComponent),
+    },
   ],
 })
 export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
@@ -116,6 +130,29 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
 
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
+  }
+
+  public onChange = (changed: any) => {};
+
+  public onTouch = () => {};
+
+  public writeValue(obj: any): void {
+    this.value = obj;
+    if (this.value instanceof Array) {
+      this.imageURL =
+        'data:image/png;base64,' +
+        Convert.toBase64String(new Uint8Array(this.value));
+    } else {
+      this.imageURL = 'data:image/png;base64,' + this.value;
+    }
+  }
+
+  public registerOnChange(changed: any): void {
+    this.onChange = changed;
+  }
+
+  public registerOnTouched(touched: any): void {
+    this.onTouch = touched;
   }
 
   public override refresh(fullUpdate?: boolean | undefined): void {
@@ -320,6 +357,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         )
       );
     }
+    this.onChange(this.value);
   }
 
   // zoom
