@@ -400,3 +400,23 @@ upce1.addOn = 99;
 upce1.addOnLabelPosition = BarCodeLabelPosition.Bottom;
 upce1.render();
 ```
+
+## Bravo Picture Input Box
+
+```html
+<form [formGroup]="formPictureBox">
+  <bravo-picture-input-box
+    #pictureBox
+    formControlName="dataImage"
+  ></bravo-picture-input-box>
+</form>
+```
+
+## Bravo Picture Editor
+
+```html
+<form [formGroup]="formPictureBox">
+  <bravo-picture-editor #pictureBox formControlName="dataImage">
+  </bravo-picture-editor>
+</form>
+```
