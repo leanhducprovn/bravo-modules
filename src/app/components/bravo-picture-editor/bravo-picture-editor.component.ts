@@ -62,6 +62,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
 
   public colorSliderControl: FormControl = new FormControl(2);
   public opacitySliderControl: FormControl = new FormControl(100);
+  public brightnessSliderControl: FormControl = new FormControl(100);
 
   private _imageURL: string = '';
   public set imageURL(pValue: string) {
@@ -161,6 +162,8 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
       this.isColorConfirm = false;
       this.opacitySliderControl.reset(100);
       this.isOpacityConFirm = false;
+      this.brightnessSliderControl.reset(100);
+      this.isBrightnessConFirm = false;
       this.resetValueFilter();
     }
   }
@@ -410,19 +413,31 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   }
 
   public onBrightnessSliderLeftChange(changeContext: ChangeContext) {
+    this._brightness = changeContext.value;
+    if (changeContext.value == 100) {
+      this.isBrightnessConFirm = false;
+    } else {
+      this.isBrightnessConFirm = true;
+    }
     let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
     if (_image) {
       wjc.setCss(_image, {
-        filter: `${'brightness' + '(' + changeContext.value + '%)'}`,
+        filter: `brightness(${changeContext.value}%)`,
       });
     }
   }
 
   public onBrightnessSliderRightChange(changeContext: ChangeContext) {
+    this._brightness = changeContext.value;
+    if (changeContext.value == 100) {
+      this.isBrightnessConFirm = false;
+    } else {
+      this.isBrightnessConFirm = true;
+    }
     let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
     if (_image) {
       wjc.setCss(_image, {
-        filter: `${'brightness' + '(' + changeContext.value + '%)'}`,
+        filter: `brightness(${changeContext.value}%)`,
       });
     }
   }

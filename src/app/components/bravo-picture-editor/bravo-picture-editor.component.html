@@ -15,12 +15,14 @@
         <div class="bravo-picture-brightness" [hidden]="!isBrightness">
           <div class="bravo-slider">
             <div class="left">
-              <ngx-slider [value]="brightnessSliderLeft.value" [options]="brightnessSliderLeft.options"
-                (userChange)="onBrightnessSliderLeftChange($event)"></ngx-slider>
+              <ngx-slider [formControl]="brightnessSliderControl" [value]="brightnessSliderLeft.value"
+                [options]="brightnessSliderLeft.options" (userChange)="onBrightnessSliderLeftChange($event)">
+              </ngx-slider>
             </div>
             <div class="right">
-              <ngx-slider [value]="brightnessSliderRight.value" [options]="brightnessSliderRight.options"
-                (userChange)="onBrightnessSliderRightChange($event)"></ngx-slider>
+              <ngx-slider [formControl]="brightnessSliderControl" [value]="brightnessSliderRight.value"
+                [options]="brightnessSliderRight.options" (userChange)="onBrightnessSliderRightChange($event)">
+              </ngx-slider>
             </div>
           </div>
           <div class="bravo-confirm">
