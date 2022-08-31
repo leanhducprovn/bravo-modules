@@ -257,18 +257,20 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   }
 
   // paste
-  public onPaste() {
-    this.hostElement.addEventListener('paste', (e) => {
-      const items = e.clipboardData?.items as any;
-      let blob = null;
-      for (const item of items) {
-        if (item.type.indexOf('image') === 0) {
-          blob = item.getAsFile();
-          console.log(blob);
-          // developing...
+  public async onPaste() {
+    await navigator.clipboard.read().then((data) => {
+      for (let i = 0; i < data.length; i++) {
+        if (!data[i].types.includes('image/png')) {
+        } else {
+          data[i].getType('image/png').then((blob) => {
+            this.imageURL = URL.createObjectURL(blob);
+            console.log(blob);
+          });
         }
       }
     });
+    // xem thêm...
+    // https://dirask.com/posts/JavaScript-read-image-from-clipboard-as-Data-URLs-encoded-with-Base64-10Wwaj
   }
 
   // copy
