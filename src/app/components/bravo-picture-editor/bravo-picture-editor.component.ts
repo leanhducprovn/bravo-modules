@@ -263,14 +263,16 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         if (!data[i].types.includes('image/png')) {
         } else {
           data[i].getType('image/png').then((blob) => {
-            this.imageURL = URL.createObjectURL(blob);
-            console.log(blob);
+            let reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = () => {
+              let base64data = reader.result;
+              this.imageURL = String(base64data);
+            };
           });
         }
       }
     });
-    // xem thêm...
-    // https://dirask.com/posts/JavaScript-read-image-from-clipboard-as-Data-URLs-encoded-with-Base64-10Wwaj
   }
 
   // copy
