@@ -272,6 +272,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
           });
         }
       }
+      //
     });
   }
 
