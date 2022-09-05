@@ -1,0 +1,24 @@
+button {
+    cursor: pointer;
+    background-color: unset;
+    border: none;
+    border-radius: unset;
+    color: unset;
+    font-size: unset;
+    padding: unset;
+    margin: unset;
+    width: unset;
+    height: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ul {
+    list-style: none;
+    margin-block-start: unset;
+    margin-block-end: unset;
+    margin-inline-start: unset;
+    margin-inline-end: unset;
+    padding-inline-start: unset;
+}
