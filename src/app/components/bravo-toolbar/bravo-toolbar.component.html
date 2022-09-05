@@ -1,8 +1,11 @@
 <div class="bravo-toolbar">
   <ul>
-    <li *ngFor="let tool of tools">{{ tool }}</li>
-    <li>
-      <button class="bravo-picture-more">
+    <li class="zoom" title="Zoom">
+      <img src="./assets/img/Search.png">100%
+    </li>
+    <li *ngFor="let tool of tools" title="{{ tool.title }}"><img src="{{ tool.image }}"></li>
+    <li class="more">
+      <button>
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
           xmlns:svgjs="http://svgjs.com/svgjs" width="15" height="15" x="0" y="0" viewBox="0 0 24 24"
           style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -19,5 +22,10 @@
         </svg>
       </button>
     </li>
+    <div class="more-popup" title="More">
+      <ul>
+        <li *ngFor="let tool of moreTools" title="{{ tool.title }}"><img src="{{ tool.image }}"></li>
+      </ul>
+    </div>
   </ul>
 </div>

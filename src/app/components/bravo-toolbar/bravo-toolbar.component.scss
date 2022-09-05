@@ -1,5 +1,5 @@
 .bravo-toolbar {
-    max-width: 300px;
+    max-width: 360px;
     max-height: 20px;
 
     ul {
@@ -34,6 +34,50 @@
                 img {
                     margin-right: 2px;
                 }
+            }
+
+            &.more {
+                display: none;
+            }
+
+            img {
+                width: 15px;
+            }
+        }
+    }
+}
+
+.more-popup {
+    width: 142px;
+    min-height: 42px;
+    border-radius: unset;
+
+    ul {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            user-select: none;
+
+            &:hover {
+                border: 1px solid #568FBA;
+                border-radius: 2px;
+                background-color: #E0EEF9;
+            }
+
+            &.active {
+                border: 1px solid #568FBA;
+                border-radius: 2px;
+                background-color: #cbe9ff;
             }
 
             img {
