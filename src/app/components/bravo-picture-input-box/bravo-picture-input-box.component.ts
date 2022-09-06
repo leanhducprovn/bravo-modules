@@ -200,8 +200,12 @@ export class BravoPictureInputBoxComponent
   private reader(
     pValue: string = this.imageURL,
     pValueType: ImageValueType = this.imageValueType,
-    pAutoFit: boolean = this.bAutoFitPicture
+    pAutoFit: boolean = this.bAutoFitPicture,
+    pReadOnly: boolean = this.readonly
   ) {
+    let _pictureBox = this.hostElement?.querySelector(
+      '.bravo-picture-input-box'
+    );
     let _picturePreview = this.hostElement?.querySelector(
       '.bravo-picture-preview'
     );
@@ -255,6 +259,10 @@ export class BravoPictureInputBoxComponent
         }
       }
     };
+
+    if (_pictureBox) {
+      wjc.toggleClass(_pictureBox, 'wj-state-readonly', pReadOnly);
+    }
 
     if (pValueType == ImageValueType.Base64String) {
       this.value = this.imageURL.replace(
