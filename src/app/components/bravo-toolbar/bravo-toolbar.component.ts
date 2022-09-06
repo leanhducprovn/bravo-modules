@@ -65,10 +65,10 @@ export class BravoToolbarComponent
           display: 'block',
         });
       }
-      this.moreTools = this.tools.slice(
-        Math.floor(_width / 20) - 1,
-        this.tools.length
-      );
+      // this.moreTools = this.tools.slice(
+      //   Math.floor(_width / 20) - 1,
+      //   this.tools.length
+      // );
     }
   }
 
