@@ -74,6 +74,16 @@ export class BravoPictureInputBoxComponent
     return this._imageValueType;
   }
 
+  private _readonly: boolean = false;
+  public set readonly(pValue: boolean) {
+    if (this._readonly == pValue) return;
+    this._readonly = pValue;
+    this.invalidate();
+  }
+  public get readonly(): boolean {
+    return this._readonly;
+  }
+
   public value: any;
   public imageInfo!: string;
   public zoomPercent!: number;
