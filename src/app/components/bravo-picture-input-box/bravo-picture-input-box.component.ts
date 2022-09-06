@@ -221,6 +221,9 @@ export class BravoPictureInputBoxComponent
           if (_image.width >= 180) {
             if (_image.width > _image.height) {
               wjc.toggleClass(_imagePreview!, 'width-100');
+              if (_imagePreview.clientHeight > _picturePreview.clientHeight) {
+                wjc.toggleClass(_imagePreview!, 'height-100');
+              }
             } else {
               wjc.toggleClass(_imagePreview!, 'height-100');
             }

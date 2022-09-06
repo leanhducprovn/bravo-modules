@@ -66,7 +66,7 @@ export class BravoToolbarComponent
         });
       }
       this.moreTools = this.tools.slice(
-        Math.floor(_width / 20),
+        Math.floor(_width / 20) - 1,
         this.tools.length
       );
     }
