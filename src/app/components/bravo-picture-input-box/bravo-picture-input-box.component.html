@@ -3,7 +3,7 @@
   <!-- preview -->
   <div (dblclick)="upload.click()" class="bravo-picture-preview" tabindex="1">
     <img src="{{ imageURL }}">
-    <input #upload type="file" multiple="true" (change)="onUpload($event)" [disabled]="bReadOnly || bDisable">
+    <input #upload type="file" multiple="true" (change)="onUpload($event)" [disabled]="bReadOnly || isDisabled">
   </div>
   <!-- selection -->
   <div class="bravo-picture-selection">
