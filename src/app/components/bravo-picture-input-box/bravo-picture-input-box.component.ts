@@ -78,7 +78,10 @@ export class BravoPictureInputBoxComponent
   public set bReadOnly(pValue: boolean) {
     if (this._bReadOnly == pValue) return;
     this._bReadOnly = pValue;
-    this.invalidate();
+    this._popup.showTrigger = !this._bReadOnly
+      ? input.PopupTrigger.ClickOwner
+      : input.PopupTrigger.None;
+    // this.invalidate();
   }
   public get bReadOnly(): boolean {
     return this._bReadOnly;
