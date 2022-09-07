@@ -5,6 +5,10 @@
     height: 120px;
     border: 1px solid #bbbbbb;
 
+    &.disable {
+        pointer-events: none;
+    }
+
     &:focus-within {
         border: 1px solid #FCC479;
     }

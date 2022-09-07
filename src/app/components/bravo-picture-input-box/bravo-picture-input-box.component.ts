@@ -74,7 +74,7 @@ export class BravoPictureInputBoxComponent
     return this._imageValueType;
   }
 
-  private _bReadOnly: boolean = true;
+  private _bReadOnly: boolean = false;
   public set bReadOnly(pValue: boolean) {
     if (this._bReadOnly == pValue) return;
     this._bReadOnly = pValue;
@@ -82,6 +82,16 @@ export class BravoPictureInputBoxComponent
   }
   public get bReadOnly(): boolean {
     return this._bReadOnly;
+  }
+
+  private _bDisable: boolean = true;
+  public set bDisable(pValue: boolean) {
+    if (this._bDisable == pValue) return;
+    this._bDisable = pValue;
+    this.invalidate();
+  }
+  public get bDisable(): boolean {
+    return this._bDisable;
   }
 
   public value: any;
@@ -125,7 +135,7 @@ export class BravoPictureInputBoxComponent
   }
 
   public onUpload(e: any) {
-    if (!this.bReadOnly) {
+    if (!this.bReadOnly && !this.bDisable) {
       let _file = e.target.files[0];
       if (_file) {
         let _fileReader = new FileReader();
@@ -203,7 +213,8 @@ export class BravoPictureInputBoxComponent
     pValue: string = this.imageURL,
     pValueType: ImageValueType = this.imageValueType,
     pAutoFit: boolean = this.bAutoFitPicture,
-    pReadOnly: boolean = this.bReadOnly
+    pReadOnly: boolean = this.bReadOnly,
+    pDisable: boolean = this.bDisable
   ) {
     let _pictureBox = this.hostElement?.querySelector(
       '.bravo-picture-input-box'
@@ -264,6 +275,7 @@ export class BravoPictureInputBoxComponent
 
     if (_pictureBox) {
       wjc.toggleClass(_pictureBox, 'wj-state-readonly', pReadOnly);
+      wjc.toggleClass(_pictureBox, 'disable', pDisable);
     }
 
     if (pValueType == ImageValueType.Base64String) {
@@ -311,9 +323,10 @@ export class BravoPictureInputBoxComponent
     this._popup = new input.Popup(_popup, {
       owner: this.hostElement?.querySelector('.bravo-picture-dropdown'),
       position: wjc.PopupPosition.BelowRight,
-      showTrigger: !this.bReadOnly
-        ? input.PopupTrigger.ClickOwner
-        : input.PopupTrigger.None,
+      showTrigger:
+        !this.bReadOnly && !this.bDisable
+          ? input.PopupTrigger.ClickOwner
+          : input.PopupTrigger.None,
       hideTrigger: input.PopupTrigger.Blur | input.PopupTrigger.ClickOwner,
       isResizable: true,
     });
