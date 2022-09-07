@@ -74,14 +74,14 @@ export class BravoPictureInputBoxComponent
     return this._imageValueType;
   }
 
-  private _readonly: boolean = false;
-  public set readonly(pValue: boolean) {
-    if (this._readonly == pValue) return;
-    this._readonly = pValue;
+  private _bReadOnly: boolean = true;
+  public set bReadOnly(pValue: boolean) {
+    if (this._bReadOnly == pValue) return;
+    this._bReadOnly = pValue;
     this.invalidate();
   }
-  public get readonly(): boolean {
-    return this._readonly;
+  public get bReadOnly(): boolean {
+    return this._bReadOnly;
   }
 
   public value: any;
@@ -117,7 +117,7 @@ export class BravoPictureInputBoxComponent
 
   public override refresh(fullUpdate?: boolean | undefined): void {
     super.refresh(fullUpdate);
-    this.reader();
+    this.render();
   }
 
   public ngOnInit(): void {
@@ -125,13 +125,15 @@ export class BravoPictureInputBoxComponent
   }
 
   public onUpload(e: any) {
-    let _file = e.target.files[0];
-    if (_file) {
-      let _fileReader = new FileReader();
-      _fileReader.readAsDataURL(e.target.files[0]);
-      _fileReader.onload = (eFile: any) => {
-        this.imageURL = eFile.target.result;
-      };
+    if (!this.bReadOnly) {
+      let _file = e.target.files[0];
+      if (_file) {
+        let _fileReader = new FileReader();
+        _fileReader.readAsDataURL(e.target.files[0]);
+        _fileReader.onload = (eFile: any) => {
+          this.imageURL = eFile.target.result;
+        };
+      }
     }
   }
 
@@ -197,11 +199,11 @@ export class BravoPictureInputBoxComponent
     this.setZoomPercent();
   }
 
-  private reader(
+  private render(
     pValue: string = this.imageURL,
     pValueType: ImageValueType = this.imageValueType,
     pAutoFit: boolean = this.bAutoFitPicture,
-    pReadOnly: boolean = this.readonly
+    pReadOnly: boolean = this.bReadOnly
   ) {
     let _pictureBox = this.hostElement?.querySelector(
       '.bravo-picture-input-box'
@@ -305,21 +307,21 @@ export class BravoPictureInputBoxComponent
   }
 
   private setPopup() {
-    wjc.setCss(this.hostElement?.querySelector('.bravo-picture-popup'), {
+    let _popup = this.hostElement?.querySelector('.bravo-picture-popup');
+    this._popup = new input.Popup(_popup, {
+      owner: this.hostElement?.querySelector('.bravo-picture-dropdown'),
+      position: wjc.PopupPosition.BelowRight,
+      showTrigger: !this.bReadOnly
+        ? input.PopupTrigger.ClickOwner
+        : input.PopupTrigger.None,
+      hideTrigger: input.PopupTrigger.Blur | input.PopupTrigger.ClickOwner,
+      isResizable: true,
+    });
+    wjc.setCss(_popup, {
       width: '300px',
       height: '200px',
       borderRadius: 'unset',
     });
-    this._popup = new input.Popup(
-      this.hostElement.querySelector('.bravo-picture-popup'),
-      {
-        owner: this.hostElement?.querySelector('.bravo-picture-dropdown'),
-        position: wjc.PopupPosition.BelowRight,
-        showTrigger: input.PopupTrigger.ClickOwner,
-        hideTrigger: input.PopupTrigger.Blur | input.PopupTrigger.ClickOwner,
-        isResizable: true,
-      }
-    );
   }
 
   private getSizeBase64(base64: string) {
