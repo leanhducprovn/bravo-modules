@@ -84,7 +84,7 @@ export class BravoPictureInputBoxComponent
     return this._bReadOnly;
   }
 
-  private _bDisable: boolean = true;
+  private _bDisable: boolean = false;
   public set bDisable(pValue: boolean) {
     if (this._bDisable == pValue) return;
     this._bDisable = pValue;
