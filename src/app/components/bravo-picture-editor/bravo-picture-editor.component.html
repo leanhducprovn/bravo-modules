@@ -128,7 +128,9 @@
         </ul>
       </div>
       <div class="bravo-picture-advanced">
-        <bravo-toolbar #toolbar></bravo-toolbar>
+        <form [formGroup]="formToolbar">
+          <bravo-toolbar #toolbar formControlName="itemsSource"></bravo-toolbar>
+        </form>
         <!-- <button class="bravo-picture-more" [class]="isPopup ? 'active' : ''">
           <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
             xmlns:svgjs="http://svgjs.com/svgjs" width="15" height="15" x="0" y="0" viewBox="0 0 24 24"
@@ -146,7 +148,7 @@
           </svg>
         </button> -->
         <!-- popup -->
-        <div class="bravo-picture-editor-popup">
+        <!-- <div class="bravo-picture-editor-popup">
           <ul>
             <li (click)="onRotateLeft()">1</li>
             <li (click)="onRotateRight()">2</li>
@@ -162,7 +164,7 @@
             <li (click)="isZoom = false; isBrightness = false; isColor = false; isOpacity = !isOpacity; invalidate();"
               [class]="isOpacity ? 'active' : ''">9</li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

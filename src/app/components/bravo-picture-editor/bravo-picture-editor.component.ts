@@ -8,7 +8,7 @@ import {
 
 import * as input from '@grapecity/wijmo.input';
 import * as wjc from '@grapecity/wijmo';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ChangeContext, Options } from '@angular-slider/ngx-slider';
 
@@ -131,7 +131,9 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     return this._imageValueType;
   }
 
-  constructor(elementRef: ElementRef) {
+  public formToolbar!: FormGroup;
+
+  constructor(private fb: FormBuilder, elementRef: ElementRef) {
     super(elementRef.nativeElement);
   }
 
@@ -165,12 +167,13 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.setPopup();
+    // this.setPopup();
     this.setZoomSlider();
     this.setColorSlider();
     this.setBrightnessSlider();
     this.setOpacitySlider();
     this.setToolBar();
+    this.onToolBar();
   }
 
   // set filter
@@ -401,6 +404,72 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
       );
     }
     this.onChange(this.value);
+  }
+
+  // toolbar
+  private setToolBar() {
+    this.formToolbar = this.fb.group({
+      itemsSource: [
+        [
+          { image: './assets/img/favicon.png', title: 'Rotate left', value: 0 },
+          {
+            image: './assets/img/favicon.png',
+            title: 'Rotate right',
+            value: 1,
+          },
+          {
+            image: './assets/img/favicon.png',
+            title: 'Flip vertical',
+            value: 2,
+          },
+          {
+            image: './assets/img/favicon.png',
+            title: 'Flip horizontal',
+            value: 3,
+          },
+          {
+            image: './assets/img/favicon.png',
+            title: 'Crop picture',
+            value: 4,
+          },
+          {
+            image: './assets/img/favicon.png',
+            title: 'Resize picture',
+            value: 5,
+          },
+          { image: './assets/img/favicon.png', title: 'Brightness', value: 6 },
+          { image: './assets/img/favicon.png', title: 'Color', value: 7 },
+          { image: './assets/img/favicon.png', title: 'Opacity', value: 8 },
+        ],
+      ],
+    });
+  }
+
+  private onToolBar() {
+    this.formToolbar.valueChanges.subscribe((e: any) => {
+      let _value = e.itemsSource.selectedItem.value;
+      if (_value == 0) {
+        this.onRotateLeft();
+      } else if (_value == 1) {
+        this.onRotateRight();
+      } else if (_value == 2) {
+        this.onFlipVertical();
+      } else if (_value == 3) {
+        this.onFlipHorizontal();
+      } else if (_value == 4) {
+        // null
+      } else if (_value == 5) {
+        // null
+      } else if (_value == 6) {
+        this.isZoom = false;
+        this.isBrightness = !this.isBrightness;
+        this.isColor = false;
+        this.isOpacity = false;
+        this.invalidate();
+      } else if (_value == 7) {
+      } else if (_value == 8) {
+      }
+    });
   }
 
   // zoom
@@ -709,41 +778,26 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   }
 
   // popup
-  private setPopup() {
-    this._popup = new input.Popup(
-      this.hostElement.querySelector('.bravo-picture-editor-popup'),
-      {
-        owner: this.hostElement?.querySelector('.bravo-picture-more'),
-        position: wjc.PopupPosition.AboveRight,
-        showTrigger: input.PopupTrigger.ClickOwner,
-        hideTrigger:
-          input.PopupTrigger.Blur |
-          input.PopupTrigger.ClickOwner |
-          input.PopupTrigger.Leave,
-      }
-    );
-    this._popup.shown.addHandler((e: input.Popup) => {
-      this.isPopup = e.isVisible;
-    });
-    this._popup.hidden.addHandler((e: input.Popup) => {
-      this.isPopup = e.isVisible;
-    });
-  }
-
-  // toolbar
-  private setToolBar() {
-    this._toolbar.tools = [
-      { image: './assets/img/favicon.png', title: 'Rotate left', value: 0 },
-      { image: './assets/img/favicon.png', title: 'Rotate right', value: 1 },
-      { image: './assets/img/favicon.png', title: 'Flip vertical', value: 2 },
-      { image: './assets/img/favicon.png', title: 'Flip horizontal', value: 3 },
-      { image: './assets/img/favicon.png', title: 'Crop picture', value: 4 },
-      { image: './assets/img/favicon.png', title: 'Resize picture', value: 5 },
-      { image: './assets/img/favicon.png', title: 'Brightness', value: 6 },
-      { image: './assets/img/favicon.png', title: 'Color', value: 7 },
-      { image: './assets/img/favicon.png', title: 'Opacity', value: 8 },
-    ];
-  }
+  // private setPopup() {
+  //   this._popup = new input.Popup(
+  //     this.hostElement.querySelector('.bravo-picture-editor-popup'),
+  //     {
+  //       owner: this.hostElement?.querySelector('.bravo-picture-more'),
+  //       position: wjc.PopupPosition.AboveRight,
+  //       showTrigger: input.PopupTrigger.ClickOwner,
+  //       hideTrigger:
+  //         input.PopupTrigger.Blur |
+  //         input.PopupTrigger.ClickOwner |
+  //         input.PopupTrigger.Leave,
+  //     }
+  //   );
+  //   this._popup.shown.addHandler((e: input.Popup) => {
+  //     this.isPopup = e.isVisible;
+  //   });
+  //   this._popup.hidden.addHandler((e: input.Popup) => {
+  //     this.isPopup = e.isVisible;
+  //   });
+  // }
 
   // get size image
   private getSizeBase64(base64: string) {

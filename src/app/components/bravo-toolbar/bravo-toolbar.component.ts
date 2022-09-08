@@ -1,4 +1,12 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  forwardRef,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as wjc from '@grapecity/wijmo';
 import * as input from '@grapecity/wijmo.input';
 
@@ -9,8 +17,18 @@ import * as input from '@grapecity/wijmo.input';
     './bravo-toolbar.component.css',
     './bravo-toolbar.component.scss',
   ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => BravoToolbarComponent),
+    },
+  ],
 })
-export class BravoToolbarComponent extends wjc.Control implements OnInit {
+export class BravoToolbarComponent
+  extends wjc.Control
+  implements OnInit, AfterViewInit
+{
   private _tools: Tool[] = [];
   @Input()
   public set tools(pValue: Tool[]) {
@@ -31,7 +49,29 @@ export class BravoToolbarComponent extends wjc.Control implements OnInit {
     super(elementRef.nativeElement);
   }
 
-  ngOnInit(): void {
+  public onChange = (changed: any) => {};
+
+  public onTouch = () => {};
+
+  public writeValue(obj: any): void {
+    this.tools = obj;
+  }
+
+  public registerOnChange(changed: any): void {
+    this.onChange = changed;
+  }
+
+  public registerOnTouched(touched: any): void {
+    this.onTouch = touched;
+  }
+
+  public override refresh(fullUpdate?: boolean | undefined): void {
+    super.refresh(fullUpdate);
+  }
+
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
     this.setMenu();
     this.setPopup();
     this.responsive();
@@ -42,6 +82,11 @@ export class BravoToolbarComponent extends wjc.Control implements OnInit {
     this._listBox = new input.ListBox(_listBox, {
       formatItem: (sender: any, e: any) => {
         e.item.innerHTML = `<img src="${e.data.image}" title="${e.data.title}" style="width:15px">`;
+        e.item.addEventListener('click', () => {
+          setTimeout(() => {
+            this.onChange(sender);
+          });
+        });
       },
       itemsSource: this.tools,
     });
@@ -50,13 +95,14 @@ export class BravoToolbarComponent extends wjc.Control implements OnInit {
     this._listBoxMore = new input.ListBox(_listBoxMore, {
       formatItem: (sender: any, e: any) => {
         e.item.innerHTML = `<img src="${e.data.image}" title="${e.data.title}" style="width:15px">`;
+        e.item.addEventListener('click', () => {
+          setTimeout(() => {
+            this.onChange(sender);
+          });
+        });
       },
       itemsSource: [],
     });
-  }
-
-  public onClick(value: number) {
-    console.log(value);
   }
 
   private responsive() {
