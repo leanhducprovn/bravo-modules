@@ -40,10 +40,10 @@ interface SliderModel {
 })
 export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   @ViewChild('upload') private _upload!: ElementRef;
-  @ViewChild('toolbar', { static: true })
-  private _toolbar!: BravoToolbarComponent;
+  // @ViewChild('toolbar', { static: true })
+  // private _toolbar!: BravoToolbarComponent;
 
-  private _popup!: input.Popup;
+  // private _popup!: input.Popup;
   private _imageWidth!: number;
   private _imageHeight!: number;
   private _imageOldName!: string;
@@ -53,7 +53,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   public isBrightness: boolean = false;
   public isColor: boolean = false;
   public isOpacity: boolean = false;
-  public isPopup: boolean = false;
+  // public isPopup: boolean = false;
 
   public zoomSlider!: SliderModel;
   public brightnessSliderLeft!: SliderModel;
@@ -131,7 +131,9 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     return this._imageValueType;
   }
 
-  public formToolbar!: FormGroup;
+  public periodTool = PeriodTool;
+  public currentTool!: number;
+  public toolbar!: FormGroup;
 
   constructor(private fb: FormBuilder, elementRef: ElementRef) {
     super(elementRef.nativeElement);
@@ -408,7 +410,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
 
   // toolbar
   private setToolBar() {
-    this.formToolbar = this.fb.group({
+    this.toolbar = this.fb.group({
       itemsSource: [
         [
           { image: './assets/img/favicon.png', title: 'Rotate left', value: 0 },
@@ -446,7 +448,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   }
 
   private onToolBar() {
-    this.formToolbar.valueChanges.subscribe((e: any) => {
+    this.toolbar.valueChanges.subscribe((e: any) => {
       let _value = e.itemsSource.selectedItem.value;
       if (_value == 0) {
         this.onRotateLeft();
@@ -467,7 +469,17 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
         this.isOpacity = false;
         this.invalidate();
       } else if (_value == 7) {
+        this.isZoom = false;
+        this.isBrightness = false;
+        this.isColor = !this.isColor;
+        this.isOpacity = false;
+        this.invalidate();
       } else if (_value == 8) {
+        this.isZoom = false;
+        this.isBrightness = false;
+        this.isColor = false;
+        this.isOpacity = !this.isOpacity;
+        this.invalidate();
       }
     });
   }
@@ -817,7 +829,9 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   }
 }
 
-export interface Tool {
-  image: string;
-  title: string;
+export enum PeriodTool {
+  Zoom = 0,
+  Brightness = 1,
+  Color = 2,
+  Opacity = 3,
 }
