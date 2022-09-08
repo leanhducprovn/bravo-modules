@@ -16,6 +16,7 @@ import { ImageValueType } from '../../types/enum/image-value-type.enum';
 import { Convert } from '../../library/bravo-convert/convert';
 
 import { FormControl } from '@angular/forms';
+import { BravoToolbarComponent } from '../bravo-toolbar/bravo-toolbar.component';
 
 interface SliderModel {
   value: number;
@@ -39,6 +40,8 @@ interface SliderModel {
 })
 export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   @ViewChild('upload') private _upload!: ElementRef;
+  @ViewChild('toolbar', { static: true })
+  private _toolbar!: BravoToolbarComponent;
 
   private _popup!: input.Popup;
   private _imageWidth!: number;
@@ -167,6 +170,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.setColorSlider();
     this.setBrightnessSlider();
     this.setOpacitySlider();
+    this.setToolBar();
   }
 
   // set filter
@@ -726,6 +730,21 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     });
   }
 
+  // toolbar
+  private setToolBar() {
+    this._toolbar.tools = [
+      { image: './assets/img/favicon.png', title: 'Rotate left', value: 0 },
+      { image: './assets/img/favicon.png', title: 'Rotate right', value: 1 },
+      { image: './assets/img/favicon.png', title: 'Flip vertical', value: 2 },
+      { image: './assets/img/favicon.png', title: 'Flip horizontal', value: 3 },
+      { image: './assets/img/favicon.png', title: 'Crop picture', value: 4 },
+      { image: './assets/img/favicon.png', title: 'Resize picture', value: 5 },
+      { image: './assets/img/favicon.png', title: 'Brightness', value: 6 },
+      { image: './assets/img/favicon.png', title: 'Color', value: 7 },
+      { image: './assets/img/favicon.png', title: 'Opacity', value: 8 },
+    ];
+  }
+
   // get size image
   private getSizeBase64(base64: string) {
     let stringLength = base64.length - 'data:image/png;base64,'.length;
@@ -742,4 +761,9 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
   }
+}
+
+export interface Tool {
+  image: string;
+  title: string;
 }

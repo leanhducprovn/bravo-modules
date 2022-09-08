@@ -1,10 +1,4 @@
-import {
-  AfterContentInit,
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-} from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import * as wjc from '@grapecity/wijmo';
 import * as input from '@grapecity/wijmo.input';
 
@@ -16,27 +10,16 @@ import * as input from '@grapecity/wijmo.input';
     './bravo-toolbar.component.scss',
   ],
 })
-export class BravoToolbarComponent
-  extends wjc.Control
-  implements OnInit, AfterViewInit
-{
-  public _tools: Tool[] = [
-    { image: './assets/img/OpenFolder.svg', title: 'Upload' },
-    { image: './assets/img/Save.png', title: 'Save' },
-    { image: './assets/img/Printer.png', title: 'Printing' },
-    { image: './assets/img/Delete.png', title: 'Delete' },
-    { image: './assets/img/Paste.svg', title: 'Paste' },
-    { image: './assets/img/Copy.png', title: 'Copy' },
-    { image: './assets/img/favicon.png', title: 'Rotate left' },
-    { image: './assets/img/favicon.png', title: 'Rotate right' },
-    { image: './assets/img/favicon.png', title: 'Flip vertical' },
-    { image: './assets/img/favicon.png', title: 'Flip horizontal' },
-    { image: './assets/img/favicon.png', title: 'Crop picture' },
-    { image: './assets/img/favicon.png', title: 'Resize picture' },
-    { image: './assets/img/favicon.png', title: 'Brightness' },
-    { image: './assets/img/favicon.png', title: 'Color' },
-    { image: './assets/img/favicon.png', title: 'Opacity' },
-  ];
+export class BravoToolbarComponent extends wjc.Control implements OnInit {
+  private _tools: Tool[] = [];
+  @Input()
+  public set tools(pValue: Tool[]) {
+    if (this._tools == pValue) return;
+    this._tools = pValue;
+  }
+  public get tools(): Tool[] {
+    return this._tools;
+  }
 
   private _listBox!: input.ListBox;
   private _listBoxMore!: input.ListBox;
@@ -54,16 +37,13 @@ export class BravoToolbarComponent
     this.responsive();
   }
 
-  ngAfterViewInit(): void {}
-
   private setMenu() {
     let _listBox = this.hostElement?.querySelector('.list-box');
     this._listBox = new input.ListBox(_listBox, {
       formatItem: (sender: any, e: any) => {
         e.item.innerHTML = `<img src="${e.data.image}" title="${e.data.title}" style="width:15px">`;
       },
-      itemsSource: this._tools,
-      selectedItem: -1,
+      itemsSource: this.tools,
     });
 
     let _listBoxMore = this.hostElement?.querySelector('.list-box-more');
@@ -75,20 +55,24 @@ export class BravoToolbarComponent
     });
   }
 
+  public onClick(value: number) {
+    console.log(value);
+  }
+
   private responsive() {
     let _listBox = this.hostElement?.querySelector('.list-box');
     let _more = this.hostElement?.querySelector('.list-more');
     if (_listBox) {
-      let _defWidth = this._tools.length * 20;
+      let _defWidth = this.tools.length * 20;
       let _clientWidth = _listBox?.clientWidth;
       if (_clientWidth >= _defWidth) {
         return;
       } else {
         let _countItem = Math.floor(_clientWidth / 20) - 1;
-        this._listBox.itemsSource = this._tools.slice(0, _countItem);
-        this._listBoxMore.itemsSource = this._tools.slice(
+        this._listBox.itemsSource = this.tools.slice(0, _countItem);
+        this._listBoxMore.itemsSource = this.tools.slice(
           _countItem,
-          this._tools.length
+          this.tools.length
         );
         if (_more) {
           wjc.setCss(_more, {
@@ -119,7 +103,6 @@ export class BravoToolbarComponent
       Array.from(
         this._popup.hostElement?.getElementsByClassName('wj-listbox-item')
       ).forEach((e) => {
-        wjc.removeClass(e, 'wj-state-selected');
         wjc.setCss(e, {
           display: 'flex',
           'align-items': 'center',
@@ -153,4 +136,5 @@ export class BravoToolbarComponent
 export interface Tool {
   image: string;
   title: string;
+  value: number;
 }
