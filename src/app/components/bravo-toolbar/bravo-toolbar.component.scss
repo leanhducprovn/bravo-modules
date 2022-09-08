@@ -1,47 +1,27 @@
 .bravo-toolbar {
-    max-width: 360px;
-    max-height: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 
-    ul {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
+    .list-more {
+        display: none;
+        padding: 1.5px;
+        border: 1px solid transparent;
 
-        li {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 18px;
-            min-height: 18px;
-            cursor: pointer;
-            border: 1px solid transparent;
-            user-select: none;
-            font-size: inherit;
+        &:hover {
+            background-color: #E0EEF9;
+            border: 1px solid #568FBA;
+            border-radius: 2px;
+        }
 
-            &:hover {
-                border: 1px solid #568FBA;
-                border-radius: 2px;
-                background-color: #E0EEF9;
-            }
+        &.active {
+            background-color: #cbe9ff;
+            border: 1px solid #568FBA;
+            border-radius: 2px;
 
-            &.zoom {
-                &.active {
-                    border: 1px solid #568FBA;
-                    border-radius: 2px;
-                    background-color: #cbe9ff;
-                }
-
-                img {
-                    margin-right: 2px;
-                }
-            }
-
-            &.more {
-                display: none;
-            }
-
-            img {
-                width: 15px;
+            svg {
+                opacity: 1;
             }
         }
     }
@@ -49,40 +29,20 @@
 
 .more-popup {
     width: 142px;
-    min-height: 42px;
     border-radius: unset;
 
-    ul {
-        list-style: none;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-
-        li {
+    .list-box-more {
+        &.wj-listbox {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 20px;
-            height: 20px;
+            flex-wrap: wrap;
+            overflow: unset;
             cursor: pointer;
-            border: 1px solid transparent;
-            user-select: none;
+        }
 
-            &:hover {
-                border: 1px solid #568FBA;
-                border-radius: 2px;
-                background-color: #E0EEF9;
-            }
-
-            &.active {
-                border: 1px solid #568FBA;
-                border-radius: 2px;
-                background-color: #cbe9ff;
-            }
-
-            img {
-                width: 15px;
-            }
+        &.wj-content {
+            border: unset;
+            border-radius: unset;
+            overflow: unset;
         }
     }
 }

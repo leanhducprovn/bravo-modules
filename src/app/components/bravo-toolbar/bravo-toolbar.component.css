@@ -14,11 +14,39 @@ button {
     justify-content: center;
 }
 
-ul {
-    list-style: none;
-    margin-block-start: unset;
-    margin-block-end: unset;
-    margin-inline-start: unset;
-    margin-inline-end: unset;
-    padding-inline-start: unset;
+:host>>>.wj-listbox {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: unset;
+    cursor: pointer;
+}
+
+:host>>>.wj-listbox .wj-listbox-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5px;
+    border: 1px solid transparent;
+}
+
+:host>>>.wj-listbox .wj-listbox-item:not(.wj-state-disabled):hover {
+    background-color: #E0EEF9 !important;
+    border: 1px solid #568FBA !important;
+    border-radius: 2px !important;
+}
+
+:host>>>.wj-state-selected {
+    background: unset !important;
+    color: unset !important;
+}
+
+
+:host>>>.wj-content {
+    border: unset;
+    border-radius: unset;
+    overflow: unset;
+}
+
+:host>>>.wj-control {
+    background: unset;
 }
