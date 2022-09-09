@@ -1,0 +1,11 @@
+.bravo-test {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 300px;
+    max-height: 20px;
+
+    .toolbar {
+        width: 100%;
+        height: 100%;
+    }
+}
