@@ -25,6 +25,7 @@
     "highlight.js": "^11.6.0",
     "highlightjs-line-numbers.js": "^2.8.0",
     "ngx-highlightjs": "^7.0.0",
+    "resize-observer-polyfill": "^1.5.1",
     "rxjs": "~7.4.0",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.4.26",
