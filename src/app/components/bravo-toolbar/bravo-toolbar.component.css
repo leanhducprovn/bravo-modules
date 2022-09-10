@@ -30,8 +30,8 @@ button {
 }
 
 :host>>>.wj-listbox .wj-listbox-item:not(.wj-state-disabled):hover {
-    background-color: #E0EEF9 !important;
-    border: 1px solid #568FBA !important;
+    background-color: #e0eef9 !important;
+    border: 1px solid #568fba !important;
     border-radius: 2px !important;
 }
 
@@ -39,7 +39,6 @@ button {
     background: unset !important;
     color: unset !important;
 }
-
 
 :host>>>.wj-content {
     border: unset;
