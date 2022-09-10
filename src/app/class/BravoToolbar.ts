@@ -1,8 +1,5 @@
 import * as wjc from '@grapecity/wijmo';
-// import ResizeObserver from 'resize-observer-polyfill';
-
-// const ResizeObserverPolyfill = require('resize-observer-polyfill');
-// const observer: ResizeObserver = new ResizeObserverPolyfill();
+import { ResizeObserver } from '@juggle/resize-observer';
 
 export class BravoToolbal extends wjc.Control {
   constructor(hostElement: HTMLElement | null) {
