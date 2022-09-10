@@ -15,10 +15,6 @@ export class BravoTestComponent extends wjc.Control implements OnInit {
 
   ngOnInit(): void {
     this.setToolbar();
-
-    const resizeObserver = new ResizeObserver((entries) => {
-      console.log(resizeObserver);
-    });
   }
   private setToolbar() {
     new BravoToolbal(this.hostElement.querySelector('.toolbar'));

@@ -4,6 +4,5 @@ import { ResizeObserver } from '@juggle/resize-observer';
 export class BravoToolbal extends wjc.Control {
   constructor(hostElement: HTMLElement | null) {
     super(hostElement);
-    console.log(hostElement);
   }
 }
