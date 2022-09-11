@@ -10,7 +10,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as wjc from '@grapecity/wijmo';
 import * as input from '@grapecity/wijmo.input';
 
-// import ResizeObserver from 'resize-observer-polyfill';
+import ResizeObserver from 'resize-observer-polyfill';
 
 @Component({
   selector: 'bravo-toolbar',
@@ -88,18 +88,19 @@ export class BravoToolbarComponent
     this.setMenu();
     this.setPopup();
     this.responsive();
+    this.onResize();
   }
 
-  // private onResize() {
-  //   let _listBox = this.hostElement?.querySelector('.bravo-toolbar');
-  //   const menu = new ResizeObserver((entries) => {
-  //     for (const entry of entries) {
-  //       const { width, height } = entry.contentRect;
-  //       this.sizeBox = new wjc.Size(width, height);
-  //     }
-  //   });
-  //   if (_listBox) menu.observe(_listBox);
-  // }
+  private onResize() {
+    let _listBox = this.hostElement?.querySelector('.bravo-toolbar');
+    const menu = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        this.sizeBox = new wjc.Size(width, height);
+      }
+    });
+    if (_listBox) menu.observe(_listBox);
+  }
 
   private setMenu() {
     let _listBox = this.hostElement?.querySelector('.list-box');
