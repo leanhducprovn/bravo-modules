@@ -44,6 +44,12 @@ export class BravoToolbarComponent
   private _listBox!: input.ListBox;
   private _listBoxMore!: input.ListBox;
   private _popup!: input.Popup;
+  private _sizeBox: wjc.Size = new wjc.Size();
+  public set sizeBox(pValue: wjc.Size) {
+    if (this._sizeBox == pValue) return;
+    this._sizeBox = pValue;
+    this.invalidate();
+  }
 
   public isMore: boolean = false;
 
@@ -69,6 +75,8 @@ export class BravoToolbarComponent
 
   public override refresh(fullUpdate?: boolean | undefined): void {
     super.refresh(fullUpdate);
+    console.log(this._sizeBox);
+    // this.responsive();
   }
 
   ngOnInit(): void {}
@@ -77,6 +85,19 @@ export class BravoToolbarComponent
     this.setMenu();
     this.setPopup();
     this.responsive();
+    this.onResize();
+  }
+
+  private onResize() {
+    let _listBox = this.hostElement?.querySelector('.bravo-toolbar');
+    const menu = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        this.sizeBox = new wjc.Size(width, height);
+        // this.invalidate();
+      }
+    });
+    if (_listBox) menu.observe(_listBox);
   }
 
   private setMenu() {
@@ -112,10 +133,11 @@ export class BravoToolbarComponent
     let _more = this.hostElement?.querySelector('.list-more');
     if (_listBox) {
       let _defWidth = this.tools.length * 20;
-      let _clientWidth = _listBox?.clientWidth;
+      let _clientWidth = _listBox.clientWidth;
       if (_clientWidth >= _defWidth) {
         return;
       } else {
+        console.log(_clientWidth, this._sizeBox.width);
         let _countItem = Math.floor(_clientWidth / 20) - 1;
         this._listBox.itemsSource = this.tools.slice(0, _countItem);
         this._listBoxMore.itemsSource = this.tools.slice(
