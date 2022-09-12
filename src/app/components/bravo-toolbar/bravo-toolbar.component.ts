@@ -10,7 +10,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as wjc from '@grapecity/wijmo';
 import * as input from '@grapecity/wijmo.input';
 
-import ResizeObserver from 'resize-observer-polyfill';
+// import ResizeObserver from 'resize-observer-polyfill';
 
 @Component({
   selector: 'bravo-toolbar',
@@ -80,7 +80,6 @@ export class BravoToolbarComponent
   public override refresh(fullUpdate?: boolean | undefined): void {
     super.refresh(fullUpdate);
     console.log(this._sizeBox);
-    // this.responsive();
   }
 
   ngOnInit(): void {}
@@ -89,19 +88,18 @@ export class BravoToolbarComponent
     this.setMenu();
     this.setPopup();
     this.responsive();
-    this.onResize();
   }
 
-  private onResize() {
-    let _listBox = this.hostElement?.querySelector('.bravo-toolbar');
-    const menu = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const { width, height } = entry.contentRect;
-        this.sizeBox = new wjc.Size(width, height);
-      }
-    });
-    if (_listBox) menu.observe(_listBox);
-  }
+  // private onResize() {
+  //   let _listBox = this.hostElement?.querySelector('.bravo-toolbar');
+  //   const menu = new ResizeObserver((entries) => {
+  //     for (const entry of entries) {
+  //       const { width, height } = entry.contentRect;
+  //       this.sizeBox = new wjc.Size(width, height);
+  //     }
+  //   });
+  //   if (_listBox) menu.observe(_listBox);
+  // }
 
   private setMenu() {
     let _listBox = this.hostElement?.querySelector('.list-box');
@@ -132,26 +130,28 @@ export class BravoToolbarComponent
   }
 
   private responsive() {
+    let _toolbar = this.hostElement?.querySelector('.bravo-toolbar');
     let _listBox = this.hostElement?.querySelector('.list-box');
     let _more = this.hostElement?.querySelector('.list-more');
-    if (_listBox) {
+    if (_toolbar && _listBox && _more) {
       let _defWidth = this.tools.length * 20;
       let _clientWidth = _listBox.clientWidth;
+      wjc.setCss(_toolbar, {
+        width: `${_clientWidth}px`,
+      });
       if (_clientWidth >= _defWidth) {
         return;
       } else {
-        console.log(_clientWidth, this._sizeBox.width);
         let _countItem = Math.floor(_clientWidth / 20) - 1;
         this._listBox.itemsSource = this.tools.slice(0, _countItem);
         this._listBoxMore.itemsSource = this.tools.slice(
           _countItem,
           this.tools.length
         );
-        if (_more) {
-          wjc.setCss(_more, {
-            display: 'block',
-          });
-        }
+
+        wjc.setCss(_more, {
+          display: 'block',
+        });
       }
     }
   }
