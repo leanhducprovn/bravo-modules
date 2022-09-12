@@ -10,6 +10,8 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as wjc from '@grapecity/wijmo';
 import * as input from '@grapecity/wijmo.input';
 
+import ResizeObserver from 'resize-observer-polyfill';
+
 @Component({
   selector: 'bravo-toolbar',
   templateUrl: './bravo-toolbar.component.html',
