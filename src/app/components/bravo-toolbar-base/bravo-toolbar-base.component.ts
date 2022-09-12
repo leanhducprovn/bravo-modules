@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-bravo-toolbar-base',
+  selector: 'bravo-toolbar-base',
   templateUrl: './bravo-toolbar-base.component.html',
   styleUrls: ['./bravo-toolbar-base.component.scss'],
 })
