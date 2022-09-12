@@ -44,11 +44,15 @@ export class BravoToolbarComponent
   private _listBox!: input.ListBox;
   private _listBoxMore!: input.ListBox;
   private _popup!: input.Popup;
+
   private _sizeBox: wjc.Size = new wjc.Size();
   public set sizeBox(pValue: wjc.Size) {
     if (this._sizeBox == pValue) return;
     this._sizeBox = pValue;
     this.invalidate();
+  }
+  public get sizeBox(): wjc.Size {
+    return this._sizeBox;
   }
 
   public isMore: boolean = false;
@@ -94,7 +98,6 @@ export class BravoToolbarComponent
       for (const entry of entries) {
         const { width, height } = entry.contentRect;
         this.sizeBox = new wjc.Size(width, height);
-        // this.invalidate();
       }
     });
     if (_listBox) menu.observe(_listBox);
