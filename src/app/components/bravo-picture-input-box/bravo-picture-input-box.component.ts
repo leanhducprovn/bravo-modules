@@ -68,7 +68,7 @@ export class BravoPictureInputBoxComponent
   public set imageValueType(pValue: ImageValueType) {
     if (this._imageValueType == pValue) return;
     this._imageValueType = pValue;
-    this.invalidate;
+    this.invalidate();
   }
   public get imageValueType(): ImageValueType {
     return this._imageValueType;
@@ -87,9 +87,28 @@ export class BravoPictureInputBoxComponent
     return this._bReadOnly;
   }
 
-  public value: any;
+  private _nMaximumImageSize: number = 1048576; // ~ 1MB;
+  public set nMaximumImageSize(pValue: number) {
+    if (this._nMaximumImageSize == pValue) return;
+    this._nMaximumImageSize = pValue;
+    this.invalidate();
+  }
+  public get nMaximumImageSize(): number {
+    return this._nMaximumImageSize;
+  }
+
+  public _value: any;
+  public set value(pValue: any) {
+    if (pValue) this.isValue = true;
+    this._value = pValue;
+  }
+  public get value(): any {
+    return this._value;
+  }
+
   public imageInfo!: string;
   public zoomPercent!: number;
+  public isValue: boolean = false;
 
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
@@ -134,10 +153,38 @@ export class BravoPictureInputBoxComponent
         let _fileReader = new FileReader();
         _fileReader.readAsDataURL(e.target.files[0]);
         _fileReader.onload = (eFile: any) => {
-          this.imageURL = eFile.target.result;
+          let _src = eFile.target.result;
+          if (this.getSizeBase64(_src) <= this.nMaximumImageSize) {
+            this.imageURL = _src;
+          } else {
+            this.resize(_src);
+          }
         };
       }
     }
+  }
+
+  private resize(src: string) {
+    let _image = new Image();
+    _image.src = src;
+    _image.onload = () => {
+      let _canvas = document.createElement('canvas');
+      let _ctx = _canvas.getContext('2d');
+      _canvas.width = _image.width - (50 / 100) * _image.width;
+      _canvas.height = _image.height - (50 / 100) * _image.height;
+      if (_ctx) {
+        _ctx.drawImage(_image, 0, 0, _canvas.width, _canvas.height);
+        if (this.getSizeBase64(_canvas.toDataURL()) > this.nMaximumImageSize) {
+          this.resize(_canvas.toDataURL());
+        } else {
+          this.imageURL = _canvas.toDataURL();
+        }
+      }
+    };
+  }
+
+  public onSave() {
+    console.log(1);
   }
 
   public onRemove() {
@@ -206,8 +253,7 @@ export class BravoPictureInputBoxComponent
     pValue: string = this.imageURL,
     pValueType: ImageValueType = this.imageValueType,
     pAutoFit: boolean = this.bAutoFitPicture,
-    pReadOnly: boolean = this.bReadOnly,
-    pDisable: boolean = this.isDisabled
+    pReadOnly: boolean = this.bReadOnly
   ) {
     let _pictureBox = this.hostElement?.querySelector(
       '.bravo-picture-input-box'
