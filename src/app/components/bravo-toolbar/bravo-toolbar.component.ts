@@ -136,27 +136,26 @@ export class BravoToolbarComponent
     if (_listBox && _more) {
       let _defWidth = this.tools.length * 20;
       let _clientWidth = this.sizeBox.width;
-      console.log(_clientWidth);
-      if (_clientWidth < _defWidth) {
-        this._listBox.itemsSource = this.tools.slice(
-          0,
-          Math.floor(_clientWidth / 20)
+      if (_clientWidth >= _defWidth) {
+        wjc.setCss(_more, {
+          display: 'none',
+        });
+        this._listBox.itemsSource = this.tools;
+      } else {
+        wjc.setCss(_more, {
+          display: 'block',
+        });
+        let _countItem = Math.floor(_clientWidth / 20) - 1;
+        this._listBox.itemsSource = this.tools.slice(0, _countItem);
+        this._listBoxMore.itemsSource = this.tools.slice(
+          _countItem,
+          this.tools.length
         );
+        if (_clientWidth <= 40) {
+          this._listBox.itemsSource = [];
+          this._listBoxMore.itemsSource = this.tools;
+        }
       }
-      // if (_clientWidth >= _defWidth) {
-      //   return;
-      // } else {
-      //   let _countItem = Math.floor(_clientWidth / 20) - 1;
-      //   this._listBox.itemsSource = this.tools.slice(0, _countItem);
-      //   this._listBoxMore.itemsSource = this.tools.slice(
-      //     _countItem,
-      //     this.tools.length
-      //   );
-
-      //   wjc.setCss(_more, {
-      //     display: 'block',
-      //   });
-      // }
     }
   }
 
