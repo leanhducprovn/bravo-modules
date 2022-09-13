@@ -109,6 +109,12 @@
             width: 100%;
             height: calc(100% - 46px);
             overflow: auto;
+
+            img {
+                &.null {
+                    display: none;
+                }
+            }
         }
 
         .bravo-picture-popup-imagesize {

@@ -2,7 +2,7 @@
   title="Click đúp chuột để mở/chọn file hoặc kéo thả file từ chương trình khác">
   <!-- preview -->
   <div class="bravo-picture-preview" tabindex="1">
-    <img (dblclick)="onSave()" src="{{ imageURL }}">
+    <img (dblclick)="onSave()" src="{{ imageURL }}" class="null">
     <input #upload type="file" multiple="true" accept="image/*" (change)="onUpload($event)"
       [disabled]="bReadOnly || isDisabled">
   </div>
@@ -24,7 +24,7 @@
     <div class="bravo-picture-popup">
       <div class="bravo-picture-popup-display">
         <div class="bravo-picture-popup-preview">
-          <img src="{{ imageURL }}">
+          <img src="{{ imageURL }}" class="null">
         </div>
         <div class="bravo-picture-popup-imagesize">{{ imageInfo }}</div>
         <div class="bravo-picture-popup-tools">
