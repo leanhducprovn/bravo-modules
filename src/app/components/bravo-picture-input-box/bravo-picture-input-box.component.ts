@@ -175,7 +175,10 @@ export class BravoPictureInputBoxComponent
   }
 
   public onSave() {
-    console.log(1);
+    const link = document.createElement('a');
+    link.download = this.randomName(10);
+    link.href = this.imageURL;
+    link.click();
   }
 
   public onRemove() {
@@ -380,5 +383,14 @@ export class BravoPictureInputBoxComponent
     const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
+  }
+
+  private randomName(length: number) {
+    let text = '';
+    const possible =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (var i = 0; i < length; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
   }
 }
