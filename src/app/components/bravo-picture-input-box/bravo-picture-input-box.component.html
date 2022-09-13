@@ -1,8 +1,8 @@
 <div class="bravo-picture-input-box" tabindex="1"
   title="Click đúp chuột để mở/chọn file hoặc kéo thả file từ chương trình khác">
   <!-- preview -->
-  <div (dblclick)="!isValue ? upload.click() : onSave()" class="bravo-picture-preview" tabindex="1">
-    <img src="{{ imageURL }}">
+  <div class="bravo-picture-preview" tabindex="1">
+    <img (dblclick)="onSave()" src="{{ imageURL }}">
     <input #upload type="file" multiple="true" accept="image/*" (change)="onUpload($event)"
       [disabled]="bReadOnly || isDisabled">
   </div>

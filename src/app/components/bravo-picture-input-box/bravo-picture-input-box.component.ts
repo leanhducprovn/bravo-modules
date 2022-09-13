@@ -97,18 +97,9 @@ export class BravoPictureInputBoxComponent
     return this._nMaximumImageSize;
   }
 
-  public _value: any;
-  public set value(pValue: any) {
-    if (pValue) this.isValue = true;
-    this._value = pValue;
-  }
-  public get value(): any {
-    return this._value;
-  }
-
+  public value: any;
   public imageInfo!: string;
   public zoomPercent!: number;
-  public isValue: boolean = false;
 
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
