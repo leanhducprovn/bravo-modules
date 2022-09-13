@@ -79,7 +79,7 @@ export class BravoToolbarComponent
 
   public override refresh(fullUpdate?: boolean | undefined): void {
     super.refresh(fullUpdate);
-    console.log(this._sizeBox);
+    this.responsive();
   }
 
   ngOnInit(): void {}
@@ -87,7 +87,7 @@ export class BravoToolbarComponent
   ngAfterViewInit(): void {
     this.setMenu();
     this.setPopup();
-    this.responsive();
+    // this.responsive();
     this.onResize();
   }
 
@@ -131,29 +131,32 @@ export class BravoToolbarComponent
   }
 
   private responsive() {
-    let _toolbar = this.hostElement?.querySelector('.bravo-toolbar');
     let _listBox = this.hostElement?.querySelector('.list-box');
     let _more = this.hostElement?.querySelector('.list-more');
-    if (_toolbar && _listBox && _more) {
+    if (_listBox && _more) {
       let _defWidth = this.tools.length * 20;
-      let _clientWidth = _listBox.clientWidth;
-      wjc.setCss(_toolbar, {
-        width: `${_clientWidth}px`,
-      });
-      if (_clientWidth >= _defWidth) {
-        return;
-      } else {
-        let _countItem = Math.floor(_clientWidth / 20) - 1;
-        this._listBox.itemsSource = this.tools.slice(0, _countItem);
-        this._listBoxMore.itemsSource = this.tools.slice(
-          _countItem,
-          this.tools.length
+      let _clientWidth = this.sizeBox.width;
+      console.log(_clientWidth);
+      if (_clientWidth < _defWidth) {
+        this._listBox.itemsSource = this.tools.slice(
+          0,
+          Math.floor(_clientWidth / 20)
         );
-
-        wjc.setCss(_more, {
-          display: 'block',
-        });
       }
+      // if (_clientWidth >= _defWidth) {
+      //   return;
+      // } else {
+      //   let _countItem = Math.floor(_clientWidth / 20) - 1;
+      //   this._listBox.itemsSource = this.tools.slice(0, _countItem);
+      //   this._listBoxMore.itemsSource = this.tools.slice(
+      //     _countItem,
+      //     this.tools.length
+      //   );
+
+      //   wjc.setCss(_more, {
+      //     display: 'block',
+      //   });
+      // }
     }
   }
 
