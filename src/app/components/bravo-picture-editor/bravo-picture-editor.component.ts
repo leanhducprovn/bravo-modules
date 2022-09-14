@@ -126,7 +126,6 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     return this._imageValueType;
   }
 
-  // public periodTool = PeriodTool;
   public currentTool!: number;
   public toolbar!: FormGroup;
 
@@ -423,6 +422,9 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
             value: 2,
           },
           {
+            bulkhead: true,
+          },
+          {
             image: './assets/img/Delete.png',
             title: 'Delete',
             value: 3,
@@ -436,6 +438,9 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
             image: './assets/img/Copy.png',
             title: 'Copy',
             value: 5,
+          },
+          {
+            bulkhead: true,
           },
           { image: './assets/img/favicon.png', title: 'Rotate left', value: 6 },
           {
@@ -454,6 +459,9 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
             value: 9,
           },
           {
+            bulkhead: true,
+          },
+          {
             image: './assets/img/favicon.png',
             title: 'Crop picture',
             value: 10,
@@ -462,6 +470,9 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
             image: './assets/img/favicon.png',
             title: 'Resize picture',
             value: 11,
+          },
+          {
+            bulkhead: true,
           },
           { image: './assets/img/favicon.png', title: 'Brightness', value: 12 },
           { image: './assets/img/favicon.png', title: 'Color', value: 13 },

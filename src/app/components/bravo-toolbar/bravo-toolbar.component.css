@@ -49,3 +49,8 @@ button {
 :host>>>.wj-control {
     background: unset;
 }
+
+:host>>>.bulkhead {
+    margin: 2px;
+    border-right: 1px solid #bbbbbb;
+}

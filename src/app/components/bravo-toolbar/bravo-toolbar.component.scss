@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 
     .list-more {
         display: none;
@@ -27,8 +28,6 @@
 }
 
 .more-popup {
-    max-width: 142px;
-    min-height: 20px;
     border-radius: unset;
 
     .list-box-more {

@@ -31,19 +31,15 @@ export class BravoToolbarComponent
   extends wjc.Control
   implements OnInit, AfterViewInit
 {
-  private _tools: Tool[] = [];
+  private _tools: any[] = [];
   @Input()
-  public set tools(pValue: Tool[]) {
+  public set tools(pValue: any[]) {
     if (this._tools == pValue) return;
     this._tools = pValue;
   }
-  public get tools(): Tool[] {
+  public get tools(): any[] {
     return this._tools;
   }
-
-  private _listBox!: input.ListBox;
-  private _listBoxMore!: input.ListBox;
-  private _popup!: input.Popup;
 
   private _sizeBox: wjc.Size = new wjc.Size();
   public set sizeBox(pValue: wjc.Size) {
@@ -54,6 +50,10 @@ export class BravoToolbarComponent
   public get sizeBox(): wjc.Size {
     return this._sizeBox;
   }
+
+  private _listBox!: input.ListBox;
+  private _listBoxMore!: input.ListBox;
+  private _popup!: input.Popup;
 
   public isMore: boolean = false;
 
@@ -106,12 +106,7 @@ export class BravoToolbarComponent
     let _listBox = this.hostElement?.querySelector('.list-box');
     this._listBox = new input.ListBox(_listBox, {
       formatItem: (sender: any, e: any) => {
-        e.item.innerHTML = `<img src="${e.data.image}" title="${e.data.title}" style="width:15px">`;
-        e.item.addEventListener('click', () => {
-          setTimeout(() => {
-            this.onChange(sender);
-          });
-        });
+        this.onFormatItem(sender, e);
       },
       itemsSource: this.tools,
     });
@@ -119,14 +114,27 @@ export class BravoToolbarComponent
     let _listBoxMore = this.hostElement?.querySelector('.list-box-more');
     this._listBoxMore = new input.ListBox(_listBoxMore, {
       formatItem: (sender: any, e: any) => {
-        e.item.innerHTML = `<img src="${e.data.image}" title="${e.data.title}" style="width:15px">`;
-        e.item.addEventListener('click', () => {
-          setTimeout(() => {
-            this.onChange(sender);
-          });
-        });
+        this.onFormatItem(sender, e);
       },
       itemsSource: [],
+    });
+  }
+
+  private onFormatItem(sender: any, e: any) {
+    if (e.data.image) {
+      e.item.innerHTML = `<img src="${e.data.image}" title="${e.data.title}" style="width:15px">`;
+    } else if (e.data.text) {
+      e.item.innerHTML = e.data.text;
+    }
+    if (e.data.bulkhead) {
+      e.item.innerHTML = '';
+      wjc.addClass(e.item, 'bulkhead');
+      wjc.removeClass(e.item, 'wj-listbox-item');
+    }
+    e.item.addEventListener('click', () => {
+      setTimeout(() => {
+        this.onChange(sender);
+      });
     });
   }
 
@@ -174,6 +182,17 @@ export class BravoToolbarComponent
       });
     }
 
+    this._popup.showing.addHandler((e: input.Popup) => {
+      let _item =
+        this._listBoxMore.itemsSource.length -
+        this._listBoxMore.itemsSource.filter((e: any) => e.bulkhead).length;
+      wjc.setCss(this._popup.hostElement, {
+        width: `${_item * 20 + 2}px`,
+        maxWidth: '142px',
+        height: `${Math.ceil((_item * 20) / 140) * 20 + 2}px`,
+      });
+    });
+
     this._popup.shown.addHandler((e: input.Popup) => {
       this.isMore = e.isVisible;
       Array.from(
@@ -207,10 +226,4 @@ export class BravoToolbarComponent
       this.isMore = e.isVisible;
     });
   }
-}
-
-export interface Tool {
-  image: string;
-  title: string;
-  value: number;
 }
