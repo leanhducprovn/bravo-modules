@@ -40,10 +40,6 @@ interface SliderModel {
 })
 export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   @ViewChild('upload') private _upload!: ElementRef;
-  // @ViewChild('toolbar', { static: true })
-  // private _toolbar!: BravoToolbarComponent;
-
-  // private _popup!: input.Popup;
   private _imageWidth!: number;
   private _imageHeight!: number;
   private _imageOldName!: string;
@@ -53,7 +49,6 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   public isBrightness: boolean = false;
   public isColor: boolean = false;
   public isOpacity: boolean = false;
-  // public isPopup: boolean = false;
 
   public zoomSlider!: SliderModel;
   public brightnessSliderLeft!: SliderModel;
@@ -131,7 +126,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     return this._imageValueType;
   }
 
-  public periodTool = PeriodTool;
+  // public periodTool = PeriodTool;
   public currentTool!: number;
   public toolbar!: FormGroup;
 
@@ -831,28 +826,6 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     }
   }
 
-  // popup
-  // private setPopup() {
-  //   this._popup = new input.Popup(
-  //     this.hostElement.querySelector('.bravo-picture-editor-popup'),
-  //     {
-  //       owner: this.hostElement?.querySelector('.bravo-picture-more'),
-  //       position: wjc.PopupPosition.AboveRight,
-  //       showTrigger: input.PopupTrigger.ClickOwner,
-  //       hideTrigger:
-  //         input.PopupTrigger.Blur |
-  //         input.PopupTrigger.ClickOwner |
-  //         input.PopupTrigger.Leave,
-  //     }
-  //   );
-  //   this._popup.shown.addHandler((e: input.Popup) => {
-  //     this.isPopup = e.isVisible;
-  //   });
-  //   this._popup.hidden.addHandler((e: input.Popup) => {
-  //     this.isPopup = e.isVisible;
-  //   });
-  // }
-
   // get size image
   private getSizeBase64(base64: string) {
     let stringLength = base64.length - 'data:image/png;base64,'.length;
@@ -871,9 +844,9 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   }
 }
 
-export enum PeriodTool {
-  Zoom = 0,
-  Brightness = 1,
-  Color = 2,
-  Opacity = 3,
-}
+// export enum PeriodTool {
+//   Zoom = 0,
+//   Brightness = 1,
+//   Color = 2,
+//   Opacity = 3,
+// }

@@ -99,72 +99,12 @@
             <img src="./assets/img/Search.png">{{ zoomSlider.value ? zoomSlider.value : '100' }}%
           </li>
           <div class="bulkhead"></div>
-          <!-- add picture -->
-          <!-- <li (click)="upload.click()">
-            <img src="./assets/img/OpenFolder.svg">
-          </li> -->
-          <!-- save picture -->
-          <!-- <li (click)="onSaveImage()">
-            <img src="./assets/img/Save.png">
-          </li> -->
-          <!-- printing picture -->
-          <!-- <li (click)="onPrinting()">
-            <img src="./assets/img/Printer.png">
-          </li> -->
-          <!-- <div class="bulkhead"></div> -->
-          <!-- delete picture -->
-          <!-- <li (click)="onRemove()">
-            <img src="./assets/img/Delete.png">
-          </li> -->
-          <!-- paste picture -->
-          <!-- <li (click)="onPaste()">
-            <img src="./assets/img/Paste.svg">
-          </li> -->
-          <!-- copy picture -->
-          <!-- <li (click)="onCopy()">
-            <img src="./assets/img/Copy.png">
-          </li> -->
-          <!-- <div class="bulkhead"></div> -->
         </ul>
       </div>
       <div class="bravo-picture-advanced">
         <form [formGroup]="toolbar">
           <bravo-toolbar formControlName="itemsSource"></bravo-toolbar>
         </form>
-        <!-- <button class="bravo-picture-more" [class]="isPopup ? 'active' : ''">
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-            xmlns:svgjs="http://svgjs.com/svgjs" width="15" height="15" x="0" y="0" viewBox="0 0 24 24"
-            style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
-            <g>
-              <g xmlns="http://www.w3.org/2000/svg" id="_19" data-name="19">
-                <path
-                  d="m12 19a1 1 0 0 1 -.71-1.71l5.3-5.29-5.3-5.29a1 1 0 0 1 1.41-1.41l6 6a1 1 0 0 1 0 1.41l-6 6a1 1 0 0 1 -.7.29z"
-                  fill="#7b7cab" data-original="#000000" class=""></path>
-                <path
-                  d="m6 19a1 1 0 0 1 -.71-1.71l5.3-5.29-5.3-5.29a1 1 0 0 1 1.42-1.42l6 6a1 1 0 0 1 0 1.41l-6 6a1 1 0 0 1 -.71.3z"
-                  fill="#7b7cab" data-original="#000000" class=""></path>
-              </g>
-            </g>
-          </svg>
-        </button> -->
-        <!-- popup -->
-        <!-- <div class="bravo-picture-editor-popup">
-          <ul>
-            <li (click)="onRotateLeft()">1</li>
-            <li (click)="onRotateRight()">2</li>
-            <li (click)="onFlipVertical()">3</li>
-            <li (click)="onFlipHorizontal()">4</li>
-            <li>5</li>
-            <li>6</li>
-            <li
-              (click)="isZoom = false; isBrightness = !isBrightness; isColor = false; isOpacity = false; invalidate();"
-              [class]="isBrightness ? 'active' : ''">7</li>
-            <li (click)="isZoom = false; isBrightness = false; isColor = !isColor; isOpacity = false; invalidate();"
-              [class]="isColor ? 'active' : ''">8</li>
-            <li (click)="isZoom = false; isBrightness = false; isColor = false; isOpacity = !isOpacity; invalidate();"
-              [class]="isOpacity ? 'active' : ''">9</li>
-          </ul>
-        </div> -->
       </div>
     </div>
   </div>
