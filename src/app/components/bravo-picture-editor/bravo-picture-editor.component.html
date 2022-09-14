@@ -9,7 +9,7 @@
         </div>
         <div class="bravo-picture-preview"
           [style]="{'width': isZoom || isColor || isOpacity ? 'calc(100% - 50px)' : isBrightness ? 'calc(100% - 100px)' : '100%'}">
-          <img (dblclick)="upload.click()" src="{{ imageURL }}" class="null">
+          <img src="{{ imageURL }}" class="null">
           <input #upload type="file" multiple="true" (change)="onUpload($event)">
         </div>
         <div class="bravo-picture-brightness" [hidden]="!isBrightness">

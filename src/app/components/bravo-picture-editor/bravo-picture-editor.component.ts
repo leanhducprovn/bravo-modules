@@ -6,7 +6,6 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import * as input from '@grapecity/wijmo.input';
 import * as wjc from '@grapecity/wijmo';
 import { FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -16,7 +15,6 @@ import { ImageValueType } from '../../types/enum/image-value-type.enum';
 import { Convert } from '../../library/bravo-convert/convert';
 
 import { FormControl } from '@angular/forms';
-import { BravoToolbarComponent } from '../bravo-toolbar/bravo-toolbar.component';
 
 interface SliderModel {
   value: number;
@@ -120,10 +118,20 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   public set imageValueType(pValue: ImageValueType) {
     if (this._imageValueType == pValue) return;
     this._imageValueType = pValue;
-    this.invalidate;
+    this.invalidate();
   }
   public get imageValueType(): ImageValueType {
     return this._imageValueType;
+  }
+
+  private _nFileSizeLimit: number = 5242880;
+  public set nFileSizeLimit(pValue: number) {
+    if (this._nFileSizeLimit == pValue) return;
+    this._nFileSizeLimit = pValue;
+    this.invalidate();
+  }
+  public get nFileSizeLimit(): number {
+    return this._nFileSizeLimit;
   }
 
   public currentTool!: number;
@@ -301,7 +309,14 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
       let _fileReader = new FileReader();
       _fileReader.readAsDataURL(e.target.files[0]);
       _fileReader.onload = (eFile: any) => {
-        this.imageURL = eFile.target.result;
+        let _src = eFile.target.result;
+        if (this.getSizeBase64(_src) <= this.nFileSizeLimit) {
+          this.imageURL = _src;
+        } else {
+          throw `Kích thước file phải nhỏ hơn hoặc bằng ${this.formatBytes(
+            this.nFileSizeLimit
+          )}.`;
+        }
       };
       this._imageOldName = _file.name;
     }

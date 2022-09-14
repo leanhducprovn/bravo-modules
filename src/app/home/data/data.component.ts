@@ -22,6 +22,8 @@ import { ImageValueType } from '../../types/enum/image-value-type.enum';
 import { BravoRangeSliderComponent } from '../../components/bravo-range-slider/bravo-range-slider.component';
 import { BravoChecklistComponent } from '../../components/bravo-checklist/bravo-checklist.component';
 import { BravoSliderBaseComponent } from '../../components/bravo-slider-base/bravo-slider-base.component';
+import { BravoPictureInputBoxComponent } from 'src/app/components/bravo-picture-input-box/bravo-picture-input-box.component';
+import { BravoPictureEditorComponent } from 'src/app/components/bravo-picture-editor/bravo-picture-editor.component';
 
 // class
 import { BravoBarCodeBox } from '../../class/BravoBarCodeBox';
@@ -32,7 +34,6 @@ import { RenderType, LabelPosition } from '@grapecity/wijmo.barcode';
 
 // swal
 import Swal from 'sweetalert2';
-import { BravoPictureInputBoxComponent } from 'src/app/components/bravo-picture-input-box/bravo-picture-input-box.component';
 
 @Component({
   selector: 'app-data',
@@ -72,6 +73,10 @@ export class DataComponent
   // picturebox viewchild
   @ViewChild('pictureBox', { static: true })
   viewPictureBox!: BravoPictureInputBoxComponent;
+
+  // pictureEditor viewchild
+  @ViewChild('pictureEditor', { static: true })
+  viewPictureEditor!: BravoPictureEditorComponent;
   /*------------------------------------*/
 
   /*------------------------------------*/
@@ -835,6 +840,12 @@ export class DataComponent
     // });
 
     /*------------------------------------*/
+    // picture editor
+    try {
+      this.viewPictureEditor.nFileSizeLimit = 6000000;
+    } catch (error: any) {
+      Swal.fire('Warning!', error, 'warning');
+    }
   }
 
   /*------------------------------------*/
