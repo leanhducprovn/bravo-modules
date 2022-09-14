@@ -7,9 +7,9 @@
             (userChange)="onZoomSliderChange($event)">
           </ngx-slider>
         </div>
-        <div (dblclick)="upload.click()" class="bravo-picture-preview"
+        <div class="bravo-picture-preview"
           [style]="{'width': isZoom || isColor || isOpacity ? 'calc(100% - 50px)' : isBrightness ? 'calc(100% - 100px)' : '100%'}">
-          <img src="{{ imageURL }}" class="null">
+          <img (dblclick)="upload.click()" src="{{ imageURL }}" class="null">
           <input #upload type="file" multiple="true" (change)="onUpload($event)">
         </div>
         <div class="bravo-picture-brightness" [hidden]="!isBrightness">
@@ -100,31 +100,31 @@
           </li>
           <div class="bulkhead"></div>
           <!-- add picture -->
-          <li (click)="upload.click()">
+          <!-- <li (click)="upload.click()">
             <img src="./assets/img/OpenFolder.svg">
-          </li>
+          </li> -->
           <!-- save picture -->
-          <li (click)="onSaveImage()">
+          <!-- <li (click)="onSaveImage()">
             <img src="./assets/img/Save.png">
-          </li>
+          </li> -->
           <!-- printing picture -->
-          <li (click)="onPrinting()">
+          <!-- <li (click)="onPrinting()">
             <img src="./assets/img/Printer.png">
-          </li>
-          <div class="bulkhead"></div>
+          </li> -->
+          <!-- <div class="bulkhead"></div> -->
           <!-- delete picture -->
-          <li (click)="onRemove()">
+          <!-- <li (click)="onRemove()">
             <img src="./assets/img/Delete.png">
-          </li>
+          </li> -->
           <!-- paste picture -->
-          <li (click)="onPaste()">
+          <!-- <li (click)="onPaste()">
             <img src="./assets/img/Paste.svg">
-          </li>
+          </li> -->
           <!-- copy picture -->
-          <li (click)="onCopy()">
+          <!-- <li (click)="onCopy()">
             <img src="./assets/img/Copy.png">
-          </li>
-          <div class="bulkhead"></div>
+          </li> -->
+          <!-- <div class="bulkhead"></div> -->
         </ul>
       </div>
       <div class="bravo-picture-advanced">

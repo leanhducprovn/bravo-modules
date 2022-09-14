@@ -413,35 +413,65 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.toolbar = this.fb.group({
       itemsSource: [
         [
-          { image: './assets/img/favicon.png', title: 'Rotate left', value: 0 },
+          {
+            image: './assets/img/OpenFolder.svg',
+            title: 'Upload',
+            value: 0,
+          },
+          {
+            image: './assets/img/Save.png',
+            title: 'Save',
+            value: 1,
+          },
+          {
+            image: './assets/img/Printer.png',
+            title: 'Printer',
+            value: 2,
+          },
+          {
+            image: './assets/img/Delete.png',
+            title: 'Delete',
+            value: 3,
+          },
+          {
+            image: './assets/img/Paste.svg',
+            title: 'Paste',
+            value: 4,
+          },
+          {
+            image: './assets/img/Copy.png',
+            title: 'Copy',
+            value: 5,
+          },
+          { image: './assets/img/favicon.png', title: 'Rotate left', value: 6 },
           {
             image: './assets/img/favicon.png',
             title: 'Rotate right',
-            value: 1,
+            value: 7,
           },
           {
             image: './assets/img/favicon.png',
             title: 'Flip vertical',
-            value: 2,
+            value: 8,
           },
           {
             image: './assets/img/favicon.png',
             title: 'Flip horizontal',
-            value: 3,
+            value: 9,
           },
           {
             image: './assets/img/favicon.png',
             title: 'Crop picture',
-            value: 4,
+            value: 10,
           },
           {
             image: './assets/img/favicon.png',
             title: 'Resize picture',
-            value: 5,
+            value: 11,
           },
-          { image: './assets/img/favicon.png', title: 'Brightness', value: 6 },
-          { image: './assets/img/favicon.png', title: 'Color', value: 7 },
-          { image: './assets/img/favicon.png', title: 'Opacity', value: 8 },
+          { image: './assets/img/favicon.png', title: 'Brightness', value: 12 },
+          { image: './assets/img/favicon.png', title: 'Color', value: 13 },
+          { image: './assets/img/favicon.png', title: 'Opacity', value: 14 },
         ],
       ],
     });
@@ -451,30 +481,42 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.toolbar.valueChanges.subscribe((e: any) => {
       let _value = e.itemsSource.selectedItem.value;
       if (_value == 0) {
-        this.onRotateLeft();
+        this._upload.nativeElement.click();
       } else if (_value == 1) {
-        this.onRotateRight();
+        this.onSaveImage();
       } else if (_value == 2) {
-        this.onFlipVertical();
+        this.onPrinting();
       } else if (_value == 3) {
-        this.onFlipHorizontal();
+        this.onRemove();
       } else if (_value == 4) {
-        // null
+        this.onPaste();
       } else if (_value == 5) {
-        // null
+        this.onCopy();
       } else if (_value == 6) {
+        this.onRotateLeft();
+      } else if (_value == 7) {
+        this.onRotateRight();
+      } else if (_value == 8) {
+        this.onFlipVertical();
+      } else if (_value == 9) {
+        this.onFlipHorizontal();
+      } else if (_value == 10) {
+        // null
+      } else if (_value == 11) {
+        // null
+      } else if (_value == 12) {
         this.isZoom = false;
         this.isBrightness = !this.isBrightness;
         this.isColor = false;
         this.isOpacity = false;
         this.invalidate();
-      } else if (_value == 7) {
+      } else if (_value == 13) {
         this.isZoom = false;
         this.isBrightness = false;
         this.isColor = !this.isColor;
         this.isOpacity = false;
         this.invalidate();
-      } else if (_value == 8) {
+      } else if (_value == 14) {
         this.isZoom = false;
         this.isBrightness = false;
         this.isColor = false;

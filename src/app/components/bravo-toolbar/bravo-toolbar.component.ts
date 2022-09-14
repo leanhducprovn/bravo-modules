@@ -87,7 +87,7 @@ export class BravoToolbarComponent
   ngAfterViewInit(): void {
     this.setMenu();
     this.setPopup();
-    // this.responsive();
+    this.responsive();
     this.onResize();
   }
 

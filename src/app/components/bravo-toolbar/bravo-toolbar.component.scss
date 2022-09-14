@@ -27,8 +27,8 @@
 }
 
 .more-popup {
-    width: 142px;
-    height: 42px;
+    max-width: 142px;
+    min-height: 20px;
     border-radius: unset;
 
     .list-box-more {
