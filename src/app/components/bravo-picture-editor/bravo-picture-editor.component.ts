@@ -353,12 +353,11 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
           if (_image.width >= 196) {
             if (_image.width > _image.height) {
               wjc.toggleClass(_imagePreview!, 'width-100');
-            } else {
-              if (_picturePreview.clientWidth > _picturePreview.clientHeight) {
+              if (_imagePreview.clientHeight > _picturePreview.clientHeight) {
                 wjc.toggleClass(_imagePreview!, 'height-100');
-              } else {
-                wjc.toggleClass(_imagePreview!, 'width-100');
               }
+            } else {
+              wjc.toggleClass(_imagePreview!, 'height-100');
             }
           } else {
             wjc.toggleClass(_imagePreview!, 'default');
