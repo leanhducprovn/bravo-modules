@@ -28,7 +28,6 @@ import { BravoPictureEditorComponent } from './components/bravo-picture-editor/b
 import { ComponentsComponent } from './components/components.component';
 import { BravoToolbarComponent } from './components/bravo-toolbar/bravo-toolbar.component';
 import { BravoTestComponent } from './components/bravo-test/bravo-test.component';
-import { BravoToolbarBaseComponent } from './components/bravo-toolbar-base/bravo-toolbar-base.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +47,6 @@ import { BravoToolbarBaseComponent } from './components/bravo-toolbar-base/bravo
     ComponentsComponent,
     BravoToolbarComponent,
     BravoTestComponent,
-    BravoToolbarBaseComponent,
   ],
   imports: [
     BrowserModule,
