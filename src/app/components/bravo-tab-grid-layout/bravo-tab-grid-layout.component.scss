@@ -1,0 +1,21 @@
+.bravo-tab-grid-layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+
+    .bravo-tab {
+        width: 100%;
+        height: 20px;
+        background-color: blue;
+        display: flex;
+    }
+
+    .bravo-grid {
+        width: 100%;
+        height: calc(100% - 20px);
+        background-color: green;
+    }
+
+}

@@ -28,6 +28,8 @@ import { BravoPictureEditorComponent } from './components/bravo-picture-editor/b
 import { ComponentsComponent } from './components/components.component';
 import { BravoToolbarComponent } from './components/bravo-toolbar/bravo-toolbar.component';
 import { BravoTabGridLayoutComponent } from './components/bravo-tab-grid-layout/bravo-tab-grid-layout.component';
+import { WjNavModule } from '@grapecity/wijmo.angular2.nav';
+import { WjGridModule } from '@grapecity/wijmo.angular2.grid';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,8 @@ import { BravoTabGridLayoutComponent } from './components/bravo-tab-grid-layout/
     WjInputModule,
     HighlightModule,
     HighlightPlusModule,
+    WjNavModule,
+    WjGridModule,
   ],
   providers: [
     {

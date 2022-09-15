@@ -1,1 +1,13 @@
-<p>bravo-tab-grid-layout works!</p>
+<div class="bravo-tab-grid-layout">
+  <!-- <div class="bravo-tab"></div>
+  <div class="bravo-grid"></div> -->
+  <wj-tab-panel #pTabPanel [selectedIndex]="0">
+    <wj-tab *ngFor="let tab of tabsInfo">
+      <div>{{tab.header}}</div>
+      <div>
+        <wj-flex-grid [isReadOnly]="true" [itemsSource]="tab.data">
+        </wj-flex-grid>
+      </div>
+    </wj-tab>
+  </wj-tab-panel>
+</div>
