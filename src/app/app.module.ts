@@ -27,6 +27,7 @@ import { BravoPictureInputBoxComponent } from './components/bravo-picture-input-
 import { BravoPictureEditorComponent } from './components/bravo-picture-editor/bravo-picture-editor.component';
 import { ComponentsComponent } from './components/components.component';
 import { BravoToolbarComponent } from './components/bravo-toolbar/bravo-toolbar.component';
+import { BravoTabGridLayoutComponent } from './components/bravo-tab-grid-layout/bravo-tab-grid-layout.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { BravoToolbarComponent } from './components/bravo-toolbar/bravo-toolbar.
     BravoPictureEditorComponent,
     ComponentsComponent,
     BravoToolbarComponent,
+    BravoTabGridLayoutComponent,
   ],
   imports: [
     BrowserModule,

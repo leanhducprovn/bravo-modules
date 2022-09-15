@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BravoPictureEditorComponent } from './components/bravo-picture-editor/bravo-picture-editor.component';
+import { BravoTabGridLayoutComponent } from './components/bravo-tab-grid-layout/bravo-tab-grid-layout.component';
 import { BravoToolbarComponent } from './components/bravo-toolbar/bravo-toolbar.component';
 import { ComponentsComponent } from './components/components.component';
 import { HomeComponent } from './home/home.component';
@@ -10,6 +11,10 @@ const routes: Routes = [
   {
     path: '404',
     component: PageNotFoundComponent,
+  },
+  {
+    path: 'bravo-tab-grid-layout',
+    component: BravoTabGridLayoutComponent,
   },
   {
     path: 'components',
