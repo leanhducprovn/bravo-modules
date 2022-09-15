@@ -35,9 +35,6 @@ import { RenderType, LabelPosition } from '@grapecity/wijmo.barcode';
 // swal
 import Swal from 'sweetalert2';
 
-// bravo
-import * as bravo from 'core';
-
 @Component({
   selector: 'app-data',
   templateUrl: './data.component.html',
@@ -849,9 +846,6 @@ export class DataComponent
     } catch (error: any) {
       Swal.fire('Warning!', error, 'warning');
     }
-
-    // bravo core
-    // bravo.WebDataSet;
   }
 
   /*------------------------------------*/

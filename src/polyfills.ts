@@ -50,7 +50,3 @@ import 'zone.js'; // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
-
-/* Evergreen browsers require these. */
-// Used for reflect-metadata in JIT. If you use AOT (and only Angular decorators), you can remove.
-import 'reflect-metadata';

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BravoPictureEditorComponent } from './components/bravo-picture-editor/bravo-picture-editor.component';
-import { BravoTestComponent } from './components/bravo-test/bravo-test.component';
 import { BravoToolbarComponent } from './components/bravo-toolbar/bravo-toolbar.component';
 import { ComponentsComponent } from './components/components.component';
 import { HomeComponent } from './home/home.component';
@@ -23,10 +22,6 @@ const routes: Routes = [
       {
         path: 'bravo-toolbar',
         component: BravoToolbarComponent,
-      },
-      {
-        path: 'bravo-test',
-        component: BravoTestComponent,
       },
     ],
   },

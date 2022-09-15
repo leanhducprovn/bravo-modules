@@ -23,7 +23,6 @@
     "@grapecity/wijmo.angular2.all": "^5.20221.842",
     "@juggle/resize-observer": "^3.4.0",
     "clr-format": "^0.5.2",
-    "core": "file:../../../Test/core-0.0.1.tgz",
     "crypto-js": "^4.1.1",
     "file-saver": "^2.0.5",
     "highlight.js": "^11.6.0",
