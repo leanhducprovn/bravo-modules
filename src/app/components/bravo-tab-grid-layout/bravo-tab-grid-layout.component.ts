@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import * as wjOdata from '@grapecity/wijmo.odata';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import * as wjc from '@grapecity/wijmo';
 
 @Component({
   selector: 'app-bravo-tab-grid-layout',
@@ -11,12 +11,21 @@ import { Subscription } from 'rxjs';
     './bravo-tab-grid-layout.component.scss',
   ],
 })
-export class BravoTabGridLayoutComponent implements OnInit, OnDestroy {
+export class BravoTabGridLayoutComponent
+  extends wjc.Control
+  implements OnInit, OnDestroy
+{
   private _subscription!: Subscription;
 
   public tabsInfo!: any[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, elementRef: ElementRef) {
+    super(elementRef.nativeElement);
+  }
+
+  public override refresh(fullUpdate?: boolean | undefined): void {
+    super.refresh(fullUpdate);
+  }
 
   public ngOnInit(): void {
     this.getData();
@@ -53,5 +62,22 @@ export class BravoTabGridLayoutComponent implements OnInit, OnDestroy {
         data: pData[header],
       });
     });
+    this.setHeaderStyle();
+  }
+
+  private setHeaderStyle() {
+    let parent = this.hostElement?.querySelector('.wj-tabheaders');
+
+    // Get the parent element
+    let parentElement = this.hostElement?.querySelector('.wj-tabheaders');
+    if (parentElement) {
+      // Get the parent's first child
+      let theFirstChild = parentElement.firstChild;
+      // Create a new element
+      let newElement = document.createElement('span');
+
+      // Insert the new element before the first child
+      parentElement.insertBefore(newElement, theFirstChild);
+    }
   }
 }
