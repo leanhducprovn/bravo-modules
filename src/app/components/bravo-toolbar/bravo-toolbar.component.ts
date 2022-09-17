@@ -92,7 +92,9 @@ export class BravoToolbarComponent
   }
 
   public getItem() {
-    return this._listBox;
+    this._listBox.selectedIndexChanged.addHandler((e, s) => {
+      console.log(e, s);
+    });
   }
 
   private onResize() {

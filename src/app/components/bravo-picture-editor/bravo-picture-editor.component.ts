@@ -182,7 +182,7 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.onToolBar();
     setTimeout(() => {
       console.log(this._toolbar.getItem());
-    });
+    }, 3000);
   }
 
   // set filter
