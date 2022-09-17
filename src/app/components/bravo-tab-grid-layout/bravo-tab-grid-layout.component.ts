@@ -66,18 +66,17 @@ export class BravoTabGridLayoutComponent
   }
 
   private setHeaderStyle() {
-    let parent = this.hostElement?.querySelector('.wj-tabheaders');
-
-    // Get the parent element
-    let parentElement = this.hostElement?.querySelector('.wj-tabheaders');
-    if (parentElement) {
-      // Get the parent's first child
-      let theFirstChild = parentElement.firstChild;
-      // Create a new element
-      let newElement = document.createElement('span');
-
-      // Insert the new element before the first child
-      parentElement.insertBefore(newElement, theFirstChild);
+    let _panel = this.hostElement?.querySelector('wj-tab-panel div');
+    wjc.setCss(_panel, {
+      display: 'flex',
+      flexDirection: 'column-reverse',
+    });
+    let _parent = this.hostElement?.querySelector('.wj-tabheaders') as any;
+    if (_parent) {
+      let _wrapper = document.createElement('div');
+      wjc.addClass(_wrapper, 'tab-headers');
+      _parent.parentNode.appendChild(_wrapper);
+      _wrapper.appendChild(_parent);
     }
   }
 }

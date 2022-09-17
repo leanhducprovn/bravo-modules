@@ -2,7 +2,7 @@
   <!-- <div class="bravo-tab"></div>
   <div class="bravo-grid"></div> -->
   <wj-tab-panel #pTabPanel [selectedIndex]="0">
-    <wj-tab *ngFor="let tab of tabsInfo" class="hihi">
+    <wj-tab *ngFor="let tab of tabsInfo">
       <div>{{tab.header}}</div>
       <div>
         <wj-flex-grid [isReadOnly]="true" [itemsSource]="tab.data">
