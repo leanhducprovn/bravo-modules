@@ -91,6 +91,10 @@ export class BravoToolbarComponent
     this.onResize();
   }
 
+  public getItem() {
+    return this._listBox;
+  }
+
   private onResize() {
     let _listBox = this.hostElement?.querySelector('.bravo-toolbar');
     const menu = new ResizeObserver((entries) => {

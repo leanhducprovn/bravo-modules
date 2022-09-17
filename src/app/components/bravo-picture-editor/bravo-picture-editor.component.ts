@@ -15,6 +15,7 @@ import { ImageValueType } from '../../types/enum/image-value-type.enum';
 import { Convert } from '../../library/bravo-convert/convert';
 
 import { FormControl } from '@angular/forms';
+import { BravoToolbarComponent } from '../bravo-toolbar/bravo-toolbar.component';
 
 interface SliderModel {
   value: number;
@@ -38,6 +39,8 @@ interface SliderModel {
 })
 export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   @ViewChild('upload') private _upload!: ElementRef;
+  @ViewChild('toolBar', { static: true })
+  private _toolbar!: BravoToolbarComponent;
   private _imageWidth!: number;
   private _imageHeight!: number;
   private _imageOldName!: string;
@@ -171,13 +174,15 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   }
 
   public ngOnInit(): void {
-    // this.setPopup();
     this.setZoomSlider();
     this.setColorSlider();
     this.setBrightnessSlider();
     this.setOpacitySlider();
     this.setToolBar();
     this.onToolBar();
+    setTimeout(() => {
+      console.log(this._toolbar.getItem());
+    });
   }
 
   // set filter
