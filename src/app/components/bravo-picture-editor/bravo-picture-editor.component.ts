@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   forwardRef,
@@ -7,7 +8,7 @@ import {
 } from '@angular/core';
 
 import * as wjc from '@grapecity/wijmo';
-import { FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormBuilder, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ChangeContext, Options } from '@angular-slider/ngx-slider';
 
@@ -37,9 +38,12 @@ interface SliderModel {
     },
   ],
 })
-export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
+export class BravoPictureEditorComponent
+  extends wjc.Control
+  implements OnInit, AfterViewInit
+{
   @ViewChild('upload') private _upload!: ElementRef;
-  @ViewChild('toolBar', { static: true })
+  @ViewChild('toolbar', { static: true })
   private _toolbar!: BravoToolbarComponent;
   private _imageWidth!: number;
   private _imageHeight!: number;
@@ -138,7 +142,6 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
   }
 
   public currentTool!: number;
-  public toolbar!: FormGroup;
 
   constructor(private fb: FormBuilder, elementRef: ElementRef) {
     super(elementRef.nativeElement);
@@ -179,10 +182,10 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
     this.setBrightnessSlider();
     this.setOpacitySlider();
     this.setToolBar();
+  }
+
+  public ngAfterViewInit(): void {
     this.onToolBar();
-    setTimeout(() => {
-      console.log(this._toolbar.getItem());
-    }, 3000);
   }
 
   // set filter
@@ -423,132 +426,140 @@ export class BravoPictureEditorComponent extends wjc.Control implements OnInit {
 
   // toolbar
   private setToolBar() {
-    this.toolbar = this.fb.group({
-      itemsSource: [
-        [
-          {
-            image: './assets/img/OpenFolder.svg',
-            title: 'Upload',
-            value: 0,
-          },
-          {
-            image: './assets/img/Save.png',
-            title: 'Save',
-            value: 1,
-          },
-          {
-            image: './assets/img/Printer.png',
-            title: 'Printer',
-            value: 2,
-          },
-          {
-            bulkhead: true,
-          },
-          {
-            image: './assets/img/Delete.png',
-            title: 'Delete',
-            value: 3,
-          },
-          {
-            image: './assets/img/Paste.svg',
-            title: 'Paste',
-            value: 4,
-          },
-          {
-            image: './assets/img/Copy.png',
-            title: 'Copy',
-            value: 5,
-          },
-          {
-            bulkhead: true,
-          },
-          { image: './assets/img/favicon.png', title: 'Rotate left', value: 6 },
-          {
-            image: './assets/img/favicon.png',
-            title: 'Rotate right',
-            value: 7,
-          },
-          {
-            image: './assets/img/favicon.png',
-            title: 'Flip vertical',
-            value: 8,
-          },
-          {
-            image: './assets/img/favicon.png',
-            title: 'Flip horizontal',
-            value: 9,
-          },
-          {
-            bulkhead: true,
-          },
-          {
-            image: './assets/img/favicon.png',
-            title: 'Crop picture',
-            value: 10,
-          },
-          {
-            image: './assets/img/favicon.png',
-            title: 'Resize picture',
-            value: 11,
-          },
-          {
-            bulkhead: true,
-          },
-          { image: './assets/img/favicon.png', title: 'Brightness', value: 12 },
-          { image: './assets/img/favicon.png', title: 'Color', value: 13 },
-          { image: './assets/img/favicon.png', title: 'Opacity', value: 14 },
-        ],
-      ],
+    this._toolbar.tools = [
+      {
+        image: './assets/img/OpenFolder.svg',
+        title: 'Upload',
+        value: 0,
+      },
+      {
+        image: './assets/img/Save.png',
+        title: 'Save',
+        value: 1,
+      },
+      {
+        image: './assets/img/Printer.png',
+        title: 'Printer',
+        value: 2,
+      },
+      {
+        bulkhead: true,
+      },
+      {
+        image: './assets/img/Delete.png',
+        title: 'Delete',
+        value: 3,
+      },
+      {
+        image: './assets/img/Paste.svg',
+        title: 'Paste',
+        value: 4,
+      },
+      {
+        image: './assets/img/Copy.png',
+        title: 'Copy',
+        value: 5,
+      },
+      {
+        bulkhead: true,
+      },
+      { image: './assets/img/favicon.png', title: 'Rotate left', value: 6 },
+      {
+        image: './assets/img/favicon.png',
+        title: 'Rotate right',
+        value: 7,
+      },
+      {
+        image: './assets/img/favicon.png',
+        title: 'Flip vertical',
+        value: 8,
+      },
+      {
+        image: './assets/img/favicon.png',
+        title: 'Flip horizontal',
+        value: 9,
+      },
+      {
+        bulkhead: true,
+      },
+      {
+        image: './assets/img/favicon.png',
+        title: 'Crop picture',
+        value: 10,
+      },
+      {
+        image: './assets/img/favicon.png',
+        title: 'Resize picture',
+        value: 11,
+      },
+      {
+        bulkhead: true,
+      },
+      { image: './assets/img/favicon.png', title: 'Brightness', value: 12 },
+      { image: './assets/img/favicon.png', title: 'Color', value: 13 },
+      { image: './assets/img/favicon.png', title: 'Opacity', value: 14 },
+    ];
+  }
+
+  // onToolbar
+  private onToolBar() {
+    this._toolbar.listBox.selectedIndexChanged.addHandler((e) => {
+      if (e.selectedItem) {
+        this.onSelectedItem(e.selectedItem.value);
+      }
+    });
+    this._toolbar.listBoxMore.selectedIndexChanged.addHandler((e) => {
+      if (e.selectedItem) {
+        this.onSelectedItem(e.selectedItem.value);
+      }
     });
   }
 
-  private onToolBar() {
-    this.toolbar.valueChanges.subscribe((e: any) => {
-      let _value = e.itemsSource.selectedItem.value;
-      if (_value == 0) {
-        this._upload.nativeElement.click();
-      } else if (_value == 1) {
-        this.onSaveImage();
-      } else if (_value == 2) {
-        this.onPrinting();
-      } else if (_value == 3) {
-        this.onRemove();
-      } else if (_value == 4) {
-        this.onPaste();
-      } else if (_value == 5) {
-        this.onCopy();
-      } else if (_value == 6) {
-        this.onRotateLeft();
-      } else if (_value == 7) {
-        this.onRotateRight();
-      } else if (_value == 8) {
-        this.onFlipVertical();
-      } else if (_value == 9) {
-        this.onFlipHorizontal();
-      } else if (_value == 10) {
-        // null
-      } else if (_value == 11) {
-        // null
-      } else if (_value == 12) {
-        this.isZoom = false;
-        this.isBrightness = !this.isBrightness;
-        this.isColor = false;
-        this.isOpacity = false;
-        this.invalidate();
-      } else if (_value == 13) {
-        this.isZoom = false;
-        this.isBrightness = false;
-        this.isColor = !this.isColor;
-        this.isOpacity = false;
-        this.invalidate();
-      } else if (_value == 14) {
-        this.isZoom = false;
-        this.isBrightness = false;
-        this.isColor = false;
-        this.isOpacity = !this.isOpacity;
-        this.invalidate();
-      }
-    });
+  // onSelectedItem
+  private onSelectedItem(pValue: number) {
+    if (pValue == 0) {
+      this._upload.nativeElement.click();
+    } else if (pValue == 1) {
+      this.onSaveImage();
+    } else if (pValue == 2) {
+      this.onPrinting();
+    } else if (pValue == 3) {
+      this.onRemove();
+    } else if (pValue == 4) {
+      this.onPaste();
+    } else if (pValue == 5) {
+      this.onCopy();
+    } else if (pValue == 6) {
+      this.onRotateLeft();
+    } else if (pValue == 7) {
+      this.onRotateRight();
+    } else if (pValue == 8) {
+      this.onFlipVertical();
+    } else if (pValue == 9) {
+      this.onFlipHorizontal();
+    } else if (pValue == 10) {
+      // null
+    } else if (pValue == 11) {
+      // null
+    } else if (pValue == 12) {
+      this.isZoom = false;
+      this.isBrightness = !this.isBrightness;
+      this.isColor = false;
+      this.isOpacity = false;
+      this.invalidate();
+    } else if (pValue == 13) {
+      this.isZoom = false;
+      this.isBrightness = false;
+      this.isColor = !this.isColor;
+      this.isOpacity = false;
+      this.invalidate();
+    } else if (pValue == 14) {
+      this.isZoom = false;
+      this.isBrightness = false;
+      this.isColor = false;
+      this.isOpacity = !this.isOpacity;
+      this.invalidate();
+    }
   }
 
   // zoom

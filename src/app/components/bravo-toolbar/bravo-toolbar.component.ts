@@ -2,11 +2,9 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  forwardRef,
   Input,
   OnInit,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as wjc from '@grapecity/wijmo';
 import * as input from '@grapecity/wijmo.input';
 
@@ -18,13 +16,6 @@ import ResizeObserver from 'resize-observer-polyfill';
   styleUrls: [
     './bravo-toolbar.component.css',
     './bravo-toolbar.component.scss',
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: forwardRef(() => BravoToolbarComponent),
-    },
   ],
 })
 export class BravoToolbarComponent
@@ -51,30 +42,14 @@ export class BravoToolbarComponent
     return this._sizeBox;
   }
 
-  private _listBox!: input.ListBox;
-  private _listBoxMore!: input.ListBox;
+  public listBox!: input.ListBox;
+  public listBoxMore!: input.ListBox;
   private _popup!: input.Popup;
 
   public isMore: boolean = false;
 
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
-  }
-
-  public onChange = (changed: any) => {};
-
-  public onTouch = () => {};
-
-  public writeValue(obj: any): void {
-    this.tools = obj;
-  }
-
-  public registerOnChange(changed: any): void {
-    this.onChange = changed;
-  }
-
-  public registerOnTouched(touched: any): void {
-    this.onTouch = touched;
   }
 
   public override refresh(fullUpdate?: boolean | undefined): void {
@@ -91,12 +66,6 @@ export class BravoToolbarComponent
     this.onResize();
   }
 
-  public getItem() {
-    this._listBox.selectedIndexChanged.addHandler((e, s) => {
-      console.log(e, s);
-    });
-  }
-
   private onResize() {
     let _listBox = this.hostElement?.querySelector('.bravo-toolbar');
     const menu = new ResizeObserver((entries) => {
@@ -110,7 +79,7 @@ export class BravoToolbarComponent
 
   private setMenu() {
     let _listBox = this.hostElement?.querySelector('.list-box');
-    this._listBox = new input.ListBox(_listBox, {
+    this.listBox = new input.ListBox(_listBox, {
       formatItem: (sender: any, e: any) => {
         this.onFormatItem(sender, e);
       },
@@ -118,7 +87,7 @@ export class BravoToolbarComponent
     });
 
     let _listBoxMore = this.hostElement?.querySelector('.list-box-more');
-    this._listBoxMore = new input.ListBox(_listBoxMore, {
+    this.listBoxMore = new input.ListBox(_listBoxMore, {
       formatItem: (sender: any, e: any) => {
         this.onFormatItem(sender, e);
       },
@@ -127,6 +96,7 @@ export class BravoToolbarComponent
   }
 
   private onFormatItem(sender: any, e: any) {
+    sender.selectedIndex = -1;
     if (e.data.image) {
       e.item.innerHTML = `<img src="${e.data.image}" title="${e.data.title}" style="width:15px">`;
     } else if (e.data.text) {
@@ -137,11 +107,6 @@ export class BravoToolbarComponent
       wjc.addClass(e.item, 'bulkhead');
       wjc.removeClass(e.item, 'wj-listbox-item');
     }
-    e.item.addEventListener('click', () => {
-      setTimeout(() => {
-        this.onChange(sender);
-      });
-    });
   }
 
   private responsive() {
@@ -154,20 +119,20 @@ export class BravoToolbarComponent
         wjc.setCss(_more, {
           display: 'none',
         });
-        this._listBox.itemsSource = this.tools;
+        this.listBox.itemsSource = this.tools;
       } else {
         wjc.setCss(_more, {
           display: 'block',
         });
         let _countItem = Math.floor(_clientWidth / 20) - 1;
-        this._listBox.itemsSource = this.tools.slice(0, _countItem);
-        this._listBoxMore.itemsSource = this.tools.slice(
+        this.listBox.itemsSource = this.tools.slice(0, _countItem);
+        this.listBoxMore.itemsSource = this.tools.slice(
           _countItem,
           this.tools.length
         );
         if (_clientWidth <= 40) {
-          this._listBox.itemsSource = [];
-          this._listBoxMore.itemsSource = this.tools;
+          this.listBox.itemsSource = [];
+          this.listBoxMore.itemsSource = this.tools;
         }
       }
     }
@@ -190,8 +155,8 @@ export class BravoToolbarComponent
 
     this._popup.showing.addHandler((e: input.Popup) => {
       let _item =
-        this._listBoxMore.itemsSource.length -
-        this._listBoxMore.itemsSource.filter((e: any) => e.bulkhead).length;
+        this.listBoxMore.itemsSource.length -
+        this.listBoxMore.itemsSource.filter((e: any) => e.bulkhead).length;
       wjc.setCss(this._popup.hostElement, {
         width: `${_item * 20 + 2}px`,
         maxWidth: '142px',
