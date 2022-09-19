@@ -518,11 +518,13 @@ export class BravoPictureEditorComponent
     this._toolbar.listBox.selectedIndexChanged.addHandler((e) => {
       if (e.selectedItem) {
         this.onSelectedItem(e.selectedItem.value);
+        e.selectedIndex = -1;
       }
     });
     this._toolbar.listBoxMore.selectedIndexChanged.addHandler((e) => {
       if (e.selectedItem) {
         this.onSelectedItem(e.selectedItem.value);
+        e.selectedIndex = -1;
       }
     });
   }
@@ -630,6 +632,7 @@ export class BravoPictureEditorComponent
       this.renderedSize = Math.round(_width) + 'x' + Math.round(_height);
       wjc.setCss(_image, {
         width: _width + 'px',
+        height: _height + 'px',
       });
     }
   }
