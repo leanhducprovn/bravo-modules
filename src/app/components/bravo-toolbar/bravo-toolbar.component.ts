@@ -34,7 +34,7 @@ export class BravoToolbarComponent
 
   private _sizeBox: wjc.Size = new wjc.Size();
   public set sizeBox(pValue: wjc.Size) {
-    if (this._sizeBox == pValue) return;
+    if (this._sizeBox?.equals(pValue)) return;
     this._sizeBox = pValue;
     this.invalidate();
   }
@@ -71,7 +71,7 @@ export class BravoToolbarComponent
     const menu = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const { width, height } = entry.contentRect;
-        this.sizeBox = new wjc.Size(width, height);
+        this.sizeBox = new wjc.Size(width, 20);
       }
     });
     if (_listBox) menu.observe(_listBox);
