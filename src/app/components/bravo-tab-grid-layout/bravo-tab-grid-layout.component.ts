@@ -75,8 +75,44 @@ export class BravoTabGridLayoutComponent
     if (_parent) {
       let _wrapper = document.createElement('div');
       wjc.addClass(_wrapper, 'tab-headers');
+      wjc.setCss(_wrapper, {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        background: '#f0f0f0',
+      });
       _parent.parentNode.appendChild(_wrapper);
       _wrapper.appendChild(_parent);
+
+      if (_wrapper) {
+        let _scroll = document.createElement('div');
+        wjc.addClass(_scroll, 'tab-scroll');
+        wjc.setCss(_scroll, {
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '40px',
+        });
+        _wrapper.appendChild(_scroll);
+
+        if (_scroll) {
+          let _left = document.createElement('button');
+          let _right = document.createElement('button');
+          wjc.addClass(_left, 'left');
+          wjc.addClass(_right, 'right');
+          wjc.setCss([_left, _right], {
+            width: '18px',
+            height: '18px',
+            border: '1px solid #acacac',
+            background: '#e9e9e9',
+          });
+          _left.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="10" height="10" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g transform="matrix(6.123233995736766e-17,1,-1,6.123233995736766e-17,64.00000190734863,-0.0000019073486328125)"><g xmlns="http://www.w3.org/2000/svg" id="Arrow-13"><path d="m54.9210777 20.296875c-.15625-.3701172-.5185547-.6108398-.9208984-.6108398l-44 .0004883c-.4018555 0-.7646484.2407227-.9213867.6108398-.15625.3701172-.0756836.7983398.2045898 1.0864258l22 22.6274414c.1879883.1933594.4467773.3027344.7167969.3027344s.5288086-.109375.7167969-.3027344l22-22.6279297c.2802734-.2885742.3603515-.7163086.2041015-1.0864258z" fill="#000000" data-original="#000000" class=""></path></g></g></svg>`;
+          _right.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="10" height="10" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g transform="matrix(-6.123233995736766e-17,1,1,6.123233995736766e-17,0.0000019073486328125,-0.0000019073486328125)"><g xmlns="http://www.w3.org/2000/svg" id="Arrow-13"><path d="m54.9210777 20.296875c-.15625-.3701172-.5185547-.6108398-.9208984-.6108398l-44 .0004883c-.4018555 0-.7646484.2407227-.9213867.6108398-.15625.3701172-.0756836.7983398.2045898 1.0864258l22 22.6274414c.1879883.1933594.4467773.3027344.7167969.3027344s.5288086-.109375.7167969-.3027344l22-22.6279297c.2802734-.2885742.3603515-.7163086.2041015-1.0864258z" fill="#000000" data-original="#000000" class=""></path></g></g></svg>`;
+          _scroll.appendChild(_left);
+          _scroll.appendChild(_right);
+        }
+      }
     }
   }
 }

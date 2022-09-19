@@ -1,3 +1,19 @@
+:host>>>button {
+    cursor: pointer;
+    background-color: unset;
+    border: none;
+    border-radius: unset;
+    color: unset;
+    font-size: unset;
+    padding: unset;
+    margin: unset;
+    width: unset;
+    height: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 :host>>>.wj-tabheaders {
     display: flex;
     width: calc(100% - 40px);
