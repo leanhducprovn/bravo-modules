@@ -113,8 +113,12 @@ export class BravoTabGridLayoutComponent
           _scroll.appendChild(_right);
           this.hoverTabScroll(_left);
           this.hoverTabScroll(_right);
-          this.onTabScrollLeft(_left);
-          this.onTabScrollRight(_right);
+          _left.addEventListener('click', () => {
+            _parent.scrollLeft = _parent.scrollLeft - 100;
+          });
+          _right.addEventListener('click', () => {
+            _parent.scrollLeft = _parent.scrollLeft + 100;
+          });
         }
       }
     }
@@ -132,18 +136,6 @@ export class BravoTabGridLayoutComponent
         'background-color': '#e9e9e9',
         border: '1px solid #acacac',
       });
-    });
-  }
-
-  private onTabScrollLeft(e: any) {
-    e.addEventListener('click', () => {
-      console.log(1);
-    });
-  }
-
-  private onTabScrollRight(e: any) {
-    e.addEventListener('click', () => {
-      console.log(2);
     });
   }
 }
