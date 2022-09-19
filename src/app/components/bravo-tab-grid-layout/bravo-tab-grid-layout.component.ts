@@ -1,7 +1,16 @@
-import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import * as wjc from '@grapecity/wijmo';
+import * as wjNav from '@grapecity/wijmo.nav';
+import * as wjcGrid from '@grapecity/wijmo.grid';
 
 @Component({
   selector: 'app-bravo-tab-grid-layout',
@@ -13,8 +22,11 @@ import * as wjc from '@grapecity/wijmo';
 })
 export class BravoTabGridLayoutComponent
   extends wjc.Control
-  implements OnInit, OnDestroy
+  implements OnInit, OnDestroy, AfterViewInit
 {
+  @ViewChild('tab') _tab!: wjNav.TabPanel;
+  @ViewChild('grid') _grid!: wjcGrid.FlexGrid;
+
   private _subscription!: Subscription;
 
   public tabsInfo!: any[];
@@ -30,6 +42,8 @@ export class BravoTabGridLayoutComponent
   public ngOnInit(): void {
     this.getData();
   }
+
+  public ngAfterViewInit(): void {}
 
   public ngOnDestroy(): void {
     this._subscription.unsubscribe();
@@ -63,6 +77,9 @@ export class BravoTabGridLayoutComponent
       });
     });
     this.setHeaderStyle();
+    // setTimeout(() => {
+    this.setGrid();
+    // });
   }
 
   private setHeaderStyle() {
@@ -137,5 +154,33 @@ export class BravoTabGridLayoutComponent
         border: '1px solid #acacac',
       });
     });
+  }
+
+  public gridInitialized(flexgrid: wjcGrid.FlexGrid) {
+    flexgrid.formatItem.addHandler(
+      (s: wjcGrid.FlexGrid, e: wjcGrid.FormatItemEventArgs) => {
+        if (e.panel.cellType == wjcGrid.CellType.RowHeader) {
+          e.cell.textContent = (e.row + 1).toString();
+        }
+      }
+    );
+  }
+
+  private setGrid() {
+    this._tab.refreshed.addHandler((handler: wjc.EventArgs, self?: any) => {
+      console.log(handler, self);
+    });
+
+    // this._grid.loadedRows.addHandler(
+    //   (sender: wjcGrid.FlexGrid, args: wjc.EventArgs) => {
+    //     console.log(sender);
+    //   }
+    // );
+    // if (this._grid) {
+    //   this._grid.formatItem.addHandler((flex, e) => {
+    //     console.log(flex);
+    //     flex.selectionMode = wjcGrid.SelectionMode.Row;
+    //   });
+    // }
   }
 }
