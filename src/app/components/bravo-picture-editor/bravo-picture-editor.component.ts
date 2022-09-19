@@ -400,13 +400,9 @@ export class BravoPictureEditorComponent
         this.renderedSize =
           _imagePreview.clientWidth + 'x' + _imagePreview.clientHeight;
       }
-      this.imageInfo = `${
-        ' / ' +
-        this._intrinsicSize +
-        ' (' +
-        this.formatBytes(this.getSizeBase64(pValue)) +
-        ')'
-      }`;
+      this.imageInfo = ` / ${this._intrinsicSize} (${this.formatBytes(
+        this.getSizeBase64(pValue)
+      )})`;
     };
     if (pValueType == ImageValueType.Base64String) {
       this.value = this.imageURL.replace(
@@ -430,17 +426,17 @@ export class BravoPictureEditorComponent
       {
         image: './assets/img/OpenFolder.svg',
         title: 'Upload',
-        value: 0,
+        value: PeriodTool.Upload,
       },
       {
         image: './assets/img/Save.png',
         title: 'Save',
-        value: 1,
+        value: PeriodTool.Save,
       },
       {
         image: './assets/img/Printer.png',
         title: 'Printer',
-        value: 2,
+        value: PeriodTool.Printer,
       },
       {
         bulkhead: true,
@@ -448,36 +444,40 @@ export class BravoPictureEditorComponent
       {
         image: './assets/img/Delete.png',
         title: 'Delete',
-        value: 3,
+        value: PeriodTool.Delete,
       },
       {
         image: './assets/img/Paste.svg',
         title: 'Paste',
-        value: 4,
+        value: PeriodTool.Paste,
       },
       {
         image: './assets/img/Copy.png',
         title: 'Copy',
-        value: 5,
+        value: PeriodTool.Copy,
       },
       {
         bulkhead: true,
       },
-      { image: './assets/img/favicon.png', title: 'Rotate left', value: 6 },
+      {
+        image: './assets/img/favicon.png',
+        title: 'Rotate left',
+        value: PeriodTool.RotateLeft,
+      },
       {
         image: './assets/img/favicon.png',
         title: 'Rotate right',
-        value: 7,
+        value: PeriodTool.RotateRight,
       },
       {
         image: './assets/img/favicon.png',
         title: 'Flip vertical',
-        value: 8,
+        value: PeriodTool.FlipVertical,
       },
       {
         image: './assets/img/favicon.png',
         title: 'Flip horizontal',
-        value: 9,
+        value: PeriodTool.FlipHorizontal,
       },
       {
         bulkhead: true,
@@ -485,19 +485,31 @@ export class BravoPictureEditorComponent
       {
         image: './assets/img/favicon.png',
         title: 'Crop picture',
-        value: 10,
+        value: PeriodTool.CropPicture,
       },
       {
         image: './assets/img/favicon.png',
         title: 'Resize picture',
-        value: 11,
+        value: PeriodTool.ResizePicture,
       },
       {
         bulkhead: true,
       },
-      { image: './assets/img/favicon.png', title: 'Brightness', value: 12 },
-      { image: './assets/img/favicon.png', title: 'Color', value: 13 },
-      { image: './assets/img/favicon.png', title: 'Opacity', value: 14 },
+      {
+        image: './assets/img/favicon.png',
+        title: 'Brightness',
+        value: PeriodTool.Brightness,
+      },
+      {
+        image: './assets/img/favicon.png',
+        title: 'Color',
+        value: PeriodTool.Color,
+      },
+      {
+        image: './assets/img/favicon.png',
+        title: 'Opacity',
+        value: PeriodTool.Opacity,
+      },
     ];
   }
 
@@ -517,43 +529,43 @@ export class BravoPictureEditorComponent
 
   // onSelectedItem
   private onSelectedItem(pValue: number) {
-    if (pValue == 0) {
+    if (pValue == PeriodTool.Upload) {
       this._upload.nativeElement.click();
-    } else if (pValue == 1) {
+    } else if (pValue == PeriodTool.Save) {
       this.onSaveImage();
-    } else if (pValue == 2) {
+    } else if (pValue == PeriodTool.Printer) {
       this.onPrinting();
-    } else if (pValue == 3) {
+    } else if (pValue == PeriodTool.Delete) {
       this.onRemove();
-    } else if (pValue == 4) {
+    } else if (pValue == PeriodTool.Paste) {
       this.onPaste();
-    } else if (pValue == 5) {
+    } else if (pValue == PeriodTool.Copy) {
       this.onCopy();
-    } else if (pValue == 6) {
+    } else if (pValue == PeriodTool.RotateLeft) {
       this.onRotateLeft();
-    } else if (pValue == 7) {
+    } else if (pValue == PeriodTool.RotateRight) {
       this.onRotateRight();
-    } else if (pValue == 8) {
+    } else if (pValue == PeriodTool.FlipVertical) {
       this.onFlipVertical();
-    } else if (pValue == 9) {
+    } else if (pValue == PeriodTool.FlipHorizontal) {
       this.onFlipHorizontal();
-    } else if (pValue == 10) {
+    } else if (pValue == PeriodTool.CropPicture) {
       // null
-    } else if (pValue == 11) {
+    } else if (pValue == PeriodTool.ResizePicture) {
       // null
-    } else if (pValue == 12) {
+    } else if (pValue == PeriodTool.Brightness) {
       this.isZoom = false;
       this.isBrightness = !this.isBrightness;
       this.isColor = false;
       this.isOpacity = false;
       this.invalidate();
-    } else if (pValue == 13) {
+    } else if (pValue == PeriodTool.Color) {
       this.isZoom = false;
       this.isBrightness = false;
       this.isColor = !this.isColor;
       this.isOpacity = false;
       this.invalidate();
-    } else if (pValue == 14) {
+    } else if (pValue == PeriodTool.Opacity) {
       this.isZoom = false;
       this.isBrightness = false;
       this.isColor = false;
@@ -885,9 +897,20 @@ export class BravoPictureEditorComponent
   }
 }
 
-// export enum PeriodTool {
-//   Zoom = 0,
-//   Brightness = 1,
-//   Color = 2,
-//   Opacity = 3,
-// }
+export enum PeriodTool {
+  Upload = 0,
+  Save = 1,
+  Printer = 2,
+  Delete = 3,
+  Paste = 4,
+  Copy = 5,
+  RotateLeft = 6,
+  RotateRight = 7,
+  FlipVertical = 8,
+  FlipHorizontal = 9,
+  CropPicture = 10,
+  ResizePicture = 11,
+  Brightness = 12,
+  Color = 13,
+  Opacity = 14,
+}
