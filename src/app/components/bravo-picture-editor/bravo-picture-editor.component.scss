@@ -40,8 +40,10 @@
                     width: 100%;
                     overflow: auto;
 
+
                     img {
                         z-index: 1;
+                        background: url('/assets/img/imgshow_bg.png') repeat;
                     }
 
                     input[type=file] {
