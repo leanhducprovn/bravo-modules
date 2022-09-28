@@ -9,7 +9,10 @@ import * as wjc from '@grapecity/wijmo';
 export class AppComponent extends wjc.Control {
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
-    let body = document.querySelector('body') as any
-    wjc.removeChild(body.lastChild)
+    let body = document.querySelector('body') as any;
+    setTimeout(() => {
+      wjc.removeChild(body.lastChild);
+      wjc.removeChild(body.lastChild);
+    });
   }
 }
