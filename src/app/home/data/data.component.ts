@@ -42,8 +42,7 @@ import Swal from 'sweetalert2';
 })
 export class DataComponent
   extends wjc.Control
-  implements OnInit, AfterViewInit
-{
+  implements OnInit, AfterViewInit {
   /*------------------------------------*/
   // #sliderBase viewchild
   @ViewChild('sliderBase', { static: true })
@@ -510,7 +509,7 @@ export class DataComponent
     super(elementRef.nativeElement);
   }
 
-  public ngAfterViewInit(): void {}
+  public ngAfterViewInit(): void { }
 
   public ngOnInit(): void {
     /*------------------------------------*/
